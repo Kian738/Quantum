@@ -11,9 +11,9 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Source\Core\Config.h" />
+    <ClInclude Include="Source\Core\Misc\Config.h" />
     <ClInclude Include="Source\Core\Core.h" />
-    <ClInclude Include="Source\Core\DateTime.h" />
+    <ClInclude Include="Source\Core\Misc\DateTime.h" />
     <ClInclude Include="Source\Core\Engine.h" />
     <ClInclude Include="Source\Core\Launch.h" />
     <ClInclude Include="Source\Core\Logging\Console.h" />
@@ -23,8 +23,8 @@
     <ClInclude Include="Source\Core\Types.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="Source\Core\Config.cpp" />
-    <ClCompile Include="Source\Core\DateTime.cpp" />
+    <ClCompile Include="Source\Core\Misc\Config.cpp" />
+    <ClCompile Include="Source\Core\Misc\DateTime.cpp" />
     <ClCompile Include="Source\Core\Engine.cpp" />
     <ClCompile Include="Source\Core\Logging\Console.cpp" />
     <ClCompile Include="Source\Core\Logging\Log.cpp" />

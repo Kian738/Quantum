@@ -3,6 +3,6 @@
 #include <Windows.h>
 
 #include "Types.h"
-#include "Config.h"
-#include "DateTime.h"
 #include "Logging/LogMacros.h"
+#include "Misc/Config.h"
+#include "Misc/DateTime.h"

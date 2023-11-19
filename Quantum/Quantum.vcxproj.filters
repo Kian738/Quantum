@@ -36,10 +36,10 @@
     <ClInclude Include="Source\Core\Logging\LogMacros.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Source\Core\DateTime.h">
+    <ClInclude Include="Source\Core\Misc\DateTime.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Source\Core\Config.h">
+    <ClInclude Include="Source\Core\Misc\Config.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Source\Core\Core.h">
@@ -59,10 +59,10 @@
     <ClCompile Include="Source\Core\Logging\LogMacros.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Source\Core\DateTime.cpp">
+    <ClCompile Include="Source\Core\Misc\DateTime.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Source\Core\Config.cpp">
+    <ClCompile Include="Source\Core\Misc\Config.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Source\Core\Engine.cpp">
