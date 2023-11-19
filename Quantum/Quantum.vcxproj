@@ -12,6 +12,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Source\Core\Config.h" />
+    <ClInclude Include="Source\Core\Core.h" />
     <ClInclude Include="Source\Core\DateTime.h" />
     <ClInclude Include="Source\Core\Engine.h" />
     <ClInclude Include="Source\Core\Launch.h" />

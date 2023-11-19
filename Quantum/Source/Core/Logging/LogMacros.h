@@ -1,6 +1,7 @@
 #pragma once
 
 #include "Log.h"
+#include "LogCategory.h"
 #include <format>
 
 #define DECLARE_LOG_CATEGORY(Name) \

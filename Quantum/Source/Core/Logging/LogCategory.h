@@ -4,6 +4,7 @@
 
 namespace Quantum
 {
+	// TODO: Add minimum log level
 	class LogCategory
 	{
 	private:
@@ -11,6 +12,6 @@ namespace Quantum
 	public:
 		LogCategory(const String& name);
 
-		const String& GetName() const;
+		StringView GetName() const;
 	};
 }

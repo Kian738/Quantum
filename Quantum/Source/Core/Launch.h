@@ -1,7 +1,7 @@
 #pragma once
 
+#include "Core.h"
 #include "Engine.h"
-#include <Windows.h>
 
 extern Quantum::Engine* CreateEngine();
 
@@ -9,6 +9,9 @@ namespace Quantum
 {
 	int Main(int argc, char** argv)
 	{
+		Log::Initialize();
+
+		auto compileDateTime = DateTime::FromCompileTime();
 		// TODO: Parse command line arguments.
 		Engine* engine = CreateEngine();
 		engine->Run();

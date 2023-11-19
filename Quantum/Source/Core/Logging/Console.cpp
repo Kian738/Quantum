@@ -1,6 +1,5 @@
 #include "Console.h"
-#include "Core/Config.h"
-#include <Windows.h>
+#include "Core/Core.h"
 #include <iostream>
 #include <format>
 

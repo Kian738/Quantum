@@ -1,7 +1,6 @@
 #pragma once
 
-#include "Types.h"
-#include <Windows.h>
+#include "Core.h"
 
 namespace Quantum
 {

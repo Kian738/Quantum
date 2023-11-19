@@ -7,7 +7,7 @@ namespace Quantum
 	{
 	}
 
-	const String& LogCategory::GetName() const
+	StringView LogCategory::GetName() const
 	{
 		return m_Name;
 	}

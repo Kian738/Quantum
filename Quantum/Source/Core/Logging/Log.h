@@ -1,6 +1,6 @@
 #pragma once
 
-#include "Core/Types.h"
+#include "Core/Core.h"
 #include "Console.h"
 #include "LogCategory.h"
 #include <fstream>

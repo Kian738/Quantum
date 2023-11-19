@@ -1,11 +1,9 @@
 #include "Log.h"
 #include "LogMacros.h"
-#include "Core/Config.h"
-#include "Core/DateTime.h"
 #include <iostream>
 #include <filesystem>
 
-// TODO: Async logging
+// TODO: Add async logging
 namespace Quantum
 {
 	std::ofstream Log::m_LogFile = {};
@@ -68,6 +66,7 @@ namespace Quantum
 		if (GConfig->ShouldUseConsole())
 			Console::Allocate();
 
+		// TODO: Move all the file stuff to a separate class
 		char* localAppDataDir = nullptr;
 		_dupenv_s(&localAppDataDir, nullptr, "LOCALAPPDATA");
 
@@ -128,12 +127,12 @@ namespace Quantum
 
 		auto currentTime = DateTime::Now().GetTime();
 		auto levelName = Utils::LevelToName(level);
-		auto& categoryName = category.GetName();
+		auto categoryName = category.GetName();
 
 		if (level < LogLevel::Fatal)
 		{
 			auto levelColor = Utils::LevelToColor(level);
-			auto levelString = std::format("{}{}{}", levelColor, levelName, defaultColor);
+			auto levelString = std::format("{}{}{}", levelColor, levelName, defaultColor); // TODO: Could be precomputed
 
 			if (Console::IsAllocated())
 				std::println("[{}]: [{}]: {}", levelString, categoryName, formatedMessage);
