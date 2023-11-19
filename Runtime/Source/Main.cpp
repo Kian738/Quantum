@@ -2,5 +2,5 @@
 
 Quantum::Engine* CreateEngine()
 {
-	return nullptr;
+	return new Quantum::Engine;
 }

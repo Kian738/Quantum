@@ -24,7 +24,7 @@
   <ItemGroup>
     <ClCompile Include="Source\Core\Config.cpp" />
     <ClCompile Include="Source\Core\DateTime.cpp" />
-    <ClCompile Include="Source\Core\Launch.cpp" />
+    <ClCompile Include="Source\Core\Engine.cpp" />
     <ClCompile Include="Source\Core\Logging\Console.cpp" />
     <ClCompile Include="Source\Core\Logging\Log.cpp" />
     <ClCompile Include="Source\Core\Logging\LogCategory.cpp" />

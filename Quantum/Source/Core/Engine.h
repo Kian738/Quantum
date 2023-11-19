@@ -4,11 +4,12 @@ namespace Quantum
 {
 	class Engine
 	{
+	private:
+		bool m_IsRunning = false;
 	public:
-		Engine() = default;
+		Engine();
+		~Engine();
 
-		void Initialize();
-		void Shutdown();
-		void Tick();
+		void Run();
 	};
 }
