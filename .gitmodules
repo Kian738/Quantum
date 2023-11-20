@@ -1,0 +1,3 @@
+[submodule "Quantum/Vendor/SimpleINI"]
+	path = Quantum/Vendor/SimpleINI
+	url = https://github.com/brofield/simpleini.git
