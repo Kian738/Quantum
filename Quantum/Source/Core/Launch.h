@@ -12,6 +12,8 @@ namespace Quantum
 		Log::Initialize();
 
 		auto compileDateTime = DateTime::FromCompileTime();
+		LOG(Info, LogCommon, "Launching Quantum Engine built on {} at {}", compileDateTime.GetDate(), compileDateTime.GetTime());
+
 		// TODO: Parse command line arguments.
 		Engine* engine = CreateEngine();
 		engine->Run();

@@ -28,5 +28,7 @@ namespace Quantum
 		static void Shutdown();
 
 		static void LogInternal(LogLevel level, const LogCategory& category, StringView formatedMessage, StringView file, int line);
+	private:
+		static void PurgeLogFiles(StringView directory);
 	};
 }

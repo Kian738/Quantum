@@ -4,14 +4,17 @@
 
 namespace Quantum
 {
-	// TODO: Add minimum log level
-	class LogCategory
+	class ConfigSection
 	{
 	private:
 		const char* m_Name;
+		Dictionary<String, String> m_Values;
 	public:
-		LogCategory(const char* name) : m_Name(name) {}
+		ConfigSection(const char* name) : m_Name(name) {}
 
 		const char* GetName() const { return m_Name; };
+		
+		void Load();
+		void Save();
 	};
 }

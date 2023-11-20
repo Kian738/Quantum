@@ -11,7 +11,10 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Source\Core\Misc\Config.h" />
+    <ClInclude Include="Source\Core\Configuration\ConfigMacros.h" />
+    <ClInclude Include="Source\Core\Configuration\ConfigSection.h" />
+    <ClInclude Include="Source\Core\Globals.h" />
+    <ClInclude Include="Source\Core\Configuration\Config.h" />
     <ClInclude Include="Source\Core\Core.h" />
     <ClInclude Include="Source\Core\Misc\DateTime.h" />
     <ClInclude Include="Source\Core\Engine.h" />
@@ -20,16 +23,18 @@
     <ClInclude Include="Source\Core\Logging\Log.h" />
     <ClInclude Include="Source\Core\Logging\LogCategory.h" />
     <ClInclude Include="Source\Core\Logging\LogMacros.h" />
+    <ClInclude Include="Source\Core\Misc\Environment.h" />
     <ClInclude Include="Source\Core\Types.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="Source\Core\Misc\Config.cpp" />
+    <ClCompile Include="Source\Core\Configuration\Config.cpp" />
+    <ClCompile Include="Source\Core\Configuration\ConfigSection.cpp" />
     <ClCompile Include="Source\Core\Misc\DateTime.cpp" />
     <ClCompile Include="Source\Core\Engine.cpp" />
     <ClCompile Include="Source\Core\Logging\Console.cpp" />
     <ClCompile Include="Source\Core\Logging\Log.cpp" />
-    <ClCompile Include="Source\Core\Logging\LogCategory.cpp" />
     <ClCompile Include="Source\Core\Logging\LogMacros.cpp" />
+    <ClCompile Include="Source\Core\Misc\Environment.cpp" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>17.0</VCProjectVersion>
@@ -80,7 +85,7 @@
       <ConformanceMode>true</ConformanceMode>
       <LanguageStandard>stdcpplatest</LanguageStandard>
       <MultiProcessorCompilation>true</MultiProcessorCompilation>
-      <AdditionalIncludeDirectories>Source\</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>Source\;Vendor\SimpleINI\</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -97,7 +102,7 @@
       <ConformanceMode>true</ConformanceMode>
       <LanguageStandard>stdcpplatest</LanguageStandard>
       <MultiProcessorCompilation>true</MultiProcessorCompilation>
-      <AdditionalIncludeDirectories>Source\</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>Source\;Vendor\SimpleINI\</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>

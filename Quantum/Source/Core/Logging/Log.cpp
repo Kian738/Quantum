@@ -63,44 +63,19 @@ namespace Quantum
 		if (m_IsInitialized)
 			return;
 
-		if (GConfig->ShouldUseConsole())
+		if (true/* KEKW: GConfig->ShouldUseConsole()*/)
 			Console::Allocate();
 
-		// TODO: Move all the file stuff to a separate class
-		char* localAppDataDir = nullptr;
-		_dupenv_s(&localAppDataDir, nullptr, "LOCALAPPDATA");
-
-		auto logDirectory = std::format("{}\\{}\\Logs", localAppDataDir, GConfig->GetName());
+		auto logDirectory = std::format("{}\\{}\\Logs", Environment::GetLocalAppDataDirectory(), "Quantum"/* KEKW: GConfig->GetName()*/);
 		std::filesystem::create_directories(logDirectory);
 
 		auto currentDateTime = DateTime::Now();
 		auto logFilePath = std::format("{}\\{}.log", logDirectory, currentDateTime.GetDate());
 		m_LogFile.open(logFilePath);
 
-		free(localAppDataDir);
-
 		LOG_CHECK(m_LogFile.is_open(), Error, LogCommon, "Failed to open log file: {}", logFilePath);
 
-		// Delete log files older than 5 days (using file creation time)
-		List<String> logFiles;
-		for (const auto& entry : std::filesystem::directory_iterator(logDirectory))
-			if (entry.is_regular_file())
-			{
-				auto path = entry.path().string();
-				if (path.ends_with(".log"))
-					logFiles.push_back(path);
-			}
-
-		if (logFiles.size() > 5)
-		{
-			std::sort(logFiles.begin(), logFiles.end(), [](StringView a, const StringView b)
-				{
-					return DateTime::FromFileCreationTime(a) < DateTime::FromFileCreationTime(b);
-				});
-
-			for (auto i = 0; i < logFiles.size() - 5; i++)
-				std::filesystem::remove(logFiles[i]);
-		}
+		PurgeLogFiles(logDirectory);
 
 		m_IsInitialized = true;
 	}
@@ -134,8 +109,7 @@ namespace Quantum
 			auto levelColor = Utils::LevelToColor(level);
 			auto levelString = std::format("{}{}{}", levelColor, levelName, defaultColor); // TODO: Could be precomputed
 
-			if (Console::IsAllocated())
-				std::println("[{}]: [{}]: {}", levelString, categoryName, formatedMessage);
+			if (Console::IsAllocated()) std::println("[{}]: [{}]: {}", levelString, categoryName, formatedMessage);
 			std::println(m_LogFile, "[{}]: [{}]: [{}]: {}", currentTime, levelName, categoryName, formatedMessage);
 
 			return;
@@ -143,11 +117,33 @@ namespace Quantum
 
 		auto relativeFile = Utils::PathToRelative(file);
 
-		if (Console::IsAllocated())
-			std::println("{}[{}]: [{}] [{}:{}]: {}{}", fatalColor, levelName, categoryName, relativeFile, line, formatedMessage, defaultColor);
+		if (Console::IsAllocated()) std::println("{}[{}]: [{}] [{}:{}]: {}{}", fatalColor, levelName, categoryName, relativeFile, line, formatedMessage, defaultColor);
 		std::println(m_LogFile, "[{}]: [{}]: [{}]: [{}:{}]: {}", currentTime, levelName, categoryName, relativeFile, line, formatedMessage);
 
 		std::this_thread::sleep_for(std::chrono::seconds(5));
 		std::abort();
+	}
+
+	void Log::PurgeLogFiles(StringView directory)
+	{
+		List<String> logFiles;
+		for (const auto& entry : std::filesystem::directory_iterator(directory))
+			if (entry.is_regular_file())
+			{
+				auto path = entry.path().string();
+				if (path.ends_with(".log"))
+					logFiles.push_back(path);
+			}
+
+		if (logFiles.size() > 5)
+		{
+			std::sort(logFiles.begin(), logFiles.end(), [](StringView a, const StringView b)
+				{
+					return DateTime::FromFileCreationTime(a) < DateTime::FromFileCreationTime(b);
+				});
+
+			for (auto i = 0; i < logFiles.size() - 5; i++)
+				std::filesystem::remove(logFiles[i]);
+		}
 	}
 }

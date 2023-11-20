@@ -17,7 +17,7 @@ namespace Quantum
 		std::ios_base::sync_with_stdio(false);
 
 		AllocConsole();
-		SetConsoleTitleA(std::format("{} - Console", GConfig->GetName()).c_str());
+		// KEKW: SetConsoleTitleA(std::format("{} - Console", GConfig->GetName()).c_str());
 
 		FILE* file = nullptr;
 		freopen_s(&file, "CONIN$", "r", stdin);

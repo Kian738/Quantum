@@ -39,18 +39,27 @@
     <ClInclude Include="Source\Core\Misc\DateTime.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Source\Core\Misc\Config.h">
+    <ClInclude Include="Source\Core\Configuration\Config.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Source\Core\Core.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="Source\Core\Globals.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Core\Configuration\ConfigMacros.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Core\Configuration\ConfigSection.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Core\Misc\Environment.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Source\Core\Logging\Log.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Source\Core\Logging\LogCategory.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Source\Core\Logging\Console.cpp">
@@ -62,10 +71,16 @@
     <ClCompile Include="Source\Core\Misc\DateTime.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Source\Core\Misc\Config.cpp">
+    <ClCompile Include="Source\Core\Configuration\Config.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Source\Core\Engine.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Core\Configuration\ConfigSection.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Core\Misc\Environment.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
