@@ -17,8 +17,7 @@ namespace Quantum
 		if (GEngineConfig.Get()["Console"]["Enabled"].as<bool>())
 			Console::Allocate();
 
-		auto currentDateTime = DateTime::Now();
-		auto logFilePath = std::format("{}\\{}.log", Environment::GetLogDir(), currentDateTime.GetDate());
+		auto logFilePath = std::format("{}\\{}.log", Environment::GetLogDir(), DateTime::Now().GetDate());
 
 		FileSystemUtils::CreateParentDirs(logFilePath);
 		m_LogFile.open(logFilePath);
@@ -129,6 +128,7 @@ namespace Quantum
 					logFiles.push_back(path);
 			}
 
+		// TODO: Maybe I should sort by file size instead of creation time or use the file name as a timestamp
 		if (logFiles.size() > 5)
 		{
 			std::sort(logFiles.begin(), logFiles.end(), [](StringView a, const StringView b)
