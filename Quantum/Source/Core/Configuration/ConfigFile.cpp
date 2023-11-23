@@ -21,13 +21,11 @@ namespace Quantum
 
 		bool isDirty = false;
 		for (auto it : defaults)
-		{
 			if (!m_Data[it.first])
 			{
 				m_Data[it.first] = it.second;
 				isDirty = true;
 			}
-		}
 
 		if (isDirty)
 			Save();
@@ -45,6 +43,7 @@ namespace Quantum
 
 	void ConfigFile::Save()
 	{
+		FileSystemUtils::CreateParentDirs(m_Path);
 		std::ofstream file(m_Path);
 		file << m_Data;
 		file.close();

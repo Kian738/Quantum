@@ -67,29 +67,31 @@ namespace Quantum
 
     String Environment::GetContentDir()
     {
-        return std::format("{}/Content", GetWorkingDir());
+        return std::format("{}\\Content", GetWorkingDir());
     }
 
     String Environment::GetAppDir()
     {
-        return std::format("{}/{}", GetAppDataDir(), App::GetName());
+        return std::format("{}\\{}", GetLocalAppDataDir(), App::GetName());
     }
 
     String Environment::GetLogDir()
     {
-        return std::format("{}/Logs", GetAppDir());
+        return std::format("{}\\Logs", GetAppDir());
     }
 
     String Environment::GetConfigDir()
     {
-		return std::format("{}/Config", GetAppDir());
+		return std::format("{}\\Config", GetAppDir());
     }
 
     String Environment::GetExecutableName()
     {
-        char path[MAX_PATH];
-		GetModuleFileNameA(nullptr, path, MAX_PATH);
-		return path;
+        char fullPath[MAX_PATH];
+        GetModuleFileNameA(NULL, fullPath, MAX_PATH);
+        std::filesystem::path executablePath(fullPath);
+        static auto executableName = executablePath.filename().string();
+        return executableName;
     }
 }
 

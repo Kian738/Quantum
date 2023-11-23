@@ -34,6 +34,6 @@ namespace Quantum
 
 		static String PathToRelative(StringView path);
 
-		static void PurgeLogFiles(StringView directory);
+		static void PurgeLogFiles();
 	};
 }

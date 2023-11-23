@@ -14,7 +14,7 @@ namespace Quantum
 		LOG(Info, LogCommon, "Quantum Engine built on {} at {}", date, time);
 
 		// TODO: Parse command line arguments.
-		Engine* engine = CreateEngine();
+ 		Engine* engine = CreateEngine();
 		engine->Run();
 		delete engine;
 

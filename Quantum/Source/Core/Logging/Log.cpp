@@ -14,21 +14,18 @@ namespace Quantum
 		if (m_IsInitialized)
 			return;
 
-		if (true/* KEKW: GConfig->ShouldUseConsole()*/)
+		if (GEngineConfig.Get()["Console"]["Enabled"].as<bool>())
 			Console::Allocate();
 
-		auto logDirectory = std::format("{}\\{}\\Logs", Environment::GetLocalAppDataDir(), "Quantum"/* KEKW: GConfig->GetName()*/);
-		std::filesystem::create_directories(logDirectory);
-
 		auto currentDateTime = DateTime::Now();
-		auto logFilePath = std::format("{}\\{}.log", logDirectory, currentDateTime.GetDate());
+		auto logFilePath = std::format("{}\\{}.log", Environment::GetLogDir(), currentDateTime.GetDate());
+
+		FileSystemUtils::CreateParentDirs(logFilePath);
 		m_LogFile.open(logFilePath);
 
-		LOG_CHECK(m_LogFile.is_open(), Error, LogCommon, "Failed to open log file: {}", logFilePath);
-
-		PurgeLogFiles(logDirectory);
-
 		m_IsInitialized = true;
+
+		LOG_CHECK(m_LogFile.is_open(), Error, LogCommon, "Failed to open log file: {}", logFilePath);
 	}
 
 	void Log::Shutdown()
@@ -121,10 +118,10 @@ namespace Quantum
 		return String((position != String::npos) ? path.substr(position) : path);
 	}
 
-	void Log::PurgeLogFiles(StringView directory)
+	void Log::PurgeLogFiles()
 	{
 		List<String> logFiles;
-		for (const auto& entry : std::filesystem::directory_iterator(directory))
+		for (const auto& entry : std::filesystem::directory_iterator(Environment::GetLogDir()))
 			if (entry.is_regular_file())
 			{
 				auto path = entry.path().string();

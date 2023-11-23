@@ -1,5 +1,7 @@
 #pragma once
 
+#include "ConfigFile.h"
+
 #define DECLARE_CONFIG_FILE(Name) \
 	namespace Quantum \
 	{ \
