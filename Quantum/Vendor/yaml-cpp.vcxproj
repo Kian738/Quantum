@@ -10,45 +10,11 @@
       <Platform>x64</Platform>
     </ProjectConfiguration>
   </ItemGroup>
-  <ItemGroup>
-    <ClInclude Include="Source\Core\Configuration\ConfigFile.h" />
-    <ClInclude Include="Source\Core\Configuration\ConfigMacros.h" />
-    <ClInclude Include="Source\Core\Globals.h" />
-    <ClInclude Include="Source\Core\Configuration\Config.h" />
-    <ClInclude Include="Source\Core\Core.h" />
-    <ClInclude Include="Source\Core\Misc\App.h" />
-    <ClInclude Include="Source\Core\Misc\DateTime.h" />
-    <ClInclude Include="Source\Core\Engine.h" />
-    <ClInclude Include="Source\Core\Launch.h" />
-    <ClInclude Include="Source\Core\Logging\Console.h" />
-    <ClInclude Include="Source\Core\Logging\Log.h" />
-    <ClInclude Include="Source\Core\Logging\LogCategory.h" />
-    <ClInclude Include="Source\Core\Logging\LogMacros.h" />
-    <ClInclude Include="Source\Core\Misc\Environment.h" />
-    <ClInclude Include="Source\Core\Types.h" />
-    <ClInclude Include="Source\Utils\StringUtils.h" />
-  </ItemGroup>
-  <ItemGroup>
-    <ClCompile Include="Source\Core\Configuration\ConfigFile.cpp" />
-    <ClCompile Include="Source\Core\Globals.cpp" />
-    <ClCompile Include="Source\Core\Misc\App.cpp" />
-    <ClCompile Include="Source\Core\Misc\DateTime.cpp" />
-    <ClCompile Include="Source\Core\Engine.cpp" />
-    <ClCompile Include="Source\Core\Logging\Console.cpp" />
-    <ClCompile Include="Source\Core\Logging\Log.cpp" />
-    <ClCompile Include="Source\Core\Misc\Environment.cpp" />
-    <ClCompile Include="Source\Utils\StringUtils.cpp" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="Vendor\yaml-cpp.vcxproj">
-      <Project>{8f3b7894-f570-4991-95f3-5aea7b55ab17}</Project>
-    </ProjectReference>
-  </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>17.0</VCProjectVersion>
     <Keyword>Win32Proj</Keyword>
-    <ProjectGuid>{92170049-57c3-4658-bb4f-e9386e8b2c4a}</ProjectGuid>
-    <RootNamespace>Quantum</RootNamespace>
+    <ProjectGuid>{8f3b7894-f570-4991-95f3-5aea7b55ab17}</ProjectGuid>
+    <RootNamespace>yamlcpp</RootNamespace>
     <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
@@ -78,12 +44,12 @@
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
-    <OutDir>$(ProjectDir)Binaries\$(Configuration)\</OutDir>
-    <IntDir>$(ProjectDir)Intermediate\$(Configuration)\</IntDir>
+    <OutDir>$(ProjectDir)$(ProjectName)\Binaries\$(Configuration)\</OutDir>
+    <IntDir>$(ProjectDir)$(ProjectName)\Intermediate\$(Configuration)\</IntDir>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Test|x64'">
-    <OutDir>$(ProjectDir)Binaries\$(Configuration)\</OutDir>
-    <IntDir>$(ProjectDir)Intermediate\$(Configuration)\</IntDir>
+    <OutDir>$(ProjectDir)$(ProjectName)\Binaries\$(Configuration)\</OutDir>
+    <IntDir>$(ProjectDir)$(ProjectName)\Intermediate\$(Configuration)\</IntDir>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <ClCompile>
@@ -91,9 +57,8 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>YAML_CPP_STATIC_DEFINE;_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <LanguageStandard>stdcpplatest</LanguageStandard>
+      <AdditionalIncludeDirectories>yaml-cpp\include</AdditionalIncludeDirectories>
       <MultiProcessorCompilation>true</MultiProcessorCompilation>
-      <AdditionalIncludeDirectories>Source\;Vendor\yaml-cpp\include</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -108,9 +73,8 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>YAML_CPP_STATIC_DEFINE;NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <LanguageStandard>stdcpplatest</LanguageStandard>
+      <AdditionalIncludeDirectories>yaml-cpp\include</AdditionalIncludeDirectories>
       <MultiProcessorCompilation>true</MultiProcessorCompilation>
-      <AdditionalIncludeDirectories>Source\;Vendor\yaml-cpp\include</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -119,6 +83,60 @@
       <GenerateDebugInformation>true</GenerateDebugInformation>
     </Link>
   </ItemDefinitionGroup>
+  <ItemGroup>
+    <ClCompile Include="yaml-cpp\src\binary.cpp" />
+    <ClCompile Include="yaml-cpp\src\convert.cpp" />
+    <ClCompile Include="yaml-cpp\src\depthguard.cpp" />
+    <ClCompile Include="yaml-cpp\src\directives.cpp" />
+    <ClCompile Include="yaml-cpp\src\emit.cpp" />
+    <ClCompile Include="yaml-cpp\src\emitfromevents.cpp" />
+    <ClCompile Include="yaml-cpp\src\emitter.cpp" />
+    <ClCompile Include="yaml-cpp\src\emitterstate.cpp" />
+    <ClCompile Include="yaml-cpp\src\emitterutils.cpp" />
+    <ClCompile Include="yaml-cpp\src\exceptions.cpp" />
+    <ClCompile Include="yaml-cpp\src\exp.cpp" />
+    <ClCompile Include="yaml-cpp\src\memory.cpp" />
+    <ClCompile Include="yaml-cpp\src\node.cpp" />
+    <ClCompile Include="yaml-cpp\src\nodebuilder.cpp" />
+    <ClCompile Include="yaml-cpp\src\nodeevents.cpp" />
+    <ClCompile Include="yaml-cpp\src\node_data.cpp" />
+    <ClCompile Include="yaml-cpp\src\null.cpp" />
+    <ClCompile Include="yaml-cpp\src\ostream_wrapper.cpp" />
+    <ClCompile Include="yaml-cpp\src\parse.cpp" />
+    <ClCompile Include="yaml-cpp\src\parser.cpp" />
+    <ClCompile Include="yaml-cpp\src\regex_yaml.cpp" />
+    <ClCompile Include="yaml-cpp\src\scanner.cpp" />
+    <ClCompile Include="yaml-cpp\src\scanscalar.cpp" />
+    <ClCompile Include="yaml-cpp\src\scantag.cpp" />
+    <ClCompile Include="yaml-cpp\src\scantoken.cpp" />
+    <ClCompile Include="yaml-cpp\src\simplekey.cpp" />
+    <ClCompile Include="yaml-cpp\src\singledocparser.cpp" />
+    <ClCompile Include="yaml-cpp\src\stream.cpp" />
+    <ClCompile Include="yaml-cpp\src\tag.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="yaml-cpp\src\collectionstack.h" />
+    <ClInclude Include="yaml-cpp\src\directives.h" />
+    <ClInclude Include="yaml-cpp\src\emitterstate.h" />
+    <ClInclude Include="yaml-cpp\src\emitterutils.h" />
+    <ClInclude Include="yaml-cpp\src\exp.h" />
+    <ClInclude Include="yaml-cpp\src\indentation.h" />
+    <ClInclude Include="yaml-cpp\src\nodebuilder.h" />
+    <ClInclude Include="yaml-cpp\src\nodeevents.h" />
+    <ClInclude Include="yaml-cpp\src\ptr_vector.h" />
+    <ClInclude Include="yaml-cpp\src\regeximpl.h" />
+    <ClInclude Include="yaml-cpp\src\regex_yaml.h" />
+    <ClInclude Include="yaml-cpp\src\scanner.h" />
+    <ClInclude Include="yaml-cpp\src\scanscalar.h" />
+    <ClInclude Include="yaml-cpp\src\scantag.h" />
+    <ClInclude Include="yaml-cpp\src\setting.h" />
+    <ClInclude Include="yaml-cpp\src\singledocparser.h" />
+    <ClInclude Include="yaml-cpp\src\stream.h" />
+    <ClInclude Include="yaml-cpp\src\streamcharsource.h" />
+    <ClInclude Include="yaml-cpp\src\stringsource.h" />
+    <ClInclude Include="yaml-cpp\src\tag.h" />
+    <ClInclude Include="yaml-cpp\src\token.h" />
+  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>

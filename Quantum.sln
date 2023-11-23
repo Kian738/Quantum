@@ -7,28 +7,34 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Quantum", "Quantum\Quantum.
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Runtime", "Runtime\Runtime.vcxproj", "{DA79CF02-F80E-4C1F-913B-6C5BDA4EAFE5}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Dependencies", "Dependencies", "{7AA7541A-50D3-4E7A-B514-A60E7F98381C}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "yaml-cpp", "Quantum\Vendor\yaml-cpp.vcxproj", "{8F3B7894-F570-4991-95F3-5AEA7B55AB17}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|x64 = Debug|x64
-		Release|x64 = Release|x64
 		Test|x64 = Test|x64
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
 		{92170049-57C3-4658-BB4F-E9386E8B2C4A}.Debug|x64.ActiveCfg = Debug|x64
 		{92170049-57C3-4658-BB4F-E9386E8B2C4A}.Debug|x64.Build.0 = Debug|x64
-		{92170049-57C3-4658-BB4F-E9386E8B2C4A}.Release|x64.ActiveCfg = Test|x64
-		{92170049-57C3-4658-BB4F-E9386E8B2C4A}.Release|x64.Build.0 = Test|x64
 		{92170049-57C3-4658-BB4F-E9386E8B2C4A}.Test|x64.ActiveCfg = Test|x64
 		{92170049-57C3-4658-BB4F-E9386E8B2C4A}.Test|x64.Build.0 = Test|x64
 		{DA79CF02-F80E-4C1F-913B-6C5BDA4EAFE5}.Debug|x64.ActiveCfg = Debug|x64
 		{DA79CF02-F80E-4C1F-913B-6C5BDA4EAFE5}.Debug|x64.Build.0 = Debug|x64
-		{DA79CF02-F80E-4C1F-913B-6C5BDA4EAFE5}.Release|x64.ActiveCfg = Release|x64
-		{DA79CF02-F80E-4C1F-913B-6C5BDA4EAFE5}.Release|x64.Build.0 = Release|x64
-		{DA79CF02-F80E-4C1F-913B-6C5BDA4EAFE5}.Test|x64.ActiveCfg = Debug|x64
-		{DA79CF02-F80E-4C1F-913B-6C5BDA4EAFE5}.Test|x64.Build.0 = Debug|x64
+		{DA79CF02-F80E-4C1F-913B-6C5BDA4EAFE5}.Test|x64.ActiveCfg = Test|x64
+		{DA79CF02-F80E-4C1F-913B-6C5BDA4EAFE5}.Test|x64.Build.0 = Test|x64
+		{8F3B7894-F570-4991-95F3-5AEA7B55AB17}.Debug|x64.ActiveCfg = Debug|x64
+		{8F3B7894-F570-4991-95F3-5AEA7B55AB17}.Debug|x64.Build.0 = Debug|x64
+		{8F3B7894-F570-4991-95F3-5AEA7B55AB17}.Test|x64.ActiveCfg = Test|x64
+		{8F3B7894-F570-4991-95F3-5AEA7B55AB17}.Test|x64.Build.0 = Test|x64
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{8F3B7894-F570-4991-95F3-5AEA7B55AB17} = {7AA7541A-50D3-4E7A-B514-A60E7F98381C}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {0F9CF9CA-42CD-4223-9657-50285B77CA92}

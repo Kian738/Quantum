@@ -43,5 +43,3 @@
 #define LOG_CHECK(Condition, Level, Category, Message, ...) \
 	if (!(Condition)) \
 		LOG(Level, Category, Message, __VA_ARGS__);
-
-DECLARE_LOG_CATEGORY(Common);

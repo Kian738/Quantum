@@ -5,24 +5,19 @@
 
 namespace Quantum
 {
-	class ConfigCache
+	class Config
 	{
 	public:
-		ConfigCache();
-		~ConfigCache();
-
 		template<typename T>
-		T Get(StringView path, StringView key, const ConfigFile& file)
+		static T Get(StringView path, StringView key, const ConfigFile& file)
 		{
 			return file.Get<T>(path, key);
 		};
 
 		template<typename T>
-		T Set(StringView path, StringView key, T value, const ConfigFile& file)
+		static T Set(StringView path, StringView key, T value, const ConfigFile& file)
 		{
 			return file.Set<T>(path, key, value);
 		};
-
-		static void Initialize();
 	};
 }
