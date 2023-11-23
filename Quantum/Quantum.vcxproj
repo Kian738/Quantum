@@ -11,11 +11,12 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Source\Core\Configuration\ConfigFile.h" />
     <ClInclude Include="Source\Core\Configuration\ConfigMacros.h" />
-    <ClInclude Include="Source\Core\Configuration\ConfigSection.h" />
     <ClInclude Include="Source\Core\Globals.h" />
     <ClInclude Include="Source\Core\Configuration\Config.h" />
     <ClInclude Include="Source\Core\Core.h" />
+    <ClInclude Include="Source\Core\Misc\App.h" />
     <ClInclude Include="Source\Core\Misc\DateTime.h" />
     <ClInclude Include="Source\Core\Engine.h" />
     <ClInclude Include="Source\Core\Launch.h" />
@@ -25,16 +26,19 @@
     <ClInclude Include="Source\Core\Logging\LogMacros.h" />
     <ClInclude Include="Source\Core\Misc\Environment.h" />
     <ClInclude Include="Source\Core\Types.h" />
+    <ClInclude Include="Source\Utils\StringUtils.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Source\Core\Configuration\Config.cpp" />
-    <ClCompile Include="Source\Core\Configuration\ConfigSection.cpp" />
+    <ClCompile Include="Source\Core\Configuration\ConfigFile.cpp" />
+    <ClCompile Include="Source\Core\Misc\App.cpp" />
     <ClCompile Include="Source\Core\Misc\DateTime.cpp" />
     <ClCompile Include="Source\Core\Engine.cpp" />
     <ClCompile Include="Source\Core\Logging\Console.cpp" />
     <ClCompile Include="Source\Core\Logging\Log.cpp" />
     <ClCompile Include="Source\Core\Logging\LogMacros.cpp" />
     <ClCompile Include="Source\Core\Misc\Environment.cpp" />
+    <ClCompile Include="Source\Utils\StringUtils.cpp" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>17.0</VCProjectVersion>
@@ -85,7 +89,7 @@
       <ConformanceMode>true</ConformanceMode>
       <LanguageStandard>stdcpplatest</LanguageStandard>
       <MultiProcessorCompilation>true</MultiProcessorCompilation>
-      <AdditionalIncludeDirectories>Source\;Vendor\SimpleINI\</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>Source\;Vendor\yaml-cpp\include</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -102,7 +106,7 @@
       <ConformanceMode>true</ConformanceMode>
       <LanguageStandard>stdcpplatest</LanguageStandard>
       <MultiProcessorCompilation>true</MultiProcessorCompilation>
-      <AdditionalIncludeDirectories>Source\;Vendor\SimpleINI\</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>Source\;Vendor\yaml-cpp\include</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>

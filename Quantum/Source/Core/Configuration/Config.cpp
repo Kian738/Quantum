@@ -1,5 +1,5 @@
 #include "Config.h"
-#include "Core/Core.h"
+#include "Core/Globals.h"
 
 namespace Quantum
 {

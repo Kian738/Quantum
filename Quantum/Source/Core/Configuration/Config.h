@@ -1,19 +1,27 @@
 #pragma once
 
 #include "Core/Types.h"
+#include "ConfigFile.h"
 
 namespace Quantum
 {
-	// TODO: Add project files
-	// TODO: Utilize multiple config files like Unreal Engine and use classes
-	// TODO: Rewrite the whole thing
 	class ConfigCache
 	{
 	public:
 		ConfigCache();
 		~ConfigCache();
 
+		template<typename T>
+		T Get(StringView path, StringView key, const ConfigFile& file)
+		{
+			return file.Get<T>(path, key);
+		};
 
+		template<typename T>
+		T Set(StringView path, StringView key, T value, const ConfigFile& file)
+		{
+			return file.Set<T>(path, key, value);
+		};
 
 		static void Initialize();
 	};

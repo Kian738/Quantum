@@ -29,6 +29,11 @@ namespace Quantum
 
 		static void LogInternal(LogLevel level, const LogCategory& category, StringView formatedMessage, StringView file, int line);
 	private:
+		static const char* LevelToName(LogLevel level);
+		static const char* LevelToColor(LogLevel level);
+
+		static String PathToRelative(StringView path);
+
 		static void PurgeLogFiles(StringView directory);
 	};
 }

@@ -15,6 +15,7 @@ namespace Quantum
 
         String GetDate() const;
         String GetTime() const;
+        Pair<String, String> GetDateTime() const;
 
         bool operator==(const DateTime& other) const;
         bool operator!=(const DateTime& other) const;

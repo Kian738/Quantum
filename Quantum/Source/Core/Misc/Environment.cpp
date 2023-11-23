@@ -1,10 +1,11 @@
 #include "Environment.h"
+#include "Core/Core.h"
 #include <filesystem>
 #include <ShlObj.h>
 
 namespace Quantum
 {
-    String Environment::GetEnvironmentVariable(StringView name)
+    String Environment::GetEnv(StringView name)
     {
         String result;
         auto size = GetEnvironmentVariableA(name.data(), nullptr, 0);
@@ -15,7 +16,17 @@ namespace Quantum
         return result;
     }
 
-    String Environment::GetSpecialFolder(int id)
+    String Environment::GetUsername()
+    {
+        return GetEnv("USERNAME");
+    }
+
+    String Environment::GetComputer()
+    {
+        return GetEnv("COMPUTERNAME");
+    }
+
+    String Environment::GetSpecialDir(int id)
     {
         String result;
 		char path[MAX_PATH];
@@ -24,44 +35,61 @@ namespace Quantum
 		return result;
     }
 
-    String Environment::GetWorkingDirectory()
+    String Environment::GetWorkingDir()
     {
         return std::filesystem::current_path().string();
     }
 
-    String Environment::GetDesktopDirectory()
+    String Environment::GetDesktopDir()
     {
-        return GetSpecialFolder(CSIDL_DESKTOPDIRECTORY);
+        return GetSpecialDir(CSIDL_DESKTOPDIRECTORY);
 	}
 
-    String Environment::GetDocumentsDirectory()
+    String Environment::GetDocumentsDir()
     {
-        return GetSpecialFolder(CSIDL_MYDOCUMENTS);
+        return GetSpecialDir(CSIDL_MYDOCUMENTS);
     }
 
-    String Environment::GetTempDirectory()
+    String Environment::GetTempDir()
     {
-		return GetEnvironmentVariable("TEMP");
+		return GetEnv("TEMP");
 	}
 
-    String Environment::GetAppDataDirectory()
+    String Environment::GetAppDataDir()
     {
-		return GetSpecialFolder(CSIDL_APPDATA);
+		return GetSpecialDir(CSIDL_APPDATA);
 	}
 
-    String Environment::GetLocalAppDataDirectory()
+    String Environment::GetLocalAppDataDir()
     {
-        return GetSpecialFolder(CSIDL_LOCAL_APPDATA);
+        return GetSpecialDir(CSIDL_LOCAL_APPDATA);
     }
 
-    String Environment::GetUsername()
+    String Environment::GetContentDir()
     {
-		return GetEnvironmentVariable("USERNAME");
-	}
+        return std::format("{}/Content", GetWorkingDir());
+    }
 
-    String Environment::GetComputerName()
+    String Environment::GetAppDir()
     {
-        return GetEnvironmentVariable("COMPUTERNAME");
+        return std::format("{}/{}", GetAppDataDir(), App::GetName());
+    }
+
+    String Environment::GetLogDir()
+    {
+        return std::format("{}/Logs", GetAppDir());
+    }
+
+    String Environment::GetConfigDir()
+    {
+		return std::format("{}/Config", GetAppDir());
+    }
+
+    String Environment::GetExecutableName()
+    {
+        char path[MAX_PATH];
+		GetModuleFileNameA(nullptr, path, MAX_PATH);
+		return path;
     }
 }
 

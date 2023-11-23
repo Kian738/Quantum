@@ -2,5 +2,6 @@
 
 Quantum::Engine* CreateEngine()
 {
-	return new Quantum::Engine;
+	Quantum::EngineSpecification specification;
+	return new Quantum::Engine(specification);
 }

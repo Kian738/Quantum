@@ -10,14 +10,17 @@ namespace Quantum
 	int Main(int argc, char** argv)
 	{
 		Log::Initialize();
-
-		auto compileDateTime = DateTime::FromCompileTime();
-		LOG(Info, LogCommon, "Launching Quantum Engine built on {} at {}", compileDateTime.GetDate(), compileDateTime.GetTime());
+		auto [date, time] = DateTime::FromCompileTime().GetDateTime();
+		LOG(Info, LogCommon, "Quantum Engine built on {} at {}", date, time);
 
 		// TODO: Parse command line arguments.
 		Engine* engine = CreateEngine();
 		engine->Run();
 		delete engine;
+
+		LOG(Info, LogCommon, "Shutting down...");
+		Log::Shutdown();
+
 		return 0; // TODO: Return the exit code from the engine.
 	}
 }

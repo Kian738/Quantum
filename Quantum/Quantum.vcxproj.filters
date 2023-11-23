@@ -51,10 +51,16 @@
     <ClInclude Include="Source\Core\Configuration\ConfigMacros.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Source\Core\Configuration\ConfigSection.h">
+    <ClInclude Include="Source\Core\Misc\Environment.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Source\Core\Misc\Environment.h">
+    <ClInclude Include="Source\Utils\StringUtils.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Core\Configuration\ConfigFile.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Core\Misc\App.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
@@ -77,10 +83,16 @@
     <ClCompile Include="Source\Core\Engine.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Source\Core\Configuration\ConfigSection.cpp">
+    <ClCompile Include="Source\Core\Misc\Environment.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Source\Core\Misc\Environment.cpp">
+    <ClCompile Include="Source\Utils\StringUtils.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Core\Configuration\ConfigFile.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Core\Misc\App.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

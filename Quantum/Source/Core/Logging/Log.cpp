@@ -9,55 +9,6 @@ namespace Quantum
 	std::ofstream Log::m_LogFile = {};
 	bool Log::m_IsInitialized = false;
 
-	namespace Utils
-	{
-		static const char* LevelToName(LogLevel level)
-		{
-			switch (level)
-			{
-			case LogLevel::Verbose:
-				return "Verbose";
-			case LogLevel::Debug:
-				return "Debug";
-			case LogLevel::Info:
-				return "Info";
-			case LogLevel::Warning:
-				return "Warning";
-			case LogLevel::Error:
-				return "Error";
-			case LogLevel::Fatal:
-				return "Fatal";
-			default:
-				return "Unknown";
-			}
-		}
-
-		static const char* LevelToColor(LogLevel level)
-		{
-			switch (level)
-			{
-			case Verbose:
-				return "\33[1;30m";
-			case Debug:
-				return "\33[34m";
-			case Info:
-				return "\33[32m";
-			case Warning:
-				return "\33[33m";
-			case Error:
-				return "\33[31m";
-			default:
-				return "";
-			}
-		}
-
-		static String PathToRelative(StringView path)
-		{
-			auto position = path.rfind("Source");
-			return String((position != String::npos) ? path.substr(position) : path);
-		}
-	}
-
 	void Log::Initialize()
 	{
 		if (m_IsInitialized)
@@ -66,7 +17,7 @@ namespace Quantum
 		if (true/* KEKW: GConfig->ShouldUseConsole()*/)
 			Console::Allocate();
 
-		auto logDirectory = std::format("{}\\{}\\Logs", Environment::GetLocalAppDataDirectory(), "Quantum"/* KEKW: GConfig->GetName()*/);
+		auto logDirectory = std::format("{}\\{}\\Logs", Environment::GetLocalAppDataDir(), "Quantum"/* KEKW: GConfig->GetName()*/);
 		std::filesystem::create_directories(logDirectory);
 
 		auto currentDateTime = DateTime::Now();
@@ -101,12 +52,12 @@ namespace Quantum
 		auto fatalColor = "\33[37;41m";
 
 		auto currentTime = DateTime::Now().GetTime();
-		auto levelName = Utils::LevelToName(level);
+		auto levelName = LevelToName(level);
 		auto categoryName = category.GetName();
 
 		if (level < LogLevel::Fatal)
 		{
-			auto levelColor = Utils::LevelToColor(level);
+			auto levelColor = LevelToColor(level);
 			auto levelString = std::format("{}{}{}", levelColor, levelName, defaultColor); // TODO: Could be precomputed
 
 			if (Console::IsAllocated()) std::println("[{}]: [{}]: {}", levelString, categoryName, formatedMessage);
@@ -115,13 +66,59 @@ namespace Quantum
 			return;
 		}
 
-		auto relativeFile = Utils::PathToRelative(file);
+		auto relativeFile = PathToRelative(file);
 
 		if (Console::IsAllocated()) std::println("{}[{}]: [{}] [{}:{}]: {}{}", fatalColor, levelName, categoryName, relativeFile, line, formatedMessage, defaultColor);
 		std::println(m_LogFile, "[{}]: [{}]: [{}]: [{}:{}]: {}", currentTime, levelName, categoryName, relativeFile, line, formatedMessage);
 
 		std::this_thread::sleep_for(std::chrono::seconds(5));
 		std::abort();
+	}
+
+	const char* Log::LevelToName(LogLevel level)
+	{
+		switch (level)
+		{
+		case LogLevel::Verbose:
+			return "Verbose";
+		case LogLevel::Debug:
+			return "Debug";
+		case LogLevel::Info:
+			return "Info";
+		case LogLevel::Warning:
+			return "Warning";
+		case LogLevel::Error:
+			return "Error";
+		case LogLevel::Fatal:
+			return "Fatal";
+		default:
+			return "Unknown";
+		}
+	}
+
+	const char* Log::LevelToColor(LogLevel level)
+	{
+		switch (level)
+		{
+		case Verbose:
+			return "\33[1;30m";
+		case Debug:
+			return "\33[34m";
+		case Info:
+			return "\33[32m";
+		case Warning:
+			return "\33[33m";
+		case Error:
+			return "\33[31m";
+		default:
+			return "";
+		}
+	}
+
+	String Log::PathToRelative(StringView path)
+	{
+		auto position = path.rfind("Source");
+		return String((position != String::npos) ? path.substr(position) : path);
 	}
 
 	void Log::PurgeLogFiles(StringView directory)

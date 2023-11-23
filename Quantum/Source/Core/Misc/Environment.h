@@ -1,25 +1,34 @@
 #pragma once
 
-#include "Core/Core.h"
+#include "Core/Types.h"
 
 namespace Quantum
 {
 	class Environment
 	{
 	public:
-		static String GetEnvironmentVariable(StringView name);
-		static String GetSpecialFolder(int id);
-
-		static String GetWorkingDirectory();
-
-		static String GetDesktopDirectory();
-		static String GetDocumentsDirectory();
-		static String GetTempDirectory();
-
-		static String GetAppDataDirectory();
-		static String GetLocalAppDataDirectory();
+		static String GetEnv(StringView name);
 
 		static String GetUsername();
-		static String GetComputerName();
+		static String GetComputer();
+
+		static String GetSpecialDir(int id);
+
+		static String GetWorkingDir();
+
+		static String GetDesktopDir();
+		static String GetDocumentsDir();
+		static String GetTempDir();
+
+		static String GetAppDataDir();
+		static String GetLocalAppDataDir();
+
+		static String GetContentDir();
+
+		static String GetAppDir();
+		static String GetLogDir();
+		static String GetConfigDir();
+
+		static String GetExecutableName();
 	};
 }

@@ -28,6 +28,11 @@ namespace Quantum
 		return buffer;
 	}
 
+	Pair<String, String> DateTime::GetDateTime() const
+	{
+		return { GetDate(), GetTime() };
+	}
+
 	bool DateTime::operator==(const DateTime& other) const
 	{
 		return m_Time.tm_year == other.m_Time.tm_year &&
