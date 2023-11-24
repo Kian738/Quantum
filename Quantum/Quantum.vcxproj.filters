@@ -66,6 +66,9 @@
     <ClInclude Include="Source\Core\Window.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="Source\Project\Project.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Source\Core\Logging\Log.cpp">
@@ -96,6 +99,9 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Source\Utils\FileSystemUtils.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Project\Project.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

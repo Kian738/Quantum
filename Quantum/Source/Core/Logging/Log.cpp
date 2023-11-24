@@ -15,12 +15,16 @@ namespace Quantum
 		if (m_IsInitialized)
 			return;
 
-		if (GEngineConfig.Get()["Console"]["Enabled"].as<bool>())
+		if (GEngineConfig["Console"]["Enabled"].as<bool>())
 			Console::Allocate();
 
-		auto logFilePath = std::format("{}\\{}.log", Environment::GetLogDir(), DateTime::Now().GetDate());
+		auto logFilePath = FileSystemUtils::CombinePath(
+			Environment::GetLogDir(),
+			DateTime::Now().GetDate(),
+			"log"
+		);
 
-		FileSystemUtils::CreateParentDirs(logFilePath);
+		FileSystemUtils::CreateParentDir(logFilePath);
 		m_LogFile.open(logFilePath);
 
 		m_IsInitialized = true;

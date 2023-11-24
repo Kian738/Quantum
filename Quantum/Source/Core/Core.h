@@ -7,6 +7,8 @@
 #include "Utils/FileSystemUtils.h"
 #include "Utils/StringUtils.h"
 
+#include "Project/Project.h"
+
 #include "Configuration/ConfigMacros.h"
 #include "Logging/LogMacros.h"
 

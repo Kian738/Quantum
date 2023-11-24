@@ -43,7 +43,7 @@ namespace Quantum
 
 	void ConfigFile::Save()
 	{
-		FileSystemUtils::CreateParentDirs(m_Path);
+		FileSystemUtils::CreateParentDir(m_Path);
 		std::ofstream file(m_Path);
 		file << m_Data;
 		file.close();
