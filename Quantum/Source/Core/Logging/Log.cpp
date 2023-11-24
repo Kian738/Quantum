@@ -1,7 +1,8 @@
 #include "Log.h"
 #include "LogMacros.h"
-#include <iostream>
 #include <filesystem>
+#include <iostream>
+#include <thread>
 
 // TODO: Add async logging
 namespace Quantum

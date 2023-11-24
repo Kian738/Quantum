@@ -13,7 +13,7 @@ namespace Quantum
 		auto [date, time] = DateTime::FromCompileTime().GetDateTime();
 		LOG(Info, LogCommon, "Quantum Engine built on {} at {}", date, time);
 
-		// TODO: Parse command line arguments.
+		// TODO: Parse command line arguments
  		Engine* engine = CreateEngine();
 		engine->Run();
 		delete engine;
@@ -21,7 +21,7 @@ namespace Quantum
 		LOG(Info, LogCommon, "Shutting down...");
 		Log::Shutdown();
 
-		return 0; // TODO: Return the exit code from the engine.
+		return 0; // TODO: Return the exit code from the engine
 	}
 }
 
