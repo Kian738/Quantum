@@ -25,6 +25,7 @@
     <ClInclude Include="Source\Core\Logging\LogMacros.h" />
     <ClInclude Include="Source\Core\Misc\Environment.h" />
     <ClInclude Include="Source\Core\Types.h" />
+    <ClInclude Include="Source\Core\Window.h" />
     <ClInclude Include="Source\Utils\FileSystemUtils.h" />
     <ClInclude Include="Source\Utils\StringUtils.h" />
   </ItemGroup>

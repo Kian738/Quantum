@@ -72,7 +72,7 @@ namespace Quantum
 
     String Environment::GetAppDir()
     {
-        return std::format("{}\\{}", GetLocalAppDataDir(), App::GetName());
+        return std::format("{}\\{}", GetLocalAppDataDir(), App::GetProjectName());
     }
 
     String Environment::GetLogDir()
