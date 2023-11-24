@@ -23,8 +23,6 @@ namespace Quantum
 		static String GetAppDataDir();
 		static String GetLocalAppDataDir();
 
-		static String GetContentDir();
-
 		static String GetAppDir();
 		static String GetLogDir();
 		static String GetConfigDir();

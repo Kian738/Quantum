@@ -7,8 +7,11 @@ namespace Quantum
 {
 	ConfigFile::ConfigFile(StringView name)
 	{
-		m_Path = std::format("{}/{}.yaml", Environment::GetConfigDir(), name);
-		auto defaults = YAML::LoadFile(std::format("{}/Config/Default{}.yaml", Environment::GetContentDir(), name));
+		m_Path = FileSystemUtils::CombinePath(Environment::GetConfigDir(), name, "yaml");
+
+		auto defaultsDir = FileSystemUtils::CombinePath(Project::GetActive()->GetContentDir(), "Config");
+		auto defaultsPath = FileSystemUtils::CombinePath(defaultsDir, std::format("Default{}", name), "yaml");
+		auto defaults = YAML::LoadFile(defaultsPath);
 
 		if (!std::filesystem::exists(m_Path))
 		{

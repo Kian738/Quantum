@@ -65,11 +65,6 @@ namespace Quantum
         return GetSpecialDir(CSIDL_LOCAL_APPDATA);
     }
 
-    String Environment::GetContentDir()
-    {
-        return std::format("{}\\Content", GetWorkingDir());
-    }
-
     String Environment::GetAppDir()
     {
         return FileSystemUtils::CombinePath(GetLocalAppDataDir(), Project::GetActive()->GetName());
@@ -77,12 +72,12 @@ namespace Quantum
 
     String Environment::GetLogDir()
     {
-        return std::format("{}\\Logs", GetAppDir());
+        return FileSystemUtils::CombinePath(GetAppDir(), "Log");
     }
 
     String Environment::GetConfigDir()
     {
-		return std::format("{}\\Config", GetAppDir());
+		return FileSystemUtils::CombinePath(GetAppDir(), "Config");
     }
 
     String Environment::GetExecutableName()

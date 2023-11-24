@@ -24,9 +24,12 @@ namespace Quantum
 	public:
 		Project(StringView path);
 
+		String GetPath() const { return m_Path; };
+		String GetDir() const { return StringUtils::BeforeLast(m_Path, "/"); };
+		String GetContentDir() const { return FileSystemUtils::CombinePath(GetDir(), "Content"); };
+
 		ProjectFile& GetFile() { return m_File; };
 
-		StringView GetPath() const { return m_Path; };
 		StringView GetName() const { return m_File.Name; };
 		StringView GetDescription() const { return m_File.Description; };
 		StringView GetVersion() const { return m_File.Version; };

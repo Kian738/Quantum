@@ -22,28 +22,28 @@ namespace Quantum
 	using WString = std::wstring;
 	using WStringView = std::wstring_view;
 
-	template<class KT, class T>
+	template <class KT, class T>
 	using Dictionary = std::unordered_map<KT, T>;
 
-	template<class T>
+	template <class T>
 	using List = std::vector<T>;
 
-	template<class T1, class T2>
+	template <class T1, class T2>
 	using Pair = std::pair<T1, T2>;
 
-	template<class T>
+	template <class T>
 	using Ref = std::shared_ptr<T>;
 
-	template<typename T, typename ... Args>
+	template <typename T, typename ... Args>
 	constexpr Ref<T> CreateRef(Args&& ... args)
 	{
 		return std::make_shared<T>(std::forward<Args>(args)...);
 	}
 
-	template<class T>
+	template <class T>
 	using Scope = std::unique_ptr<T>;
 
-	template<typename T, typename ... Args>
+	template <typename T, typename ... Args>
 	constexpr Scope<T> CreateScope(Args&& ... args)
 	{
 		return std::make_unique<T>(std::forward<Args>(args)...);
