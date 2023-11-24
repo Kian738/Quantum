@@ -1,7 +1,6 @@
 #include "Console.h"
 #include "Core/Core.h"
 #include <iostream>
-#include <format>
 
 namespace Quantum
 {

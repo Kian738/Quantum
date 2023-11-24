@@ -1,8 +1,8 @@
 #pragma once
 
-#include "Logging/LogMacros.h"
 #include "Configuration/ConfigMacros.h"
-
-DECLARE_LOG_CATEGORY(Common);
+#include "Logging/LogMacros.h"
 
 DECLARE_CONFIG_FILE(Engine);
+
+DECLARE_LOG_CATEGORY(Common);

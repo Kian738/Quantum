@@ -8,6 +8,8 @@ namespace Quantum
 		: m_Specification(specification)
 	{
 		LOG(Info, LogCore, "Initializing Engine...");
+
+
 	}
 
 	Engine::~Engine()
