@@ -1,3 +1,6 @@
 [submodule "Quantum/Vendor/yaml-cpp"]
 	path = Quantum/Vendor/yaml-cpp
 	url = https://github.com/jbeder/yaml-cpp.git
+[submodule "Quantum/Vendor/glfw"]
+	path = Quantum/Vendor/glfw
+	url = https://github.com/glfw/glfw.git
