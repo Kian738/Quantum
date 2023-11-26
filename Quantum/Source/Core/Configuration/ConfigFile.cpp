@@ -3,14 +3,29 @@
 #include <filesystem>
 #include <fstream>
 
+DEFINE_LOG_CATEGORY_STATIC(Config);
+
 namespace Quantum
 {
 	ConfigFile::ConfigFile(StringView name)
+		: m_Name(name)
 	{
-		m_Path = FileSystemUtils::CombinePath(Environment::GetConfigDir(), name, "yaml");
+		Config::Register(this);
+	}
+
+	ConfigFile::~ConfigFile()
+	{
+		Save();
+
+		Config::Unregister(this);
+	}
+
+	void ConfigFile::Load()
+	{
+		m_Path = FileSystemUtils::CombinePath(Environment::GetConfigDir(), m_Name, "yaml");
 
 		auto defaultsDir = FileSystemUtils::CombinePath(Project::GetActive()->GetContentDir(), "Config");
-		auto defaultsPath = FileSystemUtils::CombinePath(defaultsDir, std::format("Default{}", name), "yaml");
+		auto defaultsPath = FileSystemUtils::CombinePath(defaultsDir, std::format("Default{}", m_Name), "yaml");
 		auto defaults = YAML::LoadFile(defaultsPath);
 
 		if (!std::filesystem::exists(m_Path))
@@ -19,7 +34,7 @@ namespace Quantum
 			Save();
 			return;
 		}
-		
+
 		Reload();
 
 		bool isDirty = false;
@@ -32,11 +47,6 @@ namespace Quantum
 
 		if (isDirty)
 			Save();
-	}
-
-	ConfigFile::~ConfigFile()
-	{
-		Save();
 	}
 
 	void ConfigFile::Reload()

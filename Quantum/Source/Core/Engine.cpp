@@ -4,12 +4,9 @@ DEFINE_LOG_CATEGORY_STATIC(Core);
 
 namespace Quantum
 {
-	Engine::Engine(EngineSpecification specification)
-		: m_Specification(specification)
+	Engine::Engine()
 	{
 		LOG(Info, LogCore, "Initializing Engine...");
-
-
 	}
 
 	Engine::~Engine()

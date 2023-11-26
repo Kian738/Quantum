@@ -13,7 +13,6 @@ namespace Quantum
 		String EngineVersion;
 	};
 
-	// A class that represents a project file, which can be serialized and deserialized.
 	class Project
 	{
 	private:
@@ -42,10 +41,11 @@ namespace Quantum
 		void SetCompany(StringView company) { m_File.Company = company; };
 		void SetEngineVersion(StringView engineVersion) { m_File.EngineVersion = engineVersion; };
 
+		void Reload();
 		void Save();
 
 		static Ref<Project> New(StringView directory, StringView name);
-		static Ref<Project> Load(StringView path);
+		static Ref<Project> Load(StringView name);
 
 		static Ref<Project> GetActive() { return s_Active; };
 	};

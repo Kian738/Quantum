@@ -1,5 +1,6 @@
 #pragma once
 
+#include "Config.h"
 #include "ConfigFile.h"
 
 #define DECLARE_CONFIG_FILE(Name) \

@@ -10,65 +10,22 @@
       <Platform>x64</Platform>
     </ProjectConfiguration>
   </ItemGroup>
-  <ItemGroup>
-    <ClInclude Include="Source\Core\Configuration\Config.h" />
-    <ClInclude Include="Source\Core\Configuration\ConfigFile.h" />
-    <ClInclude Include="Source\Core\Configuration\ConfigMacros.h" />
-    <ClInclude Include="Source\Core\Globals.h" />
-    <ClInclude Include="Source\Core\Core.h" />
-    <ClInclude Include="Source\App\App.h" />
-    <ClInclude Include="Source\Core\Misc\DateTime.h" />
-    <ClInclude Include="Source\Core\Engine.h" />
-    <ClInclude Include="Source\Core\Launch.h" />
-    <ClInclude Include="Source\Core\Logging\Console.h" />
-    <ClInclude Include="Source\Core\Logging\Log.h" />
-    <ClInclude Include="Source\Core\Logging\LogCategory.h" />
-    <ClInclude Include="Source\Core\Logging\LogMacros.h" />
-    <ClInclude Include="Source\Core\Misc\Environment.h" />
-    <ClInclude Include="Source\Core\Modules\Module.h" />
-    <ClInclude Include="Source\Core\Modules\ModuleManager.h" />
-    <ClInclude Include="Source\Core\Types.h" />
-    <ClInclude Include="Source\Core\Window.h" />
-    <ClInclude Include="Source\App\Project.h" />
-    <ClInclude Include="Source\Utils\FileSystemUtils.h" />
-    <ClInclude Include="Source\Utils\StringUtils.h" />
-  </ItemGroup>
-  <ItemGroup>
-    <ClCompile Include="Source\Core\Configuration\Config.cpp" />
-    <ClCompile Include="Source\Core\Configuration\ConfigFile.cpp" />
-    <ClCompile Include="Source\Core\Globals.cpp" />
-    <ClCompile Include="Source\App\App.cpp" />
-    <ClCompile Include="Source\Core\Launch.cpp" />
-    <ClCompile Include="Source\Core\Misc\DateTime.cpp" />
-    <ClCompile Include="Source\Core\Engine.cpp" />
-    <ClCompile Include="Source\Core\Logging\Console.cpp" />
-    <ClCompile Include="Source\Core\Logging\Log.cpp" />
-    <ClCompile Include="Source\Core\Misc\Environment.cpp" />
-    <ClCompile Include="Source\App\Project.cpp" />
-    <ClCompile Include="Source\Utils\FileSystemUtils.cpp" />
-    <ClCompile Include="Source\Utils\StringUtils.cpp" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="Vendor\yaml-cpp.vcxproj">
-      <Project>{8f3b7894-f570-4991-95f3-5aea7b55ab17}</Project>
-    </ProjectReference>
-  </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>17.0</VCProjectVersion>
     <Keyword>Win32Proj</Keyword>
-    <ProjectGuid>{92170049-57c3-4658-bb4f-e9386e8b2c4a}</ProjectGuid>
-    <RootNamespace>Quantum</RootNamespace>
+    <ProjectGuid>{fbb704fa-d58c-4af9-bc28-3667a380825f}</ProjectGuid>
+    <RootNamespace>Editor</RootNamespace>
     <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
-    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <ConfigurationType>Application</ConfigurationType>
     <UseDebugLibraries>true</UseDebugLibraries>
     <PlatformToolset>v143</PlatformToolset>
     <CharacterSet>Unicode</CharacterSet>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Test|x64'" Label="Configuration">
-    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <ConfigurationType>Application</ConfigurationType>
     <UseDebugLibraries>false</UseDebugLibraries>
     <PlatformToolset>v143</PlatformToolset>
     <WholeProgramOptimization>true</WholeProgramOptimization>
@@ -98,11 +55,11 @@
     <ClCompile>
       <WarningLevel>Level3</WarningLevel>
       <SDLCheck>true</SDLCheck>
-      <PreprocessorDefinitions>YAML_CPP_STATIC_DEFINE;_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
       <LanguageStandard>stdcpplatest</LanguageStandard>
       <MultiProcessorCompilation>true</MultiProcessorCompilation>
-      <AdditionalIncludeDirectories>Source\;Vendor\yaml-cpp\include</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)Quantum\Source;$(SolutionDir)Quantum\Vendor\yaml-cpp\include</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -115,11 +72,11 @@
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <SDLCheck>true</SDLCheck>
-      <PreprocessorDefinitions>YAML_CPP_STATIC_DEFINE;NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
       <LanguageStandard>stdcpplatest</LanguageStandard>
       <MultiProcessorCompilation>true</MultiProcessorCompilation>
-      <AdditionalIncludeDirectories>Source\;Vendor\yaml-cpp\include</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)Quantum\Source;$(SolutionDir)Quantum\Vendor\yaml-cpp\include</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -128,6 +85,14 @@
       <GenerateDebugInformation>true</GenerateDebugInformation>
     </Link>
   </ItemDefinitionGroup>
+  <ItemGroup>
+    <ClCompile Include="Source\Main.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Quantum\Quantum.vcxproj">
+      <Project>{92170049-57c3-4658-bb4f-e9386e8b2c4a}</Project>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>

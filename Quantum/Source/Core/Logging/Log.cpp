@@ -15,7 +15,8 @@ namespace Quantum
 		if (m_IsInitialized)
 			return;
 
-		if (GEngineConfig["Console"]["Enabled"].as<bool>())
+		static auto isConsoleEnabled = GEngineConfig["Console"]["Enabled"].as<bool>();
+		if (isConsoleEnabled)
 			Console::Allocate();
 
 		auto logFilePath = FileSystemUtils::CombinePath(
@@ -47,7 +48,7 @@ namespace Quantum
 	void Log::LogInternal(LogLevel level, const LogCategory& category, StringView formatedMessage, StringView file, int line)
 	{
 		if (!m_IsInitialized)
-			return;
+			Initialize();
 
 		auto defaultColor = "\33[0m";
 		auto fatalColor = "\33[37;41m";

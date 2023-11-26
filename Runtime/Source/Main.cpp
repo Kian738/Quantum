@@ -1,7 +1,10 @@
 #include "Core/Launch.h"
 
-Quantum::Engine* CreateEngine()
+#ifndef PROJECT_NAME
+	#error "PROJECT_NAME must be defined"
+#endif
+
+Quantum::String GetProjectName()
 {
-	Quantum::EngineSpecification specification;
-	return new Quantum::Engine(specification);
+	return PROJECT_NAME;
 }
