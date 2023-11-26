@@ -11,6 +11,7 @@ namespace Quantum
 
 	Engine::~Engine()
 	{
+		LOG(Info, LogCore, "Shutting down Engine...");
 	}
 
 	void Engine::Run()

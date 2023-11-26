@@ -45,6 +45,7 @@
     <ClCompile Include="Source\Core\Logging\Log.cpp" />
     <ClCompile Include="Source\Core\Misc\Environment.cpp" />
     <ClCompile Include="Source\App\Project.cpp" />
+    <ClCompile Include="Source\Core\Window.cpp" />
     <ClCompile Include="Source\Utils\FileSystemUtils.cpp" />
     <ClCompile Include="Source\Utils\StringUtils.cpp" />
   </ItemGroup>
