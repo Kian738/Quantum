@@ -6,11 +6,11 @@ namespace Quantum
 {
 	struct ProjectFile
 	{
-		String Name;
-		String Description;
-		String Version;
-		String Company;
-		String EngineVersion;
+		String Name = "";
+		String Description = "";
+		String Version = "";
+		String Company = "";
+		String EngineVersion = "";
 	};
 
 	class Project
@@ -21,11 +21,13 @@ namespace Quantum
 
 		inline static Ref<Project> s_Active;
 	public:
+		Project(StringView directory, StringView name);
 		Project(StringView path);
+		~Project();
 
 		String GetPath() const { return m_Path; };
-		String GetDir() const { return StringUtils::BeforeLast(m_Path, "/"); };
-		String GetContentDir() const { return FileSystemUtils::CombinePath(GetDir(), "Content"); };
+		String GetDir() const;
+		String GetContentDir() const;
 
 		ProjectFile& GetFile() { return m_File; };
 

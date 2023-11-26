@@ -11,6 +11,7 @@
 #include "App/Project.h"
 
 #include "Configuration/ConfigMacros.h"
+
 #include "Logging/LogMacros.h"
 
 #include "Misc/DateTime.h"

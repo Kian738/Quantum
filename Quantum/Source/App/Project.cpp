@@ -3,10 +3,40 @@
 
 namespace Quantum
 {
+	Project::Project(StringView directory, StringView name)
+	{
+		FileSystemUtils::CreateDir(directory);
+		m_Path = FileSystemUtils::CombinePath(directory, name, "qproj");
+		std::ofstream file(m_Path);
+		file.close();
+
+		m_File.Name = name;
+		m_File.EngineVersion = "1.0"; // TODO: Get engine version from somewhere
+
+		Save();
+	}
+
 	Project::Project(StringView path)
 		: m_Path(path)
 	{
 		Reload();
+	}
+
+	Project::~Project()
+	{
+		Save();
+	}
+
+	String Project::GetDir() const
+	{
+		static auto dir = StringUtils::BeforeLast(m_Path, "\\");
+		return dir;
+	}
+
+	String Project::GetContentDir() const
+	{
+		static auto contentDir = FileSystemUtils::CombinePath(GetDir(), "Content");
+		return contentDir;
 	}
 
 	void Project::Reload()
@@ -38,13 +68,7 @@ namespace Quantum
 
 	Ref<Project> Project::New(StringView directory, StringView name)
 	{
-		FileSystemUtils::CreateDir(directory);
-
-		auto path = FileSystemUtils::CombinePath(directory, name, "qproj");
-		std::ofstream file(path);
-		file.close();
-
-		s_Active = CreateRef<Project>(path);
+		s_Active = CreateRef<Project>(directory, name);
 		return s_Active;
 	}
 

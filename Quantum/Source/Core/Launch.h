@@ -23,8 +23,8 @@ namespace Quantum
 		engine->Run();
 		delete engine;
 
-		LOG(Info, LogCommon, "Shutting down...");
 		Log::Shutdown();
+		Config::Shutdown();
 
 		return 0; // TODO: Return the exit code from the engine
 	}
