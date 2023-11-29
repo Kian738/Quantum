@@ -1,6 +1,8 @@
 #pragma once
 
-#include "Core/Core.h"
+#include "Types.h"
+#include "Event.h"
+#include "Graphics/GraphicsContext.h"
 #include <GLFW/glfw3.h>
 
 namespace Quantum
@@ -19,13 +21,19 @@ namespace Quantum
 	private:
 		WindowSpecification m_Specification;
 		GLFWwindow* m_WindowHandle;
-		int s_WindowCount = 0;
+		Scope<GraphicsContext> m_Context;
+
+		static inline int s_WindowCount = 0;
 	public:
 		Window(const WindowSpecification& spec);
 		~Window();
 
-		void Tick();
+		Event<UInt32, UInt32> ResizeEvent;
 
+		void OnUpdate();
+		void OnRender();
+
+		WindowSpecification& GetSpecification() { return m_Specification; };
 		String GetTitle() const { return m_Specification.Title; };
 		UInt32 GetWidth() const { return m_Specification.Width; };
 		UInt32 GetHeight() const { return m_Specification.Height; };

@@ -73,7 +73,7 @@ namespace Quantum
 		std::println(m_LogFile, "[{}]: [{}]: [{}]: [{}:{}]: {}", currentTime, levelName, categoryName, relativeFile, line, formatedMessage);
 
 		std::this_thread::sleep_for(std::chrono::seconds(5));
-		std::abort();
+		GEngine->Stop();
 	}
 
 	const char* Log::LevelToName(LogLevel level)

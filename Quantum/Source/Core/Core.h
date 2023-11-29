@@ -3,6 +3,9 @@
 #include <Windows.h>
 
 #include "Types.h"
+#include "Event.h"
+
+#include "Engine.h"
 
 #include "Utils/FileSystemUtils.h"
 #include "Utils/StringUtils.h"

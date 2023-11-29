@@ -1,4 +1,5 @@
 #include "Window.h"
+#include "Core.h"
 
 DEFINE_LOG_CATEGORY_STATIC(Window);
 
@@ -25,15 +26,19 @@ namespace Quantum
 		LOG_CHECK(m_WindowHandle, Error, LogWindow, "Could not create GLFW window!");
 
 		glfwMakeContextCurrent(m_WindowHandle); // TODO: Move this to the renderer
-		glfwSetWindowUserPointer(m_WindowHandle, &m_Specification);
+		glfwSetWindowUserPointer(m_WindowHandle, this);
 
-		glfwSwapInterval(spec.VSync ? 1 : 0);
+		SetVSync(spec.VSync);
 
-		glfwSetWindowSizeCallback(m_WindowHandle, [](GLFWwindow* window, int width, int height)
+		glfwSetWindowSizeCallback(m_WindowHandle, [](GLFWwindow* windowHandle, int width, int height)
 		{
-			auto& spec = *reinterpret_cast<WindowSpecification*>(glfwGetWindowUserPointer(window));
+			auto& window = *reinterpret_cast<Window*>(glfwGetWindowUserPointer(windowHandle));
+
+			auto& spec = window.GetSpecification();
 			spec.Width = width;
 			spec.Height = height;
+
+			window.ResizeEvent(width, height);
 		});
 	}
 
@@ -46,19 +51,25 @@ namespace Quantum
 			glfwTerminate();
 	}
 
-	void Window::Tick()
+	void Window::OnUpdate()
 	{
 		glfwPollEvents();
-		glfwSwapBuffers(m_WindowHandle);
+	}
+
+	void Window::OnRender()
+	{
+		m_Context->SwapBuffers();
 	}
 
 	void Window::SetTitle(StringView title)
 	{
-
+		glfwSetWindowTitle(m_WindowHandle, title.data());
+		m_Specification.Title = title;
 	}
 
 	void Window::SetSize(UInt32 width, UInt32 height)
 	{
+		glfwSetWindowSize(m_WindowHandle, width, height);
 	}
 
 	void Window::SetWidth(UInt32 width)
@@ -73,5 +84,7 @@ namespace Quantum
 
 	void Window::SetVSync(bool enabled)
 	{
+		glfwSwapInterval(enabled ? 1 : 0);
+		m_Specification.VSync = enabled;
 	}
 }

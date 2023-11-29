@@ -14,6 +14,7 @@
     <ClInclude Include="Source\Core\Configuration\Config.h" />
     <ClInclude Include="Source\Core\Configuration\ConfigFile.h" />
     <ClInclude Include="Source\Core\Configuration\ConfigMacros.h" />
+    <ClInclude Include="Source\Core\Event.h" />
     <ClInclude Include="Source\Core\Globals.h" />
     <ClInclude Include="Source\Core\Core.h" />
     <ClInclude Include="Source\App\App.h" />
@@ -30,6 +31,7 @@
     <ClInclude Include="Source\Core\Types.h" />
     <ClInclude Include="Source\Core\Window.h" />
     <ClInclude Include="Source\App\Project.h" />
+    <ClInclude Include="Source\Graphics\GraphicsContext.h" />
     <ClInclude Include="Source\Utils\FileSystemUtils.h" />
     <ClInclude Include="Source\Utils\StringUtils.h" />
   </ItemGroup>

@@ -6,7 +6,7 @@ namespace Quantum
 	String App::GetName()
 	{
 		auto executableName = Environment::GetExecutableName();
-		auto appName = StringUtils::BeforeLast(executableName, ".");
+		static auto appName = StringUtils::BeforeLast(executableName, ".");
 		return appName;
 	}
 }

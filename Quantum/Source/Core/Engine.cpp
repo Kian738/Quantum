@@ -1,4 +1,5 @@
 #include "Engine.h"
+#include "Core.h"
 
 DEFINE_LOG_CATEGORY_STATIC(Core);
 
@@ -23,6 +24,7 @@ namespace Quantum
 			);
 
 			m_Window = CreateScope<Window>(windowSpec);
+			m_Window->ResizeEvent += [=](UInt32 width, UInt32 height) { m_IsMinimized = width == 0 || height == 0; };
 		}
 	}
 
@@ -36,9 +38,18 @@ namespace Quantum
 		m_IsRunning = true;
 		while (m_IsRunning)
 		{
-			m_Window->Tick();
+			m_Window->OnUpdate();
+
+			if (!m_IsMinimized)
+			{
+			}
 
 			// TODO: Do stuff
 		}
+	}
+
+	void Engine::Stop()
+	{
+		m_IsRunning = false;
 	}
 }
