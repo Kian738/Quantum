@@ -15,8 +15,7 @@ namespace Quantum
 		if (m_IsInitialized)
 			return;
 
-		static auto isConsoleEnabled = GEngineConfig["Console"]["Enabled"].as<bool>();
-		if (isConsoleEnabled)
+		if (GEngineConfig["Console"]["Enabled"].as<bool>(Environment::IsDebug()))
 			Console::Allocate();
 
 		auto logFilePath = FileSystemUtils::CombinePath(

@@ -50,6 +50,9 @@
     <ClCompile Include="Source\Utils\StringUtils.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="Vendor\GLFW.vcxproj">
+      <Project>{52fdc80c-2498-4868-989f-d278e6db5390}</Project>
+    </ProjectReference>
     <ProjectReference Include="Vendor\yaml-cpp.vcxproj">
       <Project>{8f3b7894-f570-4991-95f3-5aea7b55ab17}</Project>
     </ProjectReference>
@@ -103,7 +106,7 @@
       <ConformanceMode>true</ConformanceMode>
       <LanguageStandard>stdcpplatest</LanguageStandard>
       <MultiProcessorCompilation>true</MultiProcessorCompilation>
-      <AdditionalIncludeDirectories>Source\;Vendor\yaml-cpp\include</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>Source\;Vendor\yaml-cpp\include;Vendor\glfw\include</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -120,7 +123,7 @@
       <ConformanceMode>true</ConformanceMode>
       <LanguageStandard>stdcpplatest</LanguageStandard>
       <MultiProcessorCompilation>true</MultiProcessorCompilation>
-      <AdditionalIncludeDirectories>Source\;Vendor\yaml-cpp\include</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>Source\;Vendor\yaml-cpp\include;Vendor\glfw\include</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>

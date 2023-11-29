@@ -7,6 +7,8 @@ namespace Quantum
 	class Environment
 	{
 	public:
+		static bool IsDebug();
+
 		static String GetEnv(StringView name);
 
 		static String GetUsername();

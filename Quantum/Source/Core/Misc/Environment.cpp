@@ -5,6 +5,15 @@
 
 namespace Quantum
 {
+    bool Environment::IsDebug()
+    {
+#ifdef _DEBUG // TODO: Make a custom macro for this that applies to both debug and test builds
+        return true;
+#else
+        return false;
+#endif
+    }
+
     String Environment::GetEnv(StringView name)
     {
         String result;
@@ -29,10 +38,10 @@ namespace Quantum
     String Environment::GetSpecialDir(int id)
     {
         String result;
-		char path[MAX_PATH];
-		if (SHGetSpecialFolderPathA(nullptr, path, id, FALSE))
-			result = path;
-		return result;
+        char path[MAX_PATH];
+        if (SHGetSpecialFolderPathA(nullptr, path, id, FALSE))
+            result = path;
+        return result;
     }
 
     String Environment::GetWorkingDir()
@@ -43,7 +52,7 @@ namespace Quantum
     String Environment::GetDesktopDir()
     {
         return GetSpecialDir(CSIDL_DESKTOPDIRECTORY);
-	}
+    }
 
     String Environment::GetDocumentsDir()
     {
@@ -52,13 +61,13 @@ namespace Quantum
 
     String Environment::GetTempDir()
     {
-		return GetEnv("TEMP");
-	}
+        return GetEnv("TEMP");
+    }
 
     String Environment::GetAppDataDir()
     {
-		return GetSpecialDir(CSIDL_APPDATA);
-	}
+        return GetSpecialDir(CSIDL_APPDATA);
+    }
 
     String Environment::GetLocalAppDataDir()
     {
@@ -77,7 +86,7 @@ namespace Quantum
 
     String Environment::GetConfigDir()
     {
-		return FileSystemUtils::CombinePath(GetAppDir(), "Config");
+        return FileSystemUtils::CombinePath(GetAppDir(), "Config");
     }
 
     String Environment::GetExecutableName()

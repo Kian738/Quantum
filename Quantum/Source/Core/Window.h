@@ -1,6 +1,7 @@
 #pragma once
 
 #include "Core/Core.h"
+#include <GLFW/glfw3.h>
 
 namespace Quantum
 {
@@ -9,25 +10,21 @@ namespace Quantum
 		String Title;
 		UInt32 Width, Height;
 		bool VSync;
-
-		WindowSpecification(StringView title = "Quantum Engine", UInt32 width = 1280, UInt32 height = 720, bool vSync = false)
-			: Title(title)
-			, Width(width)
-			, Height(height)
-			, VSync(vSync)
-		{
-		}
+		bool Resizable;
+		bool Fullscreen;
 	};
 
 	class Window
 	{
 	private:
 		WindowSpecification m_Specification;
+		GLFWwindow* m_WindowHandle;
+		int s_WindowCount = 0;
 	public:
 		Window(const WindowSpecification& spec);
 		~Window();
 
-		void OnUpdate();
+		void Tick();
 
 		String GetTitle() const { return m_Specification.Title; };
 		UInt32 GetWidth() const { return m_Specification.Width; };
@@ -35,6 +32,7 @@ namespace Quantum
 		bool IsVSync() const { return m_Specification.VSync; };
 
 		void SetTitle(StringView title);
+		void SetSize(UInt32 width, UInt32 height);
 		void SetWidth(UInt32 width);
 		void SetHeight(UInt32 height);
 		void SetVSync(bool enabled);

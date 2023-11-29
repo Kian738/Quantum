@@ -6,11 +6,11 @@ namespace Quantum
 {
 	struct ProjectFile
 	{
-		String Name = "";
-		String Description = "";
-		String Version = "";
-		String Company = "";
-		String EngineVersion = "";
+		String Name;
+		String Description;
+		String Version;
+		String Company;
+		String EngineVersion;
 	};
 
 	class Project

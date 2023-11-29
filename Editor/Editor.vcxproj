@@ -46,10 +46,12 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <OutDir>$(ProjectDir)Binaries\$(Configuration)\</OutDir>
     <IntDir>$(ProjectDir)Intermediate\$(Configuration)\</IntDir>
+    <TargetName>QuantumEngine</TargetName>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Test|x64'">
     <OutDir>$(ProjectDir)Binaries\$(Configuration)\</OutDir>
     <IntDir>$(ProjectDir)Intermediate\$(Configuration)\</IntDir>
+    <TargetName>QuantumEngine</TargetName>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <ClCompile>
@@ -59,7 +61,7 @@
       <ConformanceMode>true</ConformanceMode>
       <LanguageStandard>stdcpplatest</LanguageStandard>
       <MultiProcessorCompilation>true</MultiProcessorCompilation>
-      <AdditionalIncludeDirectories>$(SolutionDir)Quantum\Source;$(SolutionDir)Quantum\Vendor\yaml-cpp\include</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)Quantum\Source;$(SolutionDir)Quantum\Vendor\yaml-cpp\include;$(SolutionDir)Quantum\Vendor\glfw\include</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
@@ -76,7 +78,7 @@
       <ConformanceMode>true</ConformanceMode>
       <LanguageStandard>stdcpplatest</LanguageStandard>
       <MultiProcessorCompilation>true</MultiProcessorCompilation>
-      <AdditionalIncludeDirectories>$(SolutionDir)Quantum\Source;$(SolutionDir)Quantum\Vendor\yaml-cpp\include</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)Quantum\Source;$(SolutionDir)Quantum\Vendor\yaml-cpp\include;$(SolutionDir)Quantum\Vendor\glfw\include</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>

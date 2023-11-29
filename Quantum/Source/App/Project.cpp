@@ -11,7 +11,7 @@ namespace Quantum
 		file.close();
 
 		m_File.Name = name;
-		m_File.EngineVersion = "1.0"; // TODO: Get engine version from somewhere
+		m_File.EngineVersion = "1.0.0"; // TODO: Get engine version from somewhere
 
 		Save();
 	}
@@ -42,11 +42,11 @@ namespace Quantum
 	void Project::Reload()
 	{
 		auto project = YAML::LoadFile(m_Path);
-		m_File.Name = project["Name"].as<String>();
-		m_File.Description = project["Description"].as<String>();
-		m_File.Version = project["Version"].as<String>();
-		m_File.Company = project["Company"].as<String>();
-		m_File.EngineVersion = project["EngineVersion"].as<String>();
+		m_File.Name = project["Name"].as<String>("Quantum Project");
+		m_File.Description = project["Description"].as<String>("An App made using QuantumEngine!");
+		m_File.Version = project["Version"].as<String>("1.0.0");
+		m_File.Company = project["Company"].as<String>("");
+		m_File.EngineVersion = project["EngineVersion"].as<String>("1.0.0"); // TODO: Get engine version instead
 	}
 
 	void Project::Save()
