@@ -1,5 +1,6 @@
 #include "Engine.h"
 #include "Core.h"
+#include "Graphics/Renderer.h"
 
 DEFINE_LOG_CATEGORY_STATIC(Core);
 
@@ -26,6 +27,8 @@ namespace Quantum
 			m_Window = CreateScope<Window>(windowSpec);
 			m_Window->MinimizeEvent += [=](bool isMinimized) { m_IsMinimized = isMinimized; };
 			m_Window->CloseEvent += [=]() { Stop(); };
+
+			Renderer::Initialize();
 		}
 	}
 

@@ -47,7 +47,7 @@ namespace Quantum
 	void Log::LogInternal(LogLevel level, const LogCategory& category, StringView formatedMessage, StringView file, int line)
 	{
 		if (!m_IsInitialized)
-			Initialize();
+			return; // TODO: Make sure this is never called
 
 		auto defaultColor = "\33[0m";
 		auto fatalColor = "\33[37;41m";

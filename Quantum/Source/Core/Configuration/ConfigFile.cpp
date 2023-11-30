@@ -15,8 +15,6 @@ namespace Quantum
 	ConfigFile::~ConfigFile()
 	{
 		Save();
-
-		Config::Unregister(this);
 	}
 
 	void ConfigFile::Load()

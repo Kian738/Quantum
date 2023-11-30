@@ -15,6 +15,7 @@ namespace Quantum
 	GraphicsContext::GraphicsContext(GLFWwindow* windowHandle)
 		: m_WindowHandle(windowHandle)
 	{
+		LOG_CHECK(m_WindowHandle, Fatal, LogGraphics, "Window handle is null!");
 	}
 
 	void GraphicsContext::Initialize()
@@ -28,8 +29,6 @@ namespace Quantum
 		LOG(Info, LogGraphics, "  Vendor: {}", Utils::GetString(GL_VENDOR));
 		LOG(Info, LogGraphics, "  Renderer: {}", Utils::GetString(GL_RENDERER));
 		LOG(Info, LogGraphics, "  Version: {}", Utils::GetString(GL_VERSION));
-
-
 	}
 
 	void GraphicsContext::SwapBuffers()

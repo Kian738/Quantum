@@ -24,7 +24,6 @@ namespace Quantum
 		delete engine;
 
 		Log::Shutdown();
-		Config::Shutdown();
 
 		Project::GetActive()->Save();
 

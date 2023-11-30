@@ -11,9 +11,6 @@ namespace Quantum
 		inline static List<ConfigFile*> s_ConfigFiles;
 	public:
 		static void Initialize();
-		static void Shutdown();
-
 		static void Register(ConfigFile* configFile);
-		static void Unregister(ConfigFile* configFile);
 	};
 }

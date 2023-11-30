@@ -33,6 +33,7 @@
     <ClInclude Include="Source\App\Project.h" />
     <ClInclude Include="Source\Graphics\GraphicsContext.h" />
     <ClInclude Include="Source\Graphics\RenderCommand.h" />
+    <ClInclude Include="Source\Graphics\Renderer.h" />
     <ClInclude Include="Source\Utils\FileSystemUtils.h" />
     <ClInclude Include="Source\Utils\StringUtils.h" />
     <ClInclude Include="Source\Utils\YAMLUtils.h" />
@@ -50,6 +51,7 @@
     <ClCompile Include="Source\App\Project.cpp" />
     <ClCompile Include="Source\Core\Window.cpp" />
     <ClCompile Include="Source\Graphics\GraphicsContext.cpp" />
+    <ClCompile Include="Source\Graphics\Renderer.cpp" />
     <ClCompile Include="Source\Utils\FileSystemUtils.cpp" />
     <ClCompile Include="Source\Utils\StringUtils.cpp" />
     <ClCompile Include="Source\Utils\YAMLUtils.cpp" />
