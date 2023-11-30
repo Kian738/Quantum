@@ -16,15 +16,15 @@ namespace Quantum
 			auto windowConfig = GEngineConfig["Graphics"]["MainWindow"];
 			auto windowSpec = WindowSpecification(
 				windowConfig["Title"].as<String>(App::GetName()),
-				windowConfig["Width"].as<UInt32>(1280),
-				windowConfig["Height"].as<UInt32>(720),
+				windowConfig["Width"].as<UInt32>(0),
+				windowConfig["Height"].as<UInt32>(0),
 				windowConfig["VSync"].as<bool>(true),
 				windowConfig["Resizable"].as<bool>(true),
 				windowConfig["Fullscreen"].as<bool>(false)
 			);
 
 			m_Window = CreateScope<Window>(windowSpec);
-			m_Window->ResizeEvent += [=](UInt32 width, UInt32 height) { m_IsMinimized = width == 0 || height == 0; };
+			m_Window->MinimizeEvent += [=](bool isMinimized) { m_IsMinimized = isMinimized; };
 			m_Window->CloseEvent += [=]() { Stop(); };
 		}
 	}

@@ -30,12 +30,17 @@ namespace Quantum
 
 		Event<UInt32, UInt32> ResizeEvent;
 		Event<> CloseEvent;
+		Event<bool> FocusEvent;
+		Event<bool> MinimizeEvent;
+		Event<bool> MaximizeEvent;
 
 		void OnUpdate();
 		void OnRender();
 
 		WindowSpecification& GetSpecification() { return m_Specification; };
 		String GetTitle() const { return m_Specification.Title; };
+		Pair<UInt32, UInt32> GetSize() const { return { GetWidth(), GetHeight()}; };
+		Pair<UInt32, UInt32> GetMonitorSize(GLFWmonitor* monitor = glfwGetPrimaryMonitor()) const;
 		UInt32 GetWidth() const { return m_Specification.Width; };
 		UInt32 GetHeight() const { return m_Specification.Height; };
 		bool IsVSync() const { return m_Specification.VSync; };
@@ -45,5 +50,9 @@ namespace Quantum
 		void SetWidth(UInt32 width);
 		void SetHeight(UInt32 height);
 		void SetVSync(bool enabled);
+		void SetResizable(bool enabled);
+		void SetFullscreen(bool enabled);
+	private:
+		void SetCallbacks();
 	};
 }

@@ -3,6 +3,8 @@
 
 DEFINE_LOG_CATEGORY_STATIC(Window);
 
+const float c_WindowSizeRatio = 0.6667f;
+
 namespace Quantum
 {
 	static void GLFWErrorCallback(int error, const char* description)
@@ -13,26 +15,41 @@ namespace Quantum
 	Window::Window(const WindowSpecification& spec)
 		: m_Specification(spec)
 	{
-		LOG(Info, LogWindow, "Creating window {} ({}x{})...", spec.Title, spec.Width, spec.Height)
-
 		if (s_WindowCount == 0)
 		{
-			LOG_CHECK(glfwInit(), Error, LogWindow, "Could not initialize GLFW!");
+			LOG_CHECK(glfwInit(), Fatal, LogWindow, "Failed to initialize GLFW!");
 			LOG(Info, LogWindow, "Initialized GLFW version {}.{}.{}", GLFW_VERSION_MAJOR, GLFW_VERSION_MINOR, GLFW_VERSION_REVISION);
 			glfwSetErrorCallback(GLFWErrorCallback);
 		}
+
+		if (bool noSize = spec.Height == 0 || spec.Width == 0; noSize || spec.Fullscreen)
+		{
+			auto [width, height] = GetMonitorSize();
+			if (noSize)
+			{
+				width *= c_WindowSizeRatio;
+				height *= c_WindowSizeRatio;
+			}
+			m_Specification.Width = width;
+			m_Specification.Height = height;
+		}
+
+		LOG(Info, LogWindow, "Creating window {} ({}x{})...", spec.Title, m_Specification.Width, m_Specification.Height);
 
 		glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 4);
 		glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 6);
 		glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
 		glfwWindowHint(GLFW_RESIZABLE, spec.Resizable);
+		// TODO: Add suppport for decorated windows
+		// TODO: Add suppport for maximized windows
+		// TODO: Load size and position from config
 		m_WindowHandle = glfwCreateWindow(
-			spec.Width,
-			spec.Height,
+			m_Specification.Width,
+			m_Specification.Height,
 			spec.Title.c_str(),
 			spec.Fullscreen ? glfwGetPrimaryMonitor() : nullptr,
 			nullptr
-		); // TODO: Add suppport for decorated windows
+		);
 		s_WindowCount++;
 
 		LOG_CHECK(m_WindowHandle, Error, LogWindow, "Could not create GLFW window!");
@@ -43,22 +60,7 @@ namespace Quantum
 		glfwSetWindowUserPointer(m_WindowHandle, this);
 		SetVSync(spec.VSync);
 
-		glfwSetWindowSizeCallback(m_WindowHandle, [](GLFWwindow* windowHandle, int width, int height)
-		{
-			auto& window = *reinterpret_cast<Window*>(glfwGetWindowUserPointer(windowHandle));
-
-			auto& spec = window.GetSpecification();
-			spec.Width = width;
-			spec.Height = height;
-
-			window.ResizeEvent(width, height);
-		});
-
-		glfwSetWindowCloseCallback(m_WindowHandle, [](GLFWwindow* windowHandle)
-			{
-			auto& window = *reinterpret_cast<Window*>(glfwGetWindowUserPointer(windowHandle));
-			window.CloseEvent();
-		});
+		SetCallbacks();
 	}
 
 	Window::~Window()
@@ -80,6 +82,12 @@ namespace Quantum
 	void Window::OnRender()
 	{
 		m_Context->SwapBuffers();
+	}
+
+	Pair<UInt32, UInt32> Window::GetMonitorSize(GLFWmonitor* monitor) const
+	{
+		auto mode = glfwGetVideoMode(monitor);
+		return { mode->width, mode->height };
 	}
 
 	void Window::SetTitle(StringView title)
@@ -107,5 +115,58 @@ namespace Quantum
 	{
 		glfwSwapInterval(enabled ? 1 : 0);
 		m_Specification.VSync = enabled;
+	}
+
+	void Window::SetResizable(bool enabled)
+	{
+		glfwSetWindowAttrib(m_WindowHandle, GLFW_RESIZABLE, enabled);
+		m_Specification.Resizable = enabled;
+	}
+
+	void Window::SetFullscreen(bool enabled)
+	{
+		auto [width, height] = GetMonitorSize();
+		glfwSetWindowMonitor(m_WindowHandle, enabled ? glfwGetPrimaryMonitor() : nullptr, 0, 0, width, height, GLFW_DONT_CARE);
+		m_Specification.Fullscreen = enabled;
+	}
+
+	void Window::SetCallbacks()
+	{
+		glfwSetWindowSizeCallback(m_WindowHandle, [](GLFWwindow* windowHandle, int width, int height)
+			{
+				auto& window = *reinterpret_cast<Window*>(glfwGetWindowUserPointer(windowHandle));
+
+				auto& spec = window.GetSpecification();
+				spec.Width = width;
+				spec.Height = height;
+
+				window.ResizeEvent(width, height);
+			});
+
+		glfwSetWindowCloseCallback(m_WindowHandle, [](GLFWwindow* windowHandle)
+			{
+				auto& window = *reinterpret_cast<Window*>(glfwGetWindowUserPointer(windowHandle));
+				window.CloseEvent();
+			});
+
+		glfwSetWindowFocusCallback(m_WindowHandle, [](GLFWwindow* windowHandle, int focused)
+			{
+				auto& window = *reinterpret_cast<Window*>(glfwGetWindowUserPointer(windowHandle));
+				window.FocusEvent(focused);
+			});
+
+		glfwSetWindowIconifyCallback(m_WindowHandle, [](GLFWwindow* windowHandle, int iconified)
+			{
+				auto& window = *reinterpret_cast<Window*>(glfwGetWindowUserPointer(windowHandle));
+				window.MinimizeEvent(iconified);
+			});
+
+		glfwSetWindowMaximizeCallback(m_WindowHandle, [](GLFWwindow* windowHandle, int maximized)
+			{
+				auto& window = *reinterpret_cast<Window*>(glfwGetWindowUserPointer(windowHandle));
+				window.MaximizeEvent(maximized);
+			});
+
+		// TODO: Key callbacks
 	}
 }
