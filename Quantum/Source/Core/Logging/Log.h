@@ -3,7 +3,6 @@
 #include "Console.h"
 #include "Core/Core.h"
 #include "LogCategory.h"
-#include <fstream>
 #include <print>
 
 namespace Quantum

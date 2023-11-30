@@ -9,6 +9,7 @@
 
 #include "Utils/FileSystemUtils.h"
 #include "Utils/StringUtils.h"
+#include "Utils/YAMLUtils.h"
 
 #include "App/App.h"
 #include "App/Project.h"

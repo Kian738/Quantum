@@ -1,6 +1,7 @@
 #pragma once
 
 #include "Core/Types.h"
+#include <fstream>
 
 namespace Quantum
 {
@@ -14,5 +15,7 @@ namespace Quantum
 
 		static String CombinePath(StringView directory, StringView path);
 		static String CombinePath(StringView directory, StringView name, StringView extension);
+
+		static std::ofstream OpenFileSafe(StringView path);
 	};
 }

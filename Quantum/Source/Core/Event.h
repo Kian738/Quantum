@@ -19,7 +19,13 @@ namespace Quantum
 		}
 
 		void AddListener(Func listener) { m_Listeners.push_back(listener); };
-		void RemoveListener(Func listener) { m_Listeners.erase(std::remove(m_Listeners.begin(), m_Listeners.end(), listener), m_Listeners.end()); };
+		void RemoveListener(Func listener)
+		{
+			m_Listeners.erase(
+				std::remove(m_Listeners.begin(), m_Listeners.end(), listener),
+				m_Listeners.end()
+			);
+		};
 
 		void ClearAllListeners() { m_Listeners.clear(); };
 

@@ -13,6 +13,8 @@ namespace Quantum
 	Window::Window(const WindowSpecification& spec)
 		: m_Specification(spec)
 	{
+		LOG(Info, LogWindow, "Creating window {} ({}x{})...", spec.Title, spec.Width, spec.Height)
+
 		if (s_WindowCount == 0)
 		{
 			LOG_CHECK(glfwInit(), Error, LogWindow, "Could not initialize GLFW!");
@@ -20,14 +22,25 @@ namespace Quantum
 			glfwSetErrorCallback(GLFWErrorCallback);
 		}
 
-		m_WindowHandle = glfwCreateWindow(spec.Width, spec.Height, spec.Title.c_str(), nullptr, nullptr);
+		glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 4);
+		glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 6);
+		glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
+		glfwWindowHint(GLFW_RESIZABLE, spec.Resizable);
+		m_WindowHandle = glfwCreateWindow(
+			spec.Width,
+			spec.Height,
+			spec.Title.c_str(),
+			spec.Fullscreen ? glfwGetPrimaryMonitor() : nullptr,
+			nullptr
+		); // TODO: Add suppport for decorated windows
 		s_WindowCount++;
 
 		LOG_CHECK(m_WindowHandle, Error, LogWindow, "Could not create GLFW window!");
 
-		glfwMakeContextCurrent(m_WindowHandle); // TODO: Move this to the renderer
-		glfwSetWindowUserPointer(m_WindowHandle, this);
+		m_Context = CreateScope<GraphicsContext>(m_WindowHandle);
+		m_Context->Initialize();
 
+		glfwSetWindowUserPointer(m_WindowHandle, this);
 		SetVSync(spec.VSync);
 
 		glfwSetWindowSizeCallback(m_WindowHandle, [](GLFWwindow* windowHandle, int width, int height)
@@ -40,10 +53,18 @@ namespace Quantum
 
 			window.ResizeEvent(width, height);
 		});
+
+		glfwSetWindowCloseCallback(m_WindowHandle, [](GLFWwindow* windowHandle)
+			{
+			auto& window = *reinterpret_cast<Window*>(glfwGetWindowUserPointer(windowHandle));
+			window.CloseEvent();
+		});
 	}
 
 	Window::~Window()
 	{
+		LOG(Info, LogWindow, "Destroying window {}...", m_Specification.Title);
+
 		glfwDestroyWindow(m_WindowHandle);
 		s_WindowCount--;
 

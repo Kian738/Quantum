@@ -15,6 +15,8 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Editor", "Editor\Editor.vcx
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "GLFW", "Quantum\Vendor\GLFW.vcxproj", "{52FDC80C-2498-4868-989F-D278E6DB5390}"
 EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "glad", "Quantum\Vendor\glad.vcxproj", "{DB3EE6CE-0F8F-4098-B1E0-2A500DCDDE72}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|x64 = Debug|x64
@@ -41,6 +43,10 @@ Global
 		{52FDC80C-2498-4868-989F-D278E6DB5390}.Debug|x64.Build.0 = Debug|x64
 		{52FDC80C-2498-4868-989F-D278E6DB5390}.Test|x64.ActiveCfg = Test|x64
 		{52FDC80C-2498-4868-989F-D278E6DB5390}.Test|x64.Build.0 = Test|x64
+		{DB3EE6CE-0F8F-4098-B1E0-2A500DCDDE72}.Debug|x64.ActiveCfg = Debug|x64
+		{DB3EE6CE-0F8F-4098-B1E0-2A500DCDDE72}.Debug|x64.Build.0 = Debug|x64
+		{DB3EE6CE-0F8F-4098-B1E0-2A500DCDDE72}.Test|x64.ActiveCfg = Test|x64
+		{DB3EE6CE-0F8F-4098-B1E0-2A500DCDDE72}.Test|x64.Build.0 = Test|x64
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -48,6 +54,7 @@ Global
 	GlobalSection(NestedProjects) = preSolution
 		{8F3B7894-F570-4991-95F3-5AEA7B55AB17} = {7AA7541A-50D3-4E7A-B514-A60E7F98381C}
 		{52FDC80C-2498-4868-989F-D278E6DB5390} = {7AA7541A-50D3-4E7A-B514-A60E7F98381C}
+		{DB3EE6CE-0F8F-4098-B1E0-2A500DCDDE72} = {7AA7541A-50D3-4E7A-B514-A60E7F98381C}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {0F9CF9CA-42CD-4223-9657-50285B77CA92}

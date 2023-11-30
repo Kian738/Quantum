@@ -29,6 +29,7 @@ namespace Quantum
 		~Window();
 
 		Event<UInt32, UInt32> ResizeEvent;
+		Event<> CloseEvent;
 
 		void OnUpdate();
 		void OnRender();

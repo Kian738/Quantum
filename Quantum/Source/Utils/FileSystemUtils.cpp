@@ -27,4 +27,10 @@ namespace Quantum
     {
         return std::format("{}\\{}.{}", directory, name, extension);
     }
+
+    std::ofstream FileSystemUtils::OpenFileSafe(StringView path)
+    {
+        CreateParentDir(path);
+        return std::ofstream(path.data());
+    }
 }

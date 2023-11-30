@@ -25,6 +25,7 @@ namespace Quantum
 
 			m_Window = CreateScope<Window>(windowSpec);
 			m_Window->ResizeEvent += [=](UInt32 width, UInt32 height) { m_IsMinimized = width == 0 || height == 0; };
+			m_Window->CloseEvent += [=]() { Stop(); };
 		}
 	}
 
@@ -33,7 +34,7 @@ namespace Quantum
 		LOG(Info, LogCore, "Shutting down Engine...");
 	}
 
-	void Engine::Run()
+	int Engine::Run()
 	{
 		m_IsRunning = true;
 		while (m_IsRunning)
@@ -42,14 +43,20 @@ namespace Quantum
 
 			if (!m_IsMinimized)
 			{
+				// TODO: OnUpdate and ImGui render for layers
 			}
 
-			// TODO: Do stuff
+			m_Window->OnRender();
 		}
+
+		return m_ExitCode;
 	}
 
-	void Engine::Stop()
+	void Engine::Stop(bool isCrash)
 	{
+		if (isCrash)
+			m_ExitCode = EXIT_FAILURE;
+
 		m_IsRunning = false;
 	}
 }

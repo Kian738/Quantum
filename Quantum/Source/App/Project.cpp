@@ -7,8 +7,6 @@ namespace Quantum
 	{
 		FileSystemUtils::CreateDir(directory);
 		m_Path = FileSystemUtils::CombinePath(directory, name, "qproj");
-		std::ofstream file(m_Path);
-		file.close();
 
 		m_File.Name = name;
 		m_File.EngineVersion = "1.0.0"; // TODO: Get engine version from somewhere
@@ -24,6 +22,9 @@ namespace Quantum
 
 	Project::~Project()
 	{
+		if (s_Active.get() == this)
+			s_Active = nullptr;
+
 		Save();
 	}
 
@@ -60,10 +61,7 @@ namespace Quantum
 		project << YAML::Key << "EngineVersion" << YAML::Value << m_File.EngineVersion;
 		project << YAML::EndMap;
 
-		FileSystemUtils::CreateParentDir(m_Path);
-		std::ofstream file(m_Path);
-		file << project.c_str();
-		file.close();
+		FileSystemUtils::OpenFileSafe(m_Path) << project.c_str();
 	}
 
 	Ref<Project> Project::New(StringView directory, StringView name)

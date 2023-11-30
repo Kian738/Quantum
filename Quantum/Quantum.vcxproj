@@ -32,15 +32,16 @@
     <ClInclude Include="Source\Core\Window.h" />
     <ClInclude Include="Source\App\Project.h" />
     <ClInclude Include="Source\Graphics\GraphicsContext.h" />
+    <ClInclude Include="Source\Graphics\RenderCommand.h" />
     <ClInclude Include="Source\Utils\FileSystemUtils.h" />
     <ClInclude Include="Source\Utils\StringUtils.h" />
+    <ClInclude Include="Source\Utils\YAMLUtils.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Source\Core\Configuration\Config.cpp" />
     <ClCompile Include="Source\Core\Configuration\ConfigFile.cpp" />
     <ClCompile Include="Source\Core\Globals.cpp" />
     <ClCompile Include="Source\App\App.cpp" />
-    <ClCompile Include="Source\Core\Launch.cpp" />
     <ClCompile Include="Source\Core\Misc\DateTime.cpp" />
     <ClCompile Include="Source\Core\Engine.cpp" />
     <ClCompile Include="Source\Core\Logging\Console.cpp" />
@@ -48,10 +49,15 @@
     <ClCompile Include="Source\Core\Misc\Environment.cpp" />
     <ClCompile Include="Source\App\Project.cpp" />
     <ClCompile Include="Source\Core\Window.cpp" />
+    <ClCompile Include="Source\Graphics\GraphicsContext.cpp" />
     <ClCompile Include="Source\Utils\FileSystemUtils.cpp" />
     <ClCompile Include="Source\Utils\StringUtils.cpp" />
+    <ClCompile Include="Source\Utils\YAMLUtils.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="Vendor\glad.vcxproj">
+      <Project>{db3ee6ce-0f8f-4098-b1e0-2a500dcdde72}</Project>
+    </ProjectReference>
     <ProjectReference Include="Vendor\GLFW.vcxproj">
       <Project>{52fdc80c-2498-4868-989f-d278e6db5390}</Project>
     </ProjectReference>
@@ -108,7 +114,7 @@
       <ConformanceMode>true</ConformanceMode>
       <LanguageStandard>stdcpplatest</LanguageStandard>
       <MultiProcessorCompilation>true</MultiProcessorCompilation>
-      <AdditionalIncludeDirectories>Source\;Vendor\yaml-cpp\include;Vendor\glfw\include</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>Source\;Vendor\yaml-cpp\include;Vendor\glfw\include;Vendor\glad\include</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -125,7 +131,7 @@
       <ConformanceMode>true</ConformanceMode>
       <LanguageStandard>stdcpplatest</LanguageStandard>
       <MultiProcessorCompilation>true</MultiProcessorCompilation>
-      <AdditionalIncludeDirectories>Source\;Vendor\yaml-cpp\include;Vendor\glfw\include</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>Source\;Vendor\yaml-cpp\include;Vendor\glfw\include;Vendor\glad\include</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>

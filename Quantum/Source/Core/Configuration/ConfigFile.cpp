@@ -1,7 +1,6 @@
 #include "ConfigFile.h"
 #include "Core/Core.h"
 #include <filesystem>
-#include <fstream>
 
 DEFINE_LOG_CATEGORY_STATIC(Config);
 
@@ -37,15 +36,7 @@ namespace Quantum
 
 		Reload();
 
-		bool isDirty = false;
-		for (auto it : defaults)
-			if (!m_Data[it.first])
-			{
-				m_Data[it.first] = it.second;
-				isDirty = true;
-			}
-
-		if (isDirty)
+		if (YAMLUtils::MergeTo(m_Data, defaults))
 			Save();
 	}
 
@@ -56,9 +47,6 @@ namespace Quantum
 
 	void ConfigFile::Save()
 	{
-		FileSystemUtils::CreateParentDir(m_Path);
-		std::ofstream file(m_Path);
-		file << m_Data;
-		file.close();
+		FileSystemUtils::OpenFileSafe(m_Path) << m_Data;
 	}
 }

@@ -16,17 +16,19 @@ namespace Quantum
 		Log::Initialize();
 
 		auto [date, time] = DateTime::FromCompileTime().GetDateTime();
-		LOG(Info, LogCommon, "QuantumEngine built on {} at {}", date, time);
+		LOG(Info, LogCommon, "QuantumEngine built on {} at {}", date, time); // TODO: Add version number
 
 		// TODO: Parse command line arguments
  		Engine* engine = new Engine;
-		engine->Run();
+		auto status = engine->Run();
 		delete engine;
 
 		Log::Shutdown();
 		Config::Shutdown();
 
-		return 0; // TODO: Return the exit code from the engine
+		Project::GetActive()->Save();
+
+		return status;
 	}
 }
 
