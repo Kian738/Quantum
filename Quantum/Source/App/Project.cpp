@@ -4,10 +4,8 @@
 namespace Quantum
 {
 	Project::Project(StringView directory, StringView name)
+		: m_Path(FileSystemUtils::CombinePath(directory, name, "qproj"))
 	{
-		FileSystemUtils::CreateDir(directory);
-		m_Path = FileSystemUtils::CombinePath(directory, name, "qproj");
-
 		m_File.Name = name;
 		m_File.EngineVersion = "1.0.0"; // TODO: Get engine version from somewhere
 

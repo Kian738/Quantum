@@ -1,5 +1,8 @@
 #pragma once
 
+#include <glm/vec2.hpp>
+#include <glm/vec3.hpp>
+#include <glm/vec4.hpp>
 #include <memory>
 #include <string>
 #include <unordered_map>
@@ -16,6 +19,10 @@ namespace Quantum
 	using UInt16 = unsigned short;
 	using UInt32 = unsigned int;
 	using UInt64 = unsigned long long;
+
+	using Vector2D = glm::vec2;
+	using Vector3D = glm::vec3;
+	using Vector4D = glm::vec4;
 
 	using String = std::string;
 	using StringView = std::string_view;
