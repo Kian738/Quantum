@@ -28,6 +28,8 @@ namespace Quantum
 		String GetPath() const { return m_Path; };
 		String GetDir() const;
 		String GetContentDir() const;
+		String GetAssetsDir() const;
+		String GetShaderDir() const;
 
 		ProjectFile& GetFile() { return m_File; };
 

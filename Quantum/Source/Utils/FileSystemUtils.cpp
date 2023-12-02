@@ -2,6 +2,7 @@
 
 #include <filesystem>
 
+
 namespace Quantum
 {
     String FileSystemUtils::GetParentDir(StringView path)
@@ -29,9 +30,29 @@ namespace Quantum
         return std::format("{}\\{}.{}", directory, name, extension);
     }
 
-    std::ofstream FileSystemUtils::OpenFileSafe(StringView path)
+    String FileSystemUtils::GetFileName(StringView path)
+    {
+        return std::filesystem::path(path).filename().string();
+    }
+
+    std::ofstream FileSystemUtils::OpenFile(StringView path)
     {
         CreateParentDir(path);
         return std::ofstream(path.data());
+    }
+
+    String FileSystemUtils::ReadFile(StringView path)
+    {
+        String result;
+        std::ifstream file(path.data(), std::ios::in | std::ios::binary);
+        if (file.is_open())
+		{
+			file.seekg(0, std::ios::end);
+			result.resize(file.tellg());
+			file.seekg(0, std::ios::beg);
+			file.read(&result[0], result.size());
+			file.close();
+		}
+		return result;
     }
 }

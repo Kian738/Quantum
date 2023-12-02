@@ -46,6 +46,6 @@ namespace Quantum
 
 	void ConfigFile::Save()
 	{
-		FileSystemUtils::OpenFileSafe(m_Path) << m_Data;
+		FileSystemUtils::OpenFile(m_Path) << m_Data;
 	}
 }

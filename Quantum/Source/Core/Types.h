@@ -1,6 +1,7 @@
 #pragma once
 
 #include <glm/glm.hpp>
+#include <glm/gtc/quaternion.hpp>
 #include <memory>
 #include <string>
 #include <unordered_map>
@@ -17,6 +18,8 @@ namespace Quantum
 	using UInt16 = unsigned short;
 	using UInt32 = unsigned int;
 	using UInt64 = unsigned long long;
+
+	using Quaternion = glm::quat;
 
 	using Vector2D = glm::vec2;
 	using Vector3D = glm::vec3;

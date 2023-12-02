@@ -10,6 +10,7 @@ namespace Quantum
 
 		s_SceneData = new SceneData;
 
+		// TODO: Remove from here
 		s_Data = new RendererData;
 		s_Data->QuadVertexArray = CreateRef<VertexArray>();
 
@@ -30,6 +31,10 @@ namespace Quantum
 		UInt32 squareIndices[6] = { 0, 1, 2, 2, 3, 0 };
 		auto squareIndexBuffer = CreateRef<IndexBuffer>(squareIndices, sizeof(squareIndices) / sizeof(UInt32));
 		s_Data->QuadVertexArray->SetIndexBuffer(squareIndexBuffer);
+		// TODO: To here
+
+		s_ShaderLibrary = CreateRef<ShaderLibrary>();
+		s_ShaderLibrary->Load("Material");
 	}
 
 	void Renderer::Shutdown()
@@ -37,12 +42,20 @@ namespace Quantum
 		delete s_Data;
 	}
 
-	void Renderer::BeginScene()
+	void Renderer::BeginScene(const Camera& camera)
 	{
+		for (auto& [name, shader] : s_ShaderLibrary->GetShaders())
+		{
+			shader->Bind();
+
+			shader->SetMat4("u_ViewProjection", camera.GetViewProjection());
+			shader->SetFloat3("u_CameraPosition", camera.GetPosition());
+		}
 	}
 
 	void Renderer::EndScene()
 	{
+		// TODO: Figure out what to do here
 	}
 
 	void Renderer::DrawVertexArray(const Ref<VertexArray>& vertexArray)

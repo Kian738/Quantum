@@ -3,7 +3,6 @@
 #include "Core.h"
 #include "Graphics/RenderCommand.h"
 #include "Graphics/Renderer.h"
-#include <thread>
 
 DEFINE_LOG_CATEGORY_STATIC(Core);
 
@@ -33,6 +32,8 @@ namespace Quantum
 			m_Window->CloseEvent += [=]() { Stop(); };
 
 			Renderer::Initialize();
+
+			m_CameraController = CreateScope<CameraController>();
 		}
 	}
 
@@ -62,13 +63,13 @@ namespace Quantum
 
 				if (!m_IsMinimized)
 				{
-					Renderer::BeginScene(camera goes here);
+					Renderer::BeginScene(m_CameraController->GetCamera());
 					// TODO: OnUpdate and ImGui render for modules
+					Renderer::EndScene();etup 
 				}
 
 				m_Window->OnRender();
 			}
-
 		}
 
 		return m_ExitCode;

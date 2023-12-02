@@ -92,11 +92,10 @@ namespace Quantum
 
     String Environment::GetExecutableName()
     {
-        char fullPath[MAX_PATH];
-        GetModuleFileNameA(NULL, fullPath, MAX_PATH);
-        std::filesystem::path executablePath(fullPath);
-        static auto executableName = executablePath.filename().string();
-        return executableName;
+        char path[MAX_PATH];
+        GetModuleFileNameA(NULL, path, MAX_PATH);
+        static auto name = FileSystemUtils::GetFileName(path);
+        return name;
     }
 }
 

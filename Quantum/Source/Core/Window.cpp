@@ -91,6 +91,11 @@ namespace Quantum
 		return { mode->width, mode->height };
 	}
 
+	float Window::GetAspectRatio() const
+	{
+		return (float)GetWidth() / (float)GetHeight();
+	}
+
 	void Window::SetTitle(StringView title)
 	{
 		glfwSetWindowTitle(m_WindowHandle, title.data());

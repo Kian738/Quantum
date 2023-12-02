@@ -39,6 +39,18 @@ namespace Quantum
 		return contentDir;
 	}
 
+	String Project::GetAssetsDir() const
+	{
+		static auto assetsDir = FileSystemUtils::CombinePath(GetContentDir(), "Assets");
+		return assetsDir;
+	}
+
+	String Project::GetShaderDir() const
+	{
+		static auto shaderDir = FileSystemUtils::CombinePath(GetContentDir(), "Shaders");
+		return shaderDir;
+	}
+
 	void Project::Reload()
 	{
 		auto project = YAML::LoadFile(m_Path);
@@ -60,7 +72,7 @@ namespace Quantum
 		project << YAML::Key << "EngineVersion" << YAML::Value << m_File.EngineVersion;
 		project << YAML::EndMap;
 
-		FileSystemUtils::OpenFileSafe(m_Path) << project.c_str();
+		FileSystemUtils::OpenFile(m_Path) << project.c_str();
 	}
 
 	Ref<Project> Project::New(StringView directory, StringView name)

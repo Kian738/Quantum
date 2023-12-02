@@ -16,6 +16,9 @@ namespace Quantum
 		static String CombinePath(StringView directory, StringView path);
 		static String CombinePath(StringView directory, StringView name, StringView extension);
 
-		static std::ofstream OpenFileSafe(StringView path);
+		static String GetFileName(StringView path);
+
+		static std::ofstream OpenFile(StringView path);
+		static String ReadFile(StringView path);
 	};
 }

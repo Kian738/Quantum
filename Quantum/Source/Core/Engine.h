@@ -2,6 +2,7 @@
 
 #include "Types.h"
 #include "Window.h"
+#include "Graphics/Camera/CameraController.h"
 
 namespace Quantum
 {
@@ -17,6 +18,7 @@ namespace Quantum
 		EngineConfig m_Config;
 
 		Scope<Window> m_Window;
+		Scope<CameraController> m_CameraController;
 
 		int m_ExitCode = EXIT_SUCCESS;
 
@@ -25,6 +27,8 @@ namespace Quantum
 	public:
 		Engine();
 		~Engine();
+
+		Window& GetWindow() { return *m_Window; };
 
 		int Run();
 		void Stop();

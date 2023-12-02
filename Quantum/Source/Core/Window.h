@@ -43,6 +43,7 @@ namespace Quantum
 		Pair<UInt32, UInt32> GetMonitorSize(GLFWmonitor* monitor = glfwGetPrimaryMonitor()) const;
 		UInt32 GetWidth() const { return m_Specification.Width; };
 		UInt32 GetHeight() const { return m_Specification.Height; };
+		float GetAspectRatio() const;
 		bool IsVSync() const { return m_Specification.VSync; };
 
 		void SetTitle(StringView title);
