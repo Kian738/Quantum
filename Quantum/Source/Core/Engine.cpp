@@ -65,7 +65,7 @@ namespace Quantum
 				{
 					Renderer::BeginScene(m_CameraController->GetCamera());
 					// TODO: OnUpdate and ImGui render for modules
-					Renderer::EndScene();etup 
+					Renderer::EndScene();
 				}
 
 				m_Window->OnRender();
