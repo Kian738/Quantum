@@ -1,8 +1,6 @@
 #pragma once
 
-#include <glm/vec2.hpp>
-#include <glm/vec3.hpp>
-#include <glm/vec4.hpp>
+#include <glm/glm.hpp>
 #include <memory>
 #include <string>
 #include <unordered_map>
@@ -23,6 +21,10 @@ namespace Quantum
 	using Vector2D = glm::vec2;
 	using Vector3D = glm::vec3;
 	using Vector4D = glm::vec4;
+
+	using Matrix2D = glm::mat2;
+	using Matrix3D = glm::mat3;
+	using Matrix4D = glm::mat4;
 
 	using String = std::string;
 	using StringView = std::string_view;

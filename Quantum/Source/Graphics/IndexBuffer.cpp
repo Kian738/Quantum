@@ -1,4 +1,5 @@
 #include "IndexBuffer.h"
+
 #include <glad/gl.h>
 
 namespace Quantum

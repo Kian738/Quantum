@@ -27,6 +27,7 @@ namespace Quantum
 		~Engine();
 
 		int Run();
-		void Stop(bool isCrash = false);
+		void Stop();
+		void Crash();
 	};
 }

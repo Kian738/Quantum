@@ -1,5 +1,6 @@
-#include "Core/Core.h"
 #include "Environment.h"
+
+#include "Core/Core.h"
 #include <filesystem>
 #include <ShlObj.h>
 

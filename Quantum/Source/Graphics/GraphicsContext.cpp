@@ -1,4 +1,5 @@
 #include "GraphicsContext.h"
+
 #include "Core/Core.h"
 
 namespace Quantum

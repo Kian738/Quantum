@@ -1,4 +1,5 @@
 #include "Window.h"
+
 #include "Core.h"
 
 DEFINE_LOG_CATEGORY_STATIC(Window);

@@ -4,7 +4,7 @@
 	#error "PROJECT_NAME must be defined"
 #endif
 
-Quantum::String GetProjectName()
+const char* GetProjectPath()
 {
 	return PROJECT_NAME;
 }

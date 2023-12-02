@@ -1,6 +1,6 @@
 #include "Core/Launch.h"
 
-Quantum::String GetProjectName()
+const char* GetProjectPath()
 {
 	return "QuantumEngine";
 }

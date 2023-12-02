@@ -1,4 +1,5 @@
 #include "Renderer.h"
+
 #include "RenderCommand.h"
 
 namespace Quantum
@@ -6,6 +7,8 @@ namespace Quantum
 	void Renderer::Initialize()
 	{
 		RenderCommand::Initialize();
+
+		s_SceneData = new SceneData;
 
 		s_Data = new RendererData;
 		s_Data->QuadVertexArray = CreateRef<VertexArray>();
@@ -32,5 +35,23 @@ namespace Quantum
 	void Renderer::Shutdown()
 	{
 		delete s_Data;
+	}
+
+	void Renderer::BeginScene()
+	{
+	}
+
+	void Renderer::EndScene()
+	{
+	}
+
+	void Renderer::DrawVertexArray(const Ref<VertexArray>& vertexArray)
+	{
+		vertexArray->Bind();
+
+		if (auto indexBuffer = vertexArray->GetIndexBuffer(); indexBuffer)
+			RenderCommand::DrawIndexed(indexBuffer->GetCount());
+		else
+			RenderCommand::Draw(vertexArray->GetVertexCount());
 	}
 }

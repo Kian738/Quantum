@@ -1,4 +1,5 @@
 #include "Project.h"
+
 #include "yaml-cpp/yaml.h"
 
 namespace Quantum

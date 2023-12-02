@@ -1,6 +1,9 @@
 #include "Engine.h"
+
 #include "Core.h"
+#include "Graphics/RenderCommand.h"
 #include "Graphics/Renderer.h"
+#include <thread>
 
 DEFINE_LOG_CATEGORY_STATIC(Core);
 
@@ -50,24 +53,37 @@ namespace Quantum
 		m_IsRunning = true;
 		while (m_IsRunning)
 		{
-			m_Window->OnUpdate();
-
-			if (!m_IsMinimized)
+			if (m_Config.IsGraphicsEnabled)
 			{
-				// TODO: OnUpdate and ImGui render for layers
+				m_Window->OnUpdate();
+
+				RenderCommand::SetClearColor({ 0.1f, 0.1f, 0.1f, 1.0f });
+				RenderCommand::Clear();
+
+				if (!m_IsMinimized)
+				{
+					Renderer::BeginScene(camera goes here);
+					// TODO: OnUpdate and ImGui render for modules
+				}
+
+				m_Window->OnRender();
 			}
 
-			m_Window->OnRender();
 		}
 
 		return m_ExitCode;
 	}
 
-	void Engine::Stop(bool isCrash)
+	void Engine::Stop()
 	{
-		if (isCrash)
-			m_ExitCode = EXIT_FAILURE;
-
 		m_IsRunning = false;
+
+		LOG(Info, LogCore, "Exiting with code: {}", m_ExitCode);
+	}
+
+	void Engine::Crash()
+	{
+		m_ExitCode = EXIT_FAILURE;
+		Stop();
 	}
 }

@@ -3,14 +3,13 @@
 #include "Core.h"
 #include "Engine.h"
 
-extern Quantum::String GetProjectName();
+extern const char* GetProjectPath();
 
 namespace Quantum
 {
 	int Main(int argc, char** argv)
 	{
-		auto projectName = GetProjectName();
-		Project::Load(projectName);
+		Project::Load(GetProjectPath());
 
 		Config::Initialize();
 		Log::Initialize();
@@ -19,9 +18,9 @@ namespace Quantum
 		LOG(Info, LogCommon, "QuantumEngine built on {} at {}", date, time); // TODO: Add version number
 
 		// TODO: Parse command line arguments
- 		Engine* engine = new Engine;
-		auto status = engine->Run();
-		delete engine;
+ 		GEngine = new Engine;
+		auto status = GEngine->Run();
+		delete GEngine;
 
 		Log::Shutdown();
 

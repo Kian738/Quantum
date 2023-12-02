@@ -1,4 +1,5 @@
 #include "Log.h"
+
 #include "LogMacros.h"
 #include <filesystem>
 #include <iostream>
@@ -73,7 +74,7 @@ namespace Quantum
 		std::println(m_LogFile, "[{}]: [{}]: [{}]: [{}:{}]: {}", currentTime, levelName, categoryName, relativeFile, line, formatedMessage);
 
 		std::this_thread::sleep_for(std::chrono::seconds(5));
-		GEngine->Stop(true);
+		GEngine->Crash();
 	}
 
 	const char* Log::LevelToName(LogLevel level)

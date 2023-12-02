@@ -1,4 +1,5 @@
 #include "App.h"
+
 #include "Core/Core.h"
 
 namespace Quantum
