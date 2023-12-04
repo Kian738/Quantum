@@ -11,6 +11,7 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Source\App\AssetManger.h" />
     <ClInclude Include="Source\Core\Configuration\Config.h" />
     <ClInclude Include="Source\Core\Configuration\ConfigFile.h" />
     <ClInclude Include="Source\Core\Configuration\ConfigMacros.h" />
@@ -31,22 +32,30 @@
     <ClInclude Include="Source\Core\Types.h" />
     <ClInclude Include="Source\Core\Window.h" />
     <ClInclude Include="Source\App\Project.h" />
-    <ClInclude Include="Source\Graphics\Buffer.h" />
+    <ClInclude Include="Source\Graphics\Buffers\Buffer.h" />
     <ClInclude Include="Source\Graphics\Camera\Camera.h" />
     <ClInclude Include="Source\Graphics\Camera\CameraController.h" />
     <ClInclude Include="Source\Graphics\GraphicsContext.h" />
-    <ClInclude Include="Source\Graphics\IndexBuffer.h" />
+    <ClInclude Include="Source\Graphics\Buffers\IndexBuffer.h" />
+    <ClInclude Include="Source\Graphics\Resources\Material.h" />
+    <ClInclude Include="Source\Graphics\Resources\Mesh.h" />
     <ClInclude Include="Source\Graphics\RenderCommand.h" />
     <ClInclude Include="Source\Graphics\Renderer.h" />
+    <ClInclude Include="Source\Graphics\Resources\Model.h" />
+    <ClInclude Include="Source\Graphics\Resources\Texture.h" />
     <ClInclude Include="Source\Graphics\Shader\Shader.h" />
     <ClInclude Include="Source\Graphics\Shader\ShaderLibrary.h" />
-    <ClInclude Include="Source\Graphics\VertexArray.h" />
-    <ClInclude Include="Source\Graphics\VertexBuffer.h" />
+    <ClInclude Include="Source\Graphics\Buffers\VertexArray.h" />
+    <ClInclude Include="Source\Graphics\Buffers\VertexBuffer.h" />
+    <ClInclude Include="Source\Graphics\Resources\Vertex.h" />
+    <ClInclude Include="Source\Utils\AsyncHelper.h" />
     <ClInclude Include="Source\Utils\FileSystemUtils.h" />
     <ClInclude Include="Source\Utils\StringUtils.h" />
     <ClInclude Include="Source\Utils\YAMLUtils.h" />
+    <ClInclude Include="Vendor\assimp\code\AssetLib\NDO\NDOLoader.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="Source\App\AssetManger.cpp" />
     <ClCompile Include="Source\Core\Configuration\Config.cpp" />
     <ClCompile Include="Source\Core\Configuration\ConfigFile.cpp" />
     <ClCompile Include="Source\Core\Globals.cpp" />
@@ -58,22 +67,31 @@
     <ClCompile Include="Source\Core\Misc\Environment.cpp" />
     <ClCompile Include="Source\App\Project.cpp" />
     <ClCompile Include="Source\Core\Window.cpp" />
-    <ClCompile Include="Source\Graphics\Buffer.cpp" />
+    <ClCompile Include="Source\Graphics\Buffers\Buffer.cpp" />
     <ClCompile Include="Source\Graphics\Camera\Camera.cpp" />
     <ClCompile Include="Source\Graphics\Camera\CameraController.cpp" />
     <ClCompile Include="Source\Graphics\GraphicsContext.cpp" />
-    <ClCompile Include="Source\Graphics\IndexBuffer.cpp" />
+    <ClCompile Include="Source\Graphics\Buffers\IndexBuffer.cpp" />
     <ClCompile Include="Source\Graphics\RenderCommand.cpp" />
     <ClCompile Include="Source\Graphics\Renderer.cpp" />
+    <ClCompile Include="Source\Graphics\Resources\Material.cpp" />
+    <ClCompile Include="Source\Graphics\Resources\Mesh.cpp" />
+    <ClCompile Include="Source\Graphics\Resources\Model.cpp" />
+    <ClCompile Include="Source\Graphics\Resources\Texture.cpp" />
     <ClCompile Include="Source\Graphics\Shader\Shader.cpp" />
     <ClCompile Include="Source\Graphics\Shader\ShaderLibrary.cpp" />
-    <ClCompile Include="Source\Graphics\VertexArray.cpp" />
-    <ClCompile Include="Source\Graphics\VertexBuffer.cpp" />
+    <ClCompile Include="Source\Graphics\Buffers\VertexArray.cpp" />
+    <ClCompile Include="Source\Graphics\Buffers\VertexBuffer.cpp" />
+    <ClCompile Include="Source\Utils\AsyncHelper.cpp" />
     <ClCompile Include="Source\Utils\FileSystemUtils.cpp" />
     <ClCompile Include="Source\Utils\StringUtils.cpp" />
     <ClCompile Include="Source\Utils\YAMLUtils.cpp" />
+    <ClCompile Include="Vendor\assimp\code\AssetLib\NDO\NDOLoader.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="Vendor\assimp.vcxproj">
+      <Project>{530a3866-1ebd-45be-a878-896bed950667}</Project>
+    </ProjectReference>
     <ProjectReference Include="Vendor\glad.vcxproj">
       <Project>{db3ee6ce-0f8f-4098-b1e0-2a500dcdde72}</Project>
     </ProjectReference>
@@ -133,7 +151,7 @@
       <ConformanceMode>true</ConformanceMode>
       <LanguageStandard>stdcpplatest</LanguageStandard>
       <MultiProcessorCompilation>true</MultiProcessorCompilation>
-      <AdditionalIncludeDirectories>Source\;Vendor\yaml-cpp\include;Vendor\glfw\include;Vendor\glad\include;Vendor\glm</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>Source\;Vendor\yaml-cpp\include;Vendor\glfw\include;Vendor\glad\include;Vendor\glm;Vendor\stb;Vendor\assimp\include</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -150,7 +168,7 @@
       <ConformanceMode>true</ConformanceMode>
       <LanguageStandard>stdcpplatest</LanguageStandard>
       <MultiProcessorCompilation>true</MultiProcessorCompilation>
-      <AdditionalIncludeDirectories>Source\;Vendor\yaml-cpp\include;Vendor\glfw\include;Vendor\glad\include;Vendor\glm</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>Source\;Vendor\yaml-cpp\include;Vendor\glfw\include;Vendor\glad\include;Vendor\glm;Vendor\stb;Vendor\assimp\include</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>

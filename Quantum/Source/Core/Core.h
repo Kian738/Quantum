@@ -7,11 +7,13 @@
 
 #include "Engine.h"
 
+#include "Utils/AsyncHelper.h"
 #include "Utils/FileSystemUtils.h"
 #include "Utils/StringUtils.h"
 #include "Utils/YAMLUtils.h"
 
 #include "App/App.h"
+#include "App/AssetManger.h"
 #include "App/Project.h"
 
 #include "Configuration/ConfigMacros.h"

@@ -1,7 +1,6 @@
 #pragma once
 
 #include "Types.h"
-#include <functional>
 
 namespace Quantum
 {
@@ -9,8 +8,8 @@ namespace Quantum
 	class Event
 	{
 	private:
-		using Func = std::function<void(Args...)>;
-		List<Func> m_Listeners;
+		using CallbackFunc = Func<void(Args...)>;
+		List<CallbackFunc> m_Listeners;
 	public:
 		void Fire(Args... args)
 		{
@@ -18,8 +17,8 @@ namespace Quantum
 				listener(args...);
 		}
 
-		void AddListener(Func listener) { m_Listeners.push_back(listener); };
-		void RemoveListener(Func listener)
+		void AddListener(CallbackFunc listener) { m_Listeners.push_back(listener); };
+		void RemoveListener(CallbackFunc listener)
 		{
 			m_Listeners.erase(
 				std::remove(m_Listeners.begin(), m_Listeners.end(), listener),
@@ -31,8 +30,8 @@ namespace Quantum
 
 		void operator()(Args... args) { Fire(args...); };
 
-		void operator+=(Func listener) { AddListener(listener); };
-		void operator-=(Func listener) { RemoveListener(listener); };
+		void operator+=(CallbackFunc listener) { AddListener(listener); };
+		void operator-=(CallbackFunc listener) { RemoveListener(listener); };
 
 	};
 }

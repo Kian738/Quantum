@@ -29,12 +29,12 @@
 	}
 
 #define LOG(Level, Category, Message, ...) \
-    Log::LogInternal(Level, Category, \
+    Log::LogAsync(Level, Category, \
         [&]() { \
-        if constexpr (std::initializer_list<const char*>{#__VA_ARGS__}.size() == 0) \
-			return Message; \
-		else \
-			return std::format(Message, __VA_ARGS__); \
+			if constexpr (std::initializer_list<const char*>{#__VA_ARGS__}.size() == 0) \
+				return []() { return Message; }; \
+			else \
+				return [&]() { return std::format(Message, __VA_ARGS__); }; \
         }(), \
 		__FILE__, __LINE__ \
 	);

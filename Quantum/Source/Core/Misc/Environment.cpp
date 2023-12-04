@@ -80,9 +80,9 @@ namespace Quantum
         return FileSystemUtils::CombinePath(GetLocalAppDataDir(), Project::GetActive()->GetName());
     }
 
-    String Environment::GetLogDir()
+    String Environment::GetLogsDir()
     {
-        return FileSystemUtils::CombinePath(GetAppDir(), "Log");
+        return FileSystemUtils::CombinePath(GetAppDir(), "Logs");
     }
 
     String Environment::GetConfigDir()

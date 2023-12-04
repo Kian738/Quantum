@@ -19,7 +19,7 @@ namespace Quantum
 		ProjectFile m_File;
 		String m_Path;
 
-		inline static Ref<Project> s_Active;
+		static inline Ref<Project> s_Active;
 	public:
 		Project(StringView directory, StringView name);
 		Project(StringView path);

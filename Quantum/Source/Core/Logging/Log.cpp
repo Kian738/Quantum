@@ -20,7 +20,7 @@ namespace Quantum
 			Console::Allocate();
 
 		auto logFilePath = FileSystemUtils::CombinePath(
-			Environment::GetLogDir(),
+			Environment::GetLogsDir(),
 			DateTime::Now().GetDate(),
 			"log"
 		);
@@ -45,10 +45,17 @@ namespace Quantum
 		m_IsInitialized = false;
 	}
 
-	void Log::LogInternal(LogLevel level, const LogCategory& category, StringView formatedMessage, StringView file, int line)
+	void Log::LogAsync(LogLevel level, const LogCategory& category, Func<String()> formatFunc, StringView file, int line)
+	{
+		AsyncHelper::Run([=] { LogInternal(level, category, formatFunc, file, line); });
+	}
+
+	void Log::LogInternal(LogLevel level, const LogCategory& category, Func<String()> formatFunc, StringView file, int line)
 	{
 		if (!m_IsInitialized)
 			return; // TODO: Make sure this is never called
+
+		auto formatedMessage = formatFunc();
 
 		auto defaultColor = "\33[0m";
 		auto fatalColor = "\33[37;41m";
@@ -126,7 +133,7 @@ namespace Quantum
 	void Log::PurgeLogFiles()
 	{
 		List<String> logFiles;
-		for (const auto& entry : std::filesystem::directory_iterator(Environment::GetLogDir()))
+		for (const auto& entry : std::filesystem::directory_iterator(Environment::GetLogsDir()))
 			if (entry.is_regular_file())
 			{
 				auto path = entry.path().string();

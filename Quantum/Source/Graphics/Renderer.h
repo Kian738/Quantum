@@ -1,8 +1,8 @@
 #pragma once
 
+#include "Buffers/VertexArray.h"
 #include "Core/Types.h"
 #include "Shader/ShaderLibrary.h"
-#include "VertexArray.h"
 
 namespace Quantum
 {
@@ -11,16 +11,10 @@ namespace Quantum
 		Matrix4D ViewProjectionMatrix;
 	};
 
-	struct RendererData
-	{
-		Ref<VertexArray> QuadVertexArray;
-	};
-
 	class Renderer
 	{
 	private:
 		static inline SceneData* s_SceneData;
-		static inline RendererData* s_Data;
 		static inline Ref<ShaderLibrary> s_ShaderLibrary;
 	public:
 		static void Initialize();

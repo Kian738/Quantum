@@ -19,7 +19,7 @@ namespace Quantum
 		void Bind();
 		void Unbind();
 
-		void AddBuffer(const Ref<VertexBuffer>& vertexBuffer);
+		void AddVertexBuffer(const Ref<VertexBuffer>& vertexBuffer);
 		void SetIndexBuffer(const Ref<IndexBuffer>& indexBuffer);
 
 		UInt32 GetVertexCount() const;

@@ -48,7 +48,7 @@ namespace Quantum
 		glBindVertexArray(0);
 	}
 
-	void VertexArray::AddBuffer(const Ref<VertexBuffer>& vertexBuffer)
+	void VertexArray::AddVertexBuffer(const Ref<VertexBuffer>& vertexBuffer)
 	{
 		LOG_CHECK(vertexBuffer->GetLayout().GetElements().size(), Error, LogGraphics, "Vertex Buffer has no layout!");
 

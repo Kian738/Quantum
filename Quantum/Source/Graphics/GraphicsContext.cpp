@@ -9,7 +9,7 @@ namespace Quantum
 		static const char* GetString(GLenum name)
 		{
 			auto string = reinterpret_cast<const char*>(glGetString(name));
-			return string ? string : "";
+			return COALESCE(string, "");
 		}
 	}
 

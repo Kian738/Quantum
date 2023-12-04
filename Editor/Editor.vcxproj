@@ -61,7 +61,7 @@
       <ConformanceMode>true</ConformanceMode>
       <LanguageStandard>stdcpplatest</LanguageStandard>
       <MultiProcessorCompilation>true</MultiProcessorCompilation>
-      <AdditionalIncludeDirectories>$(SolutionDir)Quantum\Source;$(SolutionDir)Quantum\Vendor\yaml-cpp\include;$(SolutionDir)Quantum\Vendor\glfw\include;$(SolutionDir)Quantum\Vendor\glad\include;$(SolutionDir)Quantum\Vendor\glm</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)Quantum\Source;$(SolutionDir)Quantum\Vendor\yaml-cpp\include;$(SolutionDir)Quantum\Vendor\glfw\include;$(SolutionDir)Quantum\Vendor\glad\include;$(SolutionDir)Quantum\Vendor\glm;$(SolutionDir)Quantum\Vendor\stb;$(SolutionDir)Quantum\Vendor\assimp\include</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
@@ -78,7 +78,7 @@
       <ConformanceMode>true</ConformanceMode>
       <LanguageStandard>stdcpplatest</LanguageStandard>
       <MultiProcessorCompilation>true</MultiProcessorCompilation>
-      <AdditionalIncludeDirectories>$(SolutionDir)Quantum\Source;$(SolutionDir)Quantum\Vendor\yaml-cpp\include;$(SolutionDir)Quantum\Vendor\glfw\include;$(SolutionDir)Quantum\Vendor\glad\include;$(SolutionDir)Quantum\Vendor\glm</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)Quantum\Source;$(SolutionDir)Quantum\Vendor\yaml-cpp\include;$(SolutionDir)Quantum\Vendor\glfw\include;$(SolutionDir)Quantum\Vendor\glad\include;$(SolutionDir)Quantum\Vendor\glm;$(SolutionDir)Quantum\Vendor\stb;$(SolutionDir)Quantum\Vendor\assimp\include</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>

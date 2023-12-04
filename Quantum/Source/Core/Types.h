@@ -1,5 +1,6 @@
 #pragma once
 
+#include <functional>
 #include <glm/glm.hpp>
 #include <glm/gtc/quaternion.hpp>
 #include <memory>
@@ -7,6 +8,8 @@
 #include <unordered_map>
 #include <utility>
 #include <vector>
+
+#define COALESCE(first, second) ((first) ? (first) : (second))
 
 namespace Quantum
 {
@@ -34,8 +37,14 @@ namespace Quantum
 	using WString = std::wstring;
 	using WStringView = std::wstring_view;
 
+	template <typename T>
+	using Func = std::function<T>;
+
 	template <class KT, class T>
 	using Dictionary = std::unordered_map<KT, T>;
+
+	template <class T, UInt64 N>
+	using Array = std::array<T, N>;
 
 	template <class T>
 	using List = std::vector<T>;

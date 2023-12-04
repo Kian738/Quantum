@@ -8,7 +8,7 @@ namespace Quantum
 	class Config
 	{
 	private:
-		inline static List<ConfigFile*> s_ConfigFiles;
+		static inline List<ConfigFile*> s_ConfigFiles;
 	public:
 		static void Initialize();
 		static void Register(ConfigFile* configFile);

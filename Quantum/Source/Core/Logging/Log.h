@@ -26,8 +26,11 @@ namespace Quantum
 		static void Initialize();
 		static void Shutdown();
 
-		static void LogInternal(LogLevel level, const LogCategory& category, StringView formatedMessage, StringView file, int line);
+		// TODO: Pass a lambda to the log function to avoid the string formatting if the log level is disabled
+		static void LogAsync(LogLevel level, const LogCategory& category, Func<String()> formatFunc, StringView file, int line);
 	private:
+		static void LogInternal(LogLevel level, const LogCategory& category, Func<String()> formatFunc, StringView file, int line);
+
 		static const char* LevelToName(LogLevel level);
 		static const char* LevelToColor(LogLevel level);
 

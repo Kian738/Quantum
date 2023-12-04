@@ -21,6 +21,7 @@ namespace Quantum
  		GEngine = new Engine;
 		auto status = GEngine->Run();
 		delete GEngine;
+		GEngine = nullptr;
 
 		Log::Shutdown();
 
