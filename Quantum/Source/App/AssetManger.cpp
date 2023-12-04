@@ -9,6 +9,7 @@ namespace Quantum
 		return m_Textures.find(name) != m_Textures.end();
 	}
 
+	// TODO: Load from /Assets
 	Ref<Texture> AssetManager::LoadTexture(const String& name, const String& path)
 	{
 		if (TextureExists(name))
