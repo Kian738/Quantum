@@ -2,6 +2,8 @@
 
 #include "Buffers/VertexArray.h"
 #include "Core/Types.h"
+#include "Resources/Mesh.h"
+#include "Resources/Model.h"
 #include "Shader/ShaderLibrary.h"
 
 namespace Quantum
@@ -15,7 +17,7 @@ namespace Quantum
 	{
 	private:
 		static inline SceneData* s_SceneData;
-		static inline Ref<ShaderLibrary> s_ShaderLibrary;
+		static inline Ref<ShaderLibrary> s_ShaderLibrary; // TODO: Move to AssetManager
 	public:
 		static void Initialize();
 		static void Shutdown();
@@ -23,7 +25,9 @@ namespace Quantum
 		static void BeginScene(const Camera& camera);
 		static void EndScene();
 
-		// TODO: Add submit function
+		// TODO: Remove this and use designated draw functions and IDrawable interface
+		static void Submit(const Mesh& mesh, const Matrix4D& transform = Matrix4D(1.0f));
+		static void Submit(const Model& model, const Matrix4D& transform = Matrix4D(1.0f));
 	private:
 		static void DrawVertexArray(const Ref<VertexArray>& vertexArray);
 	};

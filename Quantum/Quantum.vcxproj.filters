@@ -141,6 +141,87 @@
     <ClInclude Include="Source\Utils\AsyncHelper.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="Vendor\assimp\code\AssetLib\ASE\ASELoader.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Vendor\assimp\code\AssetLib\ASE\ASEParser.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Vendor\assimp\code\AssetLib\MD5\MD5Loader.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Vendor\assimp\code\AssetLib\MD5\MD5Parser.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Vendor\assimp\code\AssetLib\MDC\MDCFileData.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Vendor\assimp\code\AssetLib\MDC\MDCLoader.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Vendor\assimp\code\AssetLib\MDC\MDCNormalTable.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Vendor\assimp\code\AssetLib\SMD\SMDLoader.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Vendor\assimp\code\AssetLib\LWO\LWOAnimation.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Vendor\assimp\code\AssetLib\LWO\LWOFileData.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Vendor\assimp\code\AssetLib\LWO\LWOLoader.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Vendor\assimp\code\AssetLib\NFF\NFFLoader.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Vendor\assimp\code\AssetLib\Raw\RawLoader.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Vendor\assimp\code\AssetLib\BVH\BVHLoader.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Vendor\assimp\code\AssetLib\SIB\SIBImporter.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Vendor\assimp\code\AssetLib\Irr\IRRLoader.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Vendor\assimp\code\AssetLib\Irr\IRRMeshLoader.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Vendor\assimp\code\AssetLib\Irr\IRRShared.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Vendor\assimp\code\AssetLib\OpenGEX\OpenGEXExporter.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Vendor\assimp\code\AssetLib\OpenGEX\OpenGEXImporter.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Vendor\assimp\code\AssetLib\OpenGEX\OpenGEXStructs.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Vendor\assimp\code\AssetLib\3MF\3MFTypes.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Vendor\assimp\code\AssetLib\3MF\3MFXmlTags.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Vendor\assimp\code\AssetLib\3MF\D3MFExporter.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Vendor\assimp\code\AssetLib\3MF\D3MFImporter.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Vendor\assimp\code\AssetLib\3MF\D3MFOpcPackage.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Vendor\assimp\code\AssetLib\3MF\XmlSerializer.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Source\Core\Logging\Log.cpp">
@@ -237,6 +318,75 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Source\Utils\AsyncHelper.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Vendor\assimp\code\AssetLib\ASE\ASELoader.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Vendor\assimp\code\AssetLib\ASE\ASEParser.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Vendor\assimp\code\AssetLib\MD5\MD5Loader.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Vendor\assimp\code\AssetLib\MD5\MD5Parser.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Vendor\assimp\code\AssetLib\MDC\MDCLoader.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Vendor\assimp\code\AssetLib\SMD\SMDLoader.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Vendor\assimp\code\AssetLib\LWO\LWOAnimation.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Vendor\assimp\code\AssetLib\LWO\LWOBLoader.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Vendor\assimp\code\AssetLib\LWO\LWOLoader.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Vendor\assimp\code\AssetLib\LWO\LWOMaterial.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Vendor\assimp\code\AssetLib\NFF\NFFLoader.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Vendor\assimp\code\AssetLib\Raw\RawLoader.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Vendor\assimp\code\AssetLib\BVH\BVHLoader.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Vendor\assimp\code\AssetLib\SIB\SIBImporter.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Vendor\assimp\code\AssetLib\Irr\IRRLoader.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Vendor\assimp\code\AssetLib\Irr\IRRMeshLoader.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Vendor\assimp\code\AssetLib\Irr\IRRShared.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Vendor\assimp\code\AssetLib\OpenGEX\OpenGEXExporter.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Vendor\assimp\code\AssetLib\OpenGEX\OpenGEXImporter.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Vendor\assimp\code\AssetLib\3MF\D3MFExporter.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Vendor\assimp\code\AssetLib\3MF\D3MFImporter.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Vendor\assimp\code\AssetLib\3MF\D3MFOpcPackage.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Vendor\assimp\code\AssetLib\3MF\XmlSerializer.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

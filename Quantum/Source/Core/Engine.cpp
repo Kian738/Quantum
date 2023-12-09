@@ -51,6 +51,9 @@ namespace Quantum
 
 	int Engine::Run()
 	{
+		// TODO: Remove this
+		auto model = CreateRef<Model>("Models/Test.obj");
+
 		m_IsRunning = true;
 		while (m_IsRunning)
 		{
@@ -58,13 +61,21 @@ namespace Quantum
 			{
 				m_Window->OnUpdate();
 
+				m_CameraController->OnUpdate(0); // TODO: Delta time
+
 				RenderCommand::SetClearColor({ 0.1f, 0.1f, 0.1f, 1.0f });
 				RenderCommand::Clear();
 
 				if (!m_IsMinimized)
 				{
 					Renderer::BeginScene(m_CameraController->GetCamera());
-					// TODO: OnUpdate and ImGui render for modules
+					
+					// TODO: Render models from scene
+					{
+						auto modelTransform = glm::translate(Matrix4D(1.0f), Vector3D(0.0f));
+						Renderer::Submit(*model, modelTransform);
+					}
+
 					Renderer::EndScene();
 				}
 

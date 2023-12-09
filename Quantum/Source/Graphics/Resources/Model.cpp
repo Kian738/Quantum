@@ -7,11 +7,13 @@
 namespace Quantum
 {
 	Model::Model(StringView path)
-		: m_Directory(FileSystemUtils::GetParentDir(path))
 	{
+		auto fullPath = FileSystemUtils::CombinePath(Project::GetActive()->GetAssetsDir(), path);
+		m_Directory = FileSystemUtils::GetParentDir(fullPath);
+
 		Assimp::Importer importer;
 
-		auto scene = importer.ReadFile(path.data(), aiProcess_Triangulate | aiProcess_FlipUVs);
+		auto scene = importer.ReadFile(fullPath, aiProcess_Triangulate | aiProcess_FlipUVs);
 		if (!scene || scene->mFlags & AI_SCENE_FLAGS_INCOMPLETE || !scene->mRootNode)
 		{
 			LOG(Error, LogGraphics, "Failed to load model: {}", importer.GetErrorString());
