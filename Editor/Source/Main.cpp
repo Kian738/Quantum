@@ -1,6 +1,32 @@
 #include "Core/Launch.h"
 
-const char* GetProjectPath()
+using namespace Quantum;
+
+class EditorAppContext : public AppContext
 {
-	return "QuantumEngine";
+public:
+	EditorAppContext() : AppContext("QuantumEngine")
+	{
+	}
+
+	void Initialize() override
+	{
+	}
+
+	void Update(double delta) override
+	{
+	}
+
+	void Render() override
+	{
+	}
+
+	void Shutdown() override
+	{
+	}
+};
+
+AppContext* GetAppContext()
+{
+	return new EditorAppContext;
 }

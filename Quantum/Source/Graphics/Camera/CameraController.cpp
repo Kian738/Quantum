@@ -24,7 +24,7 @@ namespace Quantum
 		SetPosition({ 0.0f, 0.0f, middle });
 	}
 
-	void CameraController::OnUpdate(float deltaTime)
+	void CameraController::OnUpdate(float delta)
 	{
 		// TODO: Implement
 	}

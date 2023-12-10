@@ -1,15 +1,16 @@
 #pragma once
 
 #include "Core.h"
-#include "Engine.h"
 
-extern const char* GetProjectPath();
+extern Quantum::AppContext* GetAppContext();
 
 namespace Quantum
 {
 	int Main(int argc, char** argv)
 	{
-		Project::Load(GetProjectPath());
+		auto appContext = GetAppContext();
+
+		Project::Load(appContext->GetProjectPath());
 
 		Config::Initialize();
 		Log::Initialize();
@@ -18,7 +19,7 @@ namespace Quantum
 		LOG(Info, LogCommon, "QuantumEngine built on {} at {}", date, time); // TODO: Add version number
 
 		// TODO: Parse command line arguments
- 		GEngine = new Engine;
+		GEngine = new Engine;
 		auto status = GEngine->Run();
 		delete GEngine;
 		GEngine = nullptr;

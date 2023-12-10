@@ -11,22 +11,27 @@ namespace Quantum
 
 	void ShaderLibrary::Add(const String& name, const Ref<Shader>& shader)
 	{
+		Lock lock(m_Mutex);
 		LOG_CHECK(!Exists(name), Warning, LogGraphics, "Shader \"{}\" already exists", name);
 		m_Shaders[name] = shader;
 	}
 
-	Ref<Shader> ShaderLibrary::Load(StringView path)
+	void ShaderLibrary::LoadAsync(StringView path)
 	{
-		auto shader = CreateRef<Shader>(GetPath(path));
-		Add(shader);
-		return shader;
+		AsyncHelper::Run([=]
+			{
+				auto shader = CreateRef<Shader>(GetPath(path));
+				Add(shader);
+			});
 	}
 
-	Ref<Shader> ShaderLibrary::Load(const String& name, StringView path)
+	void ShaderLibrary::LoadAsync(const String& name, StringView path)
 	{
-		auto shader = CreateRef<Shader>(GetPath(path));
-		Add(name, shader);
-		return shader;
+		AsyncHelper::Run([=]
+			{
+				auto shader = CreateRef<Shader>(GetPath(path));
+				Add(name, shader);
+			});
 	}
 
 	Ref<Shader> ShaderLibrary::Get(const String& name)

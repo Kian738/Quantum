@@ -21,6 +21,7 @@ namespace Quantum
 	{
 	private:
 		static std::ofstream m_LogFile;
+		static Mutex m_Mutex;
 		static bool m_IsInitialized;
 	public:
 		static void Initialize();

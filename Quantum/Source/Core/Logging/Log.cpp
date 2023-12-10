@@ -68,6 +68,8 @@ namespace Quantum
 		auto levelName = LevelToName(level);
 		auto categoryName = category.GetName();
 
+		Lock lock(m_Mutex);
+
 		if (level < LogLevel::Fatal)
 		{
 			auto levelColor = LevelToColor(level);
@@ -139,11 +141,8 @@ namespace Quantum
 		List<String> logFiles;
 		for (const auto& entry : std::filesystem::directory_iterator(Environment::GetLogsDir()))
 			if (entry.is_regular_file())
-			{
-				auto path = entry.path().string();
-				if (path.ends_with(".log"))
+				if (auto path = entry.path().string(); path.ends_with(".log"))
 					logFiles.push_back(path);
-			}
 
 		// TODO: Maybe I should sort by file size instead of creation time or use the file name as a timestamp
 		if (logFiles.size() > 5)

@@ -11,6 +11,7 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Source\App\AppContext.h" />
     <ClInclude Include="Source\App\AssetManger.h" />
     <ClInclude Include="Source\Core\Configuration\Config.h" />
     <ClInclude Include="Source\Core\Configuration\ConfigFile.h" />
@@ -27,11 +28,10 @@
     <ClInclude Include="Source\Core\Logging\LogCategory.h" />
     <ClInclude Include="Source\Core\Logging\LogMacros.h" />
     <ClInclude Include="Source\Core\Misc\Environment.h" />
-    <ClInclude Include="Source\Core\Modules\Module.h" />
-    <ClInclude Include="Source\Core\Modules\ModuleManager.h" />
     <ClInclude Include="Source\Core\Types.h" />
     <ClInclude Include="Source\Core\Window.h" />
     <ClInclude Include="Source\App\Project.h" />
+    <ClInclude Include="Source\Framework\Scene.h" />
     <ClInclude Include="Source\Graphics\Buffers\Buffer.h" />
     <ClInclude Include="Source\Graphics\Camera\Camera.h" />
     <ClInclude Include="Source\Graphics\Camera\CameraController.h" />
@@ -54,6 +54,7 @@
     <ClInclude Include="Source\Utils\YAMLUtils.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="Source\App\AppContext.cpp" />
     <ClCompile Include="Source\App\AssetManger.cpp" />
     <ClCompile Include="Source\Core\Configuration\Config.cpp" />
     <ClCompile Include="Source\Core\Configuration\ConfigFile.cpp" />

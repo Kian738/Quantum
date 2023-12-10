@@ -13,6 +13,7 @@ namespace Quantum
 		String EngineVersion;
 	};
 
+	// TODO: Move to Editor and make it only be loaded from Runtime
 	class Project
 	{
 	private:

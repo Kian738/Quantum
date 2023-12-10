@@ -4,6 +4,7 @@
 #include <glm/glm.hpp>
 #include <glm/gtc/quaternion.hpp>
 #include <memory>
+#include <mutex>
 #include <string>
 #include <unordered_map>
 #include <utility>
@@ -36,6 +37,9 @@ namespace Quantum
 	using StringView = std::string_view;
 	using WString = std::wstring;
 	using WStringView = std::wstring_view;
+
+	using Mutex = std::mutex;
+	using Lock = std::lock_guard<Mutex>;
 
 	template <typename T>
 	using Func = std::function<T>;

@@ -69,12 +69,6 @@
     <ClInclude Include="Source\App\Project.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Source\Core\Modules\ModuleManager.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\Core\Modules\Module.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="Source\Core\Configuration\Config.h">
       <Filter>Header Files</Filter>
     </ClInclude>
@@ -136,6 +130,12 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Source\Utils\AsyncHelper.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\App\AppContext.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Framework\Scene.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
@@ -231,6 +231,9 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Source\Utils\AsyncHelper.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\App\AppContext.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

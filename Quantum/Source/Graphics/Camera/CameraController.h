@@ -9,7 +9,7 @@ namespace Quantum
 	{
 	private:
 		Scope<Camera> m_Camera;
-		Vector3D m_CameraPosition = { 0.0f, 0.0f, 0.0f };
+		Vector3D m_CameraPosition;
 
 		float m_AspectRatio;
 		float m_ZoomLevel;
@@ -33,7 +33,7 @@ namespace Quantum
 			float far = 1000.0f
 		);
 
-		void OnUpdate(float deltaTime);
+		void OnUpdate(float delta);
 
 		Camera& GetCamera() { return *m_Camera; };
 		const Camera& GetCamera() const { return *m_Camera; };
