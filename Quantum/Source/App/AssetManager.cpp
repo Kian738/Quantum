@@ -1,4 +1,4 @@
-#include "AssetManger.h"
+#include "AssetManager.h"
 
 #include "Core/Core.h"
 

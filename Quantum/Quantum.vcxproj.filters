@@ -126,7 +126,7 @@
     <ClInclude Include="Source\Graphics\Resources\Model.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Source\App\AssetManger.h">
+    <ClInclude Include="Source\App\AssetManager.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Source\Utils\AsyncHelper.h">
@@ -227,7 +227,7 @@
     <ClCompile Include="Source\Graphics\Resources\Model.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Source\App\AssetManger.cpp">
+    <ClCompile Include="Source\App\AssetManager.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Source\Utils\AsyncHelper.cpp">

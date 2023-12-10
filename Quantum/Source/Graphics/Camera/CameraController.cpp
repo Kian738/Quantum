@@ -26,7 +26,7 @@ namespace Quantum
 
 	void CameraController::OnUpdate(float delta)
 	{
-		// TODO: Implement
+
 	}
 
 	void CameraController::SetPosition(const Vector3D& position)

@@ -69,7 +69,7 @@ namespace Quantum
 			{
 				m_Window->OnUpdate();
 
-				m_CameraController->OnUpdate(0); // TODO: Delta time
+				m_CameraController->OnUpdate(deltaTime);
 
 				RenderCommand::SetClearColor({ 0.1f, 0.1f, 0.1f, 1.0f });
 				RenderCommand::Clear();

@@ -12,7 +12,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Source\App\AppContext.h" />
-    <ClInclude Include="Source\App\AssetManger.h" />
+    <ClInclude Include="Source\App\AssetManager.h" />
     <ClInclude Include="Source\Core\Configuration\Config.h" />
     <ClInclude Include="Source\Core\Configuration\ConfigFile.h" />
     <ClInclude Include="Source\Core\Configuration\ConfigMacros.h" />
@@ -55,7 +55,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Source\App\AppContext.cpp" />
-    <ClCompile Include="Source\App\AssetManger.cpp" />
+    <ClCompile Include="Source\App\AssetManager.cpp" />
     <ClCompile Include="Source\Core\Configuration\Config.cpp" />
     <ClCompile Include="Source\Core\Configuration\ConfigFile.cpp" />
     <ClCompile Include="Source\Core\Globals.cpp" />
