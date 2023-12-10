@@ -19,4 +19,8 @@
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
+  <ItemGroup>
+    <None Include="Content\Config\DefaultEngine.yaml" />
+    <None Include="QuantumEngine.qproj" />
+  </ItemGroup>
 </Project>

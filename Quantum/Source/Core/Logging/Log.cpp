@@ -56,7 +56,7 @@ namespace Quantum
 			return; // TODO: Make sure this is never called
 
 		static auto minLevel = LogLevel::Verbose; // TODO: GEngineConfig["Logging"]["MinLevel"].as<LogLevel>(LogLevel::Info);
-		if (level < minLevel);
+		if (level < minLevel)
 			return;
 
 		auto formatedMessage = formatFunc();

@@ -2,6 +2,7 @@
 
 #include "Core/Core.h"
 #define STB_IMAGE_IMPLEMENTATION
+#define STB_IMAGE_STATIC
 #include <stb_image.h>
 
 namespace Quantum

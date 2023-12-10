@@ -101,7 +101,7 @@ namespace Quantum
 			glGetShaderiv(shader, GL_COMPILE_STATUS, &isCompiled);
 			if (!isCompiled)
 			{
-				auto maxLength = 0;
+				auto maxLength = 1;
 				glGetShaderiv(shader, GL_INFO_LOG_LENGTH, &maxLength);
 
 				List<char> infoLog(maxLength);
@@ -125,6 +125,9 @@ namespace Quantum
 		{
 			auto maxLength = 0;
 			glGetProgramiv(program, GL_INFO_LOG_LENGTH, &maxLength);
+
+			if (!maxLength)
+				maxLength = 4096;
 
 			List<char> infoLog(maxLength);
 			glGetProgramInfoLog(program, maxLength, &maxLength, &infoLog[0]);

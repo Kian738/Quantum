@@ -22,15 +22,14 @@ namespace Quantum
 		Ref<Texture> m_NormalMap;
 		Ref<Texture> m_EmissiveMap;
 		float m_Shininess;
-		
-		static Ref<Texture> s_DefaultTexture;
 	public:
 		Material(
 			const Ref<Texture>& diffuseMap = nullptr,
 			const Ref<Texture>& specularMap = nullptr,
 			const Ref<Texture>& normalMap = nullptr,
 			const Ref<Texture>& emissiveMap = nullptr,
-			float shininess = 32.0f
+			float shininess = 32.0f,
+			const Ref<Texture>& defaultTexture = Texture::FromColor({ 1.0f, 1.0f, 1.0f, 1.0f })
 		);
 
 		void Bind(const Ref<Shader>& shader);

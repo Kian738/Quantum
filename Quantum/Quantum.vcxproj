@@ -52,34 +52,6 @@
     <ClInclude Include="Source\Utils\FileSystemUtils.h" />
     <ClInclude Include="Source\Utils\StringUtils.h" />
     <ClInclude Include="Source\Utils\YAMLUtils.h" />
-    <ClInclude Include="Vendor\assimp\code\AssetLib\3MF\3MFTypes.h" />
-    <ClInclude Include="Vendor\assimp\code\AssetLib\3MF\3MFXmlTags.h" />
-    <ClInclude Include="Vendor\assimp\code\AssetLib\3MF\D3MFExporter.h" />
-    <ClInclude Include="Vendor\assimp\code\AssetLib\3MF\D3MFImporter.h" />
-    <ClInclude Include="Vendor\assimp\code\AssetLib\3MF\D3MFOpcPackage.h" />
-    <ClInclude Include="Vendor\assimp\code\AssetLib\3MF\XmlSerializer.h" />
-    <ClInclude Include="Vendor\assimp\code\AssetLib\ASE\ASELoader.h" />
-    <ClInclude Include="Vendor\assimp\code\AssetLib\ASE\ASEParser.h" />
-    <ClInclude Include="Vendor\assimp\code\AssetLib\BVH\BVHLoader.h" />
-    <ClInclude Include="Vendor\assimp\code\AssetLib\Irr\IRRLoader.h" />
-    <ClInclude Include="Vendor\assimp\code\AssetLib\Irr\IRRMeshLoader.h" />
-    <ClInclude Include="Vendor\assimp\code\AssetLib\Irr\IRRShared.h" />
-    <ClInclude Include="Vendor\assimp\code\AssetLib\LWO\LWOAnimation.h" />
-    <ClInclude Include="Vendor\assimp\code\AssetLib\LWO\LWOFileData.h" />
-    <ClInclude Include="Vendor\assimp\code\AssetLib\LWO\LWOLoader.h" />
-    <ClInclude Include="Vendor\assimp\code\AssetLib\MD5\MD5Loader.h" />
-    <ClInclude Include="Vendor\assimp\code\AssetLib\MD5\MD5Parser.h" />
-    <ClInclude Include="Vendor\assimp\code\AssetLib\MDC\MDCFileData.h" />
-    <ClInclude Include="Vendor\assimp\code\AssetLib\MDC\MDCLoader.h" />
-    <ClInclude Include="Vendor\assimp\code\AssetLib\MDC\MDCNormalTable.h" />
-    <ClInclude Include="Vendor\assimp\code\AssetLib\NDO\NDOLoader.h" />
-    <ClInclude Include="Vendor\assimp\code\AssetLib\NFF\NFFLoader.h" />
-    <ClInclude Include="Vendor\assimp\code\AssetLib\OpenGEX\OpenGEXExporter.h" />
-    <ClInclude Include="Vendor\assimp\code\AssetLib\OpenGEX\OpenGEXImporter.h" />
-    <ClInclude Include="Vendor\assimp\code\AssetLib\OpenGEX\OpenGEXStructs.h" />
-    <ClInclude Include="Vendor\assimp\code\AssetLib\Raw\RawLoader.h" />
-    <ClInclude Include="Vendor\assimp\code\AssetLib\SIB\SIBImporter.h" />
-    <ClInclude Include="Vendor\assimp\code\AssetLib\SMD\SMDLoader.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Source\App\AssetManger.cpp" />
@@ -113,30 +85,6 @@
     <ClCompile Include="Source\Utils\FileSystemUtils.cpp" />
     <ClCompile Include="Source\Utils\StringUtils.cpp" />
     <ClCompile Include="Source\Utils\YAMLUtils.cpp" />
-    <ClCompile Include="Vendor\assimp\code\AssetLib\3MF\D3MFExporter.cpp" />
-    <ClCompile Include="Vendor\assimp\code\AssetLib\3MF\D3MFImporter.cpp" />
-    <ClCompile Include="Vendor\assimp\code\AssetLib\3MF\D3MFOpcPackage.cpp" />
-    <ClCompile Include="Vendor\assimp\code\AssetLib\3MF\XmlSerializer.cpp" />
-    <ClCompile Include="Vendor\assimp\code\AssetLib\ASE\ASELoader.cpp" />
-    <ClCompile Include="Vendor\assimp\code\AssetLib\ASE\ASEParser.cpp" />
-    <ClCompile Include="Vendor\assimp\code\AssetLib\BVH\BVHLoader.cpp" />
-    <ClCompile Include="Vendor\assimp\code\AssetLib\Irr\IRRLoader.cpp" />
-    <ClCompile Include="Vendor\assimp\code\AssetLib\Irr\IRRMeshLoader.cpp" />
-    <ClCompile Include="Vendor\assimp\code\AssetLib\Irr\IRRShared.cpp" />
-    <ClCompile Include="Vendor\assimp\code\AssetLib\LWO\LWOAnimation.cpp" />
-    <ClCompile Include="Vendor\assimp\code\AssetLib\LWO\LWOBLoader.cpp" />
-    <ClCompile Include="Vendor\assimp\code\AssetLib\LWO\LWOLoader.cpp" />
-    <ClCompile Include="Vendor\assimp\code\AssetLib\LWO\LWOMaterial.cpp" />
-    <ClCompile Include="Vendor\assimp\code\AssetLib\MD5\MD5Loader.cpp" />
-    <ClCompile Include="Vendor\assimp\code\AssetLib\MD5\MD5Parser.cpp" />
-    <ClCompile Include="Vendor\assimp\code\AssetLib\MDC\MDCLoader.cpp" />
-    <ClCompile Include="Vendor\assimp\code\AssetLib\NDO\NDOLoader.cpp" />
-    <ClCompile Include="Vendor\assimp\code\AssetLib\NFF\NFFLoader.cpp" />
-    <ClCompile Include="Vendor\assimp\code\AssetLib\OpenGEX\OpenGEXExporter.cpp" />
-    <ClCompile Include="Vendor\assimp\code\AssetLib\OpenGEX\OpenGEXImporter.cpp" />
-    <ClCompile Include="Vendor\assimp\code\AssetLib\Raw\RawLoader.cpp" />
-    <ClCompile Include="Vendor\assimp\code\AssetLib\SIB\SIBImporter.cpp" />
-    <ClCompile Include="Vendor\assimp\code\AssetLib\SMD\SMDLoader.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="Vendor\assimp.vcxproj">
@@ -197,7 +145,7 @@
     <ClCompile>
       <WarningLevel>Level3</WarningLevel>
       <SDLCheck>true</SDLCheck>
-      <PreprocessorDefinitions>YAML_CPP_STATIC_DEFINE;ASSIMP_BUILD_NO_SMD_IMPORTER;_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>YAML_CPP_STATIC_DEFINE;_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
       <LanguageStandard>stdcpplatest</LanguageStandard>
       <MultiProcessorCompilation>true</MultiProcessorCompilation>
@@ -214,7 +162,7 @@
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <SDLCheck>true</SDLCheck>
-      <PreprocessorDefinitions>YAML_CPP_STATIC_DEFINE;ASSIMP_BUILD_NO_SMD_IMPORTER;NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>YAML_CPP_STATIC_DEFINE;NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
       <LanguageStandard>stdcpplatest</LanguageStandard>
       <MultiProcessorCompilation>true</MultiProcessorCompilation>

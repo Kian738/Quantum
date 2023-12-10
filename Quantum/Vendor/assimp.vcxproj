@@ -55,7 +55,7 @@
     <ClCompile>
       <WarningLevel>Level3</WarningLevel>
       <SDLCheck>true</SDLCheck>
-      <PreprocessorDefinitions>ASSIMP_BUILD_NO_EXPORT;ASSIMP_BUILD_NO_IFC_IMPORTER;ASSIMP_BUILD_NO_C4D_IMPORTER;RAPIDJSON_HAS_STDSTRING=1;_CRT_SECURE_NO_WARNINGS;_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>ASSIMP_BUILD_NO_EXPORT;ASSIMP_BUILD_NO_IFC_IMPORTER;ASSIMP_BUILD_NO_C4D_IMPORTER;ASSIMP_BUILD_NO_OPENGEX_IMPORTER;ASSIMP_BUILD_NO_NFF_IMPORTER;RAPIDJSON_HAS_STDSTRING=1;_CRT_SECURE_NO_WARNINGS;_CRT_NONSTDC_NO_WARNINGS;_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
       <AdditionalIncludeDirectories>assimp;assimp\include;assimp\code\;assimp\contrib;assimp\contrib\pugixml\src;assimp\contrib\zlib;assimp\contrib\rapidjson\include;assimp\contrib\unzip;assimp\contrib\utf8cpp\source</AdditionalIncludeDirectories>
       <MultiProcessorCompilation>true</MultiProcessorCompilation>
@@ -72,7 +72,7 @@
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <SDLCheck>true</SDLCheck>
-      <PreprocessorDefinitions>ASSIMP_BUILD_NO_EXPORT;ASSIMP_BUILD_NO_IFC_IMPORTER;ASSIMP_BUILD_NO_C4D_IMPORTER;RAPIDJSON_HAS_STDSTRING=1;_CRT_SECURE_NO_WARNINGS;NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>ASSIMP_BUILD_NO_EXPORT;ASSIMP_BUILD_NO_IFC_IMPORTER;ASSIMP_BUILD_NO_C4D_IMPORTER;ASSIMP_BUILD_NO_OPENGEX_IMPORTER;ASSIMP_BUILD_NO_NFF_IMPORTER;ASSIMP_USE_STB_IMAGE_STATIC;RAPIDJSON_HAS_STDSTRING=1;_CRT_SECURE_NO_WARNINGS;_CRT_NONSTDC_NO_WARNINGS;NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
       <AdditionalIncludeDirectories>assimp;assimp\include;assimp\code\;assimp\contrib;assimp\contrib\pugixml\src;assimp\contrib\zlib;assimp\contrib\rapidjson\include;assimp\contrib\unzip;assimp\contrib\utf8cpp\source</AdditionalIncludeDirectories>
       <MultiProcessorCompilation>true</MultiProcessorCompilation>
@@ -89,10 +89,17 @@
     <ClCompile Include="assimp\code\AssetLib\3DS\3DSConverter.cpp" />
     <ClCompile Include="assimp\code\AssetLib\3DS\3DSExporter.cpp" />
     <ClCompile Include="assimp\code\AssetLib\3DS\3DSLoader.cpp" />
+    <ClCompile Include="assimp\code\AssetLib\3MF\D3MFExporter.cpp" />
+    <ClCompile Include="assimp\code\AssetLib\3MF\D3MFImporter.cpp" />
+    <ClCompile Include="assimp\code\AssetLib\3MF\D3MFOpcPackage.cpp" />
+    <ClCompile Include="assimp\code\AssetLib\3MF\XmlSerializer.cpp" />
+    <ClCompile Include="assimp\code\AssetLib\AC\ACLoader.cpp" />
     <ClCompile Include="assimp\code\AssetLib\AMF\AMFImporter.cpp" />
     <ClCompile Include="assimp\code\AssetLib\AMF\AMFImporter_Geometry.cpp" />
     <ClCompile Include="assimp\code\AssetLib\AMF\AMFImporter_Material.cpp" />
     <ClCompile Include="assimp\code\AssetLib\AMF\AMFImporter_Postprocess.cpp" />
+    <ClCompile Include="assimp\code\AssetLib\ASE\ASELoader.cpp" />
+    <ClCompile Include="assimp\code\AssetLib\ASE\ASEParser.cpp" />
     <ClCompile Include="assimp\code\AssetLib\Assbin\AssbinExporter.cpp" />
     <ClCompile Include="assimp\code\AssetLib\Assbin\AssbinFileWriter.cpp" />
     <ClCompile Include="assimp\code\AssetLib\Assbin\AssbinLoader.cpp" />
@@ -104,6 +111,7 @@
     <ClCompile Include="assimp\code\AssetLib\Blender\BlenderModifier.cpp" />
     <ClCompile Include="assimp\code\AssetLib\Blender\BlenderScene.cpp" />
     <ClCompile Include="assimp\code\AssetLib\Blender\BlenderTessellator.cpp" />
+    <ClCompile Include="assimp\code\AssetLib\BVH\BVHLoader.cpp" />
     <ClCompile Include="assimp\code\AssetLib\C4D\C4DImporter.cpp" />
     <ClCompile Include="assimp\code\AssetLib\COB\COBLoader.cpp" />
     <ClCompile Include="assimp\code\AssetLib\Collada\ColladaExporter.cpp" />
@@ -135,6 +143,7 @@
     <ClCompile Include="assimp\code\AssetLib\glTF\glTFCommon.cpp" />
     <ClCompile Include="assimp\code\AssetLib\glTF\glTFExporter.cpp" />
     <ClCompile Include="assimp\code\AssetLib\glTF\glTFImporter.cpp" />
+    <ClCompile Include="assimp\code\AssetLib\HMP\HMPLoader.cpp" />
     <ClCompile Include="assimp\code\AssetLib\IFC\IFCBoolean.cpp" />
     <ClCompile Include="assimp\code\AssetLib\IFC\IFCCurve.cpp" />
     <ClCompile Include="assimp\code\AssetLib\IFC\IFCGeometry.cpp" />
@@ -147,11 +156,22 @@
     <ClCompile Include="assimp\code\AssetLib\IFC\IFCReaderGen_4.cpp" />
     <ClCompile Include="assimp\code\AssetLib\IFC\IFCUtil.cpp" />
     <ClCompile Include="assimp\code\AssetLib\IQM\IQMImporter.cpp" />
+    <ClCompile Include="assimp\code\AssetLib\Irr\IRRLoader.cpp" />
+    <ClCompile Include="assimp\code\AssetLib\Irr\IRRMeshLoader.cpp" />
+    <ClCompile Include="assimp\code\AssetLib\Irr\IRRShared.cpp" />
+    <ClCompile Include="assimp\code\AssetLib\LWO\LWOAnimation.cpp" />
+    <ClCompile Include="assimp\code\AssetLib\LWO\LWOBLoader.cpp" />
+    <ClCompile Include="assimp\code\AssetLib\LWO\LWOLoader.cpp" />
+    <ClCompile Include="assimp\code\AssetLib\LWO\LWOMaterial.cpp" />
+    <ClCompile Include="assimp\code\AssetLib\LWS\LWSLoader.cpp" />
     <ClCompile Include="assimp\code\AssetLib\M3D\M3DExporter.cpp" />
     <ClCompile Include="assimp\code\AssetLib\M3D\M3DImporter.cpp" />
     <ClCompile Include="assimp\code\AssetLib\M3D\M3DWrapper.cpp" />
     <ClCompile Include="assimp\code\AssetLib\MD2\MD2Loader.cpp" />
     <ClCompile Include="assimp\code\AssetLib\MD3\MD3Loader.cpp" />
+    <ClCompile Include="assimp\code\AssetLib\MD5\MD5Loader.cpp" />
+    <ClCompile Include="assimp\code\AssetLib\MD5\MD5Parser.cpp" />
+    <ClCompile Include="assimp\code\AssetLib\MDC\MDCLoader.cpp" />
     <ClCompile Include="assimp\code\AssetLib\MDL\HalfLife\HL1MDLLoader.cpp" />
     <ClCompile Include="assimp\code\AssetLib\MDL\HalfLife\UniqueNameGenerator.cpp" />
     <ClCompile Include="assimp\code\AssetLib\MDL\MDLLoader.cpp" />
@@ -159,6 +179,8 @@
     <ClCompile Include="assimp\code\AssetLib\MMD\MMDImporter.cpp" />
     <ClCompile Include="assimp\code\AssetLib\MMD\MMDPmxParser.cpp" />
     <ClCompile Include="assimp\code\AssetLib\MS3D\MS3DLoader.cpp" />
+    <ClCompile Include="assimp\code\AssetLib\NDO\NDOLoader.cpp" />
+    <ClCompile Include="assimp\code\AssetLib\NFF\NFFLoader.cpp" />
     <ClCompile Include="assimp\code\AssetLib\Obj\ObjExporter.cpp" />
     <ClCompile Include="assimp\code\AssetLib\Obj\ObjFileImporter.cpp" />
     <ClCompile Include="assimp\code\AssetLib\Obj\ObjFileMtlImporter.cpp" />
@@ -169,12 +191,17 @@
     <ClCompile Include="assimp\code\AssetLib\Ogre\OgreMaterial.cpp" />
     <ClCompile Include="assimp\code\AssetLib\Ogre\OgreStructs.cpp" />
     <ClCompile Include="assimp\code\AssetLib\Ogre\OgreXmlSerializer.cpp" />
+    <ClCompile Include="assimp\code\AssetLib\OpenGEX\OpenGEXExporter.cpp" />
+    <ClCompile Include="assimp\code\AssetLib\OpenGEX\OpenGEXImporter.cpp" />
     <ClCompile Include="assimp\code\AssetLib\Ply\PlyExporter.cpp" />
     <ClCompile Include="assimp\code\AssetLib\Ply\PlyLoader.cpp" />
     <ClCompile Include="assimp\code\AssetLib\Ply\PlyParser.cpp" />
     <ClCompile Include="assimp\code\AssetLib\Q3BSP\Q3BSPFileImporter.cpp" />
     <ClCompile Include="assimp\code\AssetLib\Q3BSP\Q3BSPFileParser.cpp" />
     <ClCompile Include="assimp\code\AssetLib\Q3D\Q3DLoader.cpp" />
+    <ClCompile Include="assimp\code\AssetLib\Raw\RawLoader.cpp" />
+    <ClCompile Include="assimp\code\AssetLib\SIB\SIBImporter.cpp" />
+    <ClCompile Include="assimp\code\AssetLib\SMD\SMDLoader.cpp" />
     <ClCompile Include="assimp\code\AssetLib\STL\STLExporter.cpp" />
     <ClCompile Include="assimp\code\AssetLib\STL\STLLoader.cpp" />
     <ClCompile Include="assimp\code\AssetLib\Terragen\TerragenLoader.cpp" />
@@ -193,6 +220,7 @@
     <ClCompile Include="assimp\code\AssetLib\X3D\X3DImporter_Shape.cpp" />
     <ClCompile Include="assimp\code\AssetLib\X3D\X3DImporter_Texturing.cpp" />
     <ClCompile Include="assimp\code\AssetLib\X3D\X3DXmlHelper.cpp" />
+    <ClCompile Include="assimp\code\AssetLib\XGL\XGLLoader.cpp" />
     <ClCompile Include="assimp\code\AssetLib\X\XFileExporter.cpp" />
     <ClCompile Include="assimp\code\AssetLib\X\XFileImporter.cpp" />
     <ClCompile Include="assimp\code\AssetLib\X\XFileParser.cpp" />
@@ -266,13 +294,34 @@
     <ClCompile Include="assimp\code\PostProcessing\ValidateDataStructure.cpp" />
     <ClCompile Include="assimp\contrib\unzip\ioapi.c" />
     <ClCompile Include="assimp\contrib\unzip\unzip.c" />
+    <ClCompile Include="assimp\contrib\zlib\adler32.c" />
+    <ClCompile Include="assimp\contrib\zlib\crc32.c" />
+    <ClCompile Include="assimp\contrib\zlib\gzclose.c" />
+    <ClCompile Include="assimp\contrib\zlib\gzlib.c" />
+    <ClCompile Include="assimp\contrib\zlib\gzread.c" />
+    <ClCompile Include="assimp\contrib\zlib\gzwrite.c" />
+    <ClCompile Include="assimp\contrib\zlib\infback.c" />
+    <ClCompile Include="assimp\contrib\zlib\inffast.c" />
+    <ClCompile Include="assimp\contrib\zlib\inflate.c" />
+    <ClCompile Include="assimp\contrib\zlib\inftrees.c" />
+    <ClCompile Include="assimp\contrib\zlib\uncompr.c" />
+    <ClCompile Include="assimp\contrib\zlib\zutil.c" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="assimp\code\AssetLib\3DS\3DSExporter.h" />
     <ClInclude Include="assimp\code\AssetLib\3DS\3DSHelper.h" />
     <ClInclude Include="assimp\code\AssetLib\3DS\3DSLoader.h" />
+    <ClInclude Include="assimp\code\AssetLib\3MF\3MFTypes.h" />
+    <ClInclude Include="assimp\code\AssetLib\3MF\3MFXmlTags.h" />
+    <ClInclude Include="assimp\code\AssetLib\3MF\D3MFExporter.h" />
+    <ClInclude Include="assimp\code\AssetLib\3MF\D3MFImporter.h" />
+    <ClInclude Include="assimp\code\AssetLib\3MF\D3MFOpcPackage.h" />
+    <ClInclude Include="assimp\code\AssetLib\3MF\XmlSerializer.h" />
+    <ClInclude Include="assimp\code\AssetLib\AC\ACLoader.h" />
     <ClInclude Include="assimp\code\AssetLib\AMF\AMFImporter.hpp" />
     <ClInclude Include="assimp\code\AssetLib\AMF\AMFImporter_Node.hpp" />
+    <ClInclude Include="assimp\code\AssetLib\ASE\ASELoader.h" />
+    <ClInclude Include="assimp\code\AssetLib\ASE\ASEParser.h" />
     <ClInclude Include="assimp\code\AssetLib\Assbin\AssbinExporter.h" />
     <ClInclude Include="assimp\code\AssetLib\Assbin\AssbinFileWriter.h" />
     <ClInclude Include="assimp\code\AssetLib\Assbin\AssbinLoader.h" />
@@ -286,6 +335,7 @@
     <ClInclude Include="assimp\code\AssetLib\Blender\BlenderScene.h" />
     <ClInclude Include="assimp\code\AssetLib\Blender\BlenderSceneGen.h" />
     <ClInclude Include="assimp\code\AssetLib\Blender\BlenderTessellator.h" />
+    <ClInclude Include="assimp\code\AssetLib\BVH\BVHLoader.h" />
     <ClInclude Include="assimp\code\AssetLib\C4D\C4DImporter.h" />
     <ClInclude Include="assimp\code\AssetLib\COB\COBLoader.h" />
     <ClInclude Include="assimp\code\AssetLib\COB\COBScene.h" />
@@ -320,12 +370,22 @@
     <ClInclude Include="assimp\code\AssetLib\glTF\glTFCommon.h" />
     <ClInclude Include="assimp\code\AssetLib\glTF\glTFExporter.h" />
     <ClInclude Include="assimp\code\AssetLib\glTF\glTFImporter.h" />
+    <ClInclude Include="assimp\code\AssetLib\HMP\HalfLifeFileData.h" />
+    <ClInclude Include="assimp\code\AssetLib\HMP\HMPFileData.h" />
+    <ClInclude Include="assimp\code\AssetLib\HMP\HMPLoader.h" />
     <ClInclude Include="assimp\code\AssetLib\IFC\IFCLoader.h" />
     <ClInclude Include="assimp\code\AssetLib\IFC\IFCReaderGen_2x3.h" />
     <ClInclude Include="assimp\code\AssetLib\IFC\IFCReaderGen_4.h" />
     <ClInclude Include="assimp\code\AssetLib\IFC\IFCUtil.h" />
     <ClInclude Include="assimp\code\AssetLib\IQM\iqm.h" />
     <ClInclude Include="assimp\code\AssetLib\IQM\IQMImporter.h" />
+    <ClInclude Include="assimp\code\AssetLib\Irr\IRRLoader.h" />
+    <ClInclude Include="assimp\code\AssetLib\Irr\IRRMeshLoader.h" />
+    <ClInclude Include="assimp\code\AssetLib\Irr\IRRShared.h" />
+    <ClInclude Include="assimp\code\AssetLib\LWO\LWOAnimation.h" />
+    <ClInclude Include="assimp\code\AssetLib\LWO\LWOFileData.h" />
+    <ClInclude Include="assimp\code\AssetLib\LWO\LWOLoader.h" />
+    <ClInclude Include="assimp\code\AssetLib\LWS\LWSLoader.h" />
     <ClInclude Include="assimp\code\AssetLib\M3D\m3d.h" />
     <ClInclude Include="assimp\code\AssetLib\M3D\M3DExporter.h" />
     <ClInclude Include="assimp\code\AssetLib\M3D\M3DImporter.h" />
@@ -336,6 +396,11 @@
     <ClInclude Include="assimp\code\AssetLib\MD2\MD2NormalTable.h" />
     <ClInclude Include="assimp\code\AssetLib\MD3\MD3FileData.h" />
     <ClInclude Include="assimp\code\AssetLib\MD3\MD3Loader.h" />
+    <ClInclude Include="assimp\code\AssetLib\MD5\MD5Loader.h" />
+    <ClInclude Include="assimp\code\AssetLib\MD5\MD5Parser.h" />
+    <ClInclude Include="assimp\code\AssetLib\MDC\MDCFileData.h" />
+    <ClInclude Include="assimp\code\AssetLib\MDC\MDCLoader.h" />
+    <ClInclude Include="assimp\code\AssetLib\MDC\MDCNormalTable.h" />
     <ClInclude Include="assimp\code\AssetLib\MDL\HalfLife\HalfLifeMDLBaseHeader.h" />
     <ClInclude Include="assimp\code\AssetLib\MDL\HalfLife\HL1FileData.h" />
     <ClInclude Include="assimp\code\AssetLib\MDL\HalfLife\HL1ImportDefinitions.h" />
@@ -353,6 +418,8 @@
     <ClInclude Include="assimp\code\AssetLib\MMD\MMDPmxParser.h" />
     <ClInclude Include="assimp\code\AssetLib\MMD\MMDVmdParser.h" />
     <ClInclude Include="assimp\code\AssetLib\MS3D\MS3DLoader.h" />
+    <ClInclude Include="assimp\code\AssetLib\NDO\NDOLoader.h" />
+    <ClInclude Include="assimp\code\AssetLib\NFF\NFFLoader.h" />
     <ClInclude Include="assimp\code\AssetLib\Obj\ObjExporter.h" />
     <ClInclude Include="assimp\code\AssetLib\Obj\ObjFileData.h" />
     <ClInclude Include="assimp\code\AssetLib\Obj\ObjFileImporter.h" />
@@ -365,6 +432,9 @@
     <ClInclude Include="assimp\code\AssetLib\Ogre\OgreParsingUtils.h" />
     <ClInclude Include="assimp\code\AssetLib\Ogre\OgreStructs.h" />
     <ClInclude Include="assimp\code\AssetLib\Ogre\OgreXmlSerializer.h" />
+    <ClInclude Include="assimp\code\AssetLib\OpenGEX\OpenGEXExporter.h" />
+    <ClInclude Include="assimp\code\AssetLib\OpenGEX\OpenGEXImporter.h" />
+    <ClInclude Include="assimp\code\AssetLib\OpenGEX\OpenGEXStructs.h" />
     <ClInclude Include="assimp\code\AssetLib\Ply\PlyExporter.h" />
     <ClInclude Include="assimp\code\AssetLib\Ply\PlyLoader.h" />
     <ClInclude Include="assimp\code\AssetLib\Ply\PlyParser.h" />
@@ -372,6 +442,9 @@
     <ClInclude Include="assimp\code\AssetLib\Q3BSP\Q3BSPFileImporter.h" />
     <ClInclude Include="assimp\code\AssetLib\Q3BSP\Q3BSPFileParser.h" />
     <ClInclude Include="assimp\code\AssetLib\Q3D\Q3DLoader.h" />
+    <ClInclude Include="assimp\code\AssetLib\Raw\RawLoader.h" />
+    <ClInclude Include="assimp\code\AssetLib\SIB\SIBImporter.h" />
+    <ClInclude Include="assimp\code\AssetLib\SMD\SMDLoader.h" />
     <ClInclude Include="assimp\code\AssetLib\STL\STLExporter.h" />
     <ClInclude Include="assimp\code\AssetLib\STL\STLLoader.h" />
     <ClInclude Include="assimp\code\AssetLib\Terragen\TerragenLoader.h" />
@@ -382,6 +455,7 @@
     <ClInclude Include="assimp\code\AssetLib\X3D\X3DImporter_Macro.hpp" />
     <ClInclude Include="assimp\code\AssetLib\X3D\X3DImporter_Node.hpp" />
     <ClInclude Include="assimp\code\AssetLib\X3D\X3DXmlHelper.h" />
+    <ClInclude Include="assimp\code\AssetLib\XGL\XGLLoader.h" />
     <ClInclude Include="assimp\code\AssetLib\X\XFileExporter.h" />
     <ClInclude Include="assimp\code\AssetLib\X\XFileHelper.h" />
     <ClInclude Include="assimp\code\AssetLib\X\XFileImporter.h" />

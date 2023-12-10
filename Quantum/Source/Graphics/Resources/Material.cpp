@@ -4,13 +4,18 @@
 
 namespace Quantum
 {
-	Ref<Texture> Material::s_DefaultTexture = Texture::FromColor({ 0.0f, 0.0f, 0.0f, 1.0f });
-
-	Material::Material(const Ref<Texture>& diffuseMap, const Ref<Texture>& specularMap, const Ref<Texture>& normalMap, const Ref<Texture>& emissiveMap, float shininess)
-		: m_DiffuseMap(COALESCE(diffuseMap, s_DefaultTexture))
-		, m_SpecularMap(COALESCE(specularMap, s_DefaultTexture))
-		, m_NormalMap(COALESCE(normalMap, s_DefaultTexture))
-		, m_EmissiveMap(COALESCE(emissiveMap, s_DefaultTexture))
+	Material::Material(
+		const Ref<Texture>& diffuseMap,
+		const Ref<Texture>& specularMap,
+		const Ref<Texture>& normalMap,
+		const Ref<Texture>& emissiveMap,
+		float shininess,
+		const Ref<Texture>& defaultTexture
+	)
+		: m_DiffuseMap(COALESCE(diffuseMap, defaultTexture))
+		, m_SpecularMap(COALESCE(specularMap, defaultTexture))
+		, m_NormalMap(COALESCE(normalMap, defaultTexture))
+		, m_EmissiveMap(COALESCE(emissiveMap, defaultTexture))
 		, m_Shininess(shininess)
 	{
 	}

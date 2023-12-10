@@ -95,6 +95,14 @@
       <Project>{92170049-57c3-4658-bb4f-e9386e8b2c4a}</Project>
     </ProjectReference>
   </ItemGroup>
+  <ItemGroup>
+    <None Include="Content\Config\DefaultEngine.yaml">
+      <DeploymentContent>true</DeploymentContent>
+    </None>
+    <None Include="QuantumEngine.qproj">
+      <DeploymentContent>true</DeploymentContent>
+    </None>
+  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>
