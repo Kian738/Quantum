@@ -28,10 +28,9 @@ void main()
     vec4 specularColor = texture(u_Material.specular, v_TexCoord);
     vec4 emissionColor = texture(u_Material.emission, v_TexCoord);
 
-    //vec3 normal = (normalColor) ? normalize(normalColor.rgb * 2.0 - 1.0) : normalize(v_Normal);
     vec3 normal = (any(greaterThan(normalColor.rgb, vec3(0.0))) || normalColor.a > 0.0) ? normalize(normalColor.rgb * 2.0 - 1.0) : normalize(v_Normal);
 
-    // Calculate lighting with Lambertian reflection model for now
+    // TODO: Implement lightning instead of using the Lambertian reflection model
     vec3 lightDirection = normalize(vec3(1.0, 1.0, 1.0));
     float diffuseStrength = max(dot(normal, lightDirection), 0.0);
     vec3 diffuseComponent = diffuseStrength * diffuseColor.rgb;
