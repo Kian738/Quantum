@@ -20,9 +20,9 @@ namespace Quantum
 	class Log
 	{
 	private:
-		static std::ofstream m_LogFile;
-		static Mutex m_Mutex;
-		static bool m_IsInitialized;
+		static std::ofstream s_LogFile;
+		static Mutex s_LogFileMutex;
+		static bool s_IsInitialized;
 	public:
 		static void Initialize();
 		static void Shutdown();

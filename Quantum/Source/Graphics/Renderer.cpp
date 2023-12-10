@@ -11,7 +11,7 @@ namespace Quantum
 		s_SceneData = new SceneData;
 
 		s_ShaderLibrary = CreateRef<ShaderLibrary>();
-		s_ShaderLibrary->LoadAsync("Material");
+		s_ShaderLibrary->Load("Material");
 	}
 
 	void Renderer::Shutdown()

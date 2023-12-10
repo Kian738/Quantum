@@ -7,6 +7,12 @@ namespace Quantum
 		std::thread(function).join();
 	}
 
+	void AsyncHelper::Run(const Func<void()>& function, const Func<void()>& callback)
+	{
+		std::thread(function).join();
+		callback();
+	}
+
 	void AsyncHelper::RunAll(const List<Func<void()>>& functions)
 	{
 		List<std::thread> threads;
@@ -20,6 +26,12 @@ namespace Quantum
 	void AsyncHelper::Wait(const Func<void()>& function)
 	{
 		std::async(std::launch::async, function).wait();
+	}
+
+	void AsyncHelper::Wait(const Func<void()>& function, const Func<void()>& callback)
+	{
+		std::async(std::launch::async, function).wait();
+		callback();
 	}
 
 	void AsyncHelper::WaitAll(const List<Func<void()>>& functions)

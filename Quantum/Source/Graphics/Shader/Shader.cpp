@@ -86,7 +86,7 @@ namespace Quantum
 	}
 
 	void Shader::Compile(const ShaderSource& shaderSources)
-	{
+ 	{
 		LOG_CHECK(shaderSources.size() <= 2, Warning, LogGraphics, "Shader source count is greater than 2");
 
 		auto program = glCreateProgram();
@@ -103,8 +103,11 @@ namespace Quantum
 			glGetShaderiv(shader, GL_COMPILE_STATUS, &isCompiled);
 			if (!isCompiled)
 			{
-				auto maxLength = 1;
+				auto maxLength = 0;
 				glGetShaderiv(shader, GL_INFO_LOG_LENGTH, &maxLength);
+
+				if (!maxLength)
+					maxLength = 4096;
 
 				List<char> infoLog(maxLength);
 				glGetShaderInfoLog(shader, maxLength, &maxLength, &infoLog[0]);

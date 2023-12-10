@@ -28,8 +28,8 @@ namespace Quantum
 			);
 
 			m_Window = CreateScope<Window>(windowSpec);
-			m_Window->MinimizeEvent += [=](bool isMinimized) { m_IsMinimized = isMinimized; };
-			m_Window->CloseEvent += [=]() { Stop(); };
+			m_Window->MinimizeEvent += [this](bool isMinimized) { m_IsMinimized = isMinimized; };
+			m_Window->CloseEvent += [this]() { Stop(); };
 
 			Renderer::Initialize();
 

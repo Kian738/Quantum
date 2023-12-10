@@ -8,12 +8,13 @@
 // TODO: Add async logging
 namespace Quantum
 {
-	std::ofstream Log::m_LogFile = {};
-	bool Log::m_IsInitialized = false;
+	std::ofstream Log::s_LogFile = {};
+	Mutex Log::s_LogFileMutex = {};
+	bool Log::s_IsInitialized = false;
 
 	void Log::Initialize()
 	{
-		if (m_IsInitialized)
+		if (s_IsInitialized)
 			return;
 
 		if (GEngineConfig["Console"]["Enabled"].as<bool>(Environment::IsDebug()))
@@ -26,28 +27,28 @@ namespace Quantum
 		);
 
 		FileSystemUtils::CreateParentDir(logFilePath);
-		m_LogFile.open(logFilePath);
+		s_LogFile.open(logFilePath);
 
-		m_IsInitialized = true;
+		s_IsInitialized = true;
 
-		LOG_CHECK(m_LogFile.is_open(), Error, LogCommon, "Failed to open log file: {}", logFilePath);
+		LOG_CHECK(s_LogFile.is_open(), Error, LogCommon, "Failed to open log file: {}", logFilePath);
 	}
 
 	void Log::Shutdown()
 	{
-		if (!m_IsInitialized)
+		if (!s_IsInitialized)
 			return;
 
-		m_LogFile.close();
+		s_LogFile.close();
 
 		Console::Free();
 
-		m_IsInitialized = false;
+		s_IsInitialized = false;
 	}
 
 	void Log::LogAsync(LogLevel level, const LogCategory& category, Func<String()> formatFunc, StringView file, int line)
 	{
-		if (!m_IsInitialized)
+		if (!s_IsInitialized)
 			return;
 
 		static auto minLevel = LogLevel::Verbose; // TODO: GEngineConfig["Logging"]["MinLevel"].as<LogLevel>(LogLevel::Info);
@@ -68,7 +69,7 @@ namespace Quantum
 		auto levelName = LevelToName(level);
 		auto categoryName = category.GetName();
 
-		Lock lock(m_Mutex);
+		Lock<> lock(s_LogFileMutex);
 
 		if (level < LogLevel::Fatal)
 		{
@@ -76,7 +77,7 @@ namespace Quantum
 			auto levelString = std::format("{}{}{}", levelColor, levelName, defaultColor); // TODO: Could be precomputed
 
 			if (Console::IsAllocated()) std::println("[{}]: [{}]: {}", levelString, categoryName, message);
-			std::println(m_LogFile, "[{}]: [{}]: [{}]: {}", currentTime, levelName, categoryName, message);
+			std::println(s_LogFile, "[{}]: [{}]: [{}]: {}", currentTime, levelName, categoryName, message);
 
 			return;
 		}
@@ -84,7 +85,7 @@ namespace Quantum
 		auto relativeFile = PathToRelative(file);
 
 		if (Console::IsAllocated()) std::println("{}[{}]: [{}] [{}:{}]: {}{}", fatalColor, levelName, categoryName, relativeFile, line, message, defaultColor);
-		std::println(m_LogFile, "[{}]: [{}]: [{}]: [{}:{}]: {}", currentTime, levelName, categoryName, relativeFile, line, message);
+		std::println(s_LogFile, "[{}]: [{}]: [{}]: [{}:{}]: {}", currentTime, levelName, categoryName, relativeFile, line, message);
 
 		std::this_thread::sleep_for(std::chrono::seconds(5));
 		GEngine->Crash();

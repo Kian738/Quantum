@@ -39,7 +39,9 @@ namespace Quantum
 	using WStringView = std::wstring_view;
 
 	using Mutex = std::mutex;
-	using Lock = std::lock_guard<Mutex>;
+
+	template <class T = Mutex>
+	using Lock = std::lock_guard<T>;
 
 	template <typename T>
 	using Func = std::function<T>;
