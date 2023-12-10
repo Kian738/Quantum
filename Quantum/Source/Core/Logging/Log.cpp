@@ -47,20 +47,20 @@ namespace Quantum
 
 	void Log::LogAsync(LogLevel level, const LogCategory& category, Func<String()> formatFunc, StringView file, int line)
 	{
-		AsyncHelper::Run([=] { LogInternal(level, category, formatFunc, file, line); });
-	}
-
-	void Log::LogInternal(LogLevel level, const LogCategory& category, Func<String()> formatFunc, StringView file, int line)
-	{
 		if (!m_IsInitialized)
-			return; // TODO: Make sure this is never called
+			return;
 
 		static auto minLevel = LogLevel::Verbose; // TODO: GEngineConfig["Logging"]["MinLevel"].as<LogLevel>(LogLevel::Info);
 		if (level < minLevel)
 			return;
 
-		auto formatedMessage = formatFunc();
+		auto message = formatFunc();
 
+		AsyncHelper::Run([&] { LogInternal(level, category, message, file, line); });
+	}
+
+	void Log::LogInternal(LogLevel level, const LogCategory& category, String message, StringView file, int line)
+	{
 		auto defaultColor = "\33[0m";
 		auto fatalColor = "\33[37;41m";
 
@@ -73,16 +73,16 @@ namespace Quantum
 			auto levelColor = LevelToColor(level);
 			auto levelString = std::format("{}{}{}", levelColor, levelName, defaultColor); // TODO: Could be precomputed
 
-			if (Console::IsAllocated()) std::println("[{}]: [{}]: {}", levelString, categoryName, formatedMessage);
-			std::println(m_LogFile, "[{}]: [{}]: [{}]: {}", currentTime, levelName, categoryName, formatedMessage);
+			if (Console::IsAllocated()) std::println("[{}]: [{}]: {}", levelString, categoryName, message);
+			std::println(m_LogFile, "[{}]: [{}]: [{}]: {}", currentTime, levelName, categoryName, message);
 
 			return;
 		}
 
 		auto relativeFile = PathToRelative(file);
 
-		if (Console::IsAllocated()) std::println("{}[{}]: [{}] [{}:{}]: {}{}", fatalColor, levelName, categoryName, relativeFile, line, formatedMessage, defaultColor);
-		std::println(m_LogFile, "[{}]: [{}]: [{}]: [{}:{}]: {}", currentTime, levelName, categoryName, relativeFile, line, formatedMessage);
+		if (Console::IsAllocated()) std::println("{}[{}]: [{}] [{}:{}]: {}{}", fatalColor, levelName, categoryName, relativeFile, line, message, defaultColor);
+		std::println(m_LogFile, "[{}]: [{}]: [{}]: [{}:{}]: {}", currentTime, levelName, categoryName, relativeFile, line, message);
 
 		std::this_thread::sleep_for(std::chrono::seconds(5));
 		GEngine->Crash();
