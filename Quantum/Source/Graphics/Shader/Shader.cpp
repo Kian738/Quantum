@@ -10,11 +10,13 @@ namespace Quantum
 	{
 		ShaderSource sources;
 
-		String vertexPath = std::format("{}.vert.glsl", path);
-		sources[GL_VERTEX_SHADER] = FileSystemUtils::ReadFile(vertexPath).c_str();
+		auto vertexPath = std::format("{}.vert.glsl", path);
+		auto vertexSource = FileSystemUtils::ReadFile(vertexPath);
+		sources[GL_VERTEX_SHADER] = vertexSource.c_str();
 
-		String fragmentPath = std::format("{}.frag.glsl", path);
-		sources[GL_FRAGMENT_SHADER] = FileSystemUtils::ReadFile(fragmentPath).c_str();
+		auto fragmentPath = std::format("{}.frag.glsl", path);
+		auto fragmentSource = FileSystemUtils::ReadFile(fragmentPath);
+		sources[GL_FRAGMENT_SHADER] = fragmentSource.c_str();
 
 		Compile(sources);
 	}
