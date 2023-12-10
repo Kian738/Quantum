@@ -4,6 +4,8 @@
 #include "Graphics/RenderCommand.h"
 #include "Graphics/Renderer.h"
 
+#undef GetCurrentTime
+
 DEFINE_LOG_CATEGORY_STATIC(Core);
 
 namespace Quantum
@@ -49,14 +51,20 @@ namespace Quantum
 		}
 	}
 
-	int Engine::Run()
+	void Engine::Run()
 	{
 		// TODO: Remove this
-		auto model = CreateRef<Model>("Models/Test.obj");
+		auto model = CreateRef<Model>("Models/Test.fbx");
+
+		auto lastTime = GetCurrentTime();
 
 		m_IsRunning = true;
 		while (m_IsRunning)
 		{
+			auto currentTime = GetCurrentTime();
+			auto deltaTime = std::chrono::duration<float>(currentTime - lastTime).count();
+			lastTime = currentTime;
+
 			if (m_Config.IsGraphicsEnabled)
 			{
 				m_Window->OnUpdate();
@@ -82,20 +90,23 @@ namespace Quantum
 				m_Window->OnRender();
 			}
 		}
-
-		return m_ExitCode;
 	}
 
 	void Engine::Stop()
 	{
 		m_IsRunning = false;
 
-		LOG(Info, LogCore, "Exiting with code: {}", m_ExitCode);
+		LOG(Info, LogCore, "Exiting with code: {}", GetExitCode());
 	}
 
 	void Engine::Crash()
 	{
-		m_ExitCode = EXIT_FAILURE;
+		m_HasCrashed = true;
 		Stop();
+	}
+
+	Engine::Clock::time_point Engine::GetCurrentTime()
+	{
+		return Clock::now();
 	}
 }

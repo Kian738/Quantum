@@ -20,18 +20,23 @@ namespace Quantum
 		Scope<Window> m_Window;
 		Scope<CameraController> m_CameraController;
 
-		int m_ExitCode = EXIT_SUCCESS;
+		bool m_HasCrashed = false;
 
 		bool m_IsRunning = false;
 		bool m_IsMinimized = false;
+
+		using Clock = std::chrono::high_resolution_clock;
 	public:
 		Engine();
 		~Engine();
 
+		int GetExitCode() const { return static_cast<int>(m_HasCrashed); };
 		Window& GetWindow() { return *m_Window; };
 
-		int Run();
+		void Run();
 		void Stop();
 		void Crash();
+	private:
+		Clock::time_point GetCurrentTime();
 	};
 }

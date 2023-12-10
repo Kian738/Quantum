@@ -20,7 +20,8 @@ namespace Quantum
 
 		// TODO: Parse command line arguments
 		GEngine = new Engine;
-		auto status = GEngine->Run();
+		GEngine->Run();
+		auto status = GEngine->GetExitCode();
 		delete GEngine;
 		GEngine = nullptr;
 

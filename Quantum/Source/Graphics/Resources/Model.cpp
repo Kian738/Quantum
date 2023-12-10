@@ -100,8 +100,8 @@ namespace Quantum
 				auto texture = AssetManager::LoadTexture(localPath.C_Str(), path);
 				material->SetTexture(type, texture);
 			}
-
-			return material;
 		}
+
+		return material;
 	}
 }
