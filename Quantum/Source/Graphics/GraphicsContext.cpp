@@ -4,6 +4,14 @@
 
 namespace Quantum
 {
+	namespace Utils
+	{
+		static const char* GetGLString(GLenum name)
+		{
+			return reinterpret_cast<const char*>(glGetString(name));
+		}
+	}
+
 	GraphicsContext::GraphicsContext(GLFWwindow* windowHandle)
 		: m_WindowHandle(windowHandle)
 	{
@@ -18,11 +26,9 @@ namespace Quantum
 		LOG_CHECK(gladLoaderLoadGL(), Fatal, LogGraphics, "Failed to initialize GLAD!");
 
 		LOG(Info, LogGraphics, "OpenGL Info:");
-		auto version = glGetString(GL_VENDOR);
-		LOG(Info, LogGraphics, "  Vendor: {}", reinterpret_cast<const char*>(version));
-		LOG(Info, LogGraphics, "  Vendor: {}", reinterpret_cast<const char*>(glGetString(GL_VENDOR)));
-		/*LOG(Info, LogGraphics, "  Renderer: {}", glGetString(GL_RENDERER));
-		LOG(Info, LogGraphics, "  Version: {}", glGetString(GL_VERSION));*/
+		LOG(Info, LogGraphics, "  Vendor: {}", Utils::GetGLString(GL_VENDOR));
+		LOG(Info, LogGraphics, "  Renderer: {}", Utils::GetGLString(GL_RENDERER));
+		LOG(Info, LogGraphics, "  Version: {}", Utils::GetGLString(GL_VERSION));
 	}
 
 	void GraphicsContext::SwapBuffers()
