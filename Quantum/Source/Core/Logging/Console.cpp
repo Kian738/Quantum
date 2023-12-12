@@ -15,7 +15,7 @@ namespace Quantum
 		case CTRL_LOGOFF_EVENT:
 		case CTRL_SHUTDOWN_EVENT:
 			if (GEngine)
-				GEngine->Stop();
+				GEngine->Stop(); // TODO: Make this finish clean up in Launch.h
 			[[fallthrough]];
 		default:
 			return FALSE;

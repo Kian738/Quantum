@@ -15,8 +15,6 @@ namespace Quantum
 		Config::Initialize();
 		Log::Initialize();
 
-		atexit(Log::Shutdown);
-
 		auto [date, time] = DateTime::FromCompileTime().GetDateTime();
 		LOG(Info, LogCommon, "QuantumEngine built on {} at {}", date, time); // TODO: Add version number
 
@@ -29,6 +27,8 @@ namespace Quantum
 		auto status = GEngine->GetExitCode();
 		delete GEngine;
 		GEngine = nullptr;
+
+		Log::Shutdown();
 
 		return status;
 	}
