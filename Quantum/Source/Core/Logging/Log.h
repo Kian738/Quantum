@@ -20,18 +20,19 @@ namespace Quantum
 	class Log
 	{
 	private:
-		static std::ofstream s_LogFile;
-		static Mutex s_LogFileMutex;
-		static bool s_IsInitialized;
+		static inline std::ofstream s_LogFile;
+		static inline Mutex s_LogFileMutex;
+		static inline LogLevel s_LogLevel = LogLevel::Verbose;
+		static inline bool s_IsInitialized = false;
 	public:
 		static void Initialize();
 		static void Shutdown();
 
-		// TODO: Pass a lambda to the log function to avoid the string formatting if the log level is disabled
 		static void LogAsync(LogLevel level, const LogCategory& category, Func<String()> formatFunc, StringView file, int line);
 	private:
 		static void LogInternal(LogLevel level, const LogCategory& category, String message, StringView file, int line);
 
+		static LogLevel NameToLevel(const char* name);
 		static const char* LevelToName(LogLevel level);
 		static const char* LevelToColor(LogLevel level);
 

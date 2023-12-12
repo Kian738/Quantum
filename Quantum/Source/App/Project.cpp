@@ -53,17 +53,21 @@ namespace Quantum
 
 	void Project::Reload()
 	{
-		auto project = YAML::LoadFile(m_Path);
-		m_File.Name = project["Name"].as<String>("Quantum Project");
-		m_File.Description = project["Description"].as<String>("An App made using QuantumEngine!");
-		m_File.Version = project["Version"].as<String>("1.0.0");
-		m_File.Company = project["Company"].as<String>("");
-		m_File.EngineVersion = project["EngineVersion"].as<String>("1.0.0"); // TODO: Get engine version instead
+		auto projectFile = YAML::LoadFile(m_Path);
+		m_File.Name = projectFile["Name"].as<String>("Quantum Project");
+		m_File.Description = projectFile["Description"].as<String>("An App made using QuantumEngine!");
+		m_File.Version = projectFile["Version"].as<String>("1.0.0");
+		m_File.Company = projectFile["Company"].as<String>("");
+		m_File.EngineVersion = projectFile["EngineVersion"].as<String>("1.0.0"); // TODO: Get engine version instead
 	}
 
 	void Project::Save()
 	{
+		if (!m_IsDirty)
+			return;
+
 		YAML::Emitter project;
+
 		project << YAML::BeginMap;
 		project << YAML::Key << "Name" << YAML::Value << m_File.Name;
 		project << YAML::Key << "Description" << YAML::Value << m_File.Description;

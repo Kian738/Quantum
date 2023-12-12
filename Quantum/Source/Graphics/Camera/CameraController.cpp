@@ -32,14 +32,16 @@ namespace Quantum
 			m_CameraPosition -= m_Camera->GetZAxis() * m_CameraSpeed * delta;
 		if (Input::IsKeyDown(Key::S))
 			m_CameraPosition += m_Camera->GetZAxis() * m_CameraSpeed * delta;
+
 		if (Input::IsKeyDown(Key::A))
 			m_CameraPosition -= m_Camera->GetXAxis() * m_CameraSpeed * delta;
 		if (Input::IsKeyDown(Key::D))
 			m_CameraPosition += m_Camera->GetXAxis() * m_CameraSpeed * delta;
+
 		if (Input::IsKeyDown(Key::Q))
-			m_CameraPosition += m_Camera->GetYAxis() * m_CameraSpeed * delta;
-		if (Input::IsKeyDown(Key::E))
 			m_CameraPosition -= m_Camera->GetYAxis() * m_CameraSpeed * delta;
+		if (Input::IsKeyDown(Key::E))
+			m_CameraPosition += m_Camera->GetYAxis() * m_CameraSpeed * delta;
 
 
 		SetPosition(m_CameraPosition);

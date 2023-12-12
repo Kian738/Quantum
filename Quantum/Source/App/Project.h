@@ -19,6 +19,7 @@ namespace Quantum
 	private:
 		ProjectFile m_File;
 		String m_Path;
+		bool m_IsDirty = false;
 
 		static inline Ref<Project> s_Active;
 	public:
@@ -40,11 +41,12 @@ namespace Quantum
 		StringView GetCompany() const { return m_File.Company; };
 		StringView GetEngineVersion() const { return m_File.EngineVersion; };
 
-		void SetName(StringView name) { m_File.Name = name; };
-		void SetDescription(StringView description) { m_File.Description = description; };
-		void SetVersion(StringView version) { m_File.Version = version; };
-		void SetCompany(StringView company) { m_File.Company = company; };
-		void SetEngineVersion(StringView engineVersion) { m_File.EngineVersion = engineVersion; };
+		void SetDirty(bool dirty = true) { m_IsDirty = dirty; };
+		void SetName(StringView name) { m_File.Name = name; SetDirty(); };
+		void SetDescription(StringView description) { m_File.Description = description; SetDirty(); };
+		void SetVersion(StringView version) { m_File.Version = version; SetDirty(); };
+		void SetCompany(StringView company) { m_File.Company = company; SetDirty(); };
+		void SetEngineVersion(StringView engineVersion) { m_File.EngineVersion = engineVersion; SetDirty(); };
 
 		void Reload();
 		void Save();

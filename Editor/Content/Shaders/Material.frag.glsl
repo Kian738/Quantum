@@ -20,7 +20,6 @@ uniform Material u_Material;
 
 vec3 viewDirection = normalize(v_ViewPosition - v_Position);
 
-
 void main()
 {
     vec4 diffuseColor = texture(u_Material.diffuse, v_TexCoord);

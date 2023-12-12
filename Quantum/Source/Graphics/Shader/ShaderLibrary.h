@@ -18,13 +18,13 @@ namespace Quantum
 		void Add(const String& name, const Ref<Shader>& shader);
 
 		void Load(StringView path);
-		void Load(const String& name, StringView path);
 		void LoadAll();
 
 		void Unload(const Ref<Shader>& shader);
 		void Unload(const String& name);
 		void UnloadAll();
 
+		void Reload(const Ref<Shader>& shader);
 		void Reload(const String& name);
 		void ReloadAll();
 

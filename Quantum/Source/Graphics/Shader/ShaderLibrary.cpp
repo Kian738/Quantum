@@ -25,11 +25,6 @@ namespace Quantum
 		Add(CreateRef<Shader>(GetPath(path)));
 	}
 
-	void ShaderLibrary::Load(const String& name, StringView path)
-	{
-		Add(name, CreateRef<Shader>(GetPath(path)));
-	}
-
 	void ShaderLibrary::LoadAll()
 	{
 		const auto shaderFiles = FileSystemUtils::GetFiles(Project::GetActive()->GetShaderDir(), "glsl");
@@ -37,7 +32,6 @@ namespace Quantum
 			Load(file);
 	}
 
-	// TODO: Fix issue with closing causing exception
 	void ShaderLibrary::Unload(const Ref<Shader>& shader)
 	{
 		shader->Unbind();
@@ -54,34 +48,32 @@ namespace Quantum
 
 	void ShaderLibrary::Unload(const String& name)
 	{
-		if (!Exists(name))
-		{
-			LOG(Warning, LogGraphics, "Shader \"{}\" does not exist", name);
-			return;
-		}
-
-		Unload(m_Shaders[name]);
+		if (auto shader = Get(name); shader)
+			Unload(shader);
 	}
 
 	void ShaderLibrary::UnloadAll()
 	{
-		for (auto& [name, shader] : m_Shaders)
-			Unload(shader);
+		for (auto it = m_Shaders.begin(); it != m_Shaders.end(); it = m_Shaders.begin())
+			Unload(it->second);
+	}
+
+	void ShaderLibrary::Reload(const Ref<Shader>& shader)
+	{
+		Unload(shader);
+		Load(shader->GetName());
 	}
 
 	void ShaderLibrary::Reload(const String& name)
 	{
 		if (auto shader = Get(name); shader)
-		{
-			Unload(shader);
-			Load(name);
-		}
+			Reload(shader);
 	}
 
 	void ShaderLibrary::ReloadAll()
 	{
-		for (auto& [name, shader] : m_Shaders)
-			Reload(name);
+		for (auto it = m_Shaders.begin(); it != m_Shaders.end(); it = m_Shaders.begin())
+			Reload(it->second);
 	}
 
 	Ref<Shader> ShaderLibrary::Get(const String& name)

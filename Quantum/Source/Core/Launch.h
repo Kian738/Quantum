@@ -15,18 +15,20 @@ namespace Quantum
 		Config::Initialize();
 		Log::Initialize();
 
+		atexit(Log::Shutdown);
+
 		auto [date, time] = DateTime::FromCompileTime().GetDateTime();
 		LOG(Info, LogCommon, "QuantumEngine built on {} at {}", date, time); // TODO: Add version number
 
 		// TODO: Parse command line arguments
 		GEngine = new Engine;
 		GEngine->Initialize(); // TODO: Pass appContext to engine
+
 		GEngine->Run();
+
 		auto status = GEngine->GetExitCode();
 		delete GEngine;
 		GEngine = nullptr;
-
-		Log::Shutdown();
 
 		return status;
 	}

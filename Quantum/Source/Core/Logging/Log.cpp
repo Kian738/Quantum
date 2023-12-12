@@ -5,27 +5,25 @@
 #include <iostream>
 #include <thread>
 
-// TODO: Add async logging
 namespace Quantum
 {
-	std::ofstream Log::s_LogFile = {};
-	Mutex Log::s_LogFileMutex = {};
-	bool Log::s_IsInitialized = false;
-
 	void Log::Initialize()
 	{
-		if (s_IsInitialized)
-			return;
+		auto consoleConfig = GEngineConfig["Console"];
 
-		if (GEngineConfig["Console"]["Enabled"].as<bool>(Environment::IsDebug()))
+		if (consoleConfig["Enabled"].as<bool>(Environment::IsDebug()))
 			Console::Allocate();
+
+		s_LogLevel = COALESCE(
+			NameToLevel(consoleConfig["LogLevel"].as<String>("").c_str()),
+			LogLevel::Verbose
+		);
 
 		auto logFilePath = FileSystemUtils::CombinePath(
 			Environment::GetLogsDir(),
 			DateTime::Now().GetDate(),
 			"log"
 		);
-
 		FileSystemUtils::CreateParentDir(logFilePath);
 		s_LogFile.open(logFilePath);
 
@@ -36,9 +34,6 @@ namespace Quantum
 
 	void Log::Shutdown()
 	{
-		if (!s_IsInitialized)
-			return;
-
 		s_LogFile.close();
 
 		Console::Free();
@@ -48,15 +43,10 @@ namespace Quantum
 
 	void Log::LogAsync(LogLevel level, const LogCategory& category, Func<String()> formatFunc, StringView file, int line)
 	{
-		if (!s_IsInitialized)
-			return;
-
-		static auto minLevel = LogLevel::Verbose; // TODO: GEngineConfig["Logging"]["MinLevel"].as<LogLevel>(LogLevel::Info);
-		if (level < minLevel)
+		if (!s_IsInitialized || level < s_LogLevel)
 			return;
 
 		auto message = formatFunc();
-
 		AsyncHelper::Run([&] { LogInternal(level, category, message, file, line); });
 	}
 
@@ -89,6 +79,20 @@ namespace Quantum
 
 		std::this_thread::sleep_for(std::chrono::seconds(5));
 		GEngine->Crash();
+	}
+
+	LogLevel Log::NameToLevel(const char* name)
+	{
+		static Dictionary<const char*, LogLevel> logLevels = {
+			{ "Verbose", LogLevel::Verbose },
+			{ "Debug", LogLevel::Debug },
+			{ "Info", LogLevel::Info },
+			{ "Warning", LogLevel::Warning },
+			{ "Error", LogLevel::Error },
+			{ "Fatal", LogLevel::Fatal }
+		};
+
+		return logLevels[name];
 	}
 
 	const char* Log::LevelToName(LogLevel level)

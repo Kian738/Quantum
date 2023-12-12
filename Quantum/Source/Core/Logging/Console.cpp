@@ -5,26 +5,39 @@
 
 namespace Quantum
 {
-	bool Console::m_IsAllocated = false;
+	static int WINAPI ConsoleCtrlHandler(DWORD dwCtrlType)
+	{
+		switch (dwCtrlType)
+		{
+		case CTRL_C_EVENT:
+		case CTRL_CLOSE_EVENT:
+		case CTRL_BREAK_EVENT:
+		case CTRL_LOGOFF_EVENT:
+		case CTRL_SHUTDOWN_EVENT:
+			if (GEngine)
+				GEngine->Stop();
+			[[fallthrough]];
+		default:
+			return FALSE;
+		}
+	}
 
 	void Console::Allocate()
 	{
-		if (m_IsAllocated)
-			return;
-
 		std::cin.tie(0);
 		std::cout.tie(0);
 		std::ios_base::sync_with_stdio(false);
 
 		AllocConsole();
 		SetConsoleTitleA(std::format("{} - Console", App::GetName()).c_str());
+		SetConsoleCtrlHandler(ConsoleCtrlHandler, TRUE);
 
 		FILE* file = nullptr;
 		freopen_s(&file, "CONIN$", "r", stdin);
 		freopen_s(&file, "CONOUT$", "w", stdout);
 
-		auto handle = GetStdHandle(STD_OUTPUT_HANDLE);
-		if (handle != INVALID_HANDLE_VALUE)
+		if (auto handle = GetStdHandle(STD_OUTPUT_HANDLE);
+			handle != INVALID_HANDLE_VALUE)
 		{
 			DWORD dwMode = 0;
 			GetConsoleMode(handle, &dwMode);
@@ -32,16 +45,13 @@ namespace Quantum
 			SetConsoleMode(handle, dwMode);
 		}
 
-		m_IsAllocated = true;
+		s_IsAllocated = true;
 	}
 
 	void Console::Free()
 	{
-		if (!m_IsAllocated)
-			return;
-
 		FreeConsole();
 
-		m_IsAllocated = false;
+		s_IsAllocated = false;
 	}
 }
