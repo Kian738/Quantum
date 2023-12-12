@@ -17,7 +17,7 @@ namespace Quantum
 
 		bool m_IsPerspective;
 
-		float m_TranslationSpeedXY = 0.01f, m_TranslationSpeedZ = 10.0f;
+		float m_CameraSpeed = 1.0f;
 		float m_RotationSpeed = 0.1f;
 
 		float m_ZoomSpeed = 0.1f;

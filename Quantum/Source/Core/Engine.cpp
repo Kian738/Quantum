@@ -12,9 +12,27 @@ namespace Quantum
 {
 	Engine::Engine()
 	{
+		m_Config.IsGraphicsEnabled = GEngineConfig["Graphics"]["Enabled"].as<bool>(true);
+	}
+
+	Engine::~Engine()
+	{
+		LOG(Info, LogCore, "Shutting down Engine...");
+
+		if (m_Config.IsGraphicsEnabled)
+		{
+			LOG(Info, LogCore, "Shutting down Graphics...");
+
+			Renderer::Shutdown();
+
+			Input::Shutdown();
+		}
+	}
+
+	void Engine::Initialize()
+	{
 		LOG(Info, LogCore, "Initializing Engine...");
 
-		m_Config.IsGraphicsEnabled = GEngineConfig["Graphics"]["Enabled"].as<bool>(true);
 		if (m_Config.IsGraphicsEnabled)
 		{
 			LOG(Info, LogCore, "Initializing Graphics...");
@@ -33,21 +51,11 @@ namespace Quantum
 			m_Window->MinimizeEvent += [this](bool isMinimized) { m_IsMinimized = isMinimized; };
 			m_Window->CloseEvent += [this]() { Stop(); };
 
+			Input::Initialize();
+
 			Renderer::Initialize();
 
 			m_CameraController = CreateScope<CameraController>();
-		}
-	}
-
-	Engine::~Engine()
-	{
-		LOG(Info, LogCore, "Shutting down Engine...");
-
-		if (m_Config.IsGraphicsEnabled)
-		{
-			LOG(Info, LogCore, "Shutting down Graphics...");
-
-			Renderer::Shutdown();
 		}
 	}
 

@@ -13,6 +13,7 @@ namespace Quantum
 		Matrix4D ViewProjectionMatrix;
 	};
 
+	// TODO: Implement resizing
 	class Renderer
 	{
 	private:
@@ -21,6 +22,8 @@ namespace Quantum
 	public:
 		static void Initialize();
 		static void Shutdown();
+
+		static void OnWindowResize(UInt32 width, UInt32 height);
 
 		static void BeginScene(const Camera& camera);
 		static void EndScene();

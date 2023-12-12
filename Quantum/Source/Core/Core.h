@@ -22,5 +22,7 @@
 
 #include "App/App.h"
 #include "App/AppContext.h"
-#include "App/AssetManger.h"
+#include "App/AssetManager.h"
 #include "App/Project.h"
+
+#include "Input/InputManager.h"

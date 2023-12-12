@@ -173,6 +173,28 @@ namespace Quantum
 				window.MaximizeEvent(maximized);
 			});
 
-		// TODO: Key callbacks
+		glfwSetKeyCallback(m_WindowHandle, [](GLFWwindow* windowHandle, int key, int scanCode, int action, int mods)
+			{
+				auto& window = *reinterpret_cast<Window*>(glfwGetWindowUserPointer(windowHandle));
+				window.KeyEvent(key, scanCode, action, mods);
+			});
+
+		glfwSetMouseButtonCallback(m_WindowHandle, [](GLFWwindow* windowHandle, int button, int action, int mods)
+			{
+				auto& window = *reinterpret_cast<Window*>(glfwGetWindowUserPointer(windowHandle));
+				window.MouseButtonEvent(button, action, mods);
+			});
+
+		glfwSetCursorPosCallback(m_WindowHandle, [](GLFWwindow* windowHandle, double x, double y)
+			{
+				auto& window = *reinterpret_cast<Window*>(glfwGetWindowUserPointer(windowHandle));
+				window.MouseMoveEvent(x, y);
+			});
+
+		glfwSetScrollCallback(m_WindowHandle, [](GLFWwindow* windowHandle, double x, double y)
+			{
+				auto& window = *reinterpret_cast<Window*>(glfwGetWindowUserPointer(windowHandle));
+				window.MouseScrollEvent(x, y);
+			});
 	}
 }

@@ -4,6 +4,11 @@
 
 namespace Quantum
 {
+	bool ShaderLibrary::Exists(const String& name)
+	{
+		return m_Shaders.find(name) != m_Shaders.end();
+	}
+
 	void ShaderLibrary::Add(const Ref<Shader>& shader)
 	{
 		Add(shader->GetName(), shader);
@@ -11,7 +16,6 @@ namespace Quantum
 
 	void ShaderLibrary::Add(const String& name, const Ref<Shader>& shader)
 	{
-		Lock<> lock(m_ShaderMutex);
 		LOG_CHECK(!Exists(name), Warning, LogGraphics, "Shader \"{}\" already exists", name);
 		m_Shaders[name] = shader;
 	}
@@ -26,15 +30,66 @@ namespace Quantum
 		Add(name, CreateRef<Shader>(GetPath(path)));
 	}
 
-	Ref<Shader> ShaderLibrary::Get(const String& name)
+	void ShaderLibrary::LoadAll()
 	{
-		LOG_CHECK(Exists(name), Warning, LogGraphics, "Shader \"{}\" does not exist", name);
-		return m_Shaders[name];
+		const auto shaderFiles = FileSystemUtils::GetFiles(Project::GetActive()->GetShaderDir(), "glsl");
+		for (auto& file : shaderFiles)
+			Load(file);
 	}
 
-	bool ShaderLibrary::Exists(const String& name)
+	void ShaderLibrary::Unload(const Ref<Shader>& shader)
 	{
-		return m_Shaders.find(name) != m_Shaders.end();
+		shader->Unbind();
+
+		auto it = std::find_if(
+			m_Shaders.begin(),
+			m_Shaders.end(),
+			[shader](auto& pair) { return pair.second == shader; }
+		);
+
+		if (it != m_Shaders.end())
+			m_Shaders.erase(it);
+	}
+
+	void ShaderLibrary::Unload(const String& name)
+	{
+		if (!Exists(name))
+		{
+			LOG(Warning, LogGraphics, "Shader \"{}\" does not exist", name);
+			return;
+		}
+
+		Unload(m_Shaders[name]);
+	}
+
+	void ShaderLibrary::UnloadAll()
+	{
+		for (auto& [name, shader] : m_Shaders)
+			Unload(shader);
+	}
+
+	void ShaderLibrary::Reload(const String& name)
+	{
+		if (auto shader = Get(name); shader)
+		{
+			Unload(shader);
+			Load(name);
+		}
+	}
+
+	void ShaderLibrary::ReloadAll()
+	{
+		for (auto& [name, shader] : m_Shaders)
+			Reload(name);
+	}
+
+	Ref<Shader> ShaderLibrary::Get(const String& name)
+	{
+		if (Exists(name))
+			return m_Shaders[name];
+
+		LOG(Warning, LogGraphics, "Shader \"{}\" does not exist", name);
+		return nullptr;
 	}
 
 	String ShaderLibrary::GetPath(StringView path)

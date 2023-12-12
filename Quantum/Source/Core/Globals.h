@@ -11,5 +11,5 @@ DECLARE_LOG_CATEGORY(Graphics);
 
 namespace Quantum
 {
-	inline class Engine* GEngine;
+	inline Engine* GEngine;
 }

@@ -6,9 +6,14 @@ namespace Quantum
 {
 	void Renderer::Initialize()
 	{
+		LOG(Info, LogGraphics, "Initializing Renderer...");
+
 		RenderCommand::Initialize();
 
 		s_SceneData = new SceneData;
+
+		auto& window = GEngine->GetWindow();
+		window.ResizeEvent += [](UInt32 width, UInt32 height) { Renderer::OnWindowResize(width, height); };
 
 		s_ShaderLibrary = CreateRef<ShaderLibrary>();
 		s_ShaderLibrary->Load("Material");
@@ -16,12 +21,23 @@ namespace Quantum
 
 	void Renderer::Shutdown()
 	{
+		LOG(Info, LogGraphics, "Shutting down Renderer...");
+
+		s_ShaderLibrary->UnloadAll();
+
 		delete s_SceneData;
+		s_SceneData = nullptr;
+	}
+
+	void Renderer::OnWindowResize(UInt32 width, UInt32 height)
+	{
+		// TODO: Fix not resizing properly because aspect ratio is not being updated
+		RenderCommand::SetViewport(0, 0, width, height);
 	}
 
 	void Renderer::BeginScene(const Camera& camera)
 	{
-		for (auto& [name, shader] : s_ShaderLibrary->GetShaders())
+		for (auto& [name, shader] : s_ShaderLibrary->GetAll())
 		{
 			shader->Bind();
 
@@ -32,7 +48,7 @@ namespace Quantum
 
 	void Renderer::EndScene()
 	{
-		for (auto& [name, shader] : s_ShaderLibrary->GetShaders())
+		for (auto& [name, shader] : s_ShaderLibrary->GetAll())
 			shader->Unbind();
 	}
 

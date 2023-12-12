@@ -34,6 +34,11 @@ namespace Quantum
 		Event<bool> MinimizeEvent;
 		Event<bool> MaximizeEvent;
 
+		Event<int, int, int, int> KeyEvent;
+		Event<int, int, int> MouseButtonEvent;
+		Event<double, double> MouseMoveEvent;
+		Event<double, double> MouseScrollEvent;
+
 		void OnUpdate();
 		void OnRender();
 

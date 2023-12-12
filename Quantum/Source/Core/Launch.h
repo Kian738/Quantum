@@ -20,14 +20,13 @@ namespace Quantum
 
 		// TODO: Parse command line arguments
 		GEngine = new Engine;
+		GEngine->Initialize(); // TODO: Pass appContext to engine
 		GEngine->Run();
 		auto status = GEngine->GetExitCode();
 		delete GEngine;
 		GEngine = nullptr;
 
 		Log::Shutdown();
-
-		Project::GetActive()->Save();
 
 		return status;
 	}

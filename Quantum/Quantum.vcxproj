@@ -20,6 +20,9 @@
     <ClInclude Include="Source\Core\Globals.h" />
     <ClInclude Include="Source\Core\Core.h" />
     <ClInclude Include="Source\App\App.h" />
+    <ClInclude Include="Source\Core\Input\InputManager.h" />
+    <ClInclude Include="Source\Core\Input\KeyCodes.h" />
+    <ClInclude Include="Source\Core\Input\MouseCodes.h" />
     <ClInclude Include="Source\Core\Misc\DateTime.h" />
     <ClInclude Include="Source\Core\Engine.h" />
     <ClInclude Include="Source\Core\Launch.h" />
@@ -60,6 +63,7 @@
     <ClCompile Include="Source\Core\Configuration\ConfigFile.cpp" />
     <ClCompile Include="Source\Core\Globals.cpp" />
     <ClCompile Include="Source\App\App.cpp" />
+    <ClCompile Include="Source\Core\Input\InputManager.cpp" />
     <ClCompile Include="Source\Core\Misc\DateTime.cpp" />
     <ClCompile Include="Source\Core\Engine.cpp" />
     <ClCompile Include="Source\Core\Logging\Console.cpp" />

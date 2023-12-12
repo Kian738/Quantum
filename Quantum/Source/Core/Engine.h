@@ -31,8 +31,9 @@ namespace Quantum
 		~Engine();
 
 		int GetExitCode() const { return static_cast<int>(m_HasCrashed); };
-		Window& GetWindow() { return *m_Window; };
+		Window& GetWindow() const { return *m_Window; };
 
+		void Initialize();
 		void Run();
 		void Stop();
 		void Crash();
