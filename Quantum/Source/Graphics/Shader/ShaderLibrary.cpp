@@ -37,6 +37,7 @@ namespace Quantum
 			Load(file);
 	}
 
+	// TODO: Fix issue with closing causing exception
 	void ShaderLibrary::Unload(const Ref<Shader>& shader)
 	{
 		shader->Unbind();
