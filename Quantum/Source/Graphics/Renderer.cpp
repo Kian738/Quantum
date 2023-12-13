@@ -29,12 +29,6 @@ namespace Quantum
 		s_SceneData = nullptr;
 	}
 
-	void Renderer::OnWindowResize(UInt32 width, UInt32 height)
-	{
-		// TODO: Fix not resizing properly because aspect ratio is not being updated
-		RenderCommand::SetViewport(0, 0, width, height);
-	}
-
 	void Renderer::BeginScene(const Camera& camera)
 	{
 		for (auto& [name, shader] : s_ShaderLibrary->GetAll())
@@ -67,6 +61,12 @@ namespace Quantum
 	{
 		for (auto& mesh : model.GetMeshes())
 			Submit(mesh, transform);
+	}
+
+	void Renderer::OnWindowResize(UInt32 width, UInt32 height)
+	{
+		// TODO: Fix not resizing properly because aspect ratio is not being updated
+		RenderCommand::SetViewport(0, 0, width, height);
 	}
 
 	void Renderer::DrawVertexArray(const Ref<VertexArray>& vertexArray)

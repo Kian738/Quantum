@@ -19,6 +19,7 @@ namespace Quantum
 			LogLevel::Verbose
 		);
 
+		// TODO: Implement log file stacking with -1, -2, -3, etc.
 		auto logFilePath = FileSystemUtils::CombinePath(
 			Environment::GetLogsDir(),
 			DateTime::Now().GetDate(),

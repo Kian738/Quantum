@@ -10,7 +10,7 @@ namespace Quantum
 {
 	CameraController::CameraController(bool isPerspective, float aspectRatio, float fov, float near, float far)
 		: m_IsPerspective(isPerspective)
-		, m_AspectRatio(aspectRatio)
+		, m_AspectRatio(aspectRatio) // TODO: Adapt to window size
 		, m_Fov(fov)
 		, m_Near(near)
 		, m_Far(far)
@@ -26,27 +26,42 @@ namespace Quantum
 
 	void CameraController::OnUpdate(float delta)
 	{
-		// TODO: Test this out
+		auto cameraSpeed = m_CameraSpeed * delta;
+		if (Input::IsShiftDown())
+			cameraSpeed *= 2.0f;
+
 		auto& cameraRotation = m_Camera->GetRotation();
 		if (Input::IsKeyDown(Key::W))
-			m_CameraPosition -= m_Camera->GetZAxis() * m_CameraSpeed * delta;
+			m_CameraPosition -= m_Camera->GetOrientationZ() * cameraSpeed;
 		if (Input::IsKeyDown(Key::S))
-			m_CameraPosition += m_Camera->GetZAxis() * m_CameraSpeed * delta;
+			m_CameraPosition += m_Camera->GetOrientationZ() * cameraSpeed;
 
 		if (Input::IsKeyDown(Key::A))
-			m_CameraPosition -= m_Camera->GetXAxis() * m_CameraSpeed * delta;
+			m_CameraPosition -= m_Camera->GetOrientationX() * cameraSpeed;
 		if (Input::IsKeyDown(Key::D))
-			m_CameraPosition += m_Camera->GetXAxis() * m_CameraSpeed * delta;
+			m_CameraPosition += m_Camera->GetOrientationX() * cameraSpeed;
 
 		if (Input::IsKeyDown(Key::Q))
-			m_CameraPosition -= m_Camera->GetYAxis() * m_CameraSpeed * delta;
+			m_CameraPosition -= m_Camera->GetOrientationY() * cameraSpeed;
 		if (Input::IsKeyDown(Key::E))
-			m_CameraPosition += m_Camera->GetYAxis() * m_CameraSpeed * delta;
-
+			m_CameraPosition += m_Camera->GetOrientationY() * cameraSpeed;
 
 		SetPosition(m_CameraPosition);
 
-		// TODO: Mouse input
+		// TODO: Implement camera rotation from mouse movement
+		auto rotationSpeed = m_RotationSpeed * delta;
+		if (Input::IsKeyDown(Key::Left))
+			m_Camera->SetRotation(cameraRotation * glm::angleAxis(rotationSpeed, Vector3D(0.0f, 1.0f, 0.0f)));
+		if (Input::IsKeyDown(Key::Right))
+			m_Camera->SetRotation(cameraRotation * glm::angleAxis(-rotationSpeed, Vector3D(0.0f, 1.0f, 0.0f)));
+		if (Input::IsKeyDown(Key::Up))
+			m_Camera->SetRotation(cameraRotation * glm::angleAxis(rotationSpeed, Vector3D(1.0f, 0.0f, 0.0f)));
+		if (Input::IsKeyDown(Key::Down))
+			m_Camera->SetRotation(cameraRotation * glm::angleAxis(-rotationSpeed, Vector3D(1.0f, 0.0f, 0.0f)));
+
+		// TODO: Implement camera zoom from mouse scroll
+		auto zoomSpeed = m_ZoomSpeed * delta;
+		// TODO: if (Input::GetMouseScroll delta)
 	}
 
 	void CameraController::SetPosition(const Vector3D& position)

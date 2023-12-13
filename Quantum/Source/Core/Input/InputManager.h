@@ -4,6 +4,7 @@
 #include "Core/Window.h"
 #include "KeyCodes.h"
 #include "MouseCodes.h"
+#include <bitset>
 
 namespace Quantum
 {
@@ -27,8 +28,11 @@ namespace Quantum
 
 		static inline int s_Modifiers = 0;
 
-		static inline Array<bool, c_KeyCount> s_Keys;
-		static inline Array<bool, c_MouseButtonCount> s_MouseButtons;
+		static inline std::bitset<c_KeyCount> s_KeysPrev;
+		static inline std::bitset<c_KeyCount> s_Keys;
+
+		static inline std::bitset<c_MouseButtonCount> s_MouseButtonsPrev;
+		static inline std::bitset<c_MouseButtonCount> s_MouseButtons;
 		
 		static inline Vector2D s_MousePosition;
 		static inline Vector2D s_MouseScroll;
@@ -39,9 +43,13 @@ namespace Quantum
 
 		static bool IsKeyDown(KeyCode key) { return s_Keys[key]; };
 		static bool IsKeyUp(KeyCode key) { return !s_Keys[key]; };
+		static bool IsKeyPressed(KeyCode key) { return s_Keys[key] && !s_KeysPrev[key]; };
+		static bool IsKeyReleased(KeyCode key) { return !s_Keys[key] && s_KeysPrev[key]; };
 
 		static bool IsMouseButtonDown(MouseCode button) { return s_MouseButtons[button]; };
 		static bool IsMouseButtonUp(MouseCode button) { return !s_MouseButtons[button]; };
+		static bool IsMouseButtonPressed(MouseCode button) { return s_MouseButtons[button] && !s_MouseButtonsPrev[button]; };
+		static bool IsMouseButtonReleased(MouseCode button) { return !s_MouseButtons[button] && s_MouseButtonsPrev[button]; };
 
 		static bool IsShiftDown() { return IsModifierDown(KeyModifier::Shift); };
 		static bool IsCtrlDown() { return IsModifierDown(KeyModifier::Control); };

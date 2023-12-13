@@ -27,9 +27,9 @@ namespace Quantum
 	{
 		m_Rotation = rotation;
 		auto rotationMatrix = glm::mat3_cast(m_Rotation);
-		m_OrientationX = rotationMatrix * Vector3D(1.0f, 0.0f, 0.0f);
-		m_OrientationY = rotationMatrix * Vector3D(0.0f, 1.0f, 0.0f);
-		m_OrientationZ = rotationMatrix * Vector3D(0.0f, 0.0f, 1.0f);
+		m_OrientationX = rotationMatrix * c_AxisX;
+		m_OrientationY = rotationMatrix * c_AxisY;
+		m_OrientationZ = rotationMatrix * c_AxisZ;
 		RecalculateViewMatrix();
 	}
 

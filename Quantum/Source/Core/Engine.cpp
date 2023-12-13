@@ -82,6 +82,10 @@ namespace Quantum
 				RenderCommand::SetClearColor({ 0.1f, 0.1f, 0.1f, 1.0f });
 				RenderCommand::Clear();
 
+				// TODO: Remove everything and move to appcontext or sth
+				if (Input::IsKeyPressed(Key::R)) // TODO: Fix shaders reloading 10 times
+					Renderer::GetShaderLibrary()->ReloadAll();
+
 				if (!m_IsMinimized)
 				{
 					Renderer::BeginScene(m_CameraController->GetCamera());

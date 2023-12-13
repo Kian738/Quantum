@@ -27,6 +27,8 @@ namespace Quantum
 
 	void ShaderLibrary::LoadAll()
 	{
+		LOG(Debug, LogGraphics, "Loading all shaders...");
+
 		const auto shaderFiles = FileSystemUtils::GetFiles(Project::GetActive()->GetShaderDir(), "glsl");
 		for (auto& file : shaderFiles)
 			Load(file);
@@ -54,14 +56,18 @@ namespace Quantum
 
 	void ShaderLibrary::UnloadAll()
 	{
+		LOG(Debug, LogGraphics, "Unloading all shaders...");
+
 		for (auto it = m_Shaders.begin(); it != m_Shaders.end(); it = m_Shaders.begin())
 			Unload(it->second);
 	}
 
 	void ShaderLibrary::Reload(const Ref<Shader>& shader)
 	{
+		auto name = shader->GetName();
+
 		Unload(shader);
-		Load(shader->GetName());
+		Load(name);
 	}
 
 	void ShaderLibrary::Reload(const String& name)
@@ -72,8 +78,11 @@ namespace Quantum
 
 	void ShaderLibrary::ReloadAll()
 	{
-		for (auto it = m_Shaders.begin(); it != m_Shaders.end(); it = m_Shaders.begin())
-			Reload(it->second);
+		LOG(Debug, LogGraphics, "Reloading all shaders...");
+
+		auto shaders = m_Shaders;
+		for (auto& [name, shader] : shaders)
+			Reload(shader);
 	}
 
 	Ref<Shader> ShaderLibrary::Get(const String& name)
