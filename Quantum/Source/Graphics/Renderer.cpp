@@ -59,8 +59,21 @@ namespace Quantum
 
 	void Renderer::Submit(const Model& model, const Matrix4D& transform)
 	{
-		for (auto& mesh : model.GetMeshes())
-			Submit(mesh, transform);
+		auto& meshes = model.GetMeshes();
+		for (auto& mesh : meshes)
+		{
+			// TODO: Fix this hack not working for models with multiple meshes
+			// TODO: Fix this hack causing the first mesh to be rendered with the wrong transform
+			if (&mesh == &meshes.front())
+			{
+				Submit(mesh, transform);
+				continue;
+			}
+
+			const auto& meshTransform = mesh.GetTransform();
+			auto finalTransform = transform * meshTransform;
+			Submit(mesh, finalTransform);
+		}
 	}
 
 	void Renderer::OnWindowResize(UInt32 width, UInt32 height)

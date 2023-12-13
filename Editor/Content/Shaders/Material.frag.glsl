@@ -22,8 +22,6 @@ vec3 viewDirection = normalize(v_ViewPosition - v_Position);
 
 void main()
 {
-    vec3 rainbowWave = 0.2 * v_Position;
-
     vec4 diffuseColor = texture(u_Material.diffuse, v_TexCoord);
     vec4 normalColor = texture(u_Material.normal, v_TexCoord);
     vec4 specularColor = texture(u_Material.specular, v_TexCoord);
@@ -40,7 +38,7 @@ void main()
     float specularStrength = pow(max(dot(viewDirection, reflectDirection), 0.0), u_Material.shininess);
     vec3 specularComponent = specularStrength * specularColor.rgb;
 
-    // vec3 finalColor = mix(diffuseComponent + specularComponent + emissionColor.rgb, vec3(rainbowWave), 0.5);
+    vec3 finalColor = diffuseComponent + specularComponent + emissionColor.rgb;
 
-    color = vec4(rainbowWave, diffuseColor.a);
+    color = diffuseColor;
 }

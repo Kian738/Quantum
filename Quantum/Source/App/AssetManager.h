@@ -11,7 +11,7 @@ namespace Quantum
 		static inline Dictionary<String, Ref<Texture>> m_Textures;
 	public:
 		static bool TextureExists(const String& name);
-		static Ref<Texture> LoadTexture(const String& name, const String& path);
+		static Ref<Texture> LoadTexture(const String& path);
 		static Ref<Texture> GetTexture(const String& name);
 	};
 }

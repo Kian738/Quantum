@@ -22,6 +22,8 @@ namespace Quantum
 		Ref<Texture> m_NormalMap;
 		Ref<Texture> m_EmissiveMap;
 		float m_Shininess;
+
+		friend class Model;
 	public:
 		Material(
 			const Ref<Texture>& diffuseMap = nullptr,

@@ -17,8 +17,10 @@ namespace Quantum
 
 		const List<Mesh>& GetMeshes() const { return m_Meshes; };
 	private:
-		void ProcessNode(aiNode* node, const aiScene* scene);
-		Mesh ProcessMesh(aiMesh* mesh, const aiScene* scene);
+		void ProcessNode(aiNode* node, const aiScene* scene, const Matrix4D& parentTransform = Matrix4D(1.0f));
+		Mesh ProcessMesh(aiMesh* mesh, const aiScene* scene, const Matrix4D& transform);
 		Ref<Material> LoadMaterial(aiMaterial* aiMaterial);
+
+		static Matrix4D GetMatrixFromAssimp(const aiMatrix4x4& matrix);
 	};
 }

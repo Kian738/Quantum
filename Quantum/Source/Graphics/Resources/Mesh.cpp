@@ -2,10 +2,11 @@
 
 namespace Quantum
 {
-	Mesh::Mesh(const List<Vertex>& vertices, const List<UInt32>& indices, const Ref<Material>& material)
+	Mesh::Mesh(const List<Vertex>& vertices, const List<UInt32>& indices, const Ref<Material>& material, const Matrix4D& transform)
 		: m_Vertices(vertices)
 		, m_Indices(indices)
 		, m_Material(material)
+		, m_Transform(transform)
 	{
 		m_VertexArray = CreateRef<VertexArray>();
 

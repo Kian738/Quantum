@@ -61,8 +61,9 @@ namespace Quantum
 
 	void Engine::Run()
 	{
-		// TODO: Remove this
-		auto model = CreateRef<Model>("Models/Test.fbx");
+		// TODO: Remove model loading from engine::run
+		auto helicopterModel = CreateRef<Model>("Models/Helicopter.fbx");
+		auto carModel = CreateRef<Model>("Models/Car.fbx");
 
 		auto lastTime = GetCurrentTime();
 
@@ -92,8 +93,19 @@ namespace Quantum
 					
 					// TODO: Render models from scene
 					{
-						auto modelTransform = glm::translate(Matrix4D(1.0f), Vector3D(0.0f));
-						Renderer::Submit(*model, modelTransform);
+						static auto baseTransform = Matrix4D(1.0f);
+						static auto helicopterTransform = glm::translate(baseTransform, Vector3D(0.0f, 0.0f, 0.0f));
+						static auto carTransform = glm::translate(
+							baseTransform,
+							Vector3D(5.0f, 0.0f, 0.0f)
+						) * glm::rotate(
+							baseTransform,
+							glm::radians(-90.0f),
+							Vector3D(1.0f, 0.0f, 0.0f)
+						);
+
+						Renderer::Submit(*helicopterModel, helicopterTransform);
+						Renderer::Submit(*carModel, carTransform);
 					}
 
 					Renderer::EndScene();

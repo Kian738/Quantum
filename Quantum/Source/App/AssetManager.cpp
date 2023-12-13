@@ -10,8 +10,10 @@ namespace Quantum
 	}
 
 	// TODO: Load from /Assets
-	Ref<Texture> AssetManager::LoadTexture(const String& name, const String& path)
+	Ref<Texture> AssetManager::LoadTexture(const String& path)
 	{
+		auto name = FileSystemUtils::GetFileName(path);
+
 		if (TextureExists(name))
 		{
 			LOG(Error, LogGraphics, "Texture with name \"{}\" already exists", name);

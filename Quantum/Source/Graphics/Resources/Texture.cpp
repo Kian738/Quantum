@@ -67,7 +67,7 @@ namespace Quantum
 	Ref<Texture> Texture::FromColor(const Vector4D& color)
 	{
 		auto colorData = GetColorData(color);
-		return CreateScope<Texture>(1, 1, &colorData);
+		return CreateRef<Texture>(1, 1, &colorData);
 	}
 
 	void Texture::Initialize(UInt32 channels)
