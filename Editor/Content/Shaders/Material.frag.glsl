@@ -40,5 +40,5 @@ void main()
 
     vec3 finalColor = diffuseComponent + specularComponent + emissionColor.rgb;
 
-    color = diffuseColor;
+    color = vec4(finalColor, diffuseColor.a);
 }

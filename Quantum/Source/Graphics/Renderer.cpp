@@ -62,14 +62,7 @@ namespace Quantum
 		auto& meshes = model.GetMeshes();
 		for (auto& mesh : meshes)
 		{
-			// TODO: Fix this hack not working for models with multiple meshes
 			// TODO: Fix this hack causing the first mesh to be rendered with the wrong transform
-			if (&mesh == &meshes.front())
-			{
-				Submit(mesh, transform);
-				continue;
-			}
-
 			const auto& meshTransform = mesh.GetTransform();
 			auto finalTransform = transform * meshTransform;
 			Submit(mesh, finalTransform);
