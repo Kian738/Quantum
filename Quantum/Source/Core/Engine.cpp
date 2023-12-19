@@ -103,11 +103,11 @@ namespace Quantum
 						static auto helicopterTransform = glm::translate(baseTransform, Vector3D(0.0f, 0.0f, 0.0f));
 						static auto carTransform = glm::translate(
 							baseTransform,
-							Vector3D(5.0f, 0.0f, 0.0f)
+							{ 5.0f, 0.0f, 0.0f }
 						) * glm::rotate(
 							baseTransform,
 							glm::radians(-90.0f),
-							Vector3D(1.0f, 0.0f, 0.0f)
+							{ 1.0f, 0.0f, 0.0f }
 						);
 
 						Renderer::Submit(helicopterModel, helicopterTransform);
