@@ -42,10 +42,17 @@ namespace Quantum
 		const float GetZoomLevel() const { return m_ZoomLevel; };
 		const float GetFov() const { return m_Fov; };
 
+		void SetZoomLevel(float zoomLevel);
+		void SetFov(float fov);
+
+		void SetPerspective(bool isPerspective);
+		void SetAspectRatio(float aspectRatio);
 		void SetPosition(const Vector3D& position);
 		void SetRotation(const Quaternion& rotation);
-		void SetPerspective(bool isPerspective);
 	private:
+		void OnWindowResize(int width, int height);
+
+		Matrix4D ComputeProjection();
 		Matrix4D ComputePerspectiveProjection();
 		Matrix4D ComputeOrthographicProjection();
 		void ResetProjection();

@@ -19,9 +19,11 @@ namespace Quantum
 		float halfHeight = middle * glm::tan(glm::radians(m_Fov / 2.0f));
 		m_ZoomLevel = glm::max(halfHeight, m_MinZoom);
 
-		m_Camera = CreateScope<Camera>(m_IsPerspective ? ComputePerspectiveProjection() : ComputeOrthographicProjection());
+		m_Camera = CreateScope<Camera>(ComputeProjection());
 
 		SetPosition({ 0.0f, 0.0f, middle });
+
+		GEngine->GetWindow().ResizeEvent += [this](int width, int height) { OnWindowResize(width, height); };
 	}
 
 	void CameraController::OnUpdate(float delta)
@@ -64,15 +66,17 @@ namespace Quantum
 		// TODO: if (Input::GetMouseScroll delta)
 	}
 
-	void CameraController::SetPosition(const Vector3D& position)
+	void CameraController::SetZoomLevel(float zoomLevel)
 	{
-		m_CameraPosition = position;
-		m_Camera->SetPosition(m_CameraPosition);
 	}
 
-	void CameraController::SetRotation(const Quaternion& rotation)
+	void CameraController::SetFov(float fov)
 	{
-		m_Camera->SetRotation(rotation);
+		if (m_Fov == fov)
+			return;
+
+		m_Fov = fov;
+		ResetProjection();
 	}
 
 	void CameraController::SetPerspective(bool isPerspective)
@@ -84,6 +88,34 @@ namespace Quantum
 		ResetProjection();
 	}
 
+	void CameraController::SetAspectRatio(float aspectRatio)
+	{
+		if (m_AspectRatio == aspectRatio)
+			return;
+
+		m_AspectRatio = aspectRatio;
+		ResetProjection();
+	}
+
+	void CameraController::SetPosition(const Vector3D& position)
+	{
+		m_CameraPosition = position;
+		m_Camera->SetPosition(m_CameraPosition);
+	}
+
+	void CameraController::SetRotation(const Quaternion& rotation)
+	{
+		m_Camera->SetRotation(rotation);
+	}
+
+	void CameraController::OnWindowResize(int width, int height)
+	{
+		if (width == 0 || height == 0)
+			return;
+
+		SetAspectRatio((float)width / (float)height);
+	}
+
 	Matrix4D CameraController::ComputePerspectiveProjection()
 	{
 		return glm::perspective(
@@ -92,6 +124,11 @@ namespace Quantum
 			m_Near,
 			m_Far
 		);
+	}
+
+	Matrix4D CameraController::ComputeProjection()
+	{
+		return m_IsPerspective ? ComputePerspectiveProjection() : ComputeOrthographicProjection();
 	}
 
 	Matrix4D CameraController::ComputeOrthographicProjection()
@@ -109,7 +146,6 @@ namespace Quantum
 
 	void CameraController::ResetProjection()
 	{
-		auto projection = m_IsPerspective ? ComputePerspectiveProjection() : ComputeOrthographicProjection();
-		m_Camera->SetProjection(projection);
+		m_Camera->SetProjection(ComputeProjection());
 	}
 }

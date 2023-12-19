@@ -80,15 +80,21 @@ namespace Quantum
 
 				m_CameraController->OnUpdate(deltaTime);
 
-				RenderCommand::SetClearColor({ 0.1f, 0.1f, 0.1f, 1.0f });
-				RenderCommand::Clear();
-
 				// TODO: Remove everything and move to appcontext or sth
 				if (Input::IsKeyPressed(Key::R)) // TODO: Fix shaders reloading 10 times
 					Renderer::GetShaderLibrary()->ReloadAll();
 
+				if (Input::IsKeyPressed(Key::Escape))
+					Stop();
+
+				if (Input::IsKeyPressed(Key::Minus))
+					m_CameraController->SetFov(m_CameraController->GetFov() - 1.0f);
+				if (Input::IsKeyPressed(Key::Equal))
+					m_CameraController->SetFov(m_CameraController->GetFov() + 1.0f);
+
 				if (!m_IsMinimized)
 				{
+					Renderer::Clear();
 					Renderer::BeginScene(m_CameraController->GetCamera());
 					
 					// TODO: Render models from scene
@@ -104,8 +110,8 @@ namespace Quantum
 							Vector3D(1.0f, 0.0f, 0.0f)
 						);
 
-						Renderer::Submit(*helicopterModel, helicopterTransform);
-						Renderer::Submit(*carModel, carTransform);
+						Renderer::Submit(helicopterModel, helicopterTransform);
+						Renderer::Submit(carModel, carTransform);
 					}
 
 					Renderer::EndScene();

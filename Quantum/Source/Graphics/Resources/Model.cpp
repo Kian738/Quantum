@@ -25,9 +25,11 @@ namespace Quantum
 
 	void Model::ProcessNode(aiNode* node, const aiScene* scene, const Matrix4D& parentTransform)
 	{
-		auto transform = parentTransform * GetMatrixFromAssimp(node->mTransformation);
+		auto transform = parentTransform * GetMatrix4DFromAssimp(node->mTransformation);
 
-		for (auto i = 0u; i < node->mNumMeshes; i++)
+		auto meshCount = node->mNumMeshes;
+		m_Meshes.reserve(meshCount);
+		for (auto i = 0u; i < meshCount; i++)
 		{
 			auto mesh = scene->mMeshes[node->mMeshes[i]];
 			m_Meshes.emplace_back(ProcessMesh(mesh, scene, transform));
@@ -37,13 +39,13 @@ namespace Quantum
 			ProcessNode(node->mChildren[i], scene);
 	}
 
-	Mesh Model::ProcessMesh(aiMesh* mesh, const aiScene* scene, const Matrix4D& transform)
+	Ref<Mesh> Model::ProcessMesh(aiMesh* mesh, const aiScene* scene, const Matrix4D& transform)
 	{
 		List<Vertex> vertices;
 		List<UInt32> indices;
 		Ref<Material> material;
 
-		for (auto i = 0u; i < mesh->mNumVertices; i++)
+		for (auto i = 0ull; i < mesh->mNumVertices; i++)
 		{
 			Vertex vertex{};
 
@@ -65,20 +67,20 @@ namespace Quantum
 			vertices.emplace_back(vertex);
 		}
 
-		for (auto i = 0u; i < mesh->mNumFaces; i++)
+		for (auto i = 0ull; i < mesh->mNumFaces; i++)
 		{
 			auto& aiFace = mesh->mFaces[i];
 			for (auto j = 0u; j < aiFace.mNumIndices; j++)
 				indices.emplace_back(aiFace.mIndices[j]);
 		}
 
-		if (mesh->mMaterialIndex >= 0)
+		if (auto materialIdx = mesh->mMaterialIndex; materialIdx >= 0)
 		{
-			auto aiMaterial = scene->mMaterials[mesh->mMaterialIndex];
+			auto aiMaterial = scene->mMaterials[materialIdx];
 			material = LoadMaterial(aiMaterial);
 		}
 
-		return { vertices, indices, material, transform };
+		return CreateRef<Mesh>(vertices, indices, material, transform);
 	}
 
 	Ref<Material> Model::LoadMaterial(aiMaterial* aiMaterial)
@@ -111,7 +113,7 @@ namespace Quantum
 		return material;
 	}
 
-	Matrix4D Model::GetMatrixFromAssimp(const aiMatrix4x4& matrix)
+	Matrix4D Model::GetMatrix4DFromAssimp(const aiMatrix4x4& matrix)
 	{
 		Matrix4D result{};
 		result[0][0] = matrix.a1; result[0][1] = matrix.b1; result[0][2] = matrix.c1; result[0][3] = matrix.d1;

@@ -12,8 +12,7 @@ namespace Quantum
 
 		s_SceneData = new SceneData;
 
-		auto& window = GEngine->GetWindow();
-		window.ResizeEvent += [](UInt32 width, UInt32 height) { Renderer::OnWindowResize(width, height); };
+		GEngine->GetWindow().ResizeEvent += [](UInt32 width, UInt32 height) { Renderer::OnWindowResize(width, height); };
 
 		s_ShaderLibrary = CreateRef<ShaderLibrary>();
 		s_ShaderLibrary->Load("Material");
@@ -27,6 +26,12 @@ namespace Quantum
 
 		delete s_SceneData;
 		s_SceneData = nullptr;
+	}
+
+	void Renderer::Clear()
+	{
+		RenderCommand::SetClearColor({ 0.1f, 0.1f, 0.1f, 1.0f });
+		RenderCommand::Clear();
 	}
 
 	void Renderer::BeginScene(const Camera& camera)
@@ -46,24 +51,23 @@ namespace Quantum
 			shader->Unbind();
 	}
 
-	void Renderer::Submit(const Mesh& mesh, const Matrix4D& transform)
+	void Renderer::Submit(const Ref<Mesh>& mesh, const Matrix4D& transform)
 	{
 		static auto shader = s_ShaderLibrary->Get("Material");
-		mesh.GetMaterial()->Bind(shader);
+		mesh->GetMaterial()->Bind(shader);
 		shader->SetMat4("u_Transform", transform);
 		auto transformNormal = glm::transpose(glm::inverse(Matrix3D(transform)));
 		shader->SetMat3("u_TransformNormal", transformNormal);
 
-		DrawVertexArray(mesh.GetVertexArray());
+		DrawVertexArray(mesh->GetVertexArray());
 	}
 
-	void Renderer::Submit(const Model& model, const Matrix4D& transform)
+	void Renderer::Submit(const Ref<Model>& model, const Matrix4D& transform)
 	{
-		auto& meshes = model.GetMeshes();
+		auto& meshes = model->GetMeshes();
 		for (auto& mesh : meshes)
 		{
-			// TODO: Fix this hack causing the first mesh to be rendered with the wrong transform
-			const auto& meshTransform = mesh.GetTransform();
+			const auto& meshTransform = mesh->GetTransform();
 			auto finalTransform = transform * meshTransform;
 			Submit(mesh, finalTransform);
 		}
@@ -71,7 +75,6 @@ namespace Quantum
 
 	void Renderer::OnWindowResize(UInt32 width, UInt32 height)
 	{
-		// TODO: Fix not resizing properly because aspect ratio is not being updated
 		RenderCommand::SetViewport(0, 0, width, height);
 	}
 

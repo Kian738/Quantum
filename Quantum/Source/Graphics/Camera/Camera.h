@@ -36,6 +36,7 @@ namespace Quantum
 		const Vector3D& GetOrientationZ() const { return m_OrientationZ; };
 
 		void SetProjection(const Matrix4D& projectionMatrix);
+
 		void SetPosition(const Vector3D& position);
 		void SetRotation(const Quaternion& rotation);
 	private:
