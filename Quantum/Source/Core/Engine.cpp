@@ -10,7 +10,8 @@ DEFINE_LOG_CATEGORY_STATIC(Core);
 
 namespace Quantum
 {
-	Engine::Engine()
+	Engine::Engine(AppContext* appContext)
+		: m_AppContext(appContext)
 	{
 		m_Config.IsGraphicsEnabled = GEngineConfig["Graphics"]["Enabled"].as<bool>(true);
 	}
@@ -18,6 +19,8 @@ namespace Quantum
 	Engine::~Engine()
 	{
 		LOG(Info, LogCore, "Shutting down Engine...");
+
+		m_AppContext->Shutdown();
 
 		if (m_Config.IsGraphicsEnabled)
 		{
@@ -54,17 +57,13 @@ namespace Quantum
 			Input::Initialize();
 
 			Renderer::Initialize();
-
-			m_CameraController = CreateScope<CameraController>();
 		}
+
+		m_AppContext->Initialize();
 	}
 
 	void Engine::Run()
 	{
-		// TODO: Remove model loading from engine::run
-		auto helicopterModel = CreateRef<Model>("Models/Helicopter.fbx");
-		auto carModel = CreateRef<Model>("Models/Car.fbx");
-
 		auto lastTime = GetCurrentTime();
 
 		m_IsRunning = true;
@@ -78,44 +77,10 @@ namespace Quantum
 			{
 				m_Window->OnUpdate();
 
-				m_CameraController->OnUpdate(deltaTime);
-
-				// TODO: Remove everything and move to appcontext or sth
-				if (Input::IsKeyPressed(Key::R)) // TODO: Fix shaders reloading 10 times
-					Renderer::GetShaderLibrary()->ReloadAll();
-
-				if (Input::IsKeyPressed(Key::Escape))
-					Stop();
-
-				if (Input::IsKeyPressed(Key::Minus))
-					m_CameraController->SetFov(m_CameraController->GetFov() - 1.0f);
-				if (Input::IsKeyPressed(Key::Equal))
-					m_CameraController->SetFov(m_CameraController->GetFov() + 1.0f);
+				m_AppContext->Update(deltaTime);
 
 				if (!m_IsMinimized)
-				{
-					Renderer::Clear();
-					Renderer::BeginScene(m_CameraController->GetCamera());
-					
-					// TODO: Render models from scene
-					{
-						static auto baseTransform = Matrix4D(1.0f);
-						static auto helicopterTransform = glm::translate(baseTransform, Vector3D(0.0f, 0.0f, 0.0f));
-						static auto carTransform = glm::translate(
-							baseTransform,
-							{ 5.0f, 0.0f, 0.0f }
-						) * glm::rotate(
-							baseTransform,
-							glm::radians(-90.0f),
-							{ 1.0f, 0.0f, 0.0f }
-						);
-
-						Renderer::Submit(helicopterModel, helicopterTransform);
-						Renderer::Submit(carModel, carTransform);
-					}
-
-					Renderer::EndScene();
-				}
+					m_AppContext->Render();
 
 				m_Window->OnRender();
 			}

@@ -88,10 +88,12 @@ namespace Quantum
 		auto material = CreateRef<Material>();
 
 		if (aiColor3D aiColor; aiMaterial->Get(AI_MATKEY_COLOR_DIFFUSE, aiColor) == AI_SUCCESS)
-			material->SetDiffuseMap(Texture::FromColor({ 1.0f, aiColor.b, aiColor.g, aiColor.r }));
+			material->SetDiffuseMap(Texture::FromColor({ aiColor.r, aiColor.g, aiColor.b }));
 
-		aiMaterial->Get(AI_MATKEY_SHININESS, material->m_Shininess);
-
+		float shininess;
+		aiMaterial->Get(AI_MATKEY_SHININESS, shininess);
+		material->SetShininess(COALESCE(shininess, 32.0f));
+		
 		constexpr auto textureTypeCount = 4u;
 		Array<TextureType, textureTypeCount> textureTypes = { TextureType::Diffuse, TextureType::Specular, TextureType::Normal, TextureType::Emissive };
 		Array<aiTextureType, textureTypeCount> aiTextureTypes = { aiTextureType_DIFFUSE, aiTextureType_SPECULAR, aiTextureType_NORMALS, aiTextureType_EMISSIVE };

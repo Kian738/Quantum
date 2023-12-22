@@ -7,12 +7,12 @@
 
 namespace Quantum
 {
-	Texture::Texture(UInt32 width, UInt32 height, void* data)
+	Texture::Texture(UInt32 width, UInt32 height, UInt32 channels, void* data)
 		: m_Path("")
 		, m_Width(width)
 		, m_Height(height)
 	{
-		Initialize(4);
+		Initialize(channels);
 
 		if (data)
 			SetData(data);
@@ -64,10 +64,16 @@ namespace Quantum
 		glTextureParameteri(m_RendererID, static_cast<GLenum>(axis), mode);
 	}
 
+	Ref<Texture> Texture::FromColor(const Vector3D& color)
+	{
+		auto colorData = GetColorData(color);
+		return CreateRef<Texture>(1, 1, 3, &colorData);
+	}
+
 	Ref<Texture> Texture::FromColor(const Vector4D& color)
 	{
 		auto colorData = GetColorData(color);
-		return CreateRef<Texture>(1, 1, &colorData);
+		return CreateRef<Texture>(1, 1, 4, &colorData);
 	}
 
 	void Texture::Initialize(UInt32 channels)
@@ -95,12 +101,20 @@ namespace Quantum
 		glTextureParameteri(m_RendererID, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
 	}
 
+	UInt32 Texture::GetColorData(const Vector3D& color)
+	{
+		return
+			static_cast<UInt32>(color.z * 255.0f) << 16 |
+			static_cast<UInt32>(color.y * 255.0f) << 8 |
+			static_cast<UInt32>(color.x * 255.0f);
+	}
+
 	UInt32 Texture::GetColorData(const Vector4D& color)
 	{
 		return
-			static_cast<UInt32>(color.x * 255.0f) << 24 |
-			static_cast<UInt32>(color.y * 255.0f) << 16 |
-			static_cast<UInt32>(color.z * 255.0f) << 8 |
-			static_cast<UInt32>(color.w * 255.0f);
+			static_cast<UInt32>(color.w * 255.0f) << 24 |
+			static_cast<UInt32>(color.z * 255.0f) << 16 |
+			static_cast<UInt32>(color.y * 255.0f) << 8 |
+			static_cast<UInt32>(color.x * 255.0f);
 	}
 }

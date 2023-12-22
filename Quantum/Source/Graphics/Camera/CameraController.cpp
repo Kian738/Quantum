@@ -10,7 +10,7 @@ namespace Quantum
 {
 	CameraController::CameraController(bool isPerspective, float aspectRatio, float fov, float near, float far)
 		: m_IsPerspective(isPerspective)
-		, m_AspectRatio(aspectRatio) // TODO: Adapt to window size
+		, m_AspectRatio(COALESCE(aspectRatio, GEngine->GetWindow().GetAspectRatio()))
 		, m_Fov(fov)
 		, m_Near(near)
 		, m_Far(far)

@@ -2,7 +2,7 @@
 
 #include "Types.h"
 #include "Window.h"
-#include "Graphics/Camera/CameraController.h"
+#include "App/AppContext.h"
 
 namespace Quantum
 {
@@ -16,9 +16,9 @@ namespace Quantum
 	{
 	private:
 		EngineConfig m_Config;
+		AppContext* m_AppContext;
 
 		Scope<Window> m_Window;
-		Scope<CameraController> m_CameraController;
 
 		bool m_HasCrashed = false;
 
@@ -27,7 +27,7 @@ namespace Quantum
 
 		using Clock = std::chrono::high_resolution_clock;
 	public:
-		Engine();
+		Engine(AppContext* appContext);
 		~Engine();
 
 		int GetExitCode() const { return static_cast<int>(m_HasCrashed); };

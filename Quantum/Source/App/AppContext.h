@@ -16,7 +16,7 @@ namespace Quantum
 		virtual ~AppContext() = default;
 
 		virtual void Initialize() {};
-		virtual void Update(double delta) {};
+		virtual void Update(float deltaTime) {};
 		virtual void Render() {};
 		virtual void Shutdown() {};
 

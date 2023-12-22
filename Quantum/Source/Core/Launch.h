@@ -19,14 +19,17 @@ namespace Quantum
 		LOG(Info, LogCommon, "QuantumEngine built on {} at {}", date, time); // TODO: Add version number
 
 		// TODO: Parse command line arguments
-		GEngine = new Engine;
-		GEngine->Initialize(); // TODO: Pass appContext to engine
+		GEngine = new Engine(appContext);
+		GEngine->Initialize();
 
 		GEngine->Run();
 
 		auto status = GEngine->GetExitCode();
 		delete GEngine;
 		GEngine = nullptr;
+
+		delete appContext;
+		appContext = nullptr;
 
 		Log::Shutdown();
 

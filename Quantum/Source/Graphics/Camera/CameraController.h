@@ -3,6 +3,9 @@
 #include "Camera.h"
 #include "Core/Types.h"
 
+#undef near
+#undef far
+
 namespace Quantum
 {
 	class CameraController
@@ -27,7 +30,7 @@ namespace Quantum
 		float m_MinFov = 1.0f, m_MaxFov = 179.0f;
 	public:
 		CameraController(bool isPerspective = true,
-			float aspectRatio = 16.0f / 9.0f,
+			float aspectRatio = 0.0f,
 			float fov = 45.0f,
 			float near = 0.1f,
 			float far = 1000.0f

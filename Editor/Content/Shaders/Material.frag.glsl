@@ -20,6 +20,18 @@ uniform Material u_Material;
 
 vec3 viewDirection = normalize(v_ViewPosition - v_Position);
 
+vec3 computeBlinnPhong(vec3 normal, vec3 lightDirection, vec3 viewDir, vec3 diffuseColor, vec3 specularColor, float shininess)
+{
+    float diffuseStrength = max(dot(normal, lightDirection), 0.0);
+    vec3 diffuseComponent = diffuseStrength * diffuseColor;
+
+    vec3 halfwayDir = normalize(lightDirection + viewDir);
+    float specularStrength = pow(max(dot(normal, halfwayDir), 0.0), shininess);
+    vec3 specularComponent = specularStrength * specularColor;
+
+    return diffuseComponent + specularComponent;
+}
+
 void main()
 {
     vec4 diffuseColor = texture(u_Material.diffuse, v_TexCoord);
@@ -29,16 +41,15 @@ void main()
 
     vec3 normal = (any(greaterThan(normalColor.rgb, vec3(0.0))) || normalColor.a > 0.0) ? normalize(normalColor.rgb * 2.0 - 1.0) : normalize(v_Normal);
 
-    // TODO: Implement lightning instead of using the Lambertian reflection model
     vec3 lightDirection = normalize(vec3(1.0, 1.0, 1.0));
-    float diffuseStrength = max(dot(normal, lightDirection), 0.0);
-    vec3 diffuseComponent = diffuseStrength * diffuseColor.rgb;
 
-    vec3 reflectDirection = reflect(-lightDirection, normal);
-    float specularStrength = pow(max(dot(viewDirection, reflectDirection), 0.0), u_Material.shininess);
-    vec3 specularComponent = specularStrength * specularColor.rgb;
-
-    vec3 finalColor = diffuseComponent + specularComponent + emissionColor.rgb;
+    vec3 finalColor = computeBlinnPhong(normal,
+        lightDirection,
+        viewDirection,
+        diffuseColor.rgb,
+        specularColor.rgb,
+        u_Material.shininess
+    ) + emissionColor.rgb;
 
     color = vec4(finalColor, diffuseColor.a);
 }

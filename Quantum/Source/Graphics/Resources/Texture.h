@@ -19,7 +19,7 @@ namespace Quantum
 		GLenum m_InternalFormat, m_DataFormat;
 		UInt32 m_Width, m_Height, m_BPP;
 	public:
-		Texture(UInt32 width, UInt32 height, void* data = nullptr);
+		Texture(UInt32 width, UInt32 height, UInt32 channels, void* data = nullptr);
 		Texture(const String& path);
 		~Texture();
 
@@ -32,10 +32,12 @@ namespace Quantum
 		void SetData(void* data);
 		void SetWrapMode(TextureWrapAxis axis, GLenum mode);
 		
+		static Ref<Texture> FromColor(const Vector3D& color);
 		static Ref<Texture> FromColor(const Vector4D& color);
 	private:
 		void Initialize(UInt32 channels);
 
+		static UInt32 GetColorData(const Vector3D& color);
 		static UInt32 GetColorData(const Vector4D& color);
 	};
 }

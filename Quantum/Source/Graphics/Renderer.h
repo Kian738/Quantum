@@ -1,6 +1,7 @@
 #pragma once
 
 #include "Buffers/VertexArray.h"
+#include "Camera/Camera.h"
 #include "Core/Types.h"
 #include "Resources/Mesh.h"
 #include "Resources/Model.h"
@@ -13,7 +14,6 @@ namespace Quantum
 		Matrix4D ViewProjectionMatrix;
 	};
 
-	// TODO: Implement resizing
 	class Renderer
 	{
 	private:
@@ -28,8 +28,8 @@ namespace Quantum
 		static void EndScene();
 
 		// TODO: Remove this and use designated draw functions and IDrawable interface
-		static void Submit(const Ref<Mesh>& mesh, const Matrix4D& transform = Matrix4D(1.0f));
-		static void Submit(const Ref<Model>& model, const Matrix4D& transform = Matrix4D(1.0f));
+		static void Submit(const Mesh& mesh, const Matrix4D& transform = Matrix4D(1.0f));
+		static void Submit(const Model& model, const Matrix4D& transform = Matrix4D(1.0f));
 
 		static Ref<ShaderLibrary> GetShaderLibrary() { return s_ShaderLibrary; };
 	private:
