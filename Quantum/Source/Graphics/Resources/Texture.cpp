@@ -64,13 +64,13 @@ namespace Quantum
 		glTextureParameteri(m_RendererID, static_cast<GLenum>(axis), mode);
 	}
 
-	Ref<Texture> Texture::FromColor(const Vector3D& color)
+	Ref<Texture> Texture::FromColor(const Vector3& color)
 	{
 		auto colorData = GetColorData(color);
 		return CreateRef<Texture>(1, 1, 3, &colorData);
 	}
 
-	Ref<Texture> Texture::FromColor(const Vector4D& color)
+	Ref<Texture> Texture::FromColor(const Vector4& color)
 	{
 		auto colorData = GetColorData(color);
 		return CreateRef<Texture>(1, 1, 4, &colorData);
@@ -101,7 +101,7 @@ namespace Quantum
 		glTextureParameteri(m_RendererID, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
 	}
 
-	UInt32 Texture::GetColorData(const Vector3D& color)
+	UInt32 Texture::GetColorData(const Vector3& color)
 	{
 		return
 			static_cast<UInt32>(color.z * 255.0f) << 16 |
@@ -109,7 +109,7 @@ namespace Quantum
 			static_cast<UInt32>(color.x * 255.0f);
 	}
 
-	UInt32 Texture::GetColorData(const Vector4D& color)
+	UInt32 Texture::GetColorData(const Vector4& color)
 	{
 		return
 			static_cast<UInt32>(color.w * 255.0f) << 24 |

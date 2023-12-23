@@ -55,27 +55,27 @@ namespace Quantum
 		glUniform1f(GetUniformLocation(name), value);
 	}
 
-	void Shader::SetFloat2(StringView name, const Vector2D& values)
+	void Shader::SetFloat2(StringView name, const Vector2& values)
 	{
 		glUniform2f(GetUniformLocation(name), values.x, values.y);
 	}
 
-	void Shader::SetFloat3(StringView name, const Vector3D& values)
+	void Shader::SetFloat3(StringView name, const Vector3& values)
 	{
 		glUniform3f(GetUniformLocation(name), values.x, values.y, values.z);
 	}
 
-	void Shader::SetFloat4(StringView name, const Vector4D& values)
+	void Shader::SetFloat4(StringView name, const Vector4& values)
 	{
 		glUniform4f(GetUniformLocation(name), values.x, values.y, values.z, values.w);
 	}
 
-	void Shader::SetMat3(StringView name, const Matrix3D& matrix)
+	void Shader::SetMat3(StringView name, const Matrix3& matrix)
 	{
 		glUniformMatrix3fv(GetUniformLocation(name), 1, GL_FALSE, glm::value_ptr(matrix));
 	}
 
-	void Shader::SetMat4(StringView name, const Matrix4D& matrix)
+	void Shader::SetMat4(StringView name, const Matrix4& matrix)
 	{
 		glUniformMatrix4fv(GetUniformLocation(name), 1, GL_FALSE, glm::value_ptr(matrix));
 	}

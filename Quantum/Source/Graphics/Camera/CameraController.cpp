@@ -26,13 +26,24 @@ namespace Quantum
 		GEngine->GetWindow().ResizeEvent += [this](int width, int height) { OnWindowResize(width, height); };
 	}
 
-	void CameraController::OnUpdate(float delta)
+	void CameraController::OnUpdate(float deltaTime)
 	{
-		auto cameraSpeed = m_CameraSpeed * delta;
+		auto rotationSpeed = m_RotationSpeed * deltaTime;
+		auto zoomSpeed = m_ZoomSpeed * deltaTime;
+		auto cameraSpeed = m_CameraSpeed * deltaTime;
 		if (Input::IsShiftDown())
 			cameraSpeed *= 2.0f;
 
-		auto& cameraRotation = m_Camera->GetRotation();
+		auto [mouseDeltaX, mouseDeltaY] = Input::GetMousePositionDelta();
+		if (mouseDeltaX != 0.0f || mouseDeltaY != 0.0f)
+		{
+			auto rotationX = glm::angleAxis(glm::radians((float)mouseDeltaX * rotationSpeed), m_Camera->GetOrientationY());
+			auto rotationY = glm::angleAxis(glm::radians((float)mouseDeltaY * rotationSpeed), m_Camera->GetOrientationX());
+			auto addedRotation = glm::inverse(rotationX * rotationY);
+
+			SetRotation(addedRotation * m_Camera->GetRotation()); // TODO: Handle rotation on event instead of every frame
+		}
+
 		if (Input::IsKeyDown(Key::W))
 			m_CameraPosition -= m_Camera->GetOrientationZ() * cameraSpeed;
 		if (Input::IsKeyDown(Key::S))
@@ -50,24 +61,17 @@ namespace Quantum
 
 		SetPosition(m_CameraPosition);
 
-		// TODO: Implement camera rotation from mouse movement
-		auto rotationSpeed = m_RotationSpeed * delta;
-		if (Input::IsKeyDown(Key::Left))
-			m_Camera->SetRotation(cameraRotation * glm::angleAxis(rotationSpeed, Vector3D(0.0f, 1.0f, 0.0f)));
-		if (Input::IsKeyDown(Key::Right))
-			m_Camera->SetRotation(cameraRotation * glm::angleAxis(-rotationSpeed, Vector3D(0.0f, 1.0f, 0.0f)));
-		if (Input::IsKeyDown(Key::Up))
-			m_Camera->SetRotation(cameraRotation * glm::angleAxis(rotationSpeed, Vector3D(1.0f, 0.0f, 0.0f)));
-		if (Input::IsKeyDown(Key::Down))
-			m_Camera->SetRotation(cameraRotation * glm::angleAxis(-rotationSpeed, Vector3D(1.0f, 0.0f, 0.0f)));
+		if (Input::IsKeyDown(Key::Minus))
+			m_Fov -= 1.0f;
+		if (Input::IsKeyDown(Key::Equal))
+			m_Fov += 1.0f;
 
-		// TODO: Implement camera zoom from mouse scroll
-		auto zoomSpeed = m_ZoomSpeed * delta;
-		// TODO: if (Input::GetMouseScroll delta)
+		SetFov(m_Fov);
 	}
 
 	void CameraController::SetZoomLevel(float zoomLevel)
 	{
+		// TODO: Implement
 	}
 
 	void CameraController::SetFov(float fov)
@@ -97,7 +101,7 @@ namespace Quantum
 		ResetProjection();
 	}
 
-	void CameraController::SetPosition(const Vector3D& position)
+	void CameraController::SetPosition(const Vector3& position)
 	{
 		m_CameraPosition = position;
 		m_Camera->SetPosition(m_CameraPosition);
@@ -116,7 +120,7 @@ namespace Quantum
 		SetAspectRatio((float)width / (float)height);
 	}
 
-	Matrix4D CameraController::ComputePerspectiveProjection()
+	Matrix4 CameraController::ComputePerspectiveProjection()
 	{
 		return glm::perspective(
 			glm::radians(m_Fov),
@@ -126,12 +130,12 @@ namespace Quantum
 		);
 	}
 
-	Matrix4D CameraController::ComputeProjection()
+	Matrix4 CameraController::ComputeProjection()
 	{
 		return m_IsPerspective ? ComputePerspectiveProjection() : ComputeOrthographicProjection();
 	}
 
-	Matrix4D CameraController::ComputeOrthographicProjection()
+	Matrix4 CameraController::ComputeOrthographicProjection()
 	{
 		auto halfWidth = m_AspectRatio * m_ZoomLevel;
 		return glm::ortho(

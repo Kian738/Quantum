@@ -11,7 +11,7 @@ namespace Quantum
 		glEnable(GL_DEPTH_TEST);
 	}
 
-	void RenderCommand::SetClearColor(const Vector4D& color)
+	void RenderCommand::SetClearColor(const Vector4& color)
 	{
 		glClearColor(color.r, color.g, color.b, color.a);
 	}

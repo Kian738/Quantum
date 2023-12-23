@@ -11,7 +11,7 @@ namespace Quantum
 {
 	struct SceneData
 	{
-		Matrix4D ViewProjectionMatrix;
+		Matrix4 ViewProjectionMatrix;
 	};
 
 	class Renderer
@@ -28,8 +28,8 @@ namespace Quantum
 		static void EndScene();
 
 		// TODO: Remove this and use designated draw functions and IDrawable interface
-		static void Submit(const Mesh& mesh, const Matrix4D& transform = Matrix4D(1.0f));
-		static void Submit(const Model& model, const Matrix4D& transform = Matrix4D(1.0f));
+		static void Submit(const Mesh& mesh, const Matrix4& transform = Matrix4(1.0f));
+		static void Submit(const Model& model, const Matrix4& transform = Matrix4(1.0f));
 
 		static Ref<ShaderLibrary> GetShaderLibrary() { return s_ShaderLibrary; };
 	private:

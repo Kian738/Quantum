@@ -75,6 +75,8 @@ namespace Quantum
 
 			if (m_Config.IsGraphicsEnabled)
 			{
+				Input::OnUpdate();
+
 				m_Window->OnUpdate();
 
 				m_AppContext->Update(deltaTime);

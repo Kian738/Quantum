@@ -32,12 +32,12 @@ namespace Quantum
 		void SetData(void* data);
 		void SetWrapMode(TextureWrapAxis axis, GLenum mode);
 		
-		static Ref<Texture> FromColor(const Vector3D& color);
-		static Ref<Texture> FromColor(const Vector4D& color);
+		static Ref<Texture> FromColor(const Vector3& color);
+		static Ref<Texture> FromColor(const Vector4& color);
 	private:
 		void Initialize(UInt32 channels);
 
-		static UInt32 GetColorData(const Vector3D& color);
-		static UInt32 GetColorData(const Vector4D& color);
+		static UInt32 GetColorData(const Vector3& color);
+		static UInt32 GetColorData(const Vector4& color);
 	};
 }

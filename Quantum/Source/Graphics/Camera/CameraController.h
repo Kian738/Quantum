@@ -12,7 +12,7 @@ namespace Quantum
 	{
 	private:
 		Scope<Camera> m_Camera;
-		Vector3D m_CameraPosition;
+		Vector3 m_CameraPosition; // TODO: Consider using a local variable instead of a member variable
 
 		float m_AspectRatio;
 		float m_ZoomLevel;
@@ -21,7 +21,7 @@ namespace Quantum
 		bool m_IsPerspective;
 
 		float m_CameraSpeed = 1.0f;
-		float m_RotationSpeed = 1.0f;
+		float m_RotationSpeed = 10.0f;
 
 		float m_ZoomSpeed = 0.1f;
 		float m_MinZoom = 0.1f, m_MaxZoom = 4.0f;
@@ -36,7 +36,7 @@ namespace Quantum
 			float far = 1000.0f
 		);
 
-		void OnUpdate(float delta);
+		void OnUpdate(float deltaTime);
 
 		Camera& GetCamera() { return *m_Camera; };
 		const Camera& GetCamera() const { return *m_Camera; };
@@ -50,14 +50,14 @@ namespace Quantum
 
 		void SetPerspective(bool isPerspective);
 		void SetAspectRatio(float aspectRatio);
-		void SetPosition(const Vector3D& position);
+		void SetPosition(const Vector3& position);
 		void SetRotation(const Quaternion& rotation);
 	private:
 		void OnWindowResize(int width, int height);
 
-		Matrix4D ComputeProjection();
-		Matrix4D ComputePerspectiveProjection();
-		Matrix4D ComputeOrthographicProjection();
+		Matrix4 ComputeProjection();
+		Matrix4 ComputePerspectiveProjection();
+		Matrix4 ComputeOrthographicProjection();
 		void ResetProjection();
 	};
 }

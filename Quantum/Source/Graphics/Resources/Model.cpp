@@ -23,7 +23,7 @@ namespace Quantum
 		ProcessNode(scene->mRootNode, scene);
 	}
 
-	void Model::ProcessNode(aiNode* node, const aiScene* scene, const Matrix4D& parentTransform)
+	void Model::ProcessNode(aiNode* node, const aiScene* scene, const Matrix4& parentTransform)
 	{
 		auto transform = parentTransform * GetMatrix4DFromAssimp(node->mTransformation);
 
@@ -39,7 +39,7 @@ namespace Quantum
 			ProcessNode(node->mChildren[i], scene);
 	}
 
-	Ref<Mesh> Model::ProcessMesh(aiMesh* mesh, const aiScene* scene, const Matrix4D& transform)
+	Ref<Mesh> Model::ProcessMesh(aiMesh* mesh, const aiScene* scene, const Matrix4& transform)
 	{
 		List<Vertex> vertices;
 		List<UInt32> indices;
@@ -115,9 +115,9 @@ namespace Quantum
 		return material;
 	}
 
-	Matrix4D Model::GetMatrix4DFromAssimp(const aiMatrix4x4& matrix)
+	Matrix4 Model::GetMatrix4DFromAssimp(const aiMatrix4x4& matrix)
 	{
-		Matrix4D result{};
+		Matrix4 result{};
 		result[0][0] = matrix.a1; result[0][1] = matrix.b1; result[0][2] = matrix.c1; result[0][3] = matrix.d1;
 		result[1][0] = matrix.a2; result[1][1] = matrix.b2; result[1][2] = matrix.c2; result[1][3] = matrix.d2;
 		result[2][0] = matrix.a3; result[2][1] = matrix.b3; result[2][2] = matrix.c3; result[2][3] = matrix.d3;

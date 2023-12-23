@@ -49,18 +49,18 @@ namespace Quantum
 			shader->Unbind();
 	}
 
-	void Renderer::Submit(const Mesh& mesh, const Matrix4D& transform)
+	void Renderer::Submit(const Mesh& mesh, const Matrix4& transform)
 	{
 		static auto shader = s_ShaderLibrary->Get("Material");
 		mesh.GetMaterial()->Bind(shader);
 		shader->SetMat4("u_Transform", transform);
-		auto transformNormal = glm::transpose(glm::inverse(Matrix3D(transform)));
+		auto transformNormal = glm::transpose(glm::inverse(Matrix3(transform)));
 		shader->SetMat3("u_TransformNormal", transformNormal);
 
 		DrawVertexArray(mesh.GetVertexArray());
 	}
 
-	void Renderer::Submit(const Model& model, const Matrix4D& transform)
+	void Renderer::Submit(const Model& model, const Matrix4& transform)
 	{
 		auto& meshes = model.GetMeshes();
 		for (auto& mesh : meshes)

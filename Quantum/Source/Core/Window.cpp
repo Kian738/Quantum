@@ -136,6 +136,11 @@ namespace Quantum
 		m_Specification.Fullscreen = enabled;
 	}
 
+	void Window::SetCursorMode(CursorMode mode)
+	{
+		glfwSetInputMode(m_WindowHandle, GLFW_CURSOR, static_cast<int>(mode));
+	}
+
 	void Window::SetCallbacks()
 	{
 		glfwSetWindowSizeCallback(m_WindowHandle, [](GLFWwindow* windowHandle, int width, int height)

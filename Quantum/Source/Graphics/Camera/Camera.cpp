@@ -2,7 +2,7 @@
 
 namespace Quantum
 {
-	Camera::Camera(const Matrix4D& projectionMatrix)
+	Camera::Camera(const Matrix4& projectionMatrix)
 		: m_ProjectionMatrix(projectionMatrix)
 		, m_ViewMatrix(1.0f)
 		, m_ViewProjectionMatrix(m_ProjectionMatrix * m_ViewMatrix)
@@ -11,13 +11,13 @@ namespace Quantum
 	{
 	}
 
-	void Camera::SetProjection(const Matrix4D& projectionMatrix)
+	void Camera::SetProjection(const Matrix4& projectionMatrix)
 	{
 		m_ProjectionMatrix = projectionMatrix;
 		m_ViewProjectionMatrix = m_ProjectionMatrix * m_ViewMatrix;
 	}
 
-	void Camera::SetPosition(const Vector3D& position)
+	void Camera::SetPosition(const Vector3& position)
 	{
 		m_Position = position;
 		RecalculateViewMatrix();

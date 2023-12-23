@@ -9,7 +9,7 @@ namespace Quantum
 	public:
 		static void Initialize();
 
-		static void SetClearColor(const Vector4D& color);
+		static void SetClearColor(const Vector4& color);
 		static void Clear();
 
 		static void Draw(UInt32 count);

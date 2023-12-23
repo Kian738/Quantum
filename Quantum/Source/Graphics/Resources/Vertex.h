@@ -7,9 +7,9 @@ namespace Quantum
 {
 	struct Vertex
 	{
-		Vector3D Position;
-		Vector3D Normal;
-		Vector2D TexCoord;
+		Vector3 Position;
+		Vector3 Normal;
+		Vector2 TexCoord;
 
 		static BufferLayout GetLayout()
 		{

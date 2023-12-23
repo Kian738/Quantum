@@ -1,6 +1,7 @@
 #pragma once
 
 #include <array>
+#include <bitset>
 #include <functional>
 #include <glm/glm.hpp>
 #include <glm/gtc/quaternion.hpp>
@@ -26,13 +27,13 @@ namespace Quantum
 
 	using Quaternion = glm::quat;
 
-	using Vector2D = glm::vec2;
-	using Vector3D = glm::vec3;
-	using Vector4D = glm::vec4;
+	using Vector2 = glm::vec2;
+	using Vector3 = glm::vec3;
+	using Vector4 = glm::vec4;
 
-	using Matrix2D = glm::mat2;
-	using Matrix3D = glm::mat3;
-	using Matrix4D = glm::mat4;
+	using Matrix2 = glm::mat2;
+	using Matrix3 = glm::mat3;
+	using Matrix4 = glm::mat4;
 
 	using String = std::string;
 	using StringView = std::string_view;
@@ -43,6 +44,9 @@ namespace Quantum
 
 	template <class T = Mutex>
 	using Lock = std::lock_guard<T>;
+
+	template <UInt64 Bits>
+	using BitSet = std::bitset<Bits>;
 
 	template <typename T>
 	using Func = std::function<T>;
