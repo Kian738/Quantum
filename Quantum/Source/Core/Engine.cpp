@@ -42,7 +42,11 @@ namespace Quantum
 
 			auto windowConfig = GEngineConfig["Graphics"]["MainWindow"];
 			auto windowSpec = WindowSpecification(
-				windowConfig["Title"].as<String>(App::GetName()),
+				windowConfig["Title"].as<String>(std::format(
+					"{}{}",
+					App::GetName(),
+					Environment::IsDebug() ? " (Debug)" : ""
+				)),
 				windowConfig["Width"].as<UInt32>(0),
 				windowConfig["Height"].as<UInt32>(0),
 				windowConfig["VSync"].as<bool>(true),
