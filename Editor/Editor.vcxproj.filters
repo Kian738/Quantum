@@ -21,6 +21,11 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Content\Config\DefaultEngine.yaml" />
-    <None Include="QuantumEngines.qproj" />
+    <None Include="QuantumEngine.qproj" />
+    <None Include="Content\Assets\Models\Car.fbx" />
+    <None Include="Content\Assets\Models\Gas_Station.fbx" />
+    <None Include="Content\Assets\Models\Helicopter.fbx" />
+    <None Include="Content\Shaders\Material.frag.glsl" />
+    <None Include="Content\Shaders\Material.vert.glsl" />
   </ItemGroup>
 </Project>

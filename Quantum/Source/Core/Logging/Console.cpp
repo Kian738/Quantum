@@ -5,6 +5,7 @@
 
 namespace Quantum
 {
+	// TODO: Make this work
 	static int WINAPI ConsoleCtrlHandler(DWORD dwCtrlType)
 	{
 		switch (dwCtrlType)

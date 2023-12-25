@@ -8,8 +8,8 @@ namespace Quantum
 {
 	struct EngineConfig
 	{
-		bool IsGraphicsEnabled = true;
-		// TODO: Impl: bool IsAudioEnabled = true;
+		bool IsGraphicsEnabled;
+		// TODO: Impl: bool IsAudioEnabled;
 	};
 
 	class Engine

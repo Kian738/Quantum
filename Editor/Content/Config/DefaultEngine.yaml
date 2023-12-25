@@ -1,8 +1,2 @@
-"Console":
-  "Enabled": "true"
-"Graphics":
-  "Enabled": "true"
-  "MainWindow":
-    "VSync": "true"
-    "Resizable": "true"
-    "Fullscreen": "false"
+Console:
+  Enabled: true

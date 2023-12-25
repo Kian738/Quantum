@@ -96,12 +96,15 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
+    <None Include="Content\Assets\Models\Car.fbx" />
+    <None Include="Content\Assets\Models\Gas_Station.fbx" />
+    <None Include="Content\Assets\Models\Helicopter.fbx" />
     <None Include="Content\Config\DefaultEngine.yaml">
       <DeploymentContent>true</DeploymentContent>
     </None>
-    <None Include="QuantumEngines.qproj">
-      <DeploymentContent>true</DeploymentContent>
-    </None>
+    <None Include="Content\Shaders\Material.frag.glsl" />
+    <None Include="Content\Shaders\Material.vert.glsl" />
+    <None Include="QuantumEngine.qproj" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

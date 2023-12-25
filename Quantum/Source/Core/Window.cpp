@@ -26,7 +26,7 @@ namespace Quantum
 		if (bool noSize = spec.Height == 0 || spec.Width == 0; noSize || spec.Fullscreen)
 		{
 			auto [width, height] = GetMonitorSize();
-			if (noSize)
+			if (noSize && !spec.Fullscreen)
 			{
 				width *= c_WindowSizeRatio;
 				height *= c_WindowSizeRatio;
@@ -37,17 +37,25 @@ namespace Quantum
 
 		LOG(Info, LogWindow, "Creating window {} ({}x{})...", spec.Title, m_Specification.Width, m_Specification.Height);
 
+		glfwWindowHint(GLFW_CLIENT_API, GLFW_OPENGL_API);
+		glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
 		glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 4);
 		glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 6);
-		glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
 
-		glfwWindowHint(GLFW_SAMPLES, 8); // TODO: Make this configurable
+		glfwWindowHint(GLFW_SRGB_CAPABLE, GLFW_TRUE);
 		glfwWindowHint(GLFW_DOUBLEBUFFER, GLFW_TRUE);
 
+		glfwWindowHint(
+			GLFW_SAMPLES,
+			GEngineConfig["Graphics"]["Rendering"]["Samples"].as<UInt32>(8)
+		);
+
 		glfwWindowHint(GLFW_RESIZABLE, spec.Resizable);
+		glfwWindowHint(GLFW_DECORATED, true);
 		// TODO: Add suppport for decorated windows
 		// TODO: Add suppport for maximized windows
 		// TODO: Load size and position from config
+		// TODO: Add debug context support
 		m_WindowHandle = glfwCreateWindow(
 			m_Specification.Width,
 			m_Specification.Height,

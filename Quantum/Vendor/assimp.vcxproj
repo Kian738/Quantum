@@ -72,7 +72,7 @@
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <SDLCheck>true</SDLCheck>
-      <PreprocessorDefinitions>ASSIMP_BUILD_NO_EXPORT;ASSIMP_BUILD_NO_IFC_IMPORTER;ASSIMP_BUILD_NO_C4D_IMPORTER;ASSIMP_BUILD_NO_OPENGEX_IMPORTER;ASSIMP_BUILD_NO_NFF_IMPORTER;ASSIMP_USE_STB_IMAGE_STATIC;RAPIDJSON_HAS_STDSTRING=1;_CRT_SECURE_NO_WARNINGS;_CRT_NONSTDC_NO_WARNINGS;NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>ASSIMP_BUILD_NO_EXPORT;ASSIMP_BUILD_NO_IFC_IMPORTER;ASSIMP_BUILD_NO_C4D_IMPORTER;ASSIMP_BUILD_NO_OPENGEX_IMPORTER;ASSIMP_BUILD_NO_NFF_IMPORTER;RAPIDJSON_HAS_STDSTRING=1;_CRT_SECURE_NO_WARNINGS;_CRT_NONSTDC_NO_WARNINGS;NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
       <AdditionalIncludeDirectories>assimp;assimp\include;assimp\code\;assimp\contrib;assimp\contrib\pugixml\src;assimp\contrib\zlib;assimp\contrib\rapidjson\include;assimp\contrib\unzip;assimp\contrib\utf8cpp\source</AdditionalIncludeDirectories>
       <MultiProcessorCompilation>true</MultiProcessorCompilation>
