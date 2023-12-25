@@ -16,7 +16,7 @@ namespace Quantum
 		Log::Initialize();
 
 		auto [date, time] = DateTime::FromCompileTime().GetDateTime();
-		LOG(Info, LogCommon, "QuantumEngine built on {} at {}", date, time); // TODO: Add version number
+		LOG(Info, LogCommon, "QuantumEngine built on {} at {}", date, time); // TODO: Add version number (e.g. 2023.1P)
 
 		// TODO: Parse command line arguments
 		GEngine = new Engine(appContext);
@@ -40,4 +40,9 @@ namespace Quantum
 int WINAPI wWinMain(_In_ HINSTANCE hInstance, _In_opt_ HINSTANCE hPrevInstance, _In_ LPWSTR lpCmdLine, _In_ int nShowCmd)
 {
 	return Quantum::Main(__argc, __argv);
+}
+
+int main(int argc, char** argv)
+{
+	return Quantum::Main(argc, argv);
 }

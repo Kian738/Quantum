@@ -56,7 +56,7 @@ namespace Quantum
 
 		WindowSpecification& GetSpecification() { return m_Specification; };
 		String GetTitle() const { return m_Specification.Title; };
-		Pair<UInt32, UInt32> GetSize() const { return { GetWidth(), GetHeight()}; };
+		Pair<UInt32, UInt32> GetSize() const { return CreatePair(GetWidth(), GetHeight()); };
 		UInt32 GetWidth() const { return m_Specification.Width; };
 		UInt32 GetHeight() const { return m_Specification.Height; };
 		bool IsVSync() const { return m_Specification.VSync; };

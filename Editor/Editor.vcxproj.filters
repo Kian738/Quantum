@@ -21,6 +21,6 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Content\Config\DefaultEngine.yaml" />
-    <None Include="QuantumEngine.qproj" />
+    <None Include="QuantumEngines.qproj" />
   </ItemGroup>
 </Project>

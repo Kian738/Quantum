@@ -88,7 +88,7 @@ namespace Quantum
 	Pair<UInt32, UInt32> Window::GetMonitorSize(GLFWmonitor* monitor) const
 	{
 		auto mode = glfwGetVideoMode(monitor);
-		return { mode->width, mode->height };
+		return CreatePair(mode->width, mode->height);
 	}
 
 	float Window::GetAspectRatio() const

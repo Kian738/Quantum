@@ -99,7 +99,7 @@
     <None Include="Content\Config\DefaultEngine.yaml">
       <DeploymentContent>true</DeploymentContent>
     </None>
-    <None Include="QuantumEngine.qproj">
+    <None Include="QuantumEngines.qproj">
       <DeploymentContent>true</DeploymentContent>
     </None>
   </ItemGroup>

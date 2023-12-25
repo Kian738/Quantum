@@ -31,7 +31,7 @@ namespace Quantum
 
 	Pair<String, String> DateTime::GetDateTime() const
 	{
-		return { GetDate(), GetTime() };
+		return CreatePair(GetDate(), GetTime());
 	}
 
 	bool DateTime::operator==(const DateTime& other) const
@@ -79,6 +79,7 @@ namespace Quantum
 		return !(*this < other);
 	}
 
+	// TODO: Make this Constexpr some day
 	DateTime DateTime::FromCompileTime()
 	{
 		const char* compileDate = __DATE__;

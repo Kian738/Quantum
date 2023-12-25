@@ -63,6 +63,12 @@ namespace Quantum
 	template <class T1, class T2>
 	using Pair = std::pair<T1, T2>;
 
+	template <class T1, class T2>
+	constexpr Pair<T1, T2> CreatePair(T1&& first, T2&& second)
+	{
+		return std::make_pair(std::forward<T1>(first), std::forward<T2>(second));
+	}
+
 	template <class T>
 	using Ref = std::shared_ptr<T>;
 
