@@ -8,41 +8,57 @@
 
 namespace Quantum
 {
-	CameraController::CameraController(bool isPerspective, float aspectRatio, float fov, float near, float far)
+	CameraController::CameraController(
+		const Vector3& position,
+		const Quaternion& rotation,
+		bool isPerspective,
+		float aspectRatio,
+		float fov,
+		float near,
+		float far
+	)
 		: m_IsPerspective(isPerspective)
 		, m_AspectRatio(COALESCE(aspectRatio, GEngine->GetWindow().GetAspectRatio()))
 		, m_Fov(fov)
 		, m_Near(near)
 		, m_Far(far)
 	{
+
 		float middle = glm::sqrt(m_Near * m_Far);
 		float halfHeight = middle * glm::tan(glm::radians(m_Fov / 2.0f));
 		m_ZoomLevel = glm::max(halfHeight, m_MinZoom);
 
 		m_Camera = CreateScope<Camera>(ComputeProjection());
 
-		SetPosition({ 0.0f, 0.0f, middle });
+		SetPosition(position);
+		SetRotation(rotation);
 
-		GEngine->GetWindow().ResizeEvent += [this](int width, int height) { OnWindowResize(width, height); };
+		auto& window = GEngine->GetWindow();
+		window.ResizeEvent += [this](int width, int height) { OnWindowResize(width, height); };
 	}
 
 	void CameraController::OnUpdate(float deltaTime)
 	{
 		auto rotationSpeed = m_RotationSpeed * deltaTime;
-		auto zoomSpeed = m_ZoomSpeed * deltaTime;
 		auto cameraSpeed = m_CameraSpeed * deltaTime;
-		if (Input::IsShiftDown())
-			cameraSpeed *= 2.0f;
 
-		auto [mouseDeltaX, mouseDeltaY] = Input::GetMousePositionDelta();
-		if (mouseDeltaX != 0.0f || mouseDeltaY != 0.0f)
+		auto mouseDelta = Input::GetMousePositionDelta();
+		if (mouseDelta.x != 0.0f || mouseDelta.y != 0.0f)
 		{
-			auto rotationX = glm::angleAxis(glm::radians((float)mouseDeltaX * rotationSpeed), m_Camera->GetOrientationY());
-			auto rotationY = glm::angleAxis(glm::radians((float)mouseDeltaY * rotationSpeed), m_Camera->GetOrientationX());
+			auto rotationX = glm::angleAxis(glm::radians(mouseDelta.x * rotationSpeed), m_Camera->GetOrientationY());
+			auto rotationY = glm::angleAxis(glm::radians(mouseDelta.y * rotationSpeed), m_Camera->GetOrientationX());
 
 			auto rotation = glm::inverse(rotationX * rotationY);
 			SetRotation(rotation * m_Camera->GetRotation()); // TODO: Handle rotation on event instead of every frame however may result in complications with physics
 		}
+
+		if (auto scrollDelta = Input::GetMouseScrollDeltaY(); scrollDelta != 0.0f)
+			if (Input::IsShiftDown())
+				m_CameraSpeed = glm::clamp(m_CameraSpeed + scrollDelta * m_ZoomSpeed, m_MinCameraSpeed, m_MaxCameraSpeed);
+			else
+			{
+				// TODO: Implement zooming
+			}
 
 		auto position = m_Camera->GetPosition();
 

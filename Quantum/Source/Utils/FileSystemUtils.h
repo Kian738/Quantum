@@ -23,5 +23,7 @@ namespace Quantum
 
 		static std::ofstream OpenFile(StringView path);
 		static String ReadFile(StringView path);
+
+		static bool Exists(StringView path);
 	};
 }

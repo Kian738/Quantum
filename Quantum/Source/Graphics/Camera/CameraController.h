@@ -20,6 +20,8 @@ namespace Quantum
 		bool m_IsPerspective;
 
 		float m_CameraSpeed = 1.0f;
+		float m_MinCameraSpeed = 0.1f, m_MaxCameraSpeed = 8.0f;
+
 		float m_RotationSpeed = 10.0f;
 
 		float m_ZoomSpeed = 0.1f;
@@ -28,7 +30,10 @@ namespace Quantum
 		float m_FovSpeed = 1.0f;
 		float m_MinFov = 1.0f, m_MaxFov = 179.0f;
 	public:
-		CameraController(bool isPerspective = true,
+		CameraController(
+			const Vector3& position = { 0.0f, 0.0f, 0.0f },
+			const Quaternion& rotation = { 0.0f, 0.0f, 0.0f, 1.0f },
+			bool isPerspective = true,
 			float aspectRatio = 0.0f,
 			float fov = 45.0f,
 			float near = 0.1f,

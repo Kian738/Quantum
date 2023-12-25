@@ -12,7 +12,7 @@ namespace Quantum
 		glEnable(GL_DEPTH_TEST);
 		glDepthFunc(GL_LEQUAL);
 
-		glEnable(GL_MULTISAMPLE);
+		glEnable(GL_MULTISAMPLE); // TODO: Also add support for TSAA in addition to MSAA
 
 		glEnable(GL_FRAMEBUFFER_SRGB);
 

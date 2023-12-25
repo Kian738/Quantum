@@ -11,12 +11,18 @@ namespace Quantum
 		m_File.EngineVersion = "1.0.0"; // TODO: Get engine version from somewhere
 
 		Save();
+
+		m_IsLoaded = true;
 	}
 
 	Project::Project(StringView path)
 		: m_Path(path)
 	{
+		if (!FileSystemUtils::Exists(path))
+			return;
+
 		Reload();
+		m_IsLoaded = true;
 	}
 
 	Project::~Project()

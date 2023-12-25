@@ -12,5 +12,6 @@ namespace Quantum
 	public:
 		static void Initialize();
 		static void Register(ConfigFile* configFile);
+		static void PrintStatus();
 	};
 }

@@ -93,41 +93,26 @@ namespace Quantum
 			return;
 
 		s_MouseButtonsPrev = s_MouseButtons;
-
 		s_MouseButtons[button] = state;
 		s_Modifiers = mods;
 	}
 
-	void Input::OnMouseMove(double x, double y)
+	void Input::OnMouseMove(float x, float y)
 	{
 		s_MousePositionPrev = s_MousePosition;
-
-		s_MousePosition.first = x;
-		s_MousePosition.second = y;
-
-		s_MousePositionDelta = SubtractVector(s_MousePosition, s_MousePositionPrev);
+		s_MousePosition = { x, y };
+		s_MousePositionDelta = s_MousePosition - s_MousePositionPrev;
 	}
 
-	void Input::OnMouseScroll(double x, double y)
+	void Input::OnMouseScroll(float x, float y)
 	{
 		s_MouseScrollPrev = s_MouseScroll;
-
-		s_MouseScroll.first = x;
-		s_MouseScroll.second = y;
-
-		s_MouseScrollDelta = SubtractVector(s_MouseScroll, s_MouseScrollPrev);
+		s_MouseScroll = { x, y };
+		s_MouseScrollDelta = s_MouseScroll - s_MouseScrollPrev;
 	}
 
 	bool Input::IsModifierDown(KeyModifier modifier)
 	{
 		return (s_Modifiers & static_cast<UInt8>(modifier)) != 0;
-	}
-
-	Input::Vector2D Input::SubtractVector(const Vector2D& a, const Vector2D& b)
-	{
-		auto result = a;
-		result.first -= b.first;
-		result.second -= b.second;
-		return result;
 	}
 }

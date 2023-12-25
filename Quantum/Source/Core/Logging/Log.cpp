@@ -67,19 +67,24 @@ namespace Quantum
 			auto levelColor = LevelToColor(level);
 			auto levelString = std::format("{}{}{}", levelColor, levelName, defaultColor); // TODO: Could be precomputed
 
-			if (Console::IsAllocated()) std::println("[{}]: [{}]: {}", levelString, categoryName, message);
-			std::println(s_LogFile, "[{}]: [{}]: [{}]: {}", currentTime, levelName, categoryName, message);
+			auto plainMessage = std::format("[{}]: {}", categoryName, message);
+			if (Console::IsAllocated()) std::println("[{}]: {}", levelString, plainMessage);
+			std::println(s_LogFile, "[{}]: [{}]: {}", currentTime, levelName, plainMessage);
 
 			return;
 		}
 
 		auto relativeFile = PathToRelative(file);
 
-		if (Console::IsAllocated()) std::println("{}[{}]: [{}] [{}:{}]: {}{}", fatalColor, levelName, categoryName, relativeFile, line, message, defaultColor);
-		std::println(s_LogFile, "[{}]: [{}]: [{}]: [{}:{}]: {}", currentTime, levelName, categoryName, relativeFile, line, message);
+		auto plainMessage = std::format("[{}]: [{}]: [{}:{}]: {}", levelName, categoryName, relativeFile, line, message);
+		if (Console::IsAllocated()) std::println("{}{}{}", fatalColor, plainMessage, defaultColor);
+		std::println(s_LogFile, "[{}]: {}", currentTime, plainMessage);
 
 		std::this_thread::sleep_for(std::chrono::seconds(5));
-		GEngine->Crash();
+		if (GEngine)
+			GEngine->Crash();
+		else
+			std::exit(1);
 	}
 
 	LogLevel Log::NameToLevel(const char* name)

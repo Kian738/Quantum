@@ -21,7 +21,7 @@ public:
 
 	void Initialize() override
 	{
-		m_CameraController = CreateScope<CameraController>();
+		m_CameraController = CreateScope<CameraController>(Vector3(3.25f, 6.0f, -14.0f), Quaternion(0.0f, 0.0f, 0.0f, 1.0f));
 
 		m_HelicopterModel = CreateRef<Model>("Models/Helicopter.fbx");
 		m_CarModel = CreateRef<Model>("Models/Car.fbx");

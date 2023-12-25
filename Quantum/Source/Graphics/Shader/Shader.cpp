@@ -3,6 +3,8 @@
 #include "Core/Core.h"
 #include <glm/gtc/type_ptr.hpp>
 
+DEFINE_LOG_CATEGORY_STATIC(Shader);
+
 namespace Quantum
 {
 	Shader::Shader(StringView path)
@@ -17,6 +19,12 @@ namespace Quantum
 		auto fragmentPath = std::format("{}.frag.glsl", path);
 		auto fragmentSource = FileSystemUtils::ReadFile(fragmentPath);
 		sources[GL_FRAGMENT_SHADER] = fragmentSource.c_str();
+
+		if (vertexSource.empty() || fragmentSource.empty())
+		{
+			LOG(Error, LogShader, "Failed to load shader: {}", path);
+			return;
+		}
 
 		Compile(sources);
 	}
@@ -87,7 +95,7 @@ namespace Quantum
 
 	void Shader::Compile(const ShaderSource& shaderSources)
  	{
-		LOG_CHECK(shaderSources.size() <= 2, Warning, LogGraphics, "Shader source count is greater than 2");
+		LOG_CHECK(shaderSources.size() <= 2, Warning, LogShader, "Shader source count is greater than 2");
 
 		auto program = glCreateProgram();
 
@@ -114,7 +122,7 @@ namespace Quantum
 
 				glDeleteShader(shader);
 
-				LOG(Error, LogGraphics, "Shader compilation failed: {}", infoLog.data());
+				LOG(Error, LogShader, "Shader compilation failed: {}", infoLog.data());
 				break;
 			}
 
@@ -142,7 +150,7 @@ namespace Quantum
 			for (auto id : shaderIDs)
 				glDeleteShader(id);
 
-			LOG(Error, LogGraphics, "Shader linking failed: {}", infoLog.data());
+			LOG(Error, LogShader, "Shader linking failed: {}", infoLog.data());
 			return;
 		}
 

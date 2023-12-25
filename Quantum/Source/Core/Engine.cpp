@@ -48,7 +48,8 @@ namespace Quantum
 				windowConfig["VSync"].as<bool>(true),
 				windowConfig["Resizable"].as<bool>(true),
 				windowConfig["Fullscreen"].as<bool>(false)
-			);
+				// TODO: CursorMode
+			); // TODO: Check why values arent loaded correctly
 
 			m_Window = CreateScope<Window>(windowSpec);
 			m_Window->MinimizeEvent += [this](bool isMinimized) { m_IsMinimized = isMinimized; };

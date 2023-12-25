@@ -76,4 +76,9 @@ namespace Quantum
 		}
 		return result;
     }
+
+    bool FileSystemUtils::Exists(StringView path)
+    {
+        return std::filesystem::exists(path);
+    }
 }

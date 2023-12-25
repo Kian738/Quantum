@@ -83,11 +83,11 @@ namespace Quantum
 		switch (channels)
 		{
 		case 3:
-			m_InternalFormat = GL_RGB8;
+			m_InternalFormat = GL_SRGB8;
 			m_DataFormat = GL_RGB;
 			break;
 		case 4:
-			m_InternalFormat = GL_RGBA8;
+			m_InternalFormat = GL_SRGB8_ALPHA8;
 			m_DataFormat = GL_RGBA;
 			break;
 		}

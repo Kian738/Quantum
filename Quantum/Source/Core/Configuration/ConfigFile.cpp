@@ -3,7 +3,7 @@
 #include "Core/Core.h"
 #include <filesystem>
 
-DEFINE_LOG_CATEGORY_STATIC(Config);
+DEFINE_LOG_CATEGORY(Config);
 
 namespace Quantum
 {
@@ -26,7 +26,7 @@ namespace Quantum
 		auto defaultsPath = FileSystemUtils::CombinePath(defaultsDir, std::format("Default{}", m_Name), "yaml");
 		auto defaults = YAML::LoadFile(defaultsPath);
 
-		if (!std::filesystem::exists(m_Path))
+		if (!FileSystemUtils::Exists(m_Path))
 		{
 			m_Data = defaults;
 			Save();

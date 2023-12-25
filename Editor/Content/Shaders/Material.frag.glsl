@@ -37,13 +37,16 @@ void main()
     vec4 diffuseColor = texture(u_Material.diffuse, v_TexCoord);
     vec4 normalColor = texture(u_Material.normal, v_TexCoord);
     vec4 specularColor = texture(u_Material.specular, v_TexCoord);
-    vec4 emissionColor = texture(u_Material.emission, v_TexCoord);
+    vec4 emissionColor = pow(texture(u_Material.emission, v_TexCoord), vec4(2.2));
 
-    vec3 normal = (any(greaterThan(normalColor.rgb, vec3(0.0))) || normalColor.a > 0.0) ? normalize(normalColor.rgb * 2.0 - 1.0) : normalize(v_Normal);
+    vec3 normal = (any(greaterThan(normalColor.rgb, vec3(0.0))) || normalColor.a > 0.0)
+        ? normalize(normalColor.rgb * 2.0 - 1.0)
+        : normalize(v_Normal);
 
     vec3 lightDirection = normalize(vec3(1.0, 1.0, 1.0));
 
-    vec3 finalColor = computeBlinnPhong(normal,
+    vec3 finalColor = computeBlinnPhong(
+        normal,
         lightDirection,
         viewDirection,
         diffuseColor.rgb,

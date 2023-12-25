@@ -20,12 +20,16 @@ namespace Quantum
 		ProjectFile m_File;
 		String m_Path;
 		bool m_IsDirty = false;
+		bool m_IsLoaded = false;
 
 		static inline Ref<Project> s_Active;
 	public:
 		Project(StringView directory, StringView name);
 		Project(StringView path);
 		~Project();
+
+		bool IsDirty() const { return m_IsDirty; };
+		bool IsLoaded() const { return m_IsLoaded; };
 
 		String GetPath() const { return m_Path; };
 		String GetDir() const;

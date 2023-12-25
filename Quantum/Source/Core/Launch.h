@@ -15,6 +15,11 @@ namespace Quantum
 		Config::Initialize();
 		Log::Initialize();
 
+		if (!Project::GetActive()->IsLoaded())
+			LOG(Fatal, LogCommon, "Failed to load project");
+
+		Config::PrintStatus();
+
 		auto [date, time] = DateTime::FromCompileTime().GetDateTime();
 		LOG(Info, LogCommon, "QuantumEngine built on {} at {}", date, time); // TODO: Add version number (e.g. 2023.1P)
 
