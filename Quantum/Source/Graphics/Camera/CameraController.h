@@ -12,7 +12,6 @@ namespace Quantum
 	{
 	private:
 		Scope<Camera> m_Camera;
-		Vector3 m_CameraPosition; // TODO: Consider using a local variable instead of a member variable
 
 		float m_AspectRatio;
 		float m_ZoomLevel;

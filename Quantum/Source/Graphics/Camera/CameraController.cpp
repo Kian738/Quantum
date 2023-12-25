@@ -39,34 +39,41 @@ namespace Quantum
 		{
 			auto rotationX = glm::angleAxis(glm::radians((float)mouseDeltaX * rotationSpeed), m_Camera->GetOrientationY());
 			auto rotationY = glm::angleAxis(glm::radians((float)mouseDeltaY * rotationSpeed), m_Camera->GetOrientationX());
-			auto addedRotation = glm::inverse(rotationX * rotationY);
 
-			SetRotation(addedRotation * m_Camera->GetRotation()); // TODO: Handle rotation on event instead of every frame
+			auto rotation = glm::inverse(rotationX * rotationY);
+			SetRotation(rotation * m_Camera->GetRotation()); // TODO: Handle rotation on event instead of every frame however may result in complications with physics
 		}
 
+		auto position = m_Camera->GetPosition();
+
 		if (Input::IsKeyDown(Key::W))
-			m_CameraPosition -= m_Camera->GetOrientationZ() * cameraSpeed;
+			position -= m_Camera->GetOrientationZ() * cameraSpeed;
 		if (Input::IsKeyDown(Key::S))
-			m_CameraPosition += m_Camera->GetOrientationZ() * cameraSpeed;
+			position += m_Camera->GetOrientationZ() * cameraSpeed;
 
 		if (Input::IsKeyDown(Key::A))
-			m_CameraPosition -= m_Camera->GetOrientationX() * cameraSpeed;
+			position -= m_Camera->GetOrientationX() * cameraSpeed;
 		if (Input::IsKeyDown(Key::D))
-			m_CameraPosition += m_Camera->GetOrientationX() * cameraSpeed;
+			position += m_Camera->GetOrientationX() * cameraSpeed;
 
 		if (Input::IsKeyDown(Key::Q))
-			m_CameraPosition -= m_Camera->GetOrientationY() * cameraSpeed;
+			position -= m_Camera->GetOrientationY() * cameraSpeed;
 		if (Input::IsKeyDown(Key::E))
-			m_CameraPosition += m_Camera->GetOrientationY() * cameraSpeed;
+			position += m_Camera->GetOrientationY() * cameraSpeed;
 
-		SetPosition(m_CameraPosition);
+		SetPosition(position);
+
+		auto fov = m_Fov;
 
 		if (Input::IsKeyDown(Key::Minus))
-			m_Fov -= 1.0f;
+			fov -= 1.0f;
 		if (Input::IsKeyDown(Key::Equal))
-			m_Fov += 1.0f;
+			fov += 1.0f;
 
-		SetFov(m_Fov);
+		if (Input::IsKeyDown(Key::D0))
+			fov = 45.0f; // TODO: Should be default fov instead of a hardcoded value but whatever
+
+		SetFov(fov);
 	}
 
 	void CameraController::SetZoomLevel(float zoomLevel)
@@ -103,8 +110,7 @@ namespace Quantum
 
 	void CameraController::SetPosition(const Vector3& position)
 	{
-		m_CameraPosition = position;
-		m_Camera->SetPosition(m_CameraPosition);
+		m_Camera->SetPosition(position);
 	}
 
 	void CameraController::SetRotation(const Quaternion& rotation)
