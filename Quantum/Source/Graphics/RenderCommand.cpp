@@ -17,7 +17,7 @@ namespace Quantum
 		glEnable(GL_FRAMEBUFFER_SRGB);
 
 		glEnable(GL_CULL_FACE);
-		glCullFace(GL_FRONT);
+		glCullFace(GL_BACK);
 
 		glEnable(GL_TEXTURE_CUBE_MAP_SEAMLESS);
 	}
