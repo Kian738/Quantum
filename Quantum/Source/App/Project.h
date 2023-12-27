@@ -32,7 +32,7 @@ namespace Quantum
 		bool IsLoaded() const { return m_IsLoaded; };
 
 		String GetPath() const { return m_Path; };
-		String GetDir() const;
+		String GetRootDir() const;
 		String GetContentDir() const;
 		String GetAssetsDir() const;
 		String GetShaderDir() const;

@@ -61,7 +61,7 @@
       <ConformanceMode>true</ConformanceMode>
       <LanguageStandard>stdcpplatest</LanguageStandard>
       <MultiProcessorCompilation>true</MultiProcessorCompilation>
-      <AdditionalIncludeDirectories>$(SolutionDir)Quantum\Source;$(SolutionDir)Quantum\Vendor\yaml-cpp\include;$(SolutionDir)Quantum\Vendor\glfw\include;$(SolutionDir)Quantum\Vendor\glad\include;$(SolutionDir)Quantum\Vendor\glm;$(SolutionDir)Quantum\Vendor\stb;$(SolutionDir)Quantum\Vendor\assimp\include</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)Quantum\Source;$(SolutionDir)Quantum\Vendor\yaml-cpp\include;$(SolutionDir)Quantum\Vendor\GLFW\include;$(SolutionDir)Quantum\Vendor\glad\include;$(SolutionDir)Quantum\Vendor\GLM;$(SolutionDir)Quantum\Vendor\stb;$(SolutionDir)Quantum\Vendor\assimp\include;$(SolutionDir)Quantum\Vendor\ImGui</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
@@ -78,7 +78,7 @@
       <ConformanceMode>true</ConformanceMode>
       <LanguageStandard>stdcpplatest</LanguageStandard>
       <MultiProcessorCompilation>true</MultiProcessorCompilation>
-      <AdditionalIncludeDirectories>$(SolutionDir)Quantum\Source;$(SolutionDir)Quantum\Vendor\yaml-cpp\include;$(SolutionDir)Quantum\Vendor\glfw\include;$(SolutionDir)Quantum\Vendor\glad\include;$(SolutionDir)Quantum\Vendor\glm;$(SolutionDir)Quantum\Vendor\stb;$(SolutionDir)Quantum\Vendor\assimp\include</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)Quantum\Source;$(SolutionDir)Quantum\Vendor\yaml-cpp\include;$(SolutionDir)Quantum\Vendor\GLFW\include;$(SolutionDir)Quantum\Vendor\glad\include;$(SolutionDir)Quantum\Vendor\GLM;$(SolutionDir)Quantum\Vendor\stb;$(SolutionDir)Quantum\Vendor\assimp\include;$(SolutionDir)Quantum\Vendor\ImGui</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
@@ -99,7 +99,7 @@
     <None Include="Content\Assets\Models\Car.fbx" />
     <None Include="Content\Assets\Models\Gas_Station.fbx" />
     <None Include="Content\Assets\Models\Helicopter.fbx" />
-    <None Include="Content\Config\DefaultEngine.yaml">
+    <None Include="Config\DefaultEngine.yaml">
       <DeploymentContent>true</DeploymentContent>
     </None>
     <None Include="Content\Shaders\Material.frag.glsl" />

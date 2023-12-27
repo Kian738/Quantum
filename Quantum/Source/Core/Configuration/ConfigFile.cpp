@@ -23,7 +23,7 @@ namespace Quantum
 	{
 		try
 		{
-			auto defaultsDir = FileSystemUtils::CombinePath(Project::GetActive()->GetContentDir(), "Config");
+			auto defaultsDir = FileSystemUtils::CombinePath(Project::GetActive()->GetRootDir(), "Config");
 			auto defaultsPath = FileSystemUtils::CombinePath(defaultsDir, std::format("Default{}", m_Name), "yaml");
 
 			if (m_IsStatic)

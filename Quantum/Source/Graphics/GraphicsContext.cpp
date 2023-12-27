@@ -12,6 +12,29 @@ namespace Quantum
 		}
 	}
 
+	static void OpenGLDebugMessageCallback(GLenum, GLenum, GLuint id, GLenum severity, GLsizei length, const GLchar* message, const void*)
+	{
+		auto logMessage = std::format("OpenGL Debug Message ({}): {}", id, message);
+		switch (severity)
+		{
+		case GL_DEBUG_SEVERITY_HIGH:
+			LOG(Error, LogGraphics, logMessage);
+			break;
+		case GL_DEBUG_SEVERITY_MEDIUM:
+			LOG(Warning, LogGraphics, logMessage);
+			break;
+		case GL_DEBUG_SEVERITY_LOW:
+			LOG(Info, LogGraphics, logMessage);
+			break;
+		case GL_DEBUG_SEVERITY_NOTIFICATION:
+			LOG(Debug, LogGraphics, logMessage);
+			break;
+		default:
+			LOG(Info, LogGraphics, logMessage);
+			break;
+		}
+	}
+
 	GraphicsContext::GraphicsContext(GLFWwindow* windowHandle)
 		: m_WindowHandle(windowHandle)
 	{
@@ -29,6 +52,8 @@ namespace Quantum
 		LOG(Info, LogGraphics, "  Vendor: {}", Utils::GetGLString(GL_VENDOR));
 		LOG(Info, LogGraphics, "  Renderer: {}", Utils::GetGLString(GL_RENDERER));
 		LOG(Info, LogGraphics, "  Version: {}", Utils::GetGLString(GL_VERSION));
+
+		glDebugMessageCallback(OpenGLDebugMessageCallback, nullptr);
 	}
 
 	void GraphicsContext::SwapBuffers()

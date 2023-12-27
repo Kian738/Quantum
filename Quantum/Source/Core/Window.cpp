@@ -35,7 +35,7 @@ namespace Quantum
 			m_Specification.Height = height;
 		}
 
-		LOG(Info, LogWindow, "Creating window {} ({}x{})...", spec.Title, m_Specification.Width, m_Specification.Height);
+		LOG(Info, LogWindow, "Creating window \"{}\" ({}x{})...", spec.Title, m_Specification.Width, m_Specification.Height);
 
 		glfwWindowHint(GLFW_CLIENT_API, GLFW_OPENGL_API);
 		glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
@@ -81,9 +81,6 @@ namespace Quantum
 
 		glfwDestroyWindow(m_WindowHandle);
 		s_WindowCount--;
-
-		if (s_WindowCount == 0)
-			glfwTerminate();
 	}
 
 	void Window::OnUpdate()

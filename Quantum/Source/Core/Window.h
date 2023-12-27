@@ -51,6 +51,8 @@ namespace Quantum
 		void OnUpdate();
 		void OnRender();
 
+		GLFWwindow* GetNativeWindow() const { return m_WindowHandle; };
+
 		Pair<UInt32, UInt32> GetMonitorSize(GLFWmonitor* monitor = glfwGetPrimaryMonitor()) const;
 		float GetAspectRatio() const;
 

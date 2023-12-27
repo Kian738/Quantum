@@ -12,7 +12,7 @@ namespace Quantum
 
 		s_SceneData = new SceneData;
 
-		GEngine->GetWindow().ResizeEvent += [](UInt32 width, UInt32 height) { Renderer::OnWindowResize(width, height); };
+		GEngine->GetWindow().ResizeEvent += [](UInt32 width, UInt32 height) { OnWindowResize(width, height); };
 
 		s_ShaderLibrary = CreateRef<ShaderLibrary>();
 		s_ShaderLibrary->Load("Material");

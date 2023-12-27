@@ -3,6 +3,8 @@
 #include <Graphics/Renderer.h>
 #include <Graphics/Resources/Model.h>
 
+#include <imgui.h>
+
 using namespace Quantum;
 
 class EditorAppContext : public AppContext
@@ -55,6 +57,7 @@ public:
 			window.SetCursorMode(CursorMode::Disabled);
 	}
 
+	// TODO: Move to seperate thread or something
 	void Render() override
 	{
 		Renderer::Clear();
@@ -78,6 +81,20 @@ public:
 		Renderer::Submit(*m_GasStationModel, gasStationTransform);
 
 		Renderer::EndScene();
+	}
+
+	void RenderImGui() override
+	{
+		auto& camera = m_CameraController->GetCamera();
+		auto& cameraPosition = camera.GetPosition();
+		auto& cameraRotation = camera.GetRotation();
+
+		ImGui::Begin("QuantumEngine");
+		ImGui::Text("FPS: %f", ImGui::GetIO().Framerate);
+		ImGui::Text("Camera Position: %f, %f, %f", cameraPosition.x, cameraPosition.y, cameraPosition.z);
+		ImGui::Text("Camera Rotation: %f, %f, %f", cameraRotation.x, cameraRotation.y, cameraRotation.z);
+		ImGui::Text("Camera Fov: %f", m_Fov);
+		ImGui::End();
 	}
 
 	void Shutdown() override

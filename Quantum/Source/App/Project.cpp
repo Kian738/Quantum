@@ -33,7 +33,7 @@ namespace Quantum
 		Save();
 	}
 
-	String Project::GetDir() const
+	String Project::GetRootDir() const
 	{
 		static auto dir = StringUtils::BeforeLast(m_Path, "\\");
 		return dir;
@@ -41,7 +41,7 @@ namespace Quantum
 
 	String Project::GetContentDir() const
 	{
-		static auto contentDir = FileSystemUtils::CombinePath(GetDir(), "Content");
+		static auto contentDir = FileSystemUtils::CombinePath(GetRootDir(), "Content");
 		return contentDir;
 	}
 

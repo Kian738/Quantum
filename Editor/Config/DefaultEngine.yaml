@@ -1,0 +1,5 @@
+Console:
+  Enabled: true
+Graphics:
+  ImGui:
+    Enabled: true

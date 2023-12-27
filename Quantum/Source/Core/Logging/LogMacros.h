@@ -32,7 +32,7 @@
     Log::LogAsync(Level, Category, \
         [&]() { \
 			if constexpr (std::initializer_list<const char*>{#__VA_ARGS__}.size() == 0) \
-				return []() { return Message; }; \
+				return [&]() { return Message; }; \
 			else \
 				return [&]() { return std::format(Message, __VA_ARGS__); }; \
         }(), \

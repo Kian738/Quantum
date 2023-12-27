@@ -13,7 +13,9 @@ namespace Quantum
 	Engine::Engine(AppContext* appContext)
 		: m_AppContext(appContext)
 	{
-		m_Config.IsGraphicsEnabled = GEngineConfig["Graphics"]["Enabled"].as<bool>(true);
+		auto graphicsConfig = GEngineConfig["Graphics"];
+		m_Config.IsGraphicsEnabled = graphicsConfig["Enabled"].as<bool>(true);
+		m_Config.IsImGuiEnabled = graphicsConfig["ImGui"]["Enabled"].as<bool>(false);
 	}
 
 	Engine::~Engine()
@@ -64,6 +66,12 @@ namespace Quantum
 			Renderer::Initialize();
 		}
 
+		if (m_Config.IsImGuiEnabled)
+		{
+			LOG(Info, LogCore, "Initializing ImGui...");
+			m_ImGuiContext = CreateScope<ImGuiContext>();
+		}
+
 		m_AppContext->Initialize();
 	}
 
@@ -90,6 +98,13 @@ namespace Quantum
 				{
 					m_AppContext->Render();
 					m_Window->OnRender();
+
+					if (m_Config.IsImGuiEnabled)
+					{
+						m_ImGuiContext->BeginFrame();
+						m_AppContext->RenderImGui();
+						m_ImGuiContext->EndFrame();
+					}
 				}
 			}
 			else

@@ -1,14 +1,16 @@
 #pragma once
 
-#include "Types.h"
-#include "Window.h"
 #include "App/AppContext.h"
+#include "Types.h"
+#include "UI/ImGuiContext.h"
+#include "Window.h"
 
 namespace Quantum
 {
 	struct EngineConfig
 	{
 		bool IsGraphicsEnabled;
+		bool IsImGuiEnabled;
 		// TODO: Impl: bool IsAudioEnabled;
 	};
 
@@ -18,6 +20,7 @@ namespace Quantum
 		EngineConfig m_Config;
 		AppContext* m_AppContext;
 
+		Scope<ImGuiContext> m_ImGuiContext;
 		Scope<Window> m_Window;
 
 		bool m_HasCrashed = false;

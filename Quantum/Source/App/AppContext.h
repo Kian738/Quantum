@@ -18,6 +18,7 @@ namespace Quantum
 		virtual void Initialize() {};
 		virtual void Update(float deltaTime) {};
 		virtual void Render() {};
+		virtual void RenderImGui() {};
 		virtual void Shutdown() {};
 
 		String GetProjectPath() const { return m_ProjectPath; };

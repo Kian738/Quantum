@@ -32,6 +32,7 @@
     <ClInclude Include="Source\Core\Logging\LogMacros.h" />
     <ClInclude Include="Source\Core\Misc\Environment.h" />
     <ClInclude Include="Source\Core\Types.h" />
+    <ClInclude Include="Source\Core\UI\ImGuiContext.h" />
     <ClInclude Include="Source\Core\Window.h" />
     <ClInclude Include="Source\App\Project.h" />
     <ClInclude Include="Source\Framework\Scene.h" />
@@ -70,6 +71,7 @@
     <ClCompile Include="Source\Core\Logging\Log.cpp" />
     <ClCompile Include="Source\Core\Misc\Environment.cpp" />
     <ClCompile Include="Source\App\Project.cpp" />
+    <ClCompile Include="Source\Core\UI\ImGuiContext.cpp" />
     <ClCompile Include="Source\Core\Window.cpp" />
     <ClCompile Include="Source\Graphics\Buffers\Buffer.cpp" />
     <ClCompile Include="Source\Graphics\Camera\Camera.cpp" />
@@ -100,6 +102,9 @@
     </ProjectReference>
     <ProjectReference Include="Vendor\GLFW.vcxproj">
       <Project>{52fdc80c-2498-4868-989f-d278e6db5390}</Project>
+    </ProjectReference>
+    <ProjectReference Include="Vendor\ImGui.vcxproj">
+      <Project>{f6410af9-af30-4854-bfd6-bc4b3355211d}</Project>
     </ProjectReference>
     <ProjectReference Include="Vendor\yaml-cpp.vcxproj">
       <Project>{8f3b7894-f570-4991-95f3-5aea7b55ab17}</Project>
@@ -154,7 +159,7 @@
       <ConformanceMode>true</ConformanceMode>
       <LanguageStandard>stdcpplatest</LanguageStandard>
       <MultiProcessorCompilation>true</MultiProcessorCompilation>
-      <AdditionalIncludeDirectories>Source\;Vendor\yaml-cpp\include;Vendor\glfw\include;Vendor\glad\include;Vendor\glm;Vendor\stb;Vendor\assimp\include;Vendor\assimp;Vendor\assimp\code\;Vendor\assimp\contrib;Vendor\assimp\contrib\pugixml\src;Vendor\assimp\contrib\zlib;Vendor\assimp\contrib\rapidjson\include;Vendor\assimp\contrib\unzip;Vendor\assimp\contrib\utf8cpp\source</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>Source\;Vendor\yaml-cpp\include;Vendor\GLFW\include;Vendor\glad\include;Vendor\GLM;Vendor\stb;Vendor\assimp\include;Vendor\assimp;Vendor\assimp\code\;Vendor\assimp\contrib;Vendor\assimp\contrib\pugixml\src;Vendor\assimp\contrib\zlib;Vendor\assimp\contrib\rapidjson\include;Vendor\assimp\contrib\unzip;Vendor\assimp\contrib\utf8cpp\source;Vendor\ImGui</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -171,7 +176,7 @@
       <ConformanceMode>true</ConformanceMode>
       <LanguageStandard>stdcpplatest</LanguageStandard>
       <MultiProcessorCompilation>true</MultiProcessorCompilation>
-      <AdditionalIncludeDirectories>Source\;Vendor\yaml-cpp\include;Vendor\glfw\include;Vendor\glad\include;Vendor\glm;Vendor\stb;Vendor\assimp\include;Vendor\assimp;Vendor\assimp\code\;Vendor\assimp\contrib;Vendor\assimp\contrib\pugixml\src;Vendor\assimp\contrib\zlib;Vendor\assimp\contrib\rapidjson\include;Vendor\assimp\contrib\unzip;Vendor\assimp\contrib\utf8cpp\source</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>Source\;Vendor\yaml-cpp\include;Vendor\GLFW\include;Vendor\glad\include;Vendor\GLM;Vendor\stb;Vendor\assimp\include;Vendor\assimp;Vendor\assimp\code\;Vendor\assimp\contrib;Vendor\assimp\contrib\pugixml\src;Vendor\assimp\contrib\zlib;Vendor\assimp\contrib\rapidjson\include;Vendor\assimp\contrib\unzip;Vendor\assimp\contrib\utf8cpp\source;Vendor\ImGui</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>

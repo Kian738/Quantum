@@ -20,7 +20,7 @@
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <None Include="Content\Config\DefaultEngine.yaml" />
+    <None Include="Config\DefaultEngine.yaml" />
     <None Include="QuantumEngine.qproj" />
     <None Include="Content\Assets\Models\Car.fbx" />
     <None Include="Content\Assets\Models\Gas_Station.fbx" />
