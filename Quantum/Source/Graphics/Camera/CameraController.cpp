@@ -40,7 +40,7 @@ namespace Quantum
 	void CameraController::OnUpdate(float deltaTime)
 	{
 		static auto& window = GEngine->GetWindow();
-		if (window.GetCursorMode() == CursorMode::Disabled) // TODO: Move to InputManager and call it input mode (disabled, locked, normal)
+		if (window.GetCursorMode() != CursorMode::Disabled) // TODO: Move to InputManager and call it input mode (disabled, locked, normal)
 			return;
 
 		auto rotationSpeed = m_RotationSpeed * deltaTime;
