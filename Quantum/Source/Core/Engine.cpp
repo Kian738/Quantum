@@ -87,9 +87,10 @@ namespace Quantum
 				m_AppContext->Update(deltaTime);
 
 				if (!m_IsMinimized)
+				{
 					m_AppContext->Render();
-
-				m_Window->OnRender();
+					m_Window->OnRender();
+				}
 			}
 		}
 	}

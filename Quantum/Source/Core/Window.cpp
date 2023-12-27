@@ -51,7 +51,6 @@ namespace Quantum
 		);
 
 		glfwWindowHint(GLFW_RESIZABLE, spec.Resizable);
-		glfwWindowHint(GLFW_DECORATED, true);
 		// TODO: Add suppport for decorated windows
 		// TODO: Add suppport for maximized windows
 		// TODO: Load size and position from config
@@ -151,6 +150,7 @@ namespace Quantum
 	void Window::SetCursorMode(CursorMode mode)
 	{
 		glfwSetInputMode(m_WindowHandle, GLFW_CURSOR, static_cast<int>(mode));
+		m_Specification.CursorMode = mode;
 	}
 
 	void Window::SetCallbacks()

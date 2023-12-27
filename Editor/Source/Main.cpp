@@ -39,8 +39,18 @@ public:
 		if (Input::IsKeyPressed(Key::R)) // TODO: Fix shaders reloading 10 times
 			Renderer::GetShaderLibrary()->ReloadAll();
 
-		if (Input::IsKeyPressed(Key::Escape))
+		if (Input::IsKeyPressed(Key::F10))
 			GEngine->Stop();
+
+		static auto& window = GEngine->GetWindow();
+		auto cursorMode = window.GetCursorMode();
+		if (cursorMode == CursorMode::Disabled)
+		{
+			if (Input::IsKeyPressed(Key::Escape))
+				window.SetCursorMode(CursorMode::Normal);
+		}
+		else if (Input::IsMouseButtonPressed(Mouse::ButtonLeft))
+			window.SetCursorMode(CursorMode::Disabled);
 	}
 
 	void Render() override

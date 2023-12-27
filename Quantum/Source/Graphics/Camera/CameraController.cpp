@@ -39,11 +39,15 @@ namespace Quantum
 
 	void CameraController::OnUpdate(float deltaTime)
 	{
+		static auto& window = GEngine->GetWindow();
+		if (window.GetCursorMode() == CursorMode::Disabled) // TODO: Move to InputManager and call it input mode (disabled, locked, normal)
+			return;
+
 		auto rotationSpeed = m_RotationSpeed * deltaTime;
 		auto cameraSpeed = m_CameraSpeed * deltaTime;
 
 		auto mouseDelta = Input::GetMousePositionDelta();
-		if (mouseDelta.x != 0.0f || mouseDelta.y != 0.0f)
+		if ((mouseDelta.x != 0.0f || mouseDelta.y != 0.0f))
 		{
 			auto rotationX = glm::angleAxis(glm::radians(mouseDelta.x * rotationSpeed), m_Camera->GetOrientationY());
 			auto rotationY = glm::angleAxis(glm::radians(mouseDelta.y * rotationSpeed), m_Camera->GetOrientationX());
@@ -79,6 +83,7 @@ namespace Quantum
 
 		SetPosition(position);
 
+		// TODO: Transform to zoom level
 		auto fov = m_Fov;
 
 		if (Input::IsKeyDown(Key::Minus))
