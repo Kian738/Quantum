@@ -92,6 +92,8 @@ namespace Quantum
 					m_Window->OnRender();
 				}
 			}
+			else
+				m_AppContext->Update(deltaTime);
 		}
 	}
 
