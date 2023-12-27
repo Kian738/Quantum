@@ -7,16 +7,7 @@ namespace Quantum
 	void Config::Initialize()
 	{
 		for (auto configFile : s_ConfigFiles)
-		{
-			try
-			{
-				configFile->Load();
-			}
-			catch (const std::exception& e)
-			{
-				configFile->m_HasError = true;
-			}
-		}
+			configFile->TryLoad();
 	}
 
 	void Config::Register(ConfigFile* configFile)
@@ -27,6 +18,6 @@ namespace Quantum
 	void Config::PrintStatus()
 	{
 		for (auto configFile : s_ConfigFiles)
-			LOG_CHECK(!configFile->m_HasError, Error, LogConfig, "Failed to load config file: ", configFile->m_Path);
+			LOG_CHECK(!configFile->m_HasError, Error, LogConfig, "Failed to load config file \"{}\": {}", configFile->m_Path, configFile->m_Exception);
 	}
 }

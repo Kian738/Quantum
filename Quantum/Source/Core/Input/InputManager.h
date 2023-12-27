@@ -47,7 +47,7 @@ namespace Quantum
 
 		static bool IsKeyDown(KeyCode key) { return s_Keys[key]; };
 		static bool IsKeyUp(KeyCode key) { return !s_Keys[key]; };
-		static bool IsKeyPressed(KeyCode key) { return s_Keys[key] && !s_KeysPrev[key]; };
+		static bool IsKeyPressed(KeyCode key) { return s_Keys[key] && !s_KeysPrev[key]; }; // TODO: Add key lock so it doesnt trigger multiple times
 		static bool IsKeyReleased(KeyCode key) { return !s_Keys[key] && s_KeysPrev[key]; };
 
 		static bool IsMouseButtonDown(MouseCode button) { return s_MouseButtons[button]; };

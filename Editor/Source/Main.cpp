@@ -34,8 +34,10 @@ public:
 
 	void Update(float deltaTime) override
 	{
+		// TODO: Should be some sort of Actor so I dont have to call OnUpdate manually
 		m_CameraController->OnUpdate(deltaTime);
 
+		// TODO: Add Input lock to these
 		if (Input::IsKeyPressed(Key::R)) // TODO: Fix shaders reloading 10 times
 			Renderer::GetShaderLibrary()->ReloadAll();
 

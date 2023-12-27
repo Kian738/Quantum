@@ -4,7 +4,7 @@
 #include "Configuration/ConfigMacros.h"
 #include "Logging/LogMacros.h"
 
-DECLARE_CONFIG_FILE(Engine);
+DECLARE_STATIC_CONFIG_FILE(Engine);
 
 DECLARE_LOG_CATEGORY(Common);
 DECLARE_LOG_CATEGORY(Config);

@@ -8,6 +8,7 @@
 
 namespace Quantum
 {
+	// TODO: Make this an Actor
 	class CameraController
 	{
 	private:

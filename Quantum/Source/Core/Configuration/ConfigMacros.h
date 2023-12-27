@@ -13,13 +13,14 @@
 		extern ConfigFile##Name G##Name##Config; \
 	}
 
-#define DEFINE_CONFIG_FILE_STATIC(Name) \
+#define DECLARE_STATIC_CONFIG_FILE(Name) \
 	namespace Quantum \
 	{ \
-		static struct ConfigFile##Name : public ConfigFile \
+		struct ConfigFile##Name : public ConfigFile \
 		{ \
-			ConfigFile##Name() : ConfigFile(#Name) {} \
-		} G##Name##Config; \
+			ConfigFile##Name() : ConfigFile(#Name, true) {} \
+		}; \
+		extern ConfigFile##Name G##Name##Config; \
 	}
 
 #define DEFINE_CONFIG_FILE(Name) \
