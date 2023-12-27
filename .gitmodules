@@ -13,3 +13,7 @@
 [submodule "Quantum/Vendor/assimp"]
 	path = Quantum/Vendor/assimp
 	url = https://github.com/assimp/assimp.git
+[submodule "Quantum/Vendor/ImGui"]
+	path = Quantum/Vendor/ImGui
+	url = https://github.com/ocornut/imgui.git
+	branch = docking
