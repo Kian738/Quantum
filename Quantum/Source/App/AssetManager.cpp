@@ -16,8 +16,8 @@ namespace Quantum
 
 		if (TextureExists(name))
 		{
-			LOG(Error, LogGraphics, "Texture with name \"{}\" already exists", name);
-			return nullptr;
+			LOG(Warning, LogGraphics, "Texture with name \"{}\" already exists... Returning existing.", name);
+			return m_Textures[name];
 		}
 
 		auto texture = CreateScope<Texture>(path);
