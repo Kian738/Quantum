@@ -59,7 +59,6 @@
     <ClInclude Include="Source\Utils\YAMLUtils.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="Source\App\AppContext.cpp" />
     <ClCompile Include="Source\App\AssetManager.cpp" />
     <ClCompile Include="Source\Core\Configuration\Config.cpp" />
     <ClCompile Include="Source\Core\Configuration\ConfigFile.cpp" />

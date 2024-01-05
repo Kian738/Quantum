@@ -35,5 +35,8 @@
     <ClInclude Include="Source\Gui\Gui.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="Source\Panels\PanelBase.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

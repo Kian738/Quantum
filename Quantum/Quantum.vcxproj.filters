@@ -248,9 +248,6 @@
     <ClCompile Include="Source\Utils\AsyncHelper.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Source\App\AppContext.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="Source\Core\Input\InputManager.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>

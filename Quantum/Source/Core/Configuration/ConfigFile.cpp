@@ -9,6 +9,7 @@ namespace Quantum
 {
 	ConfigFile::ConfigFile(StringView name, bool isStatic)
 		: m_Name(name)
+		, m_Path() // TODO: Path could already be set here
 		, m_IsStatic(isStatic)
 	{
 		Config::Register(this);

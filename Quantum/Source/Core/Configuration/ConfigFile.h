@@ -15,7 +15,7 @@ namespace Quantum
 		YAML::Node m_Data;
 		bool m_IsStatic;
 
-		String m_Exception;
+		const char* m_Exception = "";
 		bool m_HasError = false;
 
 		friend class Config;

@@ -14,7 +14,6 @@ namespace Quantum
 	class Texture
 	{
 	private:
-		String m_Path;
 		UInt32 m_RendererID;
 		GLenum m_InternalFormat, m_DataFormat;
 		UInt32 m_Width, m_Height, m_BPP;

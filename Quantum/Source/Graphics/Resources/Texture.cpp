@@ -8,8 +8,7 @@
 namespace Quantum
 {
 	Texture::Texture(UInt32 width, UInt32 height, UInt32 channels, void* data)
-		: m_Path("")
-		, m_Width(width)
+		: m_Width(width)
 		, m_Height(height)
 	{
 		Initialize(channels);
@@ -19,7 +18,6 @@ namespace Quantum
 	}
 
 	Texture::Texture(const String& path)
-		: m_Path(path)
 	{
 		int width, height, channels;
 		stbi_set_flip_vertically_on_load(1);

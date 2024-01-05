@@ -12,7 +12,9 @@ namespace Quantum
 		Scope<Scene> m_Scene;
 	public:
 		AppContext() = delete;
-		AppContext(const char* projectPath);
+		AppContext(const char* projectPath)
+			: m_ProjectPath(projectPath)
+		{};
 		virtual ~AppContext() = default;
 
 		virtual void Initialize() {};
@@ -21,6 +23,6 @@ namespace Quantum
 		virtual void RenderImGui() {};
 		virtual void Shutdown() {};
 
-		String GetProjectPath() const { return m_ProjectPath; };
+		StringView GetProjectPath() const { return m_ProjectPath; };
 	};
 }
