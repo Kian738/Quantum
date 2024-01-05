@@ -15,7 +15,7 @@ namespace Quantum
 			Console::Allocate();
 
 		s_LogLevel = COALESCE(
-			NameToLevel(consoleConfig["LogLevel"].as<String>("").c_str()),
+			GetLevel(consoleConfig["LogLevel"].as<String>("").c_str()),
 			LogLevel::Verbose
 		);
 
@@ -51,20 +51,41 @@ namespace Quantum
 		AsyncHelper::Run([&] { LogInternal(level, category, message, file, line); });
 	}
 
+	const char* Log::GetLevelName(LogLevel level)
+	{
+		switch (level)
+		{
+		case LogLevel::Verbose:
+			return "Verbose";
+		case LogLevel::Debug:
+			return "Debug";
+		case LogLevel::Info:
+			return "Info";
+		case LogLevel::Warning:
+			return "Warning";
+		case LogLevel::Error:
+			return "Error";
+		case LogLevel::Fatal:
+			return "Fatal";
+		default:
+			return "Unknown";
+		}
+	}
+
 	void Log::LogInternal(LogLevel level, const LogCategory& category, String message, StringView file, int line)
 	{
 		auto defaultColor = "\33[0m";
 		auto fatalColor = "\33[37;41m";
 
 		auto currentTime = DateTime::Now().GetTime();
-		auto levelName = LevelToName(level);
+		auto levelName = GetLevelName(level);
 		auto categoryName = category.GetName();
 
 		Lock<> lock(s_LogFileMutex);
 
 		if (level < LogLevel::Fatal)
 		{
-			auto levelColor = LevelToColor(level);
+			auto levelColor = GetLevelColor(level);
 			auto levelString = std::format("{}{}{}", levelColor, levelName, defaultColor); // TODO: Could be precomputed
 
 			auto plainMessage = std::format("[{}]: {}", categoryName, message);
@@ -87,7 +108,7 @@ namespace Quantum
 			std::exit(1);
 	}
 
-	LogLevel Log::NameToLevel(const char* name)
+	LogLevel Log::GetLevel(const char* name)
 	{
 		static Dictionary<const char*, LogLevel> logLevels = {
 			{ "Verbose", LogLevel::Verbose },
@@ -101,28 +122,7 @@ namespace Quantum
 		return logLevels[name];
 	}
 
-	const char* Log::LevelToName(LogLevel level)
-	{
-		switch (level)
-		{
-		case LogLevel::Verbose:
-			return "Verbose";
-		case LogLevel::Debug:
-			return "Debug";
-		case LogLevel::Info:
-			return "Info";
-		case LogLevel::Warning:
-			return "Warning";
-		case LogLevel::Error:
-			return "Error";
-		case LogLevel::Fatal:
-			return "Fatal";
-		default:
-			return "Unknown";
-		}
-	}
-
-	const char* Log::LevelToColor(LogLevel level)
+	const char* Log::GetLevelColor(LogLevel level)
 	{
 		switch (level)
 		{

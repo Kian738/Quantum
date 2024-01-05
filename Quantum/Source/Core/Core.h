@@ -6,6 +6,8 @@
 #include "Event.h"
 #include "Types.h"
 
+#include "Container/CircularBuffer.h"
+
 #include "Engine.h"
 
 #include "Utils/AsyncHelper.h"

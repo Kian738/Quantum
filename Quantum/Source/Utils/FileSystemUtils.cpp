@@ -56,16 +56,16 @@ namespace Quantum
         return std::filesystem::path(path).filename().string();
     }
 
-    std::ofstream FileSystemUtils::OpenFile(StringView path)
+    OFStream FileSystemUtils::OpenFile(StringView path)
     {
         CreateParentDir(path);
-        return std::ofstream(path.data());
+        return OFStream(path.data());
     }
 
     String FileSystemUtils::ReadFile(StringView path)
     {
         String result;
-        std::ifstream file(path.data(), std::ios::in | std::ios::binary);
+        IFStream file(path.data(), std::ios::in | std::ios::binary);
         if (file.is_open())
 		{
 			file.seekg(0, std::ios::end);

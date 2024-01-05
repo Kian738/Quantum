@@ -3,14 +3,14 @@
 #include <Graphics/Renderer.h>
 #include <Graphics/Resources/Model.h>
 
-#include "Gui/Gui.h"
+#include "Panels/MainPanel.h"
 
 namespace Quantum
 {
 	class EditorAppContext : public AppContext
 	{
 	private:
-		Scope<EditorGui> m_EditorGui;
+		Scope<MainPanel> m_MainPanel;
 		Scope<CameraController> m_CameraController;
 
 		Ref<Model> m_HelicopterModel;
@@ -26,7 +26,7 @@ namespace Quantum
 
 		void Initialize() override
 		{
-			m_EditorGui = CreateScope<EditorGui>();
+			m_MainPanel = CreateScope<MainPanel>();
 			m_CameraController = CreateScope<CameraController>(Vector3(3.25f, 6.0f, -14.0f), Quaternion(0.0f, 0.0f, 0.0f, 1.0f));
 
 			m_HelicopterModel = CreateRef<Model>("Models/Helicopter.fbx");
@@ -44,12 +44,9 @@ namespace Quantum
 			// TODO: Should be some sort of Actor so I dont have to call OnUpdate manually
 			m_CameraController->OnUpdate(deltaTime);
 
-			// TODO: Add Input lock to these
+			// TODO: Add Input lock to these | Or just move to imgui
 			if (Input::IsKeyPressed(Key::R)) // TODO: Fix shaders reloading 10 times
 				Renderer::GetShaderLibrary()->ReloadAll();
-
-			if (Input::IsKeyPressed(Key::F10))
-				GEngine->Stop();
 
 			// TODO: Move to InputManager (Lock and normal mode)
 			/*static auto& window = GEngine->GetWindow();
@@ -63,7 +60,7 @@ namespace Quantum
 				window.SetCursorMode(CursorMode::Disabled);*/
 		}
 
-		// TODO: Move to seperate thread or something
+		// TODO: Move to seperate thread or something | Use SceneRenderer class
 		void Render() override
 		{
 			Renderer::Clear();
@@ -91,7 +88,7 @@ namespace Quantum
 
 		void RenderImGui() override
 		{
-			m_EditorGui->RenderGui();
+			m_MainPanel->Update();
 		}
 
 		void Shutdown() override

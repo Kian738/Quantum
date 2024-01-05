@@ -18,7 +18,10 @@
     <ClCompile Include="Source\Main.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Source\Gui\Gui.cpp">
+    <ClCompile Include="Source\Panels\ConsolePanel.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Panels\MainPanel.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -32,10 +35,13 @@
     <None Include="Content\Shaders\Material.vert.glsl" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Source\Gui\Gui.h">
+    <ClInclude Include="Source\Panels\PanelBase.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Source\Panels\PanelBase.h">
+    <ClInclude Include="Source\Panels\MainPanel.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Panels\ConsolePanel.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

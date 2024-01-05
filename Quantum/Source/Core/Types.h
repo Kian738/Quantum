@@ -2,6 +2,8 @@
 
 #include <array>
 #include <bitset>
+#include <deque>
+#include <fstream>
 #include <functional>
 #include <glm/glm.hpp>
 #include <glm/gtc/quaternion.hpp>
@@ -40,6 +42,9 @@ namespace Quantum
 	using WString = std::wstring;
 	using WStringView = std::wstring_view;
 
+	using OFStream = std::ofstream;
+	using IFStream = std::ifstream;
+
 	using Mutex = std::mutex;
 
 	template <class T = Mutex>
@@ -56,6 +61,9 @@ namespace Quantum
 
 	template <class T, UInt64 N>
 	using Array = std::array<T, N>;
+
+	template <class T>
+	using Deque = std::deque<T>;
 
 	template <class T>
 	using List = std::vector<T>;

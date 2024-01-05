@@ -1,7 +1,6 @@
 #pragma once
 
 #include "Core/Types.h"
-#include <fstream>
 
 namespace Quantum
 {
@@ -21,7 +20,7 @@ namespace Quantum
 
 		static String GetFileName(StringView path);
 
-		static std::ofstream OpenFile(StringView path);
+		static OFStream OpenFile(StringView path);
 		static String ReadFile(StringView path);
 
 		static bool Exists(StringView path);

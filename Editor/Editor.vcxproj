@@ -88,8 +88,9 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="Source\Gui\Gui.cpp" />
     <ClCompile Include="Source\Main.cpp" />
+    <ClCompile Include="Source\Panels\ConsolePanel.cpp" />
+    <ClCompile Include="Source\Panels\MainPanel.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Quantum\Quantum.vcxproj">
@@ -108,7 +109,8 @@
     <None Include="QuantumEngine.qproj" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Source\Gui\Gui.h" />
+    <ClInclude Include="Source\Panels\ConsolePanel.h" />
+    <ClInclude Include="Source\Panels\MainPanel.h" />
     <ClInclude Include="Source\Panels\PanelBase.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

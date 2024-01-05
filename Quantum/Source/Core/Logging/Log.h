@@ -29,12 +29,13 @@ namespace Quantum
 		static void Shutdown();
 
 		static void LogAsync(LogLevel level, const LogCategory& category, Func<String()> formatFunc, StringView file, int line);
+
+		static const char* GetLevelName(LogLevel level);
 	private:
 		static void LogInternal(LogLevel level, const LogCategory& category, String message, StringView file, int line);
 
-		static LogLevel NameToLevel(const char* name);
-		static const char* LevelToName(LogLevel level);
-		static const char* LevelToColor(LogLevel level);
+		static LogLevel GetLevel(const char* name);
+		static const char* GetLevelColor(LogLevel level);
 
 		static String PathToRelative(StringView path);
 
