@@ -10,12 +10,15 @@ namespace Quantum
 
 		RenderCommand::Initialize();
 
-		s_SceneData = new SceneData;
-
-		GEngine->GetWindow().ResizeEvent += [](UInt32 width, UInt32 height) { OnWindowResize(width, height); };
-
 		s_ShaderLibrary = CreateRef<ShaderLibrary>();
 		s_ShaderLibrary->Load("Material");
+
+		auto& window = GEngine->GetWindow();
+
+		auto [width, height] = window.GetSize();
+		s_FrameBuffer = CreateRef<FrameBuffer>(width, height);
+
+		window.ResizeEvent += [](int width, int height) { OnResize(width, height); };
 	}
 
 	void Renderer::Shutdown()
@@ -23,9 +26,6 @@ namespace Quantum
 		LOG(Info, LogGraphics, "Shutting down Renderer...");
 
 		s_ShaderLibrary->UnloadAll();
-
-		delete s_SceneData;
-		s_SceneData = nullptr;
 	}
 
 	void Renderer::Clear()
@@ -36,6 +36,7 @@ namespace Quantum
 
 	void Renderer::BeginScene(const Camera& camera)
 	{
+		s_FrameBuffer->Bind();
 		for (auto& [name, shader] : s_ShaderLibrary->GetAll())
 		{
 			shader->Bind();
@@ -47,13 +48,16 @@ namespace Quantum
 	{
 		for (auto& [name, shader] : s_ShaderLibrary->GetAll())
 			shader->Unbind();
+		s_FrameBuffer->Unbind();
 	}
 
 	void Renderer::Submit(const Mesh& mesh, const Matrix4& transform)
 	{
 		static auto shader = s_ShaderLibrary->Get("Material");
 		mesh.GetMaterial()->Bind(shader);
+
 		shader->SetMat4("u_Transform", transform);
+
 		auto transformNormal = glm::transpose(glm::inverse(Matrix3(transform)));
 		shader->SetMat3("u_TransformNormal", transformNormal);
 
@@ -71,11 +75,6 @@ namespace Quantum
 		}
 	}
 
-	void Renderer::OnWindowResize(UInt32 width, UInt32 height)
-	{
-		RenderCommand::SetViewport(0, 0, width, height);
-	}
-
 	void Renderer::DrawVertexArray(const Ref<VertexArray>& vertexArray)
 	{
 		vertexArray->Bind();
@@ -84,5 +83,12 @@ namespace Quantum
 			RenderCommand::DrawIndexed(indexBuffer->GetCount());
 		else
 			RenderCommand::Draw(vertexArray->GetVertexCount());
+	}
+
+	void Renderer::OnResize(int width, int height)
+	{
+		RenderCommand::SetViewport(0, 0, width, height);
+
+		s_FrameBuffer->Resize(width, height); // TODO: Most probably wrong
 	}
 }

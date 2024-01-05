@@ -31,6 +31,7 @@ namespace Quantum
 		float m_FovSpeed = 1.0f;
 		float m_MinFov = 1.0f, m_MaxFov = 179.0f;
 	public:
+		// TOOD: Pass window as dependency
 		CameraController(
 			const Vector3& position = { 0.0f, 0.0f, 0.0f },
 			const Quaternion& rotation = { 0.0f, 0.0f, 0.0f, 1.0f },

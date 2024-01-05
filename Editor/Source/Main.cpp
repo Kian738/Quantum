@@ -11,11 +11,13 @@ class EditorAppContext : public AppContext
 {
 private:
 	Scope<CameraController> m_CameraController;
-	float m_Fov = 45.0f;
 
 	Ref<Model> m_HelicopterModel;
 	Ref<Model> m_CarModel;
 	Ref<Model> m_GasStationModel;
+
+	Vector2 m_ViewportBounds[2] = {};
+	Vector2 m_ViewportSize = {};
 public:
 	EditorAppContext() : AppContext("QuantumEngine")
 	{
@@ -85,15 +87,69 @@ public:
 
 	void RenderImGui() override
 	{
-		auto& camera = m_CameraController->GetCamera();
-		auto& cameraPosition = camera.GetPosition();
-		auto& cameraRotation = camera.GetRotation();
+		auto windowFlags = ImGuiWindowFlags_MenuBar | ImGuiWindowFlags_NoDocking | ImGuiWindowFlags_NoTitleBar | ImGuiWindowFlags_NoCollapse | ImGuiWindowFlags_NoResize | ImGuiWindowFlags_NoMove;
+		auto dockspaceFlags = ImGuiDockNodeFlags_None;
+		
+		auto viewport = ImGui::GetMainViewport();
+		ImGui::SetNextWindowPos(viewport->Pos);
+		ImGui::SetNextWindowSize(viewport->Size);
+		ImGui::SetNextWindowViewport(viewport->ID);
 
-		ImGui::Begin("QuantumEngine");
-		ImGui::Text("FPS: %f", ImGui::GetIO().Framerate);
-		ImGui::Text("Camera Position: %f, %f, %f", cameraPosition.x, cameraPosition.y, cameraPosition.z);
-		ImGui::Text("Camera Rotation: %f, %f, %f", cameraRotation.x, cameraRotation.y, cameraRotation.z);
-		ImGui::Text("Camera Fov: %f", m_Fov);
+		ImGui::PushStyleVar(ImGuiStyleVar_WindowRounding, 0.0f);
+		ImGui::PushStyleVar(ImGuiStyleVar_WindowBorderSize, 0.0f);
+		ImGui::PushStyleVar(ImGuiStyleVar_WindowPadding, ImVec2());
+
+		if (dockspaceFlags & ImGuiDockNodeFlags_PassthruCentralNode)
+			windowFlags |= ImGuiWindowFlags_NoBackground;
+
+		ImGui::Begin("Quantum", nullptr, windowFlags);
+
+		ImGui::PopStyleVar(3);
+
+		auto& io = ImGui::GetIO();
+		if (io.ConfigFlags & ImGuiConfigFlags_DockingEnable)
+		{
+			auto dockspaceID = ImGui::GetID("QuantumDockspace");
+			ImGui::DockSpace(dockspaceID, {}, dockspaceFlags);
+		}
+
+		if (ImGui::BeginMenuBar())
+		{
+			if (ImGui::BeginMenu("File"))
+			{
+				if (ImGui::MenuItem("Exit"))
+					GEngine->Stop();
+
+				ImGui::EndMenu();
+			}
+
+			ImGui::EndMenuBar();
+		}
+
+		ImGui::Begin("Stats");
+		ImGui::Text("FPS: %.1f", io.Framerate);
+		ImGui::Text("Frame Time: %.3f ms", 1000.0f / io.Framerate);
+		ImGui::End();
+
+		ImGui::PushStyleVar(ImGuiStyleVar_WindowPadding, ImVec2());
+		ImGui::Begin("Viewport");
+
+		auto viewportMinRegion = ImGui::GetWindowContentRegionMin();
+		auto viewportMaxRegion = ImGui::GetWindowContentRegionMax();
+		auto viewportOffset = ImGui::GetWindowPos();
+		m_ViewportBounds[0] = { viewportMinRegion.x + viewportOffset.x, viewportMinRegion.y + viewportOffset.y };
+		m_ViewportBounds[1] = { viewportMaxRegion.x + viewportOffset.x, viewportMaxRegion.y + viewportOffset.y };
+		
+		auto viewportSize = ImGui::GetContentRegionAvail();
+		m_ViewportSize = { viewportSize.x, viewportSize.y };
+
+		auto frameBuffer = Renderer::GetFrameBuffer();
+		frameBuffer->BindAsTexture();
+		ImGui::Image(reinterpret_cast<void*>(frameBuffer->GetColorAttachment()), viewportSize, { 0, 1 }, { 1, 0 });
+
+		ImGui::End();
+		ImGui::PopStyleVar();
+
 		ImGui::End();
 	}
 

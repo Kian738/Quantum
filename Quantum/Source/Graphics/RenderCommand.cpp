@@ -1,18 +1,45 @@
 #include "RenderCommand.h"
 
+#include "Core/Core.h"
 #include <glad/gl.h>
 
 namespace Quantum
 {
+	static void OpenGLDebugMessageCallback(GLenum, GLenum, GLuint id, GLenum severity, GLsizei length, const GLchar* message, const void*)
+	{
+		auto logMessage = std::format("OpenGL Debug Message ({}): {}", id, message);
+		switch (severity)
+		{
+		case GL_DEBUG_SEVERITY_HIGH:
+			LOG(Error, LogGraphics, logMessage);
+			break;
+		case GL_DEBUG_SEVERITY_MEDIUM:
+			LOG(Warning, LogGraphics, logMessage);
+			break;
+		case GL_DEBUG_SEVERITY_LOW:
+			LOG(Info, LogGraphics, logMessage);
+			break;
+		case GL_DEBUG_SEVERITY_NOTIFICATION:
+			LOG(Debug, LogGraphics, logMessage);
+			break;
+		default:
+			LOG(Info, LogGraphics, logMessage);
+			break;
+		}
+	}
+
 	void RenderCommand::Initialize()
 	{
+		glDebugMessageCallback(OpenGLDebugMessageCallback, nullptr);
+		glDebugMessageControl(GL_DONT_CARE, GL_DONT_CARE, GL_DEBUG_SEVERITY_NOTIFICATION, 0, NULL, GL_FALSE);
+
 		glEnable(GL_BLEND);
 		glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 
 		glEnable(GL_DEPTH_TEST);
 		glDepthFunc(GL_LEQUAL);
 
-		glEnable(GL_MULTISAMPLE); // TODO: Also add support for TSAA in addition to MSAA
+		glEnable(GL_MULTISAMPLE); // TODO: Also add support for SMAA in addition to MSAA
 
 		glEnable(GL_FRAMEBUFFER_SRGB);
 
