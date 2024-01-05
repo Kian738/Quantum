@@ -4,10 +4,14 @@
 #include <assimp/Importer.hpp>
 #include <assimp/postprocess.h>
 
+DEFINE_LOG_CATEGORY_STATIC(ModelLoader);
+
 namespace Quantum
 {
 	Model::Model(StringView path)
 	{
+		LOG(Debug, LogModelLoader, "Loading model: {}", path);
+
 		auto fullPath = FileSystemUtils::CombinePath(Project::GetActive()->GetAssetsDir(), path);
 		m_Directory = FileSystemUtils::GetParentDir(fullPath);
 
@@ -16,7 +20,7 @@ namespace Quantum
 		auto scene = importer.ReadFile(fullPath, aiProcess_Triangulate | aiProcess_FlipUVs);
 		if (!scene || scene->mFlags & AI_SCENE_FLAGS_INCOMPLETE || !scene->mRootNode)
 		{
-			LOG(Error, LogGraphics, "Failed to load model: {}", importer.GetErrorString());
+			LOG(Error, LogModelLoader, "Failed to load model: {}", importer.GetErrorString());
 			return;
 		}
 
