@@ -18,6 +18,9 @@
     <ClCompile Include="Source\Main.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="Source\Gui\Gui.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <None Include="Config\DefaultEngine.yaml" />
@@ -27,5 +30,10 @@
     <None Include="Content\Assets\Models\Helicopter.fbx" />
     <None Include="Content\Shaders\Material.frag.glsl" />
     <None Include="Content\Shaders\Material.vert.glsl" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="Source\Gui\Gui.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

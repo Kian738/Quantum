@@ -3,13 +3,14 @@
 #include <Graphics/Renderer.h>
 #include <Graphics/Resources/Model.h>
 
-#include <imgui.h>
+#include "Gui/Gui.h"
 
 using namespace Quantum;
 
 class EditorAppContext : public AppContext
 {
 private:
+	Scope<EditorGui> m_EditorGui;
 	Scope<CameraController> m_CameraController;
 
 	Ref<Model> m_HelicopterModel;
@@ -25,6 +26,7 @@ public:
 
 	void Initialize() override
 	{
+		m_EditorGui = CreateScope<EditorGui>();
 		m_CameraController = CreateScope<CameraController>(Vector3(3.25f, 6.0f, -14.0f), Quaternion(0.0f, 0.0f, 0.0f, 1.0f));
 
 		m_HelicopterModel = CreateRef<Model>("Models/Helicopter.fbx");
@@ -32,9 +34,9 @@ public:
 		m_GasStationModel = CreateRef<Model>("Models/Gas_Station.fbx");
 
 		// TODO: Check if its focusing the viewport
-		auto& window = GEngine->GetWindow();
+		/*auto& window = GEngine->GetWindow();
 		window.SetCursorMode(CursorMode::Disabled);
-		window.FocusEvent += [&](bool isFocused) { window.SetCursorMode(isFocused ? CursorMode::Disabled : CursorMode::Normal); }; // TODO: InputManager should handle this
+		window.FocusEvent += [&](bool isFocused) { window.SetCursorMode(isFocused ? CursorMode::Disabled : CursorMode::Normal); };*/ // TODO: InputManager should handle this
 	}
 
 	void Update(float deltaTime) override
@@ -50,7 +52,7 @@ public:
 			GEngine->Stop();
 
 		// TODO: Move to InputManager (Lock and normal mode)
-		static auto& window = GEngine->GetWindow();
+		/*static auto& window = GEngine->GetWindow();
 		auto cursorMode = window.GetCursorMode();
 		if (cursorMode == CursorMode::Disabled)
 		{
@@ -58,7 +60,7 @@ public:
 				window.SetCursorMode(CursorMode::Normal);
 		}
 		else if (Input::IsMouseButtonPressed(Mouse::ButtonLeft))
-			window.SetCursorMode(CursorMode::Disabled);
+			window.SetCursorMode(CursorMode::Disabled);*/
 	}
 
 	// TODO: Move to seperate thread or something
@@ -89,70 +91,7 @@ public:
 
 	void RenderImGui() override
 	{
-		auto windowFlags = ImGuiWindowFlags_MenuBar | ImGuiWindowFlags_NoDocking | ImGuiWindowFlags_NoTitleBar | ImGuiWindowFlags_NoCollapse | ImGuiWindowFlags_NoResize | ImGuiWindowFlags_NoMove;
-		auto dockSpaceFlags = ImGuiDockNodeFlags_PassthruCentralNode;
-		
-		auto viewport = ImGui::GetMainViewport();
-		ImGui::SetNextWindowPos(viewport->Pos);
-		ImGui::SetNextWindowSize(viewport->Size);
-		ImGui::SetNextWindowViewport(viewport->ID);
-
-		ImGui::PushStyleVar(ImGuiStyleVar_WindowRounding, 0.0f);
-		ImGui::PushStyleVar(ImGuiStyleVar_WindowBorderSize, 0.0f);
-		ImGui::PushStyleVar(ImGuiStyleVar_WindowPadding, ImVec2());
-
-		if (dockSpaceFlags & ImGuiDockNodeFlags_PassthruCentralNode)
-			windowFlags |= ImGuiWindowFlags_NoBackground;
-
-		ImGui::Begin("Quantum", nullptr, windowFlags);
-
-		ImGui::PopStyleVar(3);
-
-		static auto& io = ImGui::GetIO();
-		if (io.ConfigFlags & ImGuiConfigFlags_DockingEnable)
-		{
-			static auto dockSpaceID = ImGui::GetID("QuantumDockspace");
-			ImGui::DockSpaceOverViewport(ImGui::GetMainViewport(), dockSpaceFlags);
-		}
-
-		if (ImGui::BeginMainMenuBar())
-		{
-			if (ImGui::BeginMenu("File"))
-			{
-				if (ImGui::MenuItem("Exit"))
-					GEngine->Stop();
-
-				ImGui::EndMenu();
-			}
-
-			ImGui::BeginMainMenuBar();
-		}
-
-		ImGui::Begin("Stats");
-		ImGui::Text("FPS: %.1f", io.Framerate);
-		ImGui::Text("Frame Time: %.3f ms", 1000.0f / io.Framerate);
-		ImGui::End();
-
-		ImGui::PushStyleVar(ImGuiStyleVar_WindowPadding, ImVec2());
-		ImGui::Begin("Viewport");
-
-		auto viewportMinRegion = ImGui::GetWindowContentRegionMin();
-		auto viewportMaxRegion = ImGui::GetWindowContentRegionMax();
-		auto viewportOffset = ImGui::GetWindowPos();
-		m_ViewportBounds[0] = { viewportMinRegion.x + viewportOffset.x, viewportMinRegion.y + viewportOffset.y };
-		m_ViewportBounds[1] = { viewportMaxRegion.x + viewportOffset.x, viewportMaxRegion.y + viewportOffset.y };
-		
-		auto viewportSize = ImGui::GetContentRegionAvail();
-		m_ViewportSize = { viewportSize.x, viewportSize.y };
-
-		auto frameBuffer = Renderer::GetFrameBuffer();
-		frameBuffer->BindAsTexture();
-		ImGui::Image(reinterpret_cast<void*>(frameBuffer->GetColorAttachment()), viewportSize, { 0, 1 }, { 1, 0 });
-
-		ImGui::End();
-		ImGui::PopStyleVar();
-
-		ImGui::End();
+		m_EditorGui->RenderGui();
 	}
 
 	void Shutdown() override

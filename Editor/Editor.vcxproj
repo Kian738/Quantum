@@ -88,6 +88,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Source\Gui\Gui.cpp" />
     <ClCompile Include="Source\Main.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -105,6 +106,9 @@
     <None Include="Content\Shaders\Material.frag.glsl" />
     <None Include="Content\Shaders\Material.vert.glsl" />
     <None Include="QuantumEngine.qproj" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="Source\Gui\Gui.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
