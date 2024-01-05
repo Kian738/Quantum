@@ -22,6 +22,7 @@ namespace Quantum
 		io.ConfigFlags |= ImGuiConfigFlags_DpiEnableScaleViewports;
 
 		io.ConfigViewportsNoAutoMerge = true;
+		//io.ConfigDockingAlwaysTabBar = true;
 
 		io.IniFilename = nullptr;
 		io.LogFilename = nullptr;
@@ -67,7 +68,7 @@ namespace Quantum
 		ImGui::Render();
 		ImGui_ImplOpenGL3_RenderDrawData(ImGui::GetDrawData());
 
-		auto& io = ImGui::GetIO();
+		static auto& io = ImGui::GetIO();
 		if (io.ConfigFlags & ImGuiConfigFlags_ViewportsEnable)
 		{
 			auto backupCurrentContext = glfwGetCurrentContext();
