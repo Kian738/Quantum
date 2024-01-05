@@ -4,6 +4,7 @@
 
 namespace Quantum
 {
+	// TODO: Reenable framebuffer
 	void Renderer::Initialize()
 	{
 		LOG(Info, LogGraphics, "Initializing Renderer...");
@@ -36,7 +37,7 @@ namespace Quantum
 
 	void Renderer::BeginScene(const Camera& camera)
 	{
-		s_FrameBuffer->Bind();
+		// TODO: s_FrameBuffer->Bind();
 		for (auto& [name, shader] : s_ShaderLibrary->GetAll())
 		{
 			shader->Bind();
@@ -48,7 +49,7 @@ namespace Quantum
 	{
 		for (auto& [name, shader] : s_ShaderLibrary->GetAll())
 			shader->Unbind();
-		s_FrameBuffer->Unbind();
+		// TODO: s_FrameBuffer->Unbind();
 	}
 
 	void Renderer::Submit(const Mesh& mesh, const Matrix4& transform)
@@ -89,6 +90,6 @@ namespace Quantum
 	{
 		RenderCommand::SetViewport(0, 0, width, height);
 
-		s_FrameBuffer->Resize(width, height); // TODO: Most probably wrong
+		// TODO: s_FrameBuffer->Resize(width, height); // TODO: Most probably wrong
 	}
 }
