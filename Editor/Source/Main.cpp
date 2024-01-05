@@ -31,9 +31,10 @@ public:
 		m_CarModel = CreateRef<Model>("Models/Car.fbx");
 		m_GasStationModel = CreateRef<Model>("Models/Gas_Station.fbx");
 
+		// TODO: Check if its focusing the viewport
 		auto& window = GEngine->GetWindow();
 		window.SetCursorMode(CursorMode::Disabled);
-		window.FocusEvent += [&](bool isFocused) { window.SetCursorMode(isFocused ? CursorMode::Disabled : CursorMode::Normal); };
+		window.FocusEvent += [&](bool isFocused) { window.SetCursorMode(isFocused ? CursorMode::Disabled : CursorMode::Normal); }; // TODO: InputManager should handle this
 	}
 
 	void Update(float deltaTime) override
@@ -48,6 +49,7 @@ public:
 		if (Input::IsKeyPressed(Key::F10))
 			GEngine->Stop();
 
+		// TODO: Move to InputManager (Lock and normal mode)
 		static auto& window = GEngine->GetWindow();
 		auto cursorMode = window.GetCursorMode();
 		if (cursorMode == CursorMode::Disabled)
@@ -88,7 +90,7 @@ public:
 	void RenderImGui() override
 	{
 		auto windowFlags = ImGuiWindowFlags_MenuBar | ImGuiWindowFlags_NoDocking | ImGuiWindowFlags_NoTitleBar | ImGuiWindowFlags_NoCollapse | ImGuiWindowFlags_NoResize | ImGuiWindowFlags_NoMove;
-		auto dockspaceFlags = ImGuiDockNodeFlags_None;
+		auto dockSpaceFlags = ImGuiDockNodeFlags_PassthruCentralNode;
 		
 		auto viewport = ImGui::GetMainViewport();
 		ImGui::SetNextWindowPos(viewport->Pos);
@@ -99,18 +101,18 @@ public:
 		ImGui::PushStyleVar(ImGuiStyleVar_WindowBorderSize, 0.0f);
 		ImGui::PushStyleVar(ImGuiStyleVar_WindowPadding, ImVec2());
 
-		if (dockspaceFlags & ImGuiDockNodeFlags_PassthruCentralNode)
+		if (dockSpaceFlags & ImGuiDockNodeFlags_PassthruCentralNode)
 			windowFlags |= ImGuiWindowFlags_NoBackground;
 
 		ImGui::Begin("Quantum", nullptr, windowFlags);
 
 		ImGui::PopStyleVar(3);
 
-		auto& io = ImGui::GetIO();
+		static auto& io = ImGui::GetIO();
 		if (io.ConfigFlags & ImGuiConfigFlags_DockingEnable)
 		{
-			auto dockspaceID = ImGui::GetID("QuantumDockspace");
-			ImGui::DockSpace(dockspaceID, {}, dockspaceFlags);
+			static auto dockSpaceID = ImGui::GetID("QuantumDockspace");
+			ImGui::DockSpaceOverViewport(ImGui::GetMainViewport(), dockSpaceFlags);
 		}
 
 		if (ImGui::BeginMenuBar())

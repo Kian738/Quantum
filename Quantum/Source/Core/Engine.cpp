@@ -97,7 +97,6 @@ namespace Quantum
 				if (!m_IsMinimized)
 				{
 					m_AppContext->Render();
-					m_Window->OnRender();
 
 					if (m_Config.IsImGuiEnabled)
 					{
@@ -105,6 +104,8 @@ namespace Quantum
 						m_AppContext->RenderImGui();
 						m_ImGuiContext->EndFrame();
 					}
+
+					m_Window->OnRender();
 				}
 			}
 			else
