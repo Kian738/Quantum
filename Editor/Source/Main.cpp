@@ -115,7 +115,7 @@ public:
 			ImGui::DockSpaceOverViewport(ImGui::GetMainViewport(), dockSpaceFlags);
 		}
 
-		if (ImGui::BeginMenuBar())
+		if (ImGui::BeginMainMenuBar())
 		{
 			if (ImGui::BeginMenu("File"))
 			{
@@ -125,7 +125,7 @@ public:
 				ImGui::EndMenu();
 			}
 
-			ImGui::EndMenuBar();
+			ImGui::BeginMainMenuBar();
 		}
 
 		ImGui::Begin("Stats");
