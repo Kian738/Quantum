@@ -12,5 +12,7 @@ namespace Quantum
 
 		void BeginFrame();
 		void EndFrame();
+
+		void SetTheme();
 	};
 }

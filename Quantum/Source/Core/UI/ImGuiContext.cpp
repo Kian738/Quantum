@@ -12,7 +12,6 @@ namespace Quantum
 	{
 		IMGUI_CHECKVERSION();
 		ImGui::CreateContext();
-		ImGui::StyleColorsDark();
 
 		auto& io = ImGui::GetIO();
 		io.ConfigFlags |= ImGuiConfigFlags_NavEnableKeyboard;
@@ -27,12 +26,16 @@ namespace Quantum
 		io.IniFilename = nullptr;
 		io.LogFilename = nullptr;
 
+		ImGui::StyleColorsDark();
+
 		auto& style = ImGui::GetStyle();
 		if (io.ConfigFlags & ImGuiConfigFlags_ViewportsEnable)
 		{
 			style.WindowRounding = 0.0f;
 			style.Colors[ImGuiCol_WindowBg].w = 1.0f;
 		}
+
+		SetTheme();
 
 		auto& window = GEngine->GetWindow();
 
@@ -72,5 +75,10 @@ namespace Quantum
 			ImGui::RenderPlatformWindowsDefault();
 			glfwMakeContextCurrent(backupCurrentContext);
 		}
+	}
+
+	void ImGuiContext::SetTheme()
+	{
+		auto& style = ImGui::GetStyle();
 	}
 }
