@@ -49,8 +49,8 @@ namespace Quantum
 
 		auto viewportSize = ImGui::GetContentRegionAvail();
 		auto frameBuffer = Renderer::GetFrameBuffer();
-		frameBuffer->BindAsTexture();
-		ImGui::Image((void*)frameBuffer->GetColorAttachment(), viewportSize, ImVec2(0, 1), ImVec2(1, 0));
+		ImGui::Image(reinterpret_cast<void*>(frameBuffer->GetColorAttachment()), viewportSize, ImVec2(0, 1), ImVec2(1, 0));
+
 	}
 
 	void ViewportPanel::ApplyWindowSettings() const

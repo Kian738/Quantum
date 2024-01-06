@@ -16,7 +16,7 @@ namespace Quantum
 
 		auto& window = GEngine->GetWindow();
 
-		auto [width, height] = window.GetSize();
+		auto [width, height] = window.GetSize(); // TODO: Rather get viewport size than window size
 		s_FrameBuffer = CreateRef<FrameBuffer>(width, height);
 
 		window.ResizeEvent += [](int width, int height) { OnResize(width, height); };
@@ -31,13 +31,13 @@ namespace Quantum
 
 	void Renderer::Clear()
 	{
-		RenderCommand::SetClearColor({ 0.0f, 0.0f, 0.0f, 1.0f });
+		s_FrameBuffer->Bind();
+		RenderCommand::SetClearColor({ 0.1f, 0.1f, 0.1f, 1.0f }); // TODO: Eventually set this to black
 		RenderCommand::Clear();
 	}
 
 	void Renderer::BeginScene(const Camera& camera)
 	{
-		// TODO: s_FrameBuffer->Bind();
 		for (auto& [name, shader] : s_ShaderLibrary->GetAll())
 		{
 			shader->Bind();
@@ -47,9 +47,10 @@ namespace Quantum
 
 	void Renderer::EndScene()
 	{
+		s_FrameBuffer->Unbind();
 		for (auto& [name, shader] : s_ShaderLibrary->GetAll())
 			shader->Unbind();
-		// TODO: s_FrameBuffer->Unbind();
+		s_FrameBuffer->BindAsTexture();
 	}
 
 	void Renderer::Submit(const Mesh& mesh, const Matrix4& transform)
@@ -84,6 +85,8 @@ namespace Quantum
 			RenderCommand::DrawIndexed(indexBuffer->GetCount());
 		else
 			RenderCommand::Draw(vertexArray->GetVertexCount());
+
+		vertexArray->Unbind();
 	}
 
 	void Renderer::OnResize(int width, int height)

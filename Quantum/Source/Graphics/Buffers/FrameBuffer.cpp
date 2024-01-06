@@ -48,47 +48,24 @@ namespace Quantum
 		glGenFramebuffers(1, &m_RendererID);
 		Bind();
 
-		static auto samples = GEngineConfig["Graphics"]["Rendering"]["Samples"].as<UInt32>(8);
-		if (samples > 1) // TODO: Simplify this
-		{
-			glCreateTextures(GL_TEXTURE_2D_MULTISAMPLE, 1, &m_ColorAttachment);
-			glBindTexture(GL_TEXTURE_2D_MULTISAMPLE, m_ColorAttachment);
+		glCreateTextures(GL_TEXTURE_2D, 1, &m_ColorAttachment);
+		glBindTexture(GL_TEXTURE_2D, m_ColorAttachment);
 
-			glTexStorage2DMultisample(GL_TEXTURE_2D_MULTISAMPLE, samples, GL_SRGB8_ALPHA8, width, height, GL_FALSE);
-			
-			glBindTexture(GL_TEXTURE_2D_MULTISAMPLE, 0);
+		glTexStorage2D(GL_TEXTURE_2D, 1, GL_SRGB8_ALPHA8, width, height);
 
-			glCreateTextures(GL_TEXTURE_2D_MULTISAMPLE, 1, &m_DepthAttachment);
-			glBindTexture(GL_TEXTURE_2D_MULTISAMPLE, m_DepthAttachment);
+		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
+		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+		glBindTexture(GL_TEXTURE_2D, 0);
 
-			glTexStorage2DMultisample(GL_TEXTURE_2D_MULTISAMPLE, samples, GL_DEPTH24_STENCIL8, width, height, GL_FALSE);
+		glCreateTextures(GL_TEXTURE_2D, 1, &m_DepthAttachment);
+		glBindTexture(GL_TEXTURE_2D, m_DepthAttachment);
 
-			glBindTexture(GL_TEXTURE_2D_MULTISAMPLE, 0);
+		glTexStorage2D(GL_TEXTURE_2D, 1, GL_DEPTH24_STENCIL8, width, height);
 
-			glFramebufferTexture2D(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT0, GL_TEXTURE_2D_MULTISAMPLE, m_ColorAttachment, 0);
-			glFramebufferTexture2D(GL_FRAMEBUFFER, GL_DEPTH_STENCIL_ATTACHMENT, GL_TEXTURE_2D_MULTISAMPLE, m_DepthAttachment, 0);
-		}
-		else
-		{
-			glCreateTextures(GL_TEXTURE_2D, 1, &m_ColorAttachment);
-			glBindTexture(GL_TEXTURE_2D, m_ColorAttachment);
+		glBindTexture(GL_TEXTURE_2D, 0);
 
-			glTexStorage2D(GL_TEXTURE_2D, 1, GL_SRGB8_ALPHA8, width, height);
-
-			glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
-			glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
-			glBindTexture(GL_TEXTURE_2D, 0);
-
-			glCreateTextures(GL_TEXTURE_2D, 1, &m_DepthAttachment);
-			glBindTexture(GL_TEXTURE_2D, m_DepthAttachment);
-
-			glTexStorage2D(GL_TEXTURE_2D, 1, GL_DEPTH24_STENCIL8, width, height);
-
-			glBindTexture(GL_TEXTURE_2D, 0);
-
-			glFramebufferTexture2D(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT0, GL_TEXTURE_2D, m_ColorAttachment, 0);
-			glFramebufferTexture2D(GL_FRAMEBUFFER, GL_DEPTH_STENCIL_ATTACHMENT, GL_TEXTURE_2D, m_DepthAttachment, 0);
-		}
+		glFramebufferTexture2D(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT0, GL_TEXTURE_2D, m_ColorAttachment, 0);
+		glFramebufferTexture2D(GL_FRAMEBUFFER, GL_DEPTH_STENCIL_ATTACHMENT, GL_TEXTURE_2D, m_DepthAttachment, 0);
 
 		Unbind();
 	}
