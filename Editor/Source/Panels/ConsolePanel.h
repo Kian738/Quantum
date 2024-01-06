@@ -1,6 +1,6 @@
 #pragma once
 
-#include "CoreEditor.h"
+#include "EditorCore.h"
 
 namespace Quantum
 {

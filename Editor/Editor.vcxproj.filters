@@ -30,7 +30,7 @@
     <ClCompile Include="Source\Panels\PanelBase.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Source\CoreEditor.cpp">
+    <ClCompile Include="Source\EditorCore.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -56,7 +56,10 @@
     <ClInclude Include="Source\Panels\PanelManager.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Source\CoreEditor.h">
+    <ClInclude Include="Source\EditorCore.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Panels\ViewportPanel.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

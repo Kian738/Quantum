@@ -88,7 +88,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="Source\CoreEditor.cpp" />
+    <ClCompile Include="Source\EditorCore.cpp" />
     <ClCompile Include="Source\Main.cpp" />
     <ClCompile Include="Source\Panels\ConsolePanel.cpp" />
     <ClCompile Include="Source\Panels\MainPanel.cpp" />
@@ -112,11 +112,12 @@
     <None Include="QuantumEngine.qproj" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Source\CoreEditor.h" />
+    <ClInclude Include="Source\EditorCore.h" />
     <ClInclude Include="Source\Panels\ConsolePanel.h" />
     <ClInclude Include="Source\Panels\MainPanel.h" />
     <ClInclude Include="Source\Panels\PanelBase.h" />
     <ClInclude Include="Source\Panels\PanelManager.h" />
+    <ClInclude Include="Source\Panels\ViewportPanel.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

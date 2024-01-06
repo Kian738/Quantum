@@ -15,6 +15,8 @@ namespace Quantum
 		PanelManager::UpdateAll();
 
 		// TODO: Remove this test code
+		ImGui::ShowDemoWindow();
+
 		static auto num = 500;
 		static auto swap = false;
 		{
@@ -30,6 +32,7 @@ namespace Quantum
 			else
 				num++;
 		}
+		// TODO: Test code end
 
 		CheckToggleActions();
 	}
