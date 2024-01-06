@@ -19,8 +19,5 @@ namespace Quantum
 
 		void MainMenuBar();
 		void DockSpace() const;
-
-		bool IsKeyPressed(ImGuiKey key);
-		bool IsCombinationPressed(ImGuiKey key);
 	};
 }

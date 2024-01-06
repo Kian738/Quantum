@@ -27,6 +27,8 @@ namespace Quantum
 		void Draw() override;
 		void AddLog(LogLevel level, const String& message, const String& file, int line, const String& function);
 	private:
+		ImGuiKey GetToggleKey() const override { return ImGuiKey_C; };
+
 		static ImVec4 GetLevelColor(LogLevel level);
 	};
 }

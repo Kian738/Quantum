@@ -12,7 +12,7 @@ namespace Quantum
 		MainMenuBar();
 		DockSpace();
 
-		PanelManager::UpdateAll();
+		PanelManager::DrawAll();
 
 		// TODO: Remove this test code
 		ImGui::ShowDemoWindow();
@@ -39,11 +39,10 @@ namespace Quantum
 
 	void MainPanel::CheckToggleActions()
 	{
-		if (IsKeyPressed(ImGuiKey_F11))
+		if (ImGuiUtils::IsKeyPressed(ImGuiKey_F11))
 			m_IsFullscreen = !m_IsFullscreen;
 
-		/*if (IsCombinationPressed(ImGuiKey_C))
-			m_ConsolePanel->Toggle();*/
+		PanelManager::CheckToggleActions();
 	}
 
 	void MainPanel::MainMenuBar()
@@ -103,9 +102,7 @@ namespace Quantum
 
 			if (ImGui::BeginMenu("Windows"))
 			{
-				// TODO: Make this work and move to window constructor (or something like that) | probably to PanelBase
-				if (ImGui::MenuItem("Console", "Ctrl+Alt+C", m_ConsolePanel->IsOpen()))
-					m_ConsolePanel->Toggle();
+				PanelManager::DrawWindowMenuItems();
 
 				ImGui::EndMenu();
 			}
@@ -152,18 +149,5 @@ namespace Quantum
 		}
 
 		ImGui::End();
-	}
-
-	bool MainPanel::IsKeyPressed(ImGuiKey key)
-	{
-		return ImGui::IsKeyPressed(key, false);
-	}
-
-	bool MainPanel::IsCombinationPressed(ImGuiKey key)
-	{
-		return
-			ImGui::IsKeyDown(ImGuiKey_LeftCtrl) &&
-			ImGui::IsKeyDown(ImGuiKey_LeftAlt) &&
-			IsKeyPressed(key);
 	}
 }

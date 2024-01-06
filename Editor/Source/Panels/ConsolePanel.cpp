@@ -3,7 +3,7 @@
 namespace Quantum
 {
 	ConsolePanel::ConsolePanel()
-		: PanelBase("Console")
+		: PanelBase("Console", true)
 		, m_AutoScroll(true)
 	{
 	}

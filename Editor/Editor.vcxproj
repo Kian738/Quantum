@@ -94,6 +94,8 @@
     <ClCompile Include="Source\Panels\MainPanel.cpp" />
     <ClCompile Include="Source\Panels\PanelBase.cpp" />
     <ClCompile Include="Source\Panels\PanelManager.cpp" />
+    <ClCompile Include="Source\Panels\ViewportPanel.cpp" />
+    <ClCompile Include="Source\Utils\ImGuiUtils.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Quantum\Quantum.vcxproj">
@@ -118,6 +120,7 @@
     <ClInclude Include="Source\Panels\PanelBase.h" />
     <ClInclude Include="Source\Panels\PanelManager.h" />
     <ClInclude Include="Source\Panels\ViewportPanel.h" />
+    <ClInclude Include="Source\Utils\ImGuiUtils.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

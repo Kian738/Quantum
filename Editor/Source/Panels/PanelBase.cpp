@@ -17,30 +17,6 @@ namespace Quantum
 		PanelManager::Unregister(this);
 	}
 
-	void PanelBase::Update()
-	{
-		if (!m_IsOpen)
-		{
-			m_NeedsFocus = true;
-			return;
-		}
-
-		if (m_NeedsFocus)
-		{
-			ImGui::SetNextWindowFocus();
-			m_NeedsFocus = false;
-		}
-
-		ImGui::PushStyleVar(ImGuiStyleVar_WindowPadding, ImVec2(0, 5));
-		auto state = ImGui::Begin(m_Title.c_str(), &m_IsOpen);
-		ImGui::PopStyleVar();
-
-		if (state)
-			Draw();
-
-		ImGui::End();
-	}
-
 	void PanelBase::Open(bool focus)
 	{
 		m_IsOpen = true;
@@ -57,5 +33,29 @@ namespace Quantum
 	{
 		m_IsOpen = !m_IsOpen;
 		m_NeedsFocus = m_IsOpen;
+	}
+
+	void PanelBase::Update()
+	{
+		if (!m_IsOpen)
+		{
+			m_NeedsFocus = true;
+			return;
+		}
+
+		if (m_NeedsFocus)
+		{
+			ImGui::SetNextWindowFocus();
+			m_NeedsFocus = false;
+		}
+
+		SetStyleVars();
+		auto state = ImGui::Begin(m_Title.c_str(), &m_IsOpen, GetWindowFlags());
+		ResetStyleVars();
+
+		if (state)
+			Draw();
+
+		ImGui::End();
 	}
 }
