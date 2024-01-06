@@ -18,10 +18,10 @@ namespace Quantum
 
 		static void DrawWindowMenuItems();
 
-		template <typename T>
-		static Ref<T> Create()
+		template <typename T, typename... Args>
+		static Ref<T> Create(Args&&... args)
 		{
-			auto panel = CreateRef<T>();
+			auto panel = CreateRef<T>(std::forward<Args>(args)...);
 			Register(panel);
 			return panel;
 		}

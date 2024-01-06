@@ -7,7 +7,7 @@ namespace Quantum
 	MainPanel::MainPanel()
 		: m_ConsolePanel(PanelManager::Create<ConsolePanel>())
 	{
-		PanelManager::Create<ViewportPanel>();
+		PanelManager::Create<ViewportPanel>(this);
 	}
 
 	void MainPanel::Update()

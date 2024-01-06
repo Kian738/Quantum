@@ -43,9 +43,9 @@ namespace Quantum
 			m_NeedsFocus = false;
 		}
 
-		SetStyleVars();
+		ApplyWindowSettings();
 		auto state = ImGui::Begin(m_Title.c_str(), &m_IsOpen, GetWindowFlags());
-		ResetStyleVars();
+		ResetWindowSettings();
 
 		if (state)
 			Draw();

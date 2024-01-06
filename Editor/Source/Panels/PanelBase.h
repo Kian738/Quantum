@@ -26,8 +26,8 @@ namespace Quantum
 		virtual ImGuiKey GetToggleKey() const { return ImGuiKey_None; };
 		virtual ImGuiWindowFlags GetWindowFlags() const { return ImGuiWindowFlags_None; };
 
-		virtual void SetStyleVars() const {};
-		virtual void ResetStyleVars() const {};
+		virtual void ApplyWindowSettings() const {};
+		virtual void ResetWindowSettings() const {};
 	protected:
 		void Update();
 

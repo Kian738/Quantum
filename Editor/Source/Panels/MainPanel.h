@@ -14,6 +14,8 @@ namespace Quantum
 		MainPanel();
 
 		void Update();
+
+		bool IsPlaying() const { return false; }; // TODO: Implement
 	private:
 		void CheckToggleActions();
 

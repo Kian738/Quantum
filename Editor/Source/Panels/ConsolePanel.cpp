@@ -84,6 +84,14 @@ namespace Quantum
 		m_Messages.Emplace({ level, message, 1, file, line, function });
 	}
 
+	void ConsolePanel::ApplyWindowSettings() const
+	{
+		// TODO: Dock the console to the bottom
+				
+		ImGui::SetNextWindowSize({ 500, 400 });
+		ImGui::SetNextWindowPos({ 400, 350 });
+	}
+
 	ImVec4 ConsolePanel::GetLevelColor(LogLevel level)
 	{
 		switch (level)
