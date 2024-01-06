@@ -48,6 +48,7 @@ namespace Quantum
 		glGenFramebuffers(1, &m_RendererID);
 		Bind();
 
+		// TODO: Add multisampling
 		glCreateTextures(GL_TEXTURE_2D, 1, &m_ColorAttachment);
 		glBindTexture(GL_TEXTURE_2D, m_ColorAttachment);
 

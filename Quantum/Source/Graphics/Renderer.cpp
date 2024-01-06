@@ -29,15 +29,16 @@ namespace Quantum
 		s_ShaderLibrary->UnloadAll();
 	}
 
-	void Renderer::Clear()
+	void Renderer::Reset()
 	{
-		s_FrameBuffer->Bind();
 		RenderCommand::SetClearColor({ 0.1f, 0.1f, 0.1f, 1.0f }); // TODO: Eventually set this to black
 		RenderCommand::Clear();
 	}
 
 	void Renderer::BeginScene(const Camera& camera)
 	{
+		s_FrameBuffer->Bind();
+		Reset();
 		for (auto& [name, shader] : s_ShaderLibrary->GetAll())
 		{
 			shader->Bind();

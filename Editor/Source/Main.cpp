@@ -63,7 +63,6 @@ namespace Quantum
 		// TODO: Move to seperate thread or something | Use SceneRenderer class
 		void Render() override
 		{
-			Renderer::Clear();
 			Renderer::BeginScene(m_CameraController->GetCamera());
 
 			static auto baseTransform = Matrix4(1.0f);

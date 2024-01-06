@@ -19,7 +19,7 @@ namespace Quantum
 		static void Initialize();
 		static void Shutdown();
 
-		static void Clear();
+		static void Reset();
 		static void BeginScene(const Camera& camera);
 		static void EndScene();
 
