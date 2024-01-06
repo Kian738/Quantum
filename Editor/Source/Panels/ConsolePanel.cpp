@@ -16,7 +16,7 @@ namespace Quantum
 
 		ImGui::SameLine();
 
-		// TODO: Add back to bottom button
+		// TODO: Add back to bottom button that only shows when scrolled up
 		auto shouldScrollToBottom = ImGui::Checkbox("Auto Scroll", &m_AutoScroll) && m_AutoScroll;
 
 		ImGui::Separator();
