@@ -94,15 +94,12 @@ namespace Quantum
 
 			if (ImGui::BeginMenu("View"))
 			{
+				PanelManager::DrawWindowMenuItems();
+
+				ImGui::Separator();
+
 				// TODO: Make this work
 				ImGui::MenuItem("Fullscreen", "F11", &m_IsFullscreen);
-
-				ImGui::EndMenu();
-			}
-
-			if (ImGui::BeginMenu("Windows"))
-			{
-				PanelManager::DrawWindowMenuItems();
 
 				ImGui::EndMenu();
 			}
