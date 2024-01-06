@@ -9,12 +9,6 @@ namespace Quantum
 		, m_IsOpen(isOpen)
 		, m_NeedsFocus(needsFocus)
 	{
-		PanelManager::Register(this);
-	}
-
-	PanelBase::~PanelBase()
-	{
-		PanelManager::Unregister(this);
 	}
 
 	void PanelBase::Open(bool focus)

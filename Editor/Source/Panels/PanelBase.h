@@ -14,7 +14,6 @@ namespace Quantum
 		bool m_NeedsFocus = false;
 	public:
 		PanelBase(StringView title, bool isOpen = false, bool needsFocus = false);
-		virtual ~PanelBase();
 
 		virtual void Draw() = 0;
 

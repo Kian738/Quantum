@@ -1,10 +1,13 @@
 #include "MainPanel.h"
 
+#include "ViewportPanel.h"
+
 namespace Quantum
 {
 	MainPanel::MainPanel()
-		: m_ConsolePanel(CreateRef<ConsolePanel>())
+		: m_ConsolePanel(PanelManager::Create<ConsolePanel>())
 	{
+		PanelManager::Create<ViewportPanel>();
 	}
 
 	void MainPanel::Update()
