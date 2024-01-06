@@ -21,7 +21,7 @@ namespace Quantum
 		io.ConfigFlags |= ImGuiConfigFlags_DpiEnableScaleFonts;
 		io.ConfigFlags |= ImGuiConfigFlags_DpiEnableScaleViewports;
 
-		io.ConfigViewportsNoAutoMerge = true;
+		// TODO: See if I should enable this or not: io.ConfigViewportsNoAutoMerge = true;
 
 		io.IniFilename = nullptr;
 		io.LogFilename = nullptr;

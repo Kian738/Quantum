@@ -2,20 +2,36 @@
 
 namespace Quantum
 {
+	ConsolePanel::ConsolePanel()
+		: PanelBase("Console")
+		, m_AutoScroll(true)
+	{
+	}
+
+	// TODO: Make cliboard copyable
 	void ConsolePanel::Draw()
 	{
 		if (ImGui::Button("Clear"))
 			m_Messages.Clear();
+
 		ImGui::SameLine();
-		ImGui::Checkbox("Auto Scroll", &m_AutoScroll);
+
+		// TODO: Add back to bottom button
+		auto shouldScrollToBottom = ImGui::Checkbox("Auto Scroll", &m_AutoScroll) && m_AutoScroll;
 
 		ImGui::Separator();
 
-		auto height = ImGui::GetContentRegionAvail().y - ImGui::GetTextLineHeightWithSpacing(); // TODO: Up to the test
-		ImGui::BeginChild("ScrollingRegion", { 0, -height }, false, ImGuiWindowFlags_HorizontalScrollbar);
+		auto height = ImGui::GetContentRegionAvail().y;
+		ImGui::BeginChild("ScrollingRegion", { 0, height }, false, ImGuiWindowFlags_HorizontalScrollbar);
 
+		auto first = true;
 		for (const auto& message : m_Messages)
 		{
+			if (!first)
+				ImGui::Separator();
+			else
+				first = false;
+
 			auto level = message.Level;
 			auto levelName = Log::GetLevelName(level);
 			auto levelColor = GetLevelColor(level);
@@ -25,27 +41,25 @@ namespace Quantum
 			ImGui::TextWrapped("[%s] %s", levelName, message.Message.c_str());
 			ImGui::PopStyleColor();
 
+			if (ImGui::IsItemHovered())
+			{
+				ImGui::BeginTooltip();
+				ImGui::Text("Location: %s:%d", message.File.c_str(), message.Line);
+				ImGui::Text("Function: %s", message.Function.c_str());
+				ImGui::EndTooltip();
+			}
+
 			if (message.Count > 1)
 			{
 				ImGui::SameLine();
 				ImGui::PushStyleColor(ImGuiCol_Text, { 0.6f, 0.6f, 0.6f, 1.0f });
-				ImGui::TextWrapped(" (%d)", message.Count);
+				ImGui::TextWrapped("(%d)", message.Count);
 				ImGui::PopStyleColor();
 			}
-
-			if (ImGui::IsItemHovered())
-			{
-				ImGui::BeginTooltip();
-				ImGui::TextWrapped("Location: %s:%d", message.File.c_str(), message.Line);
-				ImGui::TextWrapped("Function: %s", message.Function.c_str());
-				ImGui::EndTooltip();
-			}
-
-			ImGui::Separator();
-
-			if (m_AutoScroll)
-				ImGui::SetScrollHereY(1.0f);
 		}
+
+		if (shouldScrollToBottom || m_AutoScroll && ImGui::GetScrollY() >= ImGui::GetScrollMaxY())
+			ImGui::SetScrollHereY(1.0f);
 
 		ImGui::EndChild();
 	}
@@ -56,9 +70,12 @@ namespace Quantum
 		static UInt64 previousHash;
 
 		auto hash = hasher(message);
-		if (hash == previousHash)
+		if (!m_Messages.IsEmpty() && hash == previousHash)
 		{
-			m_Messages.GetBack().Count++;
+			auto& previousMessage = m_Messages.GetBack();
+			if (previousMessage.Level != level)
+				previousMessage.Level = level;
+			previousMessage.Count++;
 			return;
 		}
 

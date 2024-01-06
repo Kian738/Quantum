@@ -61,7 +61,7 @@
       <ConformanceMode>true</ConformanceMode>
       <LanguageStandard>stdcpplatest</LanguageStandard>
       <MultiProcessorCompilation>true</MultiProcessorCompilation>
-      <AdditionalIncludeDirectories>$(SolutionDir)Quantum\Source;$(SolutionDir)Quantum\Vendor\yaml-cpp\include;$(SolutionDir)Quantum\Vendor\GLFW\include;$(SolutionDir)Quantum\Vendor\glad\include;$(SolutionDir)Quantum\Vendor\GLM;$(SolutionDir)Quantum\Vendor\stb;$(SolutionDir)Quantum\Vendor\assimp\include;$(SolutionDir)Quantum\Vendor\ImGui</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>Source;$(SolutionDir)Quantum\Source;$(SolutionDir)Quantum\Vendor\yaml-cpp\include;$(SolutionDir)Quantum\Vendor\GLFW\include;$(SolutionDir)Quantum\Vendor\glad\include;$(SolutionDir)Quantum\Vendor\GLM;$(SolutionDir)Quantum\Vendor\stb;$(SolutionDir)Quantum\Vendor\assimp\include;$(SolutionDir)Quantum\Vendor\ImGui</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
@@ -78,7 +78,7 @@
       <ConformanceMode>true</ConformanceMode>
       <LanguageStandard>stdcpplatest</LanguageStandard>
       <MultiProcessorCompilation>true</MultiProcessorCompilation>
-      <AdditionalIncludeDirectories>$(SolutionDir)Quantum\Source;$(SolutionDir)Quantum\Vendor\yaml-cpp\include;$(SolutionDir)Quantum\Vendor\GLFW\include;$(SolutionDir)Quantum\Vendor\glad\include;$(SolutionDir)Quantum\Vendor\GLM;$(SolutionDir)Quantum\Vendor\stb;$(SolutionDir)Quantum\Vendor\assimp\include;$(SolutionDir)Quantum\Vendor\ImGui</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>Source;$(SolutionDir)Quantum\Source;$(SolutionDir)Quantum\Vendor\yaml-cpp\include;$(SolutionDir)Quantum\Vendor\GLFW\include;$(SolutionDir)Quantum\Vendor\glad\include;$(SolutionDir)Quantum\Vendor\GLM;$(SolutionDir)Quantum\Vendor\stb;$(SolutionDir)Quantum\Vendor\assimp\include;$(SolutionDir)Quantum\Vendor\ImGui</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
@@ -88,9 +88,12 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Source\CoreEditor.cpp" />
     <ClCompile Include="Source\Main.cpp" />
     <ClCompile Include="Source\Panels\ConsolePanel.cpp" />
     <ClCompile Include="Source\Panels\MainPanel.cpp" />
+    <ClCompile Include="Source\Panels\PanelBase.cpp" />
+    <ClCompile Include="Source\Panels\PanelManager.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Quantum\Quantum.vcxproj">
@@ -109,9 +112,11 @@
     <None Include="QuantumEngine.qproj" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Source\CoreEditor.h" />
     <ClInclude Include="Source\Panels\ConsolePanel.h" />
     <ClInclude Include="Source\Panels\MainPanel.h" />
     <ClInclude Include="Source\Panels\PanelBase.h" />
+    <ClInclude Include="Source\Panels\PanelManager.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

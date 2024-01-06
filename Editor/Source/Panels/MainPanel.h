@@ -1,8 +1,6 @@
 #pragma once
 
-#include <Core/Types.h>
-
-#include "PanelBase.h"
+#include "CoreEditor.h"
 #include "ConsolePanel.h"
 
 namespace Quantum
@@ -10,12 +8,10 @@ namespace Quantum
 	class MainPanel
 	{
 	private:
-		Scope<ConsolePanel> m_ConsolePanel;
+		Ref<ConsolePanel> m_ConsolePanel;
 		bool m_IsFullscreen = true;
 	public:
-		MainPanel()
-			: m_ConsolePanel(CreateScope<ConsolePanel>())
-		{};
+		MainPanel();
 
 		void Update();
 	private:

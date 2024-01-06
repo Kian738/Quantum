@@ -1,11 +1,10 @@
 #pragma once
 
-#include <Core/Core.h>
-
-#include "PanelBase.h"
+#include "CoreEditor.h"
 
 namespace Quantum
 {
+	// TODO: Eventually make this work with several log sinks
 	class ConsolePanel : public PanelBase
 	{
 	protected:
@@ -23,10 +22,7 @@ namespace Quantum
 		bool m_AutoScroll;
 		CircularBuffer<Message, 100> m_Messages;
 	public:
-		ConsolePanel()
-			: PanelBase("Console")
-			, m_AutoScroll(true)
-		{};
+		ConsolePanel();
 
 		void Draw() override;
 		void AddLog(LogLevel level, const String& message, const String& file, int line, const String& function);

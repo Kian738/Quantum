@@ -2,27 +2,50 @@
 
 namespace Quantum
 {
+	MainPanel::MainPanel()
+		: m_ConsolePanel(CreateRef<ConsolePanel>())
+	{
+	}
+
 	void MainPanel::Update()
 	{
 		MainMenuBar();
 		DockSpace();
 
-		m_ConsolePanel->Draw();
+		PanelManager::UpdateAll();
+
+		// TODO: Remove this test code
+		static auto num = 500;
+		static auto swap = false;
+		{
+			if (num >= 70)
+			{
+				if (swap)
+					m_ConsolePanel->AddLog(LogLevel::Info, "Bruh", __FILE__, __LINE__, __FUNCTION__);
+				else
+					m_ConsolePanel->AddLog(LogLevel::Warning, "Hello World!", __FILE__, __LINE__, __FUNCTION__);	
+				swap = !swap;
+				num = 0;
+			}
+			else
+				num++;
+		}
 
 		CheckToggleActions();
 	}
 
 	void MainPanel::CheckToggleActions()
 	{
-		if (IsCombinationPressed(ImGuiKey_C))
-			m_ConsolePanel->m_IsOpen = !m_ConsolePanel->m_IsOpen;
-
 		if (IsKeyPressed(ImGuiKey_F11))
 			m_IsFullscreen = !m_IsFullscreen;
+
+		/*if (IsCombinationPressed(ImGuiKey_C))
+			m_ConsolePanel->Toggle();*/
 	}
 
 	void MainPanel::MainMenuBar()
 	{
+		// TODO: Add icons to menu items
 		if (ImGui::BeginMainMenuBar())
 		{
 			if (ImGui::BeginMenu("File"))
@@ -33,13 +56,43 @@ namespace Quantum
 				ImGui::EndMenu();
 			}
 
+			// TODO: Implement keyboard shortcuts
 			if (ImGui::BeginMenu("Edit"))
 			{
+				if (ImGui::MenuItem("Undo", "Ctrl+Z"))
+					LOG(Warning, LogCommon, "Undo not implemented");
+
+				if (ImGui::MenuItem("Redo", "Ctrl+Y"))
+					LOG(Warning, LogCommon, "Redo not implemented");
+
+				ImGui::Separator();
+
+				if (ImGui::MenuItem("Cut", "Ctrl+X"))
+					LOG(Warning, LogEditor, "Cut not implemented");
+
+				if (ImGui::MenuItem("Copy", "Ctrl+C"))
+					LOG(Warning, LogCommon, "Copy not implemented");
+
+				if (ImGui::MenuItem("Paste", "Ctrl+V"))
+					LOG(Warning, LogCommon, "Paste not implemented");
+
+				if (ImGui::MenuItem("Duplicate", "Ctrl+D"))
+					LOG(Warning, LogCommon, "Duplicate not implemented");
+
+				if (ImGui::MenuItem("Delete", "Del"))
+					LOG(Warning, LogCommon, "Delete not implemented")
+
+				ImGui::Separator();
+
+				if (ImGui::MenuItem("Select All", "Ctrl+A"))
+					LOG(Warning, LogCommon, "Select All not implemented");
+
 				ImGui::EndMenu();
 			}
 
 			if (ImGui::BeginMenu("View"))
 			{
+				// TODO: Make this work
 				ImGui::MenuItem("Fullscreen", "F11", &m_IsFullscreen);
 
 				ImGui::EndMenu();
@@ -47,7 +100,9 @@ namespace Quantum
 
 			if (ImGui::BeginMenu("Windows"))
 			{
-				ImGui::MenuItem("Console", "Ctrl+Alt+C", &m_ConsolePanel->m_IsOpen);
+				// TODO: Make this work and move to window constructor (or something like that) | probably to PanelBase
+				if (ImGui::MenuItem("Console", "Ctrl+Alt+C", m_ConsolePanel->IsOpen()))
+					m_ConsolePanel->Toggle();
 
 				ImGui::EndMenu();
 			}
@@ -81,7 +136,7 @@ namespace Quantum
 		if (dockSpaceFlags & ImGuiDockNodeFlags_PassthruCentralNode)
 			windowFlags |= ImGuiWindowFlags_NoBackground;
 
-		ImGui::Begin("QuantumEngine", {}, dockSpaceFlags);
+		ImGui::Begin("QuantumEngine", {}, windowFlags);
 
 		if (m_IsFullscreen)
 			ImGui::PopStyleVar(3);
