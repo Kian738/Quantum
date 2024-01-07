@@ -45,12 +45,6 @@ namespace Quantum
 		glfwWindowHint(GLFW_SRGB_CAPABLE, GLFW_TRUE);
 		glfwWindowHint(GLFW_DOUBLEBUFFER, GLFW_TRUE);
 
-		// TODO: Check if this is needed
-		glfwWindowHint(
-			GLFW_SAMPLES,
-			GEngineConfig["Graphics"]["Rendering"]["Samples"].as<UInt32>(8)
-		);
-
 		glfwWindowHint(GLFW_RESIZABLE, spec.Resizable);
 		// TODO: Add suppport for decorated windows
 		// TODO: Add suppport for maximized windows
