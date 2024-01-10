@@ -37,8 +37,8 @@ void main()
     vec4 diffuseColor = texture(u_Material.diffuse, v_TexCoord);
     vec4 normalColor = texture(u_Material.normal, v_TexCoord);
     vec4 specularColor = texture(u_Material.specular, v_TexCoord);
-    vec4 emissionColor = pow(texture(u_Material.emission, v_TexCoord), vec4(2.2));
-
+    vec4 emissionColor = texture(u_Material.emission, v_TexCoord);
+    
     vec3 normal = (any(greaterThan(normalColor.rgb, vec3(0.0))) || normalColor.a > 0.0)
         ? normalize(normalColor.rgb * 2.0 - 1.0)
         : normalize(v_Normal);
@@ -54,5 +54,5 @@ void main()
         u_Material.shininess
     ) + emissionColor.rgb;
 
-    color = vec4(finalColor, diffuseColor.a);
+    color = vec4(diffuseColor.rgb, diffuseColor.a);
 }
