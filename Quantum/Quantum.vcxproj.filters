@@ -135,7 +135,7 @@
     <ClInclude Include="Source\App\AppContext.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Source\Framework\Scene.h">
+    <ClInclude Include="Source\Framework\Scene\Scene.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Source\Core\Input\InputManager.h">
@@ -154,6 +154,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Source\Core\Container\CircularBuffer.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Framework\Scene\Actor.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

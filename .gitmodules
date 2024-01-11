@@ -17,3 +17,6 @@
 	path = Quantum/Vendor/ImGui
 	url = https://github.com/ocornut/imgui.git
 	branch = docking
+[submodule "Quantum/Vendor/EnTT"]
+	path = Quantum/Vendor/EnTT
+	url = https://github.com/skypjack/entt.git

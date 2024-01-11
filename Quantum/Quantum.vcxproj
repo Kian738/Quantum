@@ -36,7 +36,8 @@
     <ClInclude Include="Source\Core\UI\ImGuiContext.h" />
     <ClInclude Include="Source\Core\Window.h" />
     <ClInclude Include="Source\App\Project.h" />
-    <ClInclude Include="Source\Framework\Scene.h" />
+    <ClInclude Include="Source\Framework\Scene\Actor.h" />
+    <ClInclude Include="Source\Framework\Scene\Scene.h" />
     <ClInclude Include="Source\Graphics\Buffers\Buffer.h" />
     <ClInclude Include="Source\Graphics\Camera\Camera.h" />
     <ClInclude Include="Source\Graphics\Camera\CameraController.h" />
@@ -161,7 +162,7 @@
       <ConformanceMode>true</ConformanceMode>
       <LanguageStandard>stdcpplatest</LanguageStandard>
       <MultiProcessorCompilation>true</MultiProcessorCompilation>
-      <AdditionalIncludeDirectories>Source\;Vendor\yaml-cpp\include;Vendor\GLFW\include;Vendor\glad\include;Vendor\GLM;Vendor\stb;Vendor\assimp\include;Vendor\assimp;Vendor\assimp\code\;Vendor\assimp\contrib;Vendor\assimp\contrib\pugixml\src;Vendor\assimp\contrib\zlib;Vendor\assimp\contrib\rapidjson\include;Vendor\assimp\contrib\unzip;Vendor\assimp\contrib\utf8cpp\source;Vendor\ImGui</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>Source\;Vendor\yaml-cpp\include;Vendor\GLFW\include;Vendor\glad\include;Vendor\GLM;Vendor\stb;Vendor\assimp\include;Vendor\assimp;Vendor\assimp\code\;Vendor\assimp\contrib;Vendor\assimp\contrib\pugixml\src;Vendor\assimp\contrib\zlib;Vendor\assimp\contrib\rapidjson\include;Vendor\assimp\contrib\unzip;Vendor\assimp\contrib\utf8cpp\source;Vendor\ImGui;Vendor\EnTT\src</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -178,7 +179,7 @@
       <ConformanceMode>true</ConformanceMode>
       <LanguageStandard>stdcpplatest</LanguageStandard>
       <MultiProcessorCompilation>true</MultiProcessorCompilation>
-      <AdditionalIncludeDirectories>Source\;Vendor\yaml-cpp\include;Vendor\GLFW\include;Vendor\glad\include;Vendor\GLM;Vendor\stb;Vendor\assimp\include;Vendor\assimp;Vendor\assimp\code\;Vendor\assimp\contrib;Vendor\assimp\contrib\pugixml\src;Vendor\assimp\contrib\zlib;Vendor\assimp\contrib\rapidjson\include;Vendor\assimp\contrib\unzip;Vendor\assimp\contrib\utf8cpp\source;Vendor\ImGui</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>Source\;Vendor\yaml-cpp\include;Vendor\GLFW\include;Vendor\glad\include;Vendor\GLM;Vendor\stb;Vendor\assimp\include;Vendor\assimp;Vendor\assimp\code\;Vendor\assimp\contrib;Vendor\assimp\contrib\pugixml\src;Vendor\assimp\contrib\zlib;Vendor\assimp\contrib\rapidjson\include;Vendor\assimp\contrib\unzip;Vendor\assimp\contrib\utf8cpp\source;Vendor\ImGui;Vendor\EnTT\src</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>

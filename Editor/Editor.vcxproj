@@ -61,7 +61,7 @@
       <ConformanceMode>true</ConformanceMode>
       <LanguageStandard>stdcpplatest</LanguageStandard>
       <MultiProcessorCompilation>true</MultiProcessorCompilation>
-      <AdditionalIncludeDirectories>Source;$(SolutionDir)Quantum\Source;$(SolutionDir)Quantum\Vendor\yaml-cpp\include;$(SolutionDir)Quantum\Vendor\GLFW\include;$(SolutionDir)Quantum\Vendor\glad\include;$(SolutionDir)Quantum\Vendor\GLM;$(SolutionDir)Quantum\Vendor\stb;$(SolutionDir)Quantum\Vendor\assimp\include;$(SolutionDir)Quantum\Vendor\ImGui</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>Source;$(SolutionDir)Quantum\Source;$(SolutionDir)Quantum\Vendor\yaml-cpp\include;$(SolutionDir)Quantum\Vendor\GLFW\include;$(SolutionDir)Quantum\Vendor\glad\include;$(SolutionDir)Quantum\Vendor\GLM;$(SolutionDir)Quantum\Vendor\stb;$(SolutionDir)Quantum\Vendor\assimp\include;$(SolutionDir)Quantum\Vendor\ImGui;$(SolutionDir)Quantum\Vendor\EnTT\src</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
@@ -78,7 +78,7 @@
       <ConformanceMode>true</ConformanceMode>
       <LanguageStandard>stdcpplatest</LanguageStandard>
       <MultiProcessorCompilation>true</MultiProcessorCompilation>
-      <AdditionalIncludeDirectories>Source;$(SolutionDir)Quantum\Source;$(SolutionDir)Quantum\Vendor\yaml-cpp\include;$(SolutionDir)Quantum\Vendor\GLFW\include;$(SolutionDir)Quantum\Vendor\glad\include;$(SolutionDir)Quantum\Vendor\GLM;$(SolutionDir)Quantum\Vendor\stb;$(SolutionDir)Quantum\Vendor\assimp\include;$(SolutionDir)Quantum\Vendor\ImGui</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>Source;$(SolutionDir)Quantum\Source;$(SolutionDir)Quantum\Vendor\yaml-cpp\include;$(SolutionDir)Quantum\Vendor\GLFW\include;$(SolutionDir)Quantum\Vendor\glad\include;$(SolutionDir)Quantum\Vendor\GLM;$(SolutionDir)Quantum\Vendor\stb;$(SolutionDir)Quantum\Vendor\assimp\include;$(SolutionDir)Quantum\Vendor\ImGui;$(SolutionDir)Quantum\Vendor\EnTT\src</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>

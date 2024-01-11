@@ -15,11 +15,16 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Editor", "Editor\Editor.vcx
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "GLFW", "Quantum\Vendor\GLFW.vcxproj", "{52FDC80C-2498-4868-989F-D278E6DB5390}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "glad", "Quantum\Vendor\glad.vcxproj", "{DB3EE6CE-0F8F-4098-B1E0-2A500DCDDE72}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Glad", "Quantum\Vendor\glad.vcxproj", "{DB3EE6CE-0F8F-4098-B1E0-2A500DCDDE72}"
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "assimp", "Quantum\Vendor\assimp.vcxproj", "{530A3866-1EBD-45BE-A878-896BED950667}"
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "ImGui", "Quantum\Vendor\ImGui.vcxproj", "{F6410AF9-AF30-4854-BFD6-BC4B3355211D}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{3F63E0E9-8F56-4311-9DF3-0FCD35AE9519}"
+	ProjectSection(SolutionItems) = preProject
+		README.md = README.md
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
