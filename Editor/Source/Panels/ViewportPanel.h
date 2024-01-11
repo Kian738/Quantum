@@ -16,6 +16,7 @@ namespace Quantum
 
 		void Draw() override;
 	private:
+		ImGuiKey GetToggleKey() const override { return ImGuiKey_V; };
 		ImGuiWindowFlags GetWindowFlags() const override { return ImGuiWindowFlags_NoScrollbar | ImGuiWindowFlags_NoScrollWithMouse | ImGuiWindowFlags_MenuBar; };
 
 		void ApplyWindowSettings() const override;
