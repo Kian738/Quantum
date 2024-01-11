@@ -10,7 +10,6 @@ This document will provide a list of current issues and ongoing features.
 ### Setup
 
 - [ ] Take care of the **assimp cmake mess**
-- [ ] **Register** the **submodules** so they show up in the github repo
 - [ ] Make the **build system** more **cross-platform**
 
 ### General
