@@ -55,6 +55,7 @@
     <ClInclude Include="Source\Graphics\Buffers\VertexArray.h" />
     <ClInclude Include="Source\Graphics\Buffers\VertexBuffer.h" />
     <ClInclude Include="Source\Graphics\Resources\Vertex.h" />
+    <ClInclude Include="Source\Scripting\ScriptEngine.h" />
     <ClInclude Include="Source\Utils\AsyncHelper.h" />
     <ClInclude Include="Source\Utils\FileSystemUtils.h" />
     <ClInclude Include="Source\Utils\StringUtils.h" />
@@ -75,6 +76,7 @@
     <ClCompile Include="Source\App\Project.cpp" />
     <ClCompile Include="Source\Core\UI\ImGuiContext.cpp" />
     <ClCompile Include="Source\Core\Window.cpp" />
+    <ClCompile Include="Source\Framework\Scene\Scene.cpp" />
     <ClCompile Include="Source\Graphics\Buffers\Buffer.cpp" />
     <ClCompile Include="Source\Graphics\Camera\Camera.cpp" />
     <ClCompile Include="Source\Graphics\Camera\CameraController.cpp" />

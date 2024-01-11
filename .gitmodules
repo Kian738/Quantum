@@ -20,3 +20,6 @@
 [submodule "Quantum/Vendor/EnTT"]
 	path = Quantum/Vendor/EnTT
 	url = https://github.com/skypjack/entt.git
+[submodule "Quantum/Vendor/QuickJSPP"]
+	path = Quantum/Vendor/QuickJSPP
+	url = https://github.com/ftk/quickjspp
