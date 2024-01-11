@@ -28,11 +28,12 @@ namespace Quantum
 		glBindFramebuffer(GL_FRAMEBUFFER, 0);
 	}
 
-	void FrameBuffer::BindAsTexture(UInt32 slot)
+	void FrameBuffer::BindTexture(UInt32 slot)
 	{
 		glBindTextureUnit(slot, m_ColorAttachment);
 	}
 
+	// TODO: Add following options: GLFW_SAMPLES, GLFW_DOUBLEBUFFER
 	void FrameBuffer::Resize(UInt32 width, UInt32 height)
 	{
 		if (width == 0 || height == 0)
@@ -48,7 +49,6 @@ namespace Quantum
 		glGenFramebuffers(1, &m_RendererID);
 		Bind();
 
-		// TODO: Add multisampling
 		glCreateTextures(GL_TEXTURE_2D, 1, &m_ColorAttachment);
 		glBindTexture(GL_TEXTURE_2D, m_ColorAttachment);
 

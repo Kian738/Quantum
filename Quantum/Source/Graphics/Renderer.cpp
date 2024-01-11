@@ -31,7 +31,7 @@ namespace Quantum
 
 	void Renderer::Reset()
 	{
-		RenderCommand::SetClearColor({ 0.1f, 0.1f, 0.1f, 1.0f }); // TODO: Eventually set this to black
+		RenderCommand::SetClearColor({ 0.0f, 0.0f, 0.0f, 1.0f });
 		RenderCommand::Clear();
 	}
 
@@ -51,7 +51,7 @@ namespace Quantum
 		s_FrameBuffer->Unbind();
 		for (auto& [name, shader] : s_ShaderLibrary->GetAll())
 			shader->Unbind();
-		s_FrameBuffer->BindAsTexture();
+		s_FrameBuffer->BindTexture();
 	}
 
 	void Renderer::Submit(const Mesh& mesh, const Matrix4& transform)

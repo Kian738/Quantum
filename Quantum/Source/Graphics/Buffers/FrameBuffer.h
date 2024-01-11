@@ -17,7 +17,7 @@ namespace Quantum
 		void Bind();
 		void Unbind();
 
-		void BindAsTexture(UInt32 slot = 0);
+		void BindTexture(UInt32 slot = 0);
 
 		void Resize(UInt32 width, UInt32 height);
 
