@@ -19,4 +19,9 @@
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
+  <ItemGroup>
+    <None Include="Config\DefaultEngine.yaml" />
+    <None Include="Content\Shaders\Material.frag.glsl" />
+    <None Include="Content\Shaders\Material.vert.glsl" />
+  </ItemGroup>
 </Project>

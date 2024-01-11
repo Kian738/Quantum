@@ -93,6 +93,11 @@
       <Project>{92170049-57c3-4658-bb4f-e9386e8b2c4a}</Project>
     </ProjectReference>
   </ItemGroup>
+  <ItemGroup>
+    <None Include="Config\DefaultEngine.yaml" />
+    <None Include="Content\Shaders\Material.frag.glsl" />
+    <None Include="Content\Shaders\Material.vert.glsl" />
+  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>
