@@ -42,9 +42,6 @@ namespace Quantum
 		glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 4);
 		glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 6);
 
-		glfwWindowHint(GLFW_SRGB_CAPABLE, GLFW_TRUE);
-		glfwWindowHint(GLFW_DOUBLEBUFFER, GLFW_TRUE);
-
 		glfwWindowHint(GLFW_RESIZABLE, spec.Resizable);
 		// TODO: Add suppport for decorated windows
 		// TODO: Add suppport for maximized windows
