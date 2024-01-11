@@ -55,7 +55,7 @@ namespace Quantum
 		{
 			if (ImGui::BeginMenu("File"))
 			{
-				if (ImGui::MenuItem("Exit", "Alt+F4"))
+				if (ImGui::MenuItem("Quit", "Alt+F4"))
 					GEngine->Stop();
 
 				ImGui::EndMenu();
